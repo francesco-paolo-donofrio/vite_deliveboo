@@ -1,12 +1,29 @@
 <template>
-  <h1 class="text-center">Ciao</h1>
-  <i class="fa fa-solid fa-home"></i>
+  
+  <HeaderComponent/>
+  <router-view ></router-view>
 </template>
 
 <script>
+
+import HeaderComponent from './components/HeaderComponent.vue';
+import { store } from './store';
+import axios from 'axios';
+
   export default {
-    name: 'App'
-  }
+    name: 'App',
+    components: {
+      HeaderComponent
+  },
+    data() {
+      return {
+        store,
+        
+      }
+    },
+    
+}
+
 </script>
 
 <style lang="scss" scoped>
