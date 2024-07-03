@@ -30,7 +30,7 @@
                     </div>
                     <div id="f-d-nav-kebab-button" ref="fdNavKebabButton"
                         class="icon-container rounded-top-2 d-lg-none order-1" role="button"
-                        @click="toggleMenu('hypeNavKebabMenu', $event)">
+                        @click="toggleMenu('fdNavKebabMenu', $event)">
                         <i class="fa-solid fa-bars"></i>
                     </div>
                     <div id="f-d-nav-search-bar-input" ref="fdNavSearchBarInput"
@@ -60,6 +60,8 @@
 </template>
 
 <script>
+import ShoppingCartComponent from '@/pages/ShoppingCartComponent.vue';
+
 
 export default {
     name: 'HeaderComponent',
@@ -76,6 +78,11 @@ export default {
                     label: 'Ristoranti',
                     routeName: 'restaurant-detail'
                 },
+                {
+                    label: 'Carrello',
+                    routeName: 'shopping-cart'
+                },
+
             ],
         }
 
