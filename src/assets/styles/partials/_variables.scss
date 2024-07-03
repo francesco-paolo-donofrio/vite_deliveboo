@@ -1,7 +1,25 @@
 /* Color styles */
-$lightblue: rgb(218, 233, 254);
-$blacktext: rgb(63, 54, 59);
-$bluetext: rgb(24, 71, 132);
-$colorred: red;
+
+$basefont: "Roboto", sans-serif;
+
+$text-color: rgb(27, 112, 240);
+$text-primary-color: white;
+$text-secondary-color: red;
+
+$shadow-primary-color: black;
+$footerText: white;
+
+// Frontend variables from the Logo
+
+$background-primary-color: #223440;
+$background-secondary-color: #BF9673;
+$background-tertiary-color: #4EE918;
+$background-fourth-color: #F28B0C;
+$background-fifth-color: #F2F2F2;
+$background-footer: #223440;
+
+$active-primary-color: rgb(22, 161, 149);
+$active-secondary-color: rgb(140, 228, 206);
+$active-tertiary-color: rgb(193, 214, 216);
 
 $basefont: "Roboto", sans-serif;
