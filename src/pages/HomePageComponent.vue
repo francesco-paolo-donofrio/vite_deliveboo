@@ -2,8 +2,7 @@
     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo aspernatur architecto aut, doloremque recusandae
         totam. </p>
     <ul>
-
-        <li v-for="(item, index) in types">{{ item.name }}</li>
+        <li v-for="(item, index) in types"><a href="">{{ item.name }}</a></li>
     </ul>
 </template>
 
@@ -16,21 +15,29 @@ export default {
     data() {
         return {
             store,
+            params : new URLSearchParams(),            
             types: [],
-            params: {type_id: '1'}
         }
     },
     methods: {
-        getData() {
-            axios.get(this.store.apiBaseUrl + '/restaurants',{params: this.params}).then((res) => {
-                
+        getTypes() {
+            axios.get(this.store.apiBaseUrl + '/types').then((res) => {
+                console.log(res.data.results);
+                this.types = res.data.results;
+            });
+        },
+        getRestaurants() {
+            this.params.append("type_id", 1);
+            this.params.append("type_id", 3);
+            axios.get(this.store.apiBaseUrl + '/restaurants', { params: this.params }).then((res) => {
+
                 console.log(res.data.results);
                 this.types = res.data.results;
             });
         }
     },
     mounted() {
-        this.getData();
+        this.getTypes();
     }
 }
 </script>
