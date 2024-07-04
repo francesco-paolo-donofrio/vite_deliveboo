@@ -8,7 +8,7 @@
     </small>
     <p class="card-text" v-html="item.description.substring(0, 40) + '...'"></p>
   </div>
-  <RouterLink :to="{ name: 'restaurant-detail', params: { 'id': item.id } }" class="btn btn-success">Visualizza Ristorante</RouterLink>
+  <RouterLink :to="{ name: 'restaurant-detail', params: {'id': item}}" class="btn btn-success" @click="getid(item)">Visualizza Ristorante</RouterLink>
 </div>
     </section> 
 </template>
@@ -23,10 +23,21 @@ import { store } from '../store';
                 store
             }
         },
+        methods:{
+            getid(item){
+                console.log(item);
+               this.store.item= item.id
+            }
+        },
+        mounted(){
+            
+        },
         computed: {
             getImage() {
                 return this.item.image ? store.imgBasePath + this.item.image : '/images/placeholder.png';
+                
             }
+            
         }
     }
 </script>

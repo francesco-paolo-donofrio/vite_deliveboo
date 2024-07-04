@@ -1,7 +1,7 @@
 <template>
     <div class="container mt-4">
         <div class="card" v-if="restaurant">
-        <h1>{{ restaurant.title }}</h1>
+        <h1>{{ restaurant.name }}</h1>
         <img v-if="restaurant.image" :src="store.imgBasePath + restaurant.image" :alt="restaurant.name">
         <img v-else src="../public/imgages/placeholder-restaurant.png" :alt="restaurant.name">
         <p>{{ restaurant.description }}</p>
@@ -24,8 +24,9 @@
     },
     methods: {
     getSingleRestaurant() {
-      axios.get(`${this.store.apiBaseUrl}/restaurants/${this.$route.params.id}`, { params: this.params })
-        .then((res) => {
+        console.log(this.store.item);
+        axios.get(`${this.store.apiBaseUrl}/restaurants/${this.store.item}`).then((res) => {
+            
           console.log(res.data.results);
           this.restaurant = res.data.results; 
         })

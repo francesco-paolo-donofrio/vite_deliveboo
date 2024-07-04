@@ -1,7 +1,8 @@
 <template>
     <HeroComponent />
     <div class="d-flex justify-content-center my-3">
-        <span v-for="(item, index) in types" :key="item.id" class="p-2 mx-2 btn-types btn-color" @click="addType(item)">{{ item.name }}</span>
+        <span v-for="(item, index) in types" :key="item.id" class="p-2 mx-2 btn-types btn-color"
+        @click="addType(item)">{{ item.name }}</span>
     </div>    
     <div class="d-flex justify-content-center">
         <button type="button" class="btn btn-primary mx-2 p-2" @click="sendTypes">Filtra</button>
@@ -56,6 +57,7 @@ export default {
         getTypes() {
             axios.get(this.store.apiBaseUrl + '/types').then((res) => {
                 console.log(res.data.results);
+                console.log(this.$route.params, 'prova');
                 this.types = res.data.results;
             });
         },
@@ -99,9 +101,9 @@ export default {
             this.selectedtypes = [];
             this.getRestaurants();
         },
-        changeColor(item) {
-            item.toggle('selected');
-        }
+        // isSelected(typeId) {
+        //     return this.selectedTypes.includes(typeId);
+        // }
     },
     mounted() {
         this.getTypes();
