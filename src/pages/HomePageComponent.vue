@@ -1,5 +1,7 @@
 <template>
 
+
+
     <HeroComponent/>
     <div class="container my-4">
         <div class="row">
@@ -14,6 +16,14 @@
         </div>
         </div>
     </div>
+     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo aspernatur architecto aut, doloremque recusandae
+        totam. </p>
+    <ul>
+        <li v-for="(item, index) in types" :key="item.id"><button class="btn btn-danger" @click="addType(item)">{{ item.name
+                }}</button></li>
+    </ul>
+    <button type="button" class="btn btn-primary" @click="sendTypes">Submit</button>
+
 </template>
 
 <script>
@@ -35,9 +45,11 @@ export default {
         return {
             store,
 
-            restaurants: [],
-            params : new URLSearchParams(),            
+            params: new URLSearchParams(),
+            //params: {},           
             types: [],
+            restaurants: [],
+            selectedtypes:[],
 
         }
     },
@@ -49,17 +61,44 @@ export default {
             });
         },
         getRestaurants() {
-            this.params.append("type_id", 1);
-            this.params.append("type_id", 3);
-            axios.get(this.store.apiBaseUrl + '/restaurants', { params: this.params }).then((res) => {
+            //this.params.append("type_id", prova);
+            //this.params.append("type_id", 3);
 
+            axios.get(this.store.apiBaseUrl + '/restaurants', { params: this.params }).then((res) => {
+                console.log(this.params);
                 console.log(res.data.results);
                 this.restaurants = res.data.results;
+            });
+        },
+        addType(item){
+            // console.log(item.id, 'aaa');
+            if(this.selectedtypes.includes(item.id)){
+                const index = this.selectedtypes.indexOf(item.id);
+                this.selectedtypes.splice(index, 1);
+                
+            } else {
+                this.selectedtypes.push(item.id)
+            }
+            console.log(this.selectedtypes);
+        },
+        sendTypes(){
+            //console.log(this.selectedtypes);
+            this.selectedtypes.forEach(element => {
+                this.params.append("type_id", element);
+            })
+            //this.params.append("type_id", this.selectedtypes);
+            console.log(this.params);
+            axios.get(this.store.apiBaseUrl + '/restaurants', { params: this.params }).then((res) => {
+                console.log(this.params);
+                console.log(res.data.results);
+                this.restaurants = res.data.results;
+
             });
         }
     },
     mounted() {
         this.getTypes();
+        this.getRestaurants();
     }
 }
 </script>
@@ -68,20 +107,34 @@ export default {
 
 </style>
 
+
 <!-- 
-FUNZIONE DA METTERE NEL CONTROLLER API
+let url = window.location.href;
+let params = new URLSearchParams(url.search);
 
-public function index(Request $request)
-{
-    if ($request->query('type_id')) {
-        $typeId = $request->query('type_id');
+//Add a new parameter.
+params.append("foo", 4);
+//Query string is now: 'foo=4'
+-->
 
-        $restaurants = Restaurant::whereHas('types', function ($query) use ($typeId) {
-        $query->where('type_id', $typeId);
-            })->get();
+<!-- 
+updateUrl() {
+      // Ottieni l'URL attuale
+        const currentUrl = this.$route.fullPath;
+        console.log('URL attuale:', currentUrl);
 
-    return response()->json(['results' => $restaurants]);
+      // Crea un nuovo oggetto URLSearchParams con i nuovi parametri
+        const searchParams = new URLSearchParams(this.params);
+
+      // Aggiorna l'URL senza ricaricare la pagina
+        this.$router.push({ path: this.$route.path, query: Object.fromEntries(searchParams) });
     }
 }
 
+let url = window.location.href;
+           
+            let paramsTest = new URLSearchParams(url.search);
+            //Add a new parameter.
+            paramsTest.append("type_id", 3);
+            //Query string is now: 'foo=4'
 -->
