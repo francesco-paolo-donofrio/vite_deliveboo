@@ -15,9 +15,10 @@ const router = createRouter({
             component: HomePageComponent
         },
         {
-            path: '/restaurant-detail',
+            path: '/restaurant/:id',
             name: 'restaurant-detail',
-            component: RestaurantDetailComponent
+            component: RestaurantDetailComponent,
+            props: true
         },
         {
             path: '/shopping-cart',

@@ -79,7 +79,6 @@ export default {
             } else {
                 this.selectedtypes.push(item.id)
             }
-            changeColor(item);
             console.log(this.selectedtypes);
         },
         sendTypes() {
