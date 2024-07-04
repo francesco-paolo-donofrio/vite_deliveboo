@@ -1,4 +1,5 @@
 <template>
+
     <HeroComponent/>
     <div class="container my-4">
         <div class="row">
@@ -13,7 +14,6 @@
         </div>
         </div>
     </div>
-
 </template>
 
 <script>
@@ -34,21 +34,32 @@ export default {
     data() {
         return {
             store,
+
             restaurants: [],
-            params: {type_id: '1'}
+            params : new URLSearchParams(),            
+            types: [],
+
         }
     },
     methods: {
-        getData() {
-            axios.get(this.store.apiBaseUrl + '/restaurants',{params: this.params}).then((res) => {
-                
+        getTypes() {
+            axios.get(this.store.apiBaseUrl + '/types').then((res) => {
+                console.log(res.data.results);
+                this.types = res.data.results;
+            });
+        },
+        getRestaurants() {
+            this.params.append("type_id", 1);
+            this.params.append("type_id", 3);
+            axios.get(this.store.apiBaseUrl + '/restaurants', { params: this.params }).then((res) => {
+
                 console.log(res.data.results);
                 this.restaurants = res.data.results;
             });
         }
     },
     mounted() {
-        this.getData();
+        this.getTypes();
     }
 }
 </script>
