@@ -1,28 +1,29 @@
 <template>
-
-
-
-    <HeroComponent/>
+    <HeroComponent />
+    <div class="d-flex justify-content-center my-3">
+        <span v-for="(item, index) in types" :key="item.id" class="p-2 mx-2 btn-types btn-color" @click="addType(item)">{{ item.name }}</span>
+    </div>    
+    <div class="d-flex justify-content-center">
+        <button type="button" class="btn btn-primary mx-2 p-2" @click="sendTypes">Filtra</button>
+        <button type="button" class="btn btn-secondary mx-2 p-2" @click="resetTypes">Reset</button>
+    </div>
     <div class="container my-4">
         <div class="row">
             <div class="col-12 col-md-3 col-sm-6 mt-4" v-for="(item, index) in restaurants">
-        <div class="row">
-            <!-- SE LA RICERCA NON DÁ NESSUN RISULTATO -->
-        <div class="col-12 col-lg-6" v-if="item.length < 1">
-            <h3>Nessun post trovato per la tipologia: ... </h3> <!-- inserire qui la funzione che ritorna il nome della tipologia -->
-        </div>
-                <CardComponent :item="item"/>
+                <div class="row">
+                    <!-- SE LA RICERCA NON DÁ NESSUN RISULTATO -->
+                    <div class="col-12 col-lg-6" v-if="item.length < 1">
+                        <h3>Nessun post trovato per la tipologia: ... </h3>
+                        <!-- inserire qui la funzione che ritorna il nome della tipologia -->
+                    </div>
+                    <CardComponent :item="item" />
+                </div>
             </div>
         </div>
-        </div>
     </div>
-     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo aspernatur architecto aut, doloremque recusandae
-        totam. </p>
-    <ul>
-        <li v-for="(item, index) in types" :key="item.id"><button class="btn btn-danger" @click="addType(item)">{{ item.name
-                }}</button></li>
-    </ul>
-    <button type="button" class="btn btn-primary" @click="sendTypes">Submit</button>
+    
+
+
 
 </template>
 
@@ -39,18 +40,16 @@ export default {
     components: {
         CardComponent,
         HeroComponent
-       
+
     },
     data() {
         return {
             store,
-
             params: new URLSearchParams(),
             //params: {},           
             types: [],
             restaurants: [],
-            selectedtypes:[],
-
+            selectedtypes: [],
         }
     },
     methods: {
@@ -70,18 +69,18 @@ export default {
                 this.restaurants = res.data.results;
             });
         },
-        addType(item){
+        addType(item) {
             // console.log(item.id, 'aaa');
-            if(this.selectedtypes.includes(item.id)){
+            if (this.selectedtypes.includes(item.id)) {
                 const index = this.selectedtypes.indexOf(item.id);
                 this.selectedtypes.splice(index, 1);
-                
             } else {
                 this.selectedtypes.push(item.id)
             }
+            changeColor(item);
             console.log(this.selectedtypes);
         },
-        sendTypes(){
+        sendTypes() {
             //console.log(this.selectedtypes);
             this.selectedtypes.forEach(element => {
                 this.params.append("type_id", element);
@@ -94,6 +93,14 @@ export default {
                 this.restaurants = res.data.results;
 
             });
+            this.params = new URLSearchParams();
+        },
+        resetTypes() {
+            this.selectedtypes = [];
+            this.getRestaurants();
+        },
+        changeColor(item) {
+            item.toggle('selected');
         }
     },
     mounted() {
@@ -104,6 +111,23 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.btn-types{
+    border: 1px solid black;
+    border-radius: 10px;
+    cursor: pointer;
+    &.btn-color{
+        background-color: blue;
+        color: white;
+        &.selected{
+            background-color: red;
+        }   
+    }
+    &:hover{
+        background-color: lightblue;
+        color: white;
+    }
+
+}
 
 </style>
 
