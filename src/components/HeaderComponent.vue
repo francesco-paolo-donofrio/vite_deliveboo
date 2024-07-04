@@ -20,8 +20,11 @@
                 </div>
                 <div class="user-account gap-3 d-flex fs-3 align-self-stretch align-items-end">
                     <div id="f-d-nav-login-button" ref="fdNavLoginButton"
-                        class="icon-container rounded-top-2 d-flex flex-column justify-content-center order-2 w-auto"
+                        class="icon-container rounded-top-2 d-flex justify-content-center order-2 w-auto"
                         role="button">
+                        <router-link :to="{ name: 'shopping-cart' }" class="nav-link">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                                </router-link>
                         <a href="http://localhost:8000/login"
                             class="text-decoration-none text-white d-flex flex-column align-items-center">
                             <i class="fa-solid fa-user"></i>
