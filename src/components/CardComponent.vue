@@ -1,16 +1,16 @@
 <template>
-  <!--   <section>
+  <section>
 <div class="card">
-  <img class="card-img-top" src="..." alt="Card image cap">
+  <img class="card-img-top" :src="getImage" :alt="item.name">
   <div class="card-body">
     <h5 class="card-title">{{ item.name }}</h5>
-    <p class="card-text">{{item.type}}</p>
-    <p class="card-text">{{item.description}}</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
+    <small class="card-text" v-for="(type, index) in item.types" :key="index">{{ type.name }}<span v-if="index < item.types.length - 1">, </span>
+    </small>
+    <p class="card-text" v-html="item.description.substring(0, 40) + '...'"></p>
   </div>
   <RouterLink :to="{ name: 'restaurant-detail', params: { 'id': item.id } }" class="btn btn-success">Visualizza Ristorante</RouterLink>
 </div>
-    </section>  -->
+    </section> 
 </template>
 
 <script>
@@ -25,12 +25,21 @@ import { store } from '../store';
         },
         computed: {
             getImage() {
-                /* return this.item.image ? store.imgBasePath + this.item.image : '/images/placeholder.png'; */
+                return this.item.image ? store.imgBasePath + this.item.image : '/images/placeholder.png';
             }
         }
     }
 </script>
 
 <style lang="scss" scoped>
-
+    .card{
+        width: 250px;
+    .card-body{
+        border: 1px solid grey;
+    }
+    img {
+        aspect-ratio: 1/1;
+        width: 100%;
+}
+}
 </style>
