@@ -1,22 +1,39 @@
 <template>
     <div class="f-d-container-typologies">
-        <div class="f-d-container-img"><img class="f-d-img-fluid" src="../../public/images/pizza.png" alt="Pizza"></div>
-        <div class="f-d-container-img"><img class="f-d-img-fluid" src="../../public/images/chinese.png" alt="Pizza"></div>
-        <div class="f-d-container-img"><img class="f-d-img-fluid" src="../../public/images/pasta.png" alt="Pizza"></div>
-        <div class="f-d-container-img"><img class="f-d-img-fluid" src="../../public/images/sushi.png" alt="Pizza"></div>
-        <div class="f-d-container-img"><img class="f-d-img-fluid" src="../../public/images/pizza.png" alt="Pizza"></div>
-        <div class="f-d-container-img"><img class="f-d-img-fluid" src="../../public/images/pizza.png" alt="Pizza"></div>
-        <div class="f-d-container-img"><img class="f-d-img-fluid" src="../../public/images/pizza.png" alt="Pizza"></div>
-        <div class="f-d-container-img"><img class="f-d-img-fluid" src="../../public/images/taco.png" alt="Pizza"></div>
-        <div class="f-d-container-img"><img class="f-d-img-fluid" src="../../public/images/pizza.png" alt="Pizza"></div>
-        <div class="f-d-container-img"><img class="f-d-img-fluid" src="../../public/images/sushi.png" alt="Pizza"></div>
-    </div>
+       <div v-for="item in types" class="f-d-container-img"><img class="f-d-img-fluid" :src="item.image" :alt=item.name></div>
+        </div>
 </template>
 
 <script>
-    export default {
-        name: 'TypologiesListComponent',
+import { store } from '../store';
+import axios from 'axios';
+
+export default {
+    name: 'TypologiesListComponent',
+    props: ['item'],
+    components: {
+    
+    
+    },
+    data() {
+        return {
+            store,
+            types: [],
+        }
+    },
+    methods: {
+        getData() {
+            axios.get(this.store.apiBaseUrl + '/types',{params: this.params}).then((res) => {
+                
+                console.log(res.data.results);
+                this.types = res.data.results;
+            });
+        }
+    },
+    mounted() {
+        this.getData();
     }
+}
 </script>
 
 <style lang="scss" scoped>
