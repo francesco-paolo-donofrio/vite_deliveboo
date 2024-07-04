@@ -85,6 +85,10 @@ export default {
                     label: 'Carrello',
                     routeName: 'shopping-cart'
                 },
+                {
+                    label: 'Tipologie',
+                    routeName: 'typologies-list'
+                }
 
             ],
         }

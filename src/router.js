@@ -3,6 +3,7 @@ import HomePageComponent from "./pages/HomePageComponent.vue";
 import RestaurantDetailComponent from "./pages/RestaurantDetailComponent.vue";
 import ShoppingCartComponent from "./pages/ShoppingCartComponent.vue";
 import NotFoundComponent from "./pages/NotFoundComponent.vue";
+import TypologiesListComponent from './components/TypologiesListComponent.vue';
 
 
 const router = createRouter({
@@ -22,6 +23,11 @@ const router = createRouter({
             path: '/shopping-cart',
             name: 'shopping-cart',
             component: ShoppingCartComponent
+        },
+        {
+            path: '/typologies-list',
+            name: 'typologies-list',
+            component: TypologiesListComponent
         },
         {
             path: '/:pathMatch(.*)*',
