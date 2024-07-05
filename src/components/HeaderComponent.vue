@@ -26,9 +26,9 @@
                             <i class="fa-solid fa-cart-shopping"></i>
                                 </router-link>
                         <a href="http://localhost:8000/login"
-                            class="text-decoration-none text-white d-flex flex-column align-items-center">
+                            class="text-decoration-none text-white d-flex flex-column align-items-center mx-2">
                             <i class="fa-solid fa-user"></i>
-                            <span class="small" style="font-size:12px">Area Riservata</span>
+                            
                         </a>
                     </div>
                     <div id="f-d-nav-kebab-button" ref="fdNavKebabButton"
