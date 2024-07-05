@@ -77,18 +77,18 @@ export default {
                     label: 'Home',
                     routeName: 'home'
                 },
-                {
-                    label: 'Ristoranti',
-                    routeName: 'restaurant-detail'
-                },
-                {
-                    label: 'Carrello',
-                    routeName: 'shopping-cart'
-                },
-                {
-                    label: 'Tipologie',
-                    routeName: 'typologies-list'
-                }
+                // {
+                //     label: 'Ristoranti',
+                //     routeName: 'restaurant-detail'
+                // },
+                // {
+                //     label: 'Carrello',
+                //     routeName: 'shopping-cart'
+                // },
+                // {
+                //     label: 'Tipologie',
+                //     routeName: 'typologies-list'
+                // }
 
             ],
         }
