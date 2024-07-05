@@ -77,18 +77,18 @@ export default {
                     label: 'Home',
                     routeName: 'home'
                 },
-                {
-                    label: 'Ristoranti',
-                    routeName: 'restaurant-detail'
-                },
-                {
-                    label: 'Carrello',
-                    routeName: 'shopping-cart'
-                },
-                {
-                    label: 'Tipologie',
-                    routeName: 'typologies-list'
-                }
+                // {
+                //     label: 'Ristoranti',
+                //     routeName: 'restaurant-detail'
+                // },
+                // {
+                //     label: 'Carrello',
+                //     routeName: 'shopping-cart'
+                // },
+                // {
+                //     label: 'Tipologie',
+                //     routeName: 'typologies-list'
+                // }
 
             ],
         }
@@ -173,7 +173,7 @@ export default {
 
 header {
     height: 75px;
-    background: linear-gradient(to left, $background-tertiary-color, $background-primary-color, $background-fourth-color);
+    background: $background-primary-color;
 
     .active-color {
         background-color: $background-secondary-color !important;
