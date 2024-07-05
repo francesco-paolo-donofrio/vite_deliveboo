@@ -1,7 +1,7 @@
 <template>
     <HeroComponent />
     <div class="d-flex justify-content-center my-3">
-        <span v-for="(item, index) in types" :key="item.id" class="p-2 mx-2 btn-types btn-color"
+        <span v-for="(item, index) in types" :key="item.id" class="p-2 mx-2 btn-types btn-color" :class="{ selected: selectedtypes.includes(item.id) }" 
         @click="addType(item)">{{ item.name }}</span>
     </div>    
     <div class="d-flex justify-content-center">
@@ -77,9 +77,8 @@ export default {
                 const index = this.selectedtypes.indexOf(item.id);
                 this.selectedtypes.splice(index, 1);
             } else {
-                this.selectedtypes.push(item.id)
+                this.selectedtypes.push(item.id);
             }
-            changeColor(item);
             console.log(this.selectedtypes);
         },
         sendTypes() {
@@ -100,10 +99,7 @@ export default {
         resetTypes() {
             this.selectedtypes = [];
             this.getRestaurants();
-        },
-        // isSelected(typeId) {
-        //     return this.selectedTypes.includes(typeId);
-        // }
+        }
     },
     mounted() {
         this.getTypes();
@@ -121,12 +117,8 @@ export default {
         background-color: blue;
         color: white;
         &.selected{
-            background-color: red;
+            background-color: lightblue;
         }   
-    }
-    &:hover{
-        background-color: lightblue;
-        color: white;
     }
 
 }
