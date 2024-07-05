@@ -5,6 +5,10 @@
         <img v-if="restaurant.image" :src="store.imgBasePath + restaurant.image" :alt="restaurant.name">
         <img v-else src="../public/imgages/placeholder-restaurant.png" :alt="restaurant.name">
         <p>{{ restaurant.description }}</p>
+        <h3>Menù</h3>
+        <ul>
+            <li v-for="(item, index) in restaurant.products">{{item.name}}</li>
+        </ul>
     </div>
     </div>
       
