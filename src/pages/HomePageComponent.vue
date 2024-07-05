@@ -9,6 +9,7 @@
         <button type="button" class="btn btn-secondary mx-2 p-2" @click="resetTypes">Reset</button>
     </div>
     <div class="container my-4">
+        <div>Risultati trovati: {{ restaurants.length }}</div>
         <div class="row">
             <div class="col-12 col-md-3 col-sm-6 mt-4" v-for="(item, index) in restaurants">
                 <div class="row">
