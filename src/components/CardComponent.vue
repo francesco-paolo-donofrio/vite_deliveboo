@@ -6,7 +6,9 @@
     <h5 class="card-title">{{ item.name }}</h5>
     <small class="card-text" v-for="(type, index) in item.types" :key="index">{{ type.name }}<span v-if="index < item.types.length - 1">, </span>
     </small>
-    <p class="card-text" v-html="item.description.substring(0, 40) + '...'"></p>
+    <div v-if="item.description">
+        <p class="card-text" v-html="item.description.substring(0, 40) + '...'"></p>
+    </div>
   </div>
   <RouterLink :to="{ name: 'restaurant-detail', params: {'id': item}}" class="btn btn-success" @click="getid(item)">Visualizza Ristorante</RouterLink>
 </div>
