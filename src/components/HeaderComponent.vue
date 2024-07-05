@@ -173,7 +173,7 @@ export default {
 
 header {
     height: 75px;
-    background: linear-gradient(to left, $background-tertiary-color, $background-primary-color, $background-fourth-color);
+    background: $background-primary-color;
 
     .active-color {
         background-color: $background-secondary-color !important;
