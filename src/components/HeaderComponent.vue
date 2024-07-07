@@ -6,7 +6,7 @@
                 class="fixed-header container f-d-w-80x100 d-flex margin-x-auto rounded-2 align-items-center justify-content-between">
                 <div class="d-flex h-100 align-items-center">
                     <div class="logo-img-container d-flex align-items-center">
-                        <img class="img-fluid rounded-circle" src="../../public/images/logo_deliveboo.png" alt="logo" />
+                        <a href="http://localhost:5174/"><img class="img-fluid rounded-circle" src="../../public/images/logo_deliveboo.png" alt="logo" /></a>
                     </div>
                     <div id="f-d-nav-menu" class="d-flex h-100 d-none d-lg-block align-items-center">
                         <ul class="navbar-nav h-100 mb-2 mb-lg-0 d-flex flex-row align-items-center">
@@ -26,9 +26,9 @@
                             <i class="fa-solid fa-cart-shopping"></i>
                                 </router-link>
                         <a href="http://localhost:8000/login"
-                            class="text-decoration-none text-white d-flex flex-column align-items-center">
+                            class="text-decoration-none text-white d-flex flex-column align-items-center mx-2">
                             <i class="fa-solid fa-user"></i>
-                            <span class="small" style="font-size:12px">Area Riservata</span>
+                            
                         </a>
                     </div>
                     <div id="f-d-nav-kebab-button" ref="fdNavKebabButton"

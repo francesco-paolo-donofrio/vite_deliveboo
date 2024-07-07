@@ -51,3 +51,58 @@ body {
       rgba(125, 74, 23, 0.6) 100%
     );
   }
+
+  .f-d-btn-color {
+    background-color: #223440;
+    color: white;
+  }
+
+  .f-d-btn-color-green {
+    background-color: #1d8f23;
+    color: white;
+  }
+
+  .f-d-btn-color-orange {
+    background-color: #f28b0c;
+    color: white;
+  }
+
+  .f-d-primary-color {
+    color: $background-primary-color;
+}
+
+  .gradientColor {
+    background: linear-gradient(90deg, $background-primary-color, $background-secondary-color, $background-fourth-color, $background-primary-color);
+    -webkit-background-clip: text;
+    /* Safari/Chrome */
+    -moz-background-clip: text;
+    /* Firefox */
+    -o-background-clip: text;
+    /* Opera */
+    background-clip: text;
+    /* Standard */
+    color: transparent;
+}
+
+.f-d-button {
+  height: 30px;
+  background-color: $background-tertiary-color;
+  border: none;
+  color: black;
+  font-weight:500;
+  text-align: center;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 5px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+
+  &:hover {
+      background-color: $background-tertiary-color;
+  }
+}
+

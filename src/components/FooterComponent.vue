@@ -24,7 +24,7 @@
 
 <style lang="scss" scoped>
 footer {
-  background-color: #051025;
+  background-color: #223440;
   color: white; 
   padding: 20px;
   display: flex;
