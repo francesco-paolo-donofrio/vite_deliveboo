@@ -1,39 +1,80 @@
 <template>
-    <div class="container mt-4">
-        <div class="card" v-if="restaurant">
-        <h1>{{ restaurant.name }}</h1>
-        <img v-if="restaurant.image" :src="store.imgBasePath + restaurant.image" :alt="restaurant.name">
-        <img v-else src="../public/imgages/placeholder-restaurant.png" :alt="restaurant.name">
-        <p>{{ restaurant.description }}</p>
-        <h3>Menù</h3>
-        <ul>
-            <li v-for="(item, index) in restaurant.products">{{item.name}}</li>
-        </ul>
+    <div v-if="restaurant" class="f-d-container">
+        <div class="f-d-first-container">
+            <div class="card">
+                <h1 class="text-center"><strong class="gradientColor">{{ restaurant.name }}</strong></h1>
+                <img v-if="restaurant.image" :src="store.imgBasePath + restaurant.image" :alt="restaurant.name">
+                <img v-else src="../public/images/placeholder-restaurant.png" :alt="restaurant.name">
+            </div>
+        </div>
+        <div class="f-d-second-container">
+            <div>
+                <h3 class="text-center"><em class="f-d-primary-color">Menù</em></h3>
+                <div class="">
+                    <ul class="d-flex flex-wrap justify-content-around p-0">
+                        <li class="f-d-mini-container" v-for="(item, index) in restaurant.products" :key="index" @click="openModal(item)">
+                            <img class="img-fluid" :src="store.imgBasePath + item.image" :alt="item.name">                         
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Modal -->
+        <div v-if="showModal" class="modal fade show d-block" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="background-color: rgba(0, 0, 0, 0.5);">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header d-flex justify-content-between">
+                        <h5 class="modal-title" id="exampleModalLabel">{{ selectedDish.name }}</h5>
+                        <button type="button" class="f-d-close" @click="closeModal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="d-flex flex-column align-items-center justify-content-center">
+                        <img v-if="selectedDish.image" :src="store.imgBasePath + selectedDish.image" :alt="selectedDish.name" class="f-d-modal-img-fluid">
+                        <p v-if="selectedDish.description" class="align-self-start"><em>{{ selectedDish.description }}</em></p>
+                        <p v-if="selectedDish.price" class="align-self-start fs-5">{{ selectedDish.price }}€</p>
+                        
+                    </div>
+                        
+                    </div>
+                    <div class="modal-footer d-flex flex-column justify-content-center align-items-center">
+                        <button type="button" class="f-d-button" @click="closeModal">Aggiungi al carrello</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    </div>
-      
 </template>
 
 <script>
-    import { store } from '../store';
-    import axios from 'axios';
+import { store } from '../store';
+import axios from 'axios';
 
-    export default {
+export default {
     name: 'RestaurantDetailComponent',
     data() {
         return {
             store,
-            restaurant: null
-        }
+            restaurant: null,
+            selectedDish: {},
+            showModal: false
+        };
     },
     methods: {
-    getSingleRestaurant() {
-        console.log(this.store.item);
-        axios.get(`${this.store.apiBaseUrl}/restaurants/${this.store.item}`).then((res) => {
-            
-          console.log(res.data.results);
-          this.restaurant = res.data.results; 
-        })
+        getSingleRestaurant() {
+            axios.get(`${this.store.apiBaseUrl}/restaurants/${this.store.item}`).then((res) => {
+                this.restaurant = res.data.results;
+            });
+        },
+        openModal(dish) {
+            this.selectedDish = dish;
+            this.showModal = true;
+        },
+        closeModal() {
+            this.showModal = false;
+            this.selectedDish = {};
         }
     },
     mounted() {
@@ -43,5 +84,67 @@
 </script>
 
 <style lang="scss" scoped>
+@use '../assets/styles/partials/_variables' as *;
 
+.f-d-first-container {
+    width: calc(100% / 2 - 40px);
+    height: 500px;
+}
+
+.f-d-second-container {
+    width: calc(100% / 2 - 40px);
+    height: 500px;
+}
+
+.f-d-container {
+    width: 100%;
+    height: 600px;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.f-d-first-container {
+    width: calc(100% / 2 - 40px);
+    height: 300px;
+}
+
+.f-d-second-container {
+    width: calc(100% / 2 - 40px);
+    height: 300px;
+}
+
+.f-d-mini-container {
+    width: calc(100% / 8 - 40px);
+    height: 100px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+
+    li {
+        list-style-type: none;
+    }
+}
+
+.modal.fade.show {
+    display: block;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.f-d-modal-img-fluid {
+    width: 100%;
+    height: 50%;
+}
+
+.f-d-close {
+    border: none;
+    background-color: transparent;
+    font-size: 40px;
+}
 </style>

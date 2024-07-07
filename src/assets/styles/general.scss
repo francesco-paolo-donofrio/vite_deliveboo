@@ -67,3 +67,42 @@ body {
     color: white;
   }
 
+  .f-d-primary-color {
+    color: $background-primary-color;
+}
+
+  .gradientColor {
+    background: linear-gradient(90deg, $background-tertiary-color, $background-secondary-color, $background-fourth-color, $background-tertiary-color);
+    -webkit-background-clip: text;
+    /* Safari/Chrome */
+    -moz-background-clip: text;
+    /* Firefox */
+    -o-background-clip: text;
+    /* Opera */
+    background-clip: text;
+    /* Standard */
+    color: transparent;
+}
+
+.f-d-button {
+  height: 30px;
+  background-color: $background-tertiary-color;
+  border: none;
+  color: black;
+  font-weight:500;
+  text-align: center;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 5px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+
+  &:hover {
+      background-color: $background-tertiary-color;
+  }
+}
+
