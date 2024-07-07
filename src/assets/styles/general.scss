@@ -72,7 +72,7 @@ body {
 }
 
   .gradientColor {
-    background: linear-gradient(90deg, $background-tertiary-color, $background-secondary-color, $background-fourth-color, $background-tertiary-color);
+    background: linear-gradient(90deg, $background-primary-color, $background-secondary-color, $background-fourth-color, $background-primary-color);
     -webkit-background-clip: text;
     /* Safari/Chrome */
     -moz-background-clip: text;

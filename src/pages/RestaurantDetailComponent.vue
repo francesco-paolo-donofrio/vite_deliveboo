@@ -9,13 +9,32 @@
         </div>
         <div class="f-d-second-container">
             <div>
-                <h3 class="text-center"><em class="f-d-primary-color">Menù</em></h3>
+                <h3 class=""><em class="f-d-primary-color">Menù</em></h3>
                 <div class="">
                     <ul class="d-flex flex-wrap justify-content-around p-0">
                         <li class="f-d-mini-container" v-for="(item, index) in restaurant.products" :key="index" @click="openModal(item)">
-                            <img class="img-fluid" :src="store.imgBasePath + item.image" :alt="item.name">                         
+                            <img class="img-fluid" :src="store.imgBasePath + item.image" :alt="item.name"> 
+                            <span class="hover-icon">+</span>                        
                         </li>
                     </ul>
+                </div>
+                <div>
+                    <h3><em class="f-d-primary-color">Tipologie</em></h3>
+                    <div>
+                        <ul class="d-flex flex-wrap justify-content-start p-0">
+                            <li class="f-d-mini-container" v-for="(item, index) in restaurant.types" :key="index">
+                                <img class="img-fluid" :src="store.imgBasePath + item.image" :alt="item.name"> 
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div>
+                    <h3 class=""><em class="f-d-primary-color">Info utili</em></h3>
+                    <p><em>{{ restaurant.description }}</em></p>
+                    <p>Consegna in <strong>10 - 20 minuti</strong></p>
+                    <p>Indirizzo: {{ restaurant.address }}</p>
+                    <p>Numero di telefono: {{ restaurant.phone }}</p>
+                    <p class="f-d-primary-color">Prezzo medio: {{ restaurant.price }}€</p>
                 </div>
             </div>
         </div>
@@ -107,28 +126,43 @@ export default {
     margin-bottom: 30px;
 }
 
-.f-d-first-container {
-    width: calc(100% / 2 - 40px);
-    height: 300px;
-}
-
-.f-d-second-container {
-    width: calc(100% / 2 - 40px);
-    height: 300px;
-}
 
 .f-d-mini-container {
-    width: calc(100% / 8 - 40px);
+    width: calc(100% / 6 - 40px);
     height: 100px;
     cursor: pointer;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: gray;
     display: flex;
+    flex-wrap: wrap;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 10px;
+    position: relative;
 
     li {
         list-style-type: none;
+    }
+
+    &:hover {
+        opacity: 0.7;
+    }
+    
+    .hover-icon {
+        display: none;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 3rem;
+        color: black;
+        font-weight: bold;
+    }
+
+    &:hover .hover-icon {
+        display: block;
     }
 }
 
@@ -138,8 +172,9 @@ export default {
 }
 
 .f-d-modal-img-fluid {
-    width: 100%;
+    width: 50%;
     height: 50%;
+    border-radius: 50%;
 }
 
 .f-d-close {
