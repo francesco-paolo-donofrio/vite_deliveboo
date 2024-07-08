@@ -72,8 +72,9 @@ export default {
         toggleType(typeId) {
             if (this.selectedtypes.includes(typeId)) {
                 // Se già presente, rimuovi
-                this.selectedtypes = this.selectedtypes.filter(id => id !== typeId);
-                this.selectedtypesNames = this.selectedtypesNames.filter(name => name.id !== typeId.toString());
+                const index = this.selectedtypes.indexOf(typeId);
+                this.selectedtypes.splice(index, 1);
+                this.selectedtypesNames.splice(index, 1);
             } else {
                 // Altrimenti aggiungi
                 this.selectedtypes.push(typeId);
@@ -83,16 +84,8 @@ export default {
                 }
             }
             
-            // Costruisci l'oggetto query con i parametri selezionati
-            const query = {};
-            this.selectedtypes.forEach(typeId => {
-                if (!query.type_id) {
-                    query.type_id = [];
-                }
-                query.type_id.push(typeId.toString());
-            });
-            
             // Aggiorna l'URL con i nuovi parametri
+            const query = { type_id: this.selectedtypes };
             this.$router.push({ path: '/', query }).then(() => {
                 // Aggiorna i ristoranti con i nuovi parametri
                 this.getRestaurants(query);
