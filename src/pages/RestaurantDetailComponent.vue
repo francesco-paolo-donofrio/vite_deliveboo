@@ -1,56 +1,33 @@
 <template>
     <div v-if="restaurant" class="f-d-container">
-        <div class="f-d-first-container">
+        <section class="f-d-first-container">
             <div class="card">
                 <h1 class="text-center"><strong class="gradientColor">{{ restaurant.name }}</strong></h1>
                 <img v-if="restaurant.image" :src="store.imgBasePath + restaurant.image" :alt="restaurant.name">
                 <img v-else src="../public/images/placeholder-restaurant.png" :alt="restaurant.name">
             </div>
-        </div>
-        <div class="f-d-second-container">
+        </section>
+        <section class="f-d-second-container">
             <div>
-                <h3 class=""><em class="f-d-primary-color">Menù</em></h3>
-                <div class="">
-                    <ul class="d-flex flex-wrap justify-content-around p-0">
-                        <li class="f-d-mini-container" v-for="(item, index) in restaurant.products" :key="index"
-                            @click="openModal(item)">
+                <h3><em class="f-d-primary-color">Tipologie</em></h3>
+                <div>
+                    <ul class="d-flex flex-wrap justify-content-start gap-2 p-0">
+                        <li class="f-d-mini-container" v-for="(item, index) in restaurant.types" :key="index">
                             <img class="img-fluid" :src="store.imgBasePath + item.image" :alt="item.name">
-                            <span class="hover-icon">+</span>
                         </li>
                     </ul>
                 </div>
-                <div v-for="product in restaurant.products" :key="product.id" class="product-card">
-                    <h3>{{ product.name }}</h3>
-                    <p>Prezzo: {{ product.price }}€</p>
-                    <button @click="decreaseQuantity(product)">-</button>
-                    <span>{{ getQuantityInCart(product.id) }}</span>
-                    <button @click="increaseQuantity(product)">+</button>
-                </div>
-                <div>
-                    <h3><em class="f-d-primary-color">Tipologie</em></h3>
-                    <div>
-                        <ul class="d-flex flex-wrap justify-content-start p-0">
-                            <li class="f-d-mini-container" v-for="(item, index) in restaurant.types" :key="index">
-                                <img class="img-fluid" :src="store.imgBasePath + item.image" :alt="item.name">
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div>
-                    <h3 class=""><em class="f-d-primary-color">Info utili</em></h3>
-                    <p><em>{{ restaurant.description }}</em></p>
-                    <p>Consegna in <strong>10 - 20 minuti</strong></p>
-                    <p>Indirizzo: {{ restaurant.address }}</p>
-                    <p>Numero di telefono: {{ restaurant.phone }}</p>
-                    <p class="f-d-primary-color">Prezzo medio: {{ restaurant.price }}€</p>
-                </div>
             </div>
-
-        </div>
-
-
-
-
+            <div>
+                <h3 class=""><em class="f-d-primary-color">Info utili</em></h3>
+                <p><em>{{ restaurant.description }}</em></p>
+                <p>Consegna in <strong>10 - 20 minuti</strong></p>
+                <p>Indirizzo: {{ restaurant.address }}</p>
+                <p>Numero di telefono: {{ restaurant.phone }}</p>
+                <p class="f-d-primary-color">Prezzo medio: {{ restaurant.price }}€</p>
+            </div>
+        </section>
+        
         <!-- Modal -->
         <div v-if="showModal" class="modal fade show d-block" tabindex="-1" role="dialog"
             aria-labelledby="exampleModalLabel" aria-hidden="true" style="background-color: rgba(0, 0, 0, 0.5);">
@@ -71,7 +48,6 @@
                             <p v-if="selectedDish.price" class="align-self-start fs-5">{{ selectedDish.price }}€</p>
 
                         </div>
-
                     </div>
                     <div class="quantity-control d-flex justify-content-center align-items-center gap-3">
                         <button class="btn btn-danger decrease">-</button>
@@ -85,7 +61,20 @@
             </div>
         </div>
     </div>
-
+    <section id="menu">
+        <h3 class="text-center mb-3"><em class="f-d-primary-color">Menù</em></h3>
+        <div class="">
+            <ul class="d-flex flex-wrap justify-content-around p-0">
+                <li class="f-d-mini-container" v-for="(item, index) in restaurant.products" :key="index" @click="openModal(item)">
+                    <img class="img-fluid" :src="store.imgBasePath + item.image" :alt="item.name">
+                    <span class="hover-icon">+</span>
+                    <!-- BISOGNA MOSTRARE ANCHE IL NOME DEL PIATTO, SOTTO L?ICONA CON L'IMMAGINE
+                    Bisogna sistemare le regole del css, perché ora il item.name si nasconde sotto l'immagine oppure ci va sopra -->
+                    <!-- <p class="f-d-primary-color">{{ item.name }}</p> -->
+                </li>
+            </ul>
+        </div>
+    </section>
 </template>
 
 <script>
@@ -94,10 +83,11 @@ import axios from 'axios';
 
 export default {
     name: 'RestaurantDetailComponent',
+    props: ['id'],
     data() {
         return {
             store,
-            restaurant: null,
+            restaurant: {},
             selectedDish: {},
             showModal: false,
             checkCart: false,
@@ -105,9 +95,11 @@ export default {
     },
     methods: {
         getSingleRestaurant() {
-            axios.get(`${this.store.apiBaseUrl}/restaurants/${this.store.item}`).then((res) => {
+            axios.get(`${this.store.apiBaseUrl}/restaurants/${this.id}`).then(res => {
                 this.restaurant = res.data.results;
+                console.log(this.restaurant);
             });
+
         },
         getProducts() {
             axios.post(this.store.apiBaseUrl + '/update-quantity').then((res) => {
@@ -196,17 +188,17 @@ export default {
 
 .f-d-first-container {
     width: calc(100% / 2 - 40px);
-    height: 500px;
+    //height: 500px;
 }
 
 .f-d-second-container {
     width: calc(100% / 2 - 40px);
-    height: 500px;
+    //height: 500px;
 }
 
 .f-d-container {
     width: 100%;
-    height: 600px;
+    //height: 600px;
     padding: 20px;
     display: flex;
     justify-content: center;
@@ -218,7 +210,7 @@ export default {
 
 .f-d-mini-container {
     width: calc(100% / 6 - 40px);
-    height: 100px;
+    aspect-ratio: 1/1;
     cursor: pointer;
     border-radius: 50%;
     overflow: hidden;
