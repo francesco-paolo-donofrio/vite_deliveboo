@@ -2,31 +2,55 @@
     <div v-if="restaurant">
         <div class="f-d-container">
             <div class="f-d-first-container">
-                <div class="card">
-                    <h1 class="text-center"><strong class="gradientColor">{{ restaurant.name }}</strong></h1>
-                    <img v-if="restaurant.image" :src="store.imgBasePath + restaurant.image" :alt="restaurant.name">
-                    <img v-else src="../public/images/placeholder-restaurant.png" :alt="restaurant.name">
+                <h1 class="text-center"><strong class="gradientColor">{{ restaurant.name }}</strong></h1>
+                <div>
+                    <div class="d-flex justify-content-between align-items-center gap-3">
+                        <div class="f-d-container-img">
+                            <img v-if="restaurant.image" class="f-d-img-fluid"
+                                :src="store.imgBasePath + restaurant.image" :alt="restaurant.name">
+                            <img v-else src="../public/images/placeholder-restaurant.png" :alt="restaurant.name">
+                        </div>
+                        <div class="ps-3">
+                            <h3 class=""><em class="f-d-primary-color">Info utili</em></h3>
+                            <p><em>{{ restaurant.description }}</em></p>
+                            <p>Consegna in <strong>10 - 20 minuti</strong></p>
+                            <p>Indirizzo: {{ restaurant.address }}</p>
+                            <p>Numero di telefono: {{ restaurant.phone }}</p>
+                            <p class="f-d-primary-color">Prezzo medio: {{ restaurant.price }}€</p>
+                        </div>
+                    </div>
+                    <div>
+
+                        <div class="ps-3">
+                            <h3 class="text-center"><em class="f-d-primary-color">Tipologie</em></h3>
+                            <div>
+                                <ul class="d-flex flex-wrap justify-content-center align-items-center p-0">
+                                    <li class="f-d-mini-container" v-for="(item, index) in restaurant.types"
+                                        :key="index">
+                                        
+                                        <img class="img-fluid" :src="store.imgBasePath + item.image" :alt="item.name">
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="f-d-second-container">
-                <div>
-                    <div>
-                        <h3 class=""><em class="f-d-primary-color">Info utili</em></h3>
-                        <p><em>{{ restaurant.description }}</em></p>
-                        <p>Consegna in <strong>10 - 20 minuti</strong></p>
-                        <p>Indirizzo: {{ restaurant.address }}</p>
-                        <p>Numero di telefono: {{ restaurant.phone }}</p>
-                        <p class="f-d-primary-color">Prezzo medio: {{ restaurant.price }}€</p>
-                    </div>
-                    <div>
-                        <h3><em class="f-d-primary-color">Tipologie</em></h3>
-                        <div>
-                            <ul class="d-flex flex-wrap justify-content-start p-0">
-                                <li class="f-d-mini-container" v-for="(item, index) in restaurant.types" :key="index">
-                                    <img class="img-fluid" :src="store.imgBasePath + item.image" :alt="item.name">
-                                </li>
-                            </ul>
+                <div class="pt-5">
+                    <div class="container d-flex flex-column justify-content-center align-items-center">
+                        <div class="f-d-cart cart d-flex flex-column align-items-center justify-content-center">
+                            <h2>Carrello</h2>
+                            <div v-for="item in cart" :key="item.id">
+                                <p>x{{ item.quantity }}-{{ item.name }} - Totale: {{ item.price * item.quantity }}€</p>
+                            </div>
+                            <p>Totale carrello: {{ cartTotal }}€</p>
+                            <div class="buttons d-flex align-items-center justify-content-center gap-3">
+                                <button class="btn btn-danger" @click="emptyCart">Svuota Carrello</button>
+                                <button class="btn btn-success">Procedi con il tuo ordine</button>
+                            </div>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -37,8 +61,10 @@
                 <ul class="d-flex flex-wrap justify-content-around p-0">
                     <li class="f-d-mini-container col-12 col-md-6 col-lg-4" v-for="(item, index) in restaurant.products"
                         :key="index" @click="openModal(item)">
+                        
                         <img class="img-fluid" :src="store.imgBasePath + item.image" :alt="item.name">
                         <span class="hover-icon">+</span>
+                    
                     </li>
                 </ul>
             </div>
@@ -53,7 +79,8 @@
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header d-flex justify-content-between">
-                        <h5 class="modal-title" id="exampleModalLabel">{{ selectedDish.name }} di {{ restaurant.name }}</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">{{ selectedDish.name }} di {{ restaurant.name }}
+                        </h5>
                         <button type="button" class="f-d-close" @click="closeModal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -62,7 +89,7 @@
                         <div class="d-flex flex-column align-items-center justify-content-center">
                             <img v-if="selectedDish.image" :src="store.imgBasePath + selectedDish.image"
                                 :alt="selectedDish.name" class="f-d-modal-img-fluid">
-                            
+
 
                         </div>
 
@@ -106,9 +133,15 @@ export default {
             selectedDish: {},
             showModal: false,
             checkCart: false,
+            cart: [],
         };
     },
     methods: {
+        computed: {
+            cartTotal() {
+                return this.cart.reduce((total, item) => total + item.price * item.quantity, 0);
+            }
+        },
         getSingleRestaurant() {
             axios.get(`${this.store.apiBaseUrl}/restaurants/${this.id}`).then(res => {
                 this.restaurant = res.data.results;
@@ -137,11 +170,12 @@ export default {
                 cartItem.quantity--;
             } else if (cartItem && cartItem.quantity === 1) {
                 this.store.cart.splice(this.store.cart.indexOf(cartItem), 1);
+                alert(`Hai rimosso ${product.name} di ${this.restaurant.name} dal carrello`);
             } else if (cartItem === undefined) {
-                alert('Hai tolto tutti gli elementi dal carrello')
+                alert(`${product.name} di ${this.restaurant.name} non è presente nel carrello`);
             }
-            this.saveCart()
-            console.log(this.store.cart)
+            this.saveCart();
+            console.log(this.store.cart);
             console.log(localStorage, 'localstorage');
         },
         increaseQuantity(product) {
@@ -155,7 +189,7 @@ export default {
             if (product.restaurant_id != this.store.cart[0].restaurant_id) {
                 this.store.cart.splice(this.store.cart.indexOf(cartItem), 1)
                 this.saveCart()
-                alert('Non puoi acquistare qui!')
+                alert('Hai gia altri articoli di altri ristoranti nel carrello, svuota il carrello o procedi con il tuo ordine!')
             }
             console.log(product);
             console.log(this.store.cart[0].restaurant_id);
@@ -188,6 +222,11 @@ export default {
         checkcart() {
             console.log(this.checkCart);
         },
+        emptyCart() {
+            this.store.cart = [];
+            localStorage.clear();
+            location.reload();
+        },
         // metodo per aggiornare i piatti ordinati nella modale
         getOrderSummary() {
             const quantity = this.getQuantityInCart(this.selectedDish.id);
@@ -204,8 +243,11 @@ export default {
         this.getSingleRestaurant();
         this.loadCart();
     },
-    computed: {
-    }
+    created() {
+        this.getProducts();
+        this.loadCart();
+    },
+
 }
 </script>
 
@@ -233,14 +275,25 @@ export default {
     margin-bottom: 30px;
 }
 
+.f-d-container-img {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    width: 60%;
+    height: 40%;
+    aspect-ratio: 1/1;
+}
+
 
 .f-d-mini-container {
-    width: calc(100% / 6);
+    width: calc(100% / 4);
     aspect-ratio: 1/1;
     cursor: pointer;
     border-radius: 50%;
     overflow: hidden;
-    background-color: gray;
+    background-color: lightgray;
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
@@ -288,5 +341,27 @@ export default {
     border: none;
     background-color: transparent;
     font-size: 40px;
+}
+
+.f-d-img-fluid {
+    min-height: 60%;
+    min-width: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.f-d-cart {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    width: 50%;
+    height: 50%;
+    border-radius: 10px;
+    border: 2px solid black;
+    background-color: white;
 }
 </style>
