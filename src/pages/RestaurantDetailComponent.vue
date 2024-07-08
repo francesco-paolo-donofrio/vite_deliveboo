@@ -19,6 +19,13 @@
                         </li>
                     </ul>
                 </div>
+                <div v-for="product in restaurant.products" :key="product.id" class="product-card">
+                    <h3>{{ product.name }}</h3>
+                    <p>Prezzo: {{ product.price }}€</p>
+                    <button @click="decreaseQuantity(product)">-</button>
+                    <span>{{ getQuantityInCart(product.id) }}</span>
+                    <button @click="increaseQuantity(product)">+</button>
+                </div>
                 <div>
                     <h3><em class="f-d-primary-color">Tipologie</em></h3>
                     <div>
@@ -38,7 +45,11 @@
                     <p class="f-d-primary-color">Prezzo medio: {{ restaurant.price }}€</p>
                 </div>
             </div>
+
         </div>
+
+
+
 
         <!-- Modal -->
         <div v-if="showModal" class="modal fade show d-block" tabindex="-1" role="dialog"
@@ -74,6 +85,7 @@
             </div>
         </div>
     </div>
+
 </template>
 
 <script>
@@ -87,7 +99,8 @@ export default {
             store,
             restaurant: null,
             selectedDish: {},
-            showModal: false
+            showModal: false,
+            checkCart: false,
         };
     },
     methods: {
@@ -110,11 +123,80 @@ export default {
         closeModal() {
             this.showModal = false;
             this.selectedDish = {};
+        },
+        decreaseQuantity(product) {
+            let cartItem = this.store.cart.find(item => item.id === product.id);
+            if (cartItem && cartItem.quantity > 1) {
+                cartItem.quantity--;
+            } else if (cartItem.quantity === 1) {
+                this.store.cart.splice(this.store.cart.indexOf(cartItem), 1);
+
+            }
+            this.saveCart()
+            console.log(this.store.cart)
+            console.log(localStorage, 'localstorage');
+        },
+        increaseQuantity(product) {
+            let cartItem = this.store.cart.find(item => item.id === product.id);
+            console.log(cartItem);
+            // if (this.store.cart.length > 0) {
+            //     // console.log(cartItem)
+            //     if (this.store.cart[0].restaurant_id != cartItem.restaurant_id) {
+            //         console.log(this.store.cart);
+            //         this.checkcart()
+            //         return this.checkCart = true
+            //     }
+
+            // }
+            if (cartItem) {
+                cartItem.quantity++;
+            } else {
+                if (this.store.cart.length === 0 ) {
+                    this.addToCart(product);
+                    
+                } else {
+                    console.log(this.store.cart[0].restaurant_id);
+                    this.checkCart = true
+                    this.checkcart()
+                }
+            }
+            this.saveCart()
+            console.log(this.store.cart)
+            console.log(localStorage, 'localstorage');
+        },
+        getQuantityInCart(productId) {
+            const cartItem = this.store.cart.find(item => item.id === productId);
+            return cartItem ? cartItem.quantity : 0;
+        },
+        addToCart(product) {
+            const cartItem = this.store.cart.find(item => item.id === product.id);
+            if (cartItem) {
+                cartItem.quantity++;
+            } else {
+                this.store.cart.push({ ...product, quantity: 1 });
+            }
+
+        },
+        loadCart() {
+            const savedCart = localStorage.getItem('cart');
+            if (savedCart) {
+                this.store.cart = JSON.parse(savedCart);
+            }
+            console.log(this.store.cart);
+        },
+        saveCart() {
+            localStorage.setItem('cart', JSON.stringify(this.store.cart));
+        },
+        checkcart() {
+            console.log(this.checkCart);
         }
     },
     mounted() {
         this.getSingleRestaurant();
+        this.loadCart();
     },
+    computed: {
+    }
 }
 </script>
 
