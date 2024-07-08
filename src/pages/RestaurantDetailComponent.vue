@@ -138,7 +138,7 @@ export default {
 
 .f-d-mini-container {
     width: calc(100% / 6 - 40px);
-    height: 100px;
+    aspect-ratio: 1/1;
     cursor: pointer;
     border-radius: 50%;
     overflow: hidden;
