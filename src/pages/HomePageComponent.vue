@@ -85,7 +85,7 @@ export default {
             }
             
             // Aggiorna l'URL con i nuovi parametri
-            const query = { type_id: this.selectedtypes };
+            const query = { type_id: this.selectedtypes.map(id => id.toString()) };
             this.$router.push({ path: '/', query }).then(() => {
                 // Aggiorna i ristoranti con i nuovi parametri
                 this.getRestaurants(query);
