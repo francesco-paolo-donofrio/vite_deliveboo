@@ -1,51 +1,47 @@
 <template>
-    <div v-if="restaurant" class="f-d-container">
-        <div class="f-d-first-container">
-            <div class="card">
-                <h1 class="text-center"><strong class="gradientColor">{{ restaurant.name }}</strong></h1>
-                <img v-if="restaurant.image" :src="store.imgBasePath + restaurant.image" :alt="restaurant.name">
-                <img v-else src="../public/images/placeholder-restaurant.png" :alt="restaurant.name">
+    <div v-if="restaurant">
+        <div class="f-d-container">
+            <div class="f-d-first-container">
+                <div class="card">
+                    <h1 class="text-center"><strong class="gradientColor">{{ restaurant.name }}</strong></h1>
+                    <img v-if="restaurant.image" :src="store.imgBasePath + restaurant.image" :alt="restaurant.name">
+                    <img v-else src="../public/images/placeholder-restaurant.png" :alt="restaurant.name">
+                </div>
             </div>
-        </div>
-        <div class="f-d-second-container">
-            <div>
-                <h3 class=""><em class="f-d-primary-color">Menù</em></h3>
-                <div class="">
-                    <ul class="d-flex flex-wrap justify-content-around p-0">
-                        <li class="f-d-mini-container" v-for="(item, index) in restaurant.products" :key="index"
-                            @click="openModal(item)">
-                            <img class="img-fluid" :src="store.imgBasePath + item.image" :alt="item.name">
-                            <span class="hover-icon">+</span>
-                        </li>
-                    </ul>
-                </div>
-                <div v-for="product in restaurant.products" :key="product.id" class="product-card">
-                    <h3>{{ product.name }}</h3>
-                    <p>Prezzo: {{ product.price }}€</p>
-                    <button @click="decreaseQuantity(product)">-</button>
-                    <span>{{ getQuantityInCart(product.id) }}</span>
-                    <button @click="increaseQuantity(product)">+</button>
-                </div>
+            <div class="f-d-second-container">
                 <div>
-                    <h3><em class="f-d-primary-color">Tipologie</em></h3>
                     <div>
-                        <ul class="d-flex flex-wrap justify-content-start p-0">
-                            <li class="f-d-mini-container" v-for="(item, index) in restaurant.types" :key="index">
-                                <img class="img-fluid" :src="store.imgBasePath + item.image" :alt="item.name">
-                            </li>
-                        </ul>
+                        <h3 class=""><em class="f-d-primary-color">Info utili</em></h3>
+                        <p><em>{{ restaurant.description }}</em></p>
+                        <p>Consegna in <strong>10 - 20 minuti</strong></p>
+                        <p>Indirizzo: {{ restaurant.address }}</p>
+                        <p>Numero di telefono: {{ restaurant.phone }}</p>
+                        <p class="f-d-primary-color">Prezzo medio: {{ restaurant.price }}€</p>
+                    </div>
+                    <div>
+                        <h3><em class="f-d-primary-color">Tipologie</em></h3>
+                        <div>
+                            <ul class="d-flex flex-wrap justify-content-start p-0">
+                                <li class="f-d-mini-container" v-for="(item, index) in restaurant.types" :key="index">
+                                    <img class="img-fluid" :src="store.imgBasePath + item.image" :alt="item.name">
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-                <div>
-                    <h3 class=""><em class="f-d-primary-color">Info utili</em></h3>
-                    <p><em>{{ restaurant.description }}</em></p>
-                    <p>Consegna in <strong>10 - 20 minuti</strong></p>
-                    <p>Indirizzo: {{ restaurant.address }}</p>
-                    <p>Numero di telefono: {{ restaurant.phone }}</p>
-                    <p class="f-d-primary-color">Prezzo medio: {{ restaurant.price }}€</p>
-                </div>
             </div>
-
+        </div>
+        <div class="container">
+            <h3 class="text-center text-uppercase"><em class="f-d-primary-color">Menù</em></h3>
+            <div class="row">
+                <ul class="d-flex flex-wrap justify-content-around p-0">
+                    <li class="f-d-mini-container col-12 col-md-6 col-lg-4" v-for="(item, index) in restaurant.products"
+                        :key="index" @click="openModal(item)">
+                        <img class="img-fluid" :src="store.imgBasePath + item.image" :alt="item.name">
+                        <span class="hover-icon">+</span>
+                    </li>
+                </ul>
+            </div>
         </div>
 
 
@@ -57,7 +53,7 @@
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header d-flex justify-content-between">
-                        <h5 class="modal-title" id="exampleModalLabel">{{ selectedDish.name }}</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">{{ selectedDish.name }} di {{ restaurant.name }}</h5>
                         <button type="button" class="f-d-close" @click="closeModal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -66,24 +62,32 @@
                         <div class="d-flex flex-column align-items-center justify-content-center">
                             <img v-if="selectedDish.image" :src="store.imgBasePath + selectedDish.image"
                                 :alt="selectedDish.name" class="f-d-modal-img-fluid">
-                            <p v-if="selectedDish.description" class="align-self-start"><em>{{ selectedDish.description
-                                    }}</em></p>
-                            <p v-if="selectedDish.price" class="align-self-start fs-5">{{ selectedDish.price }}€</p>
+                            
 
                         </div>
 
                     </div>
-                    <div class="quantity-control d-flex justify-content-center align-items-center gap-3">
-                        <button class="btn btn-danger decrease">-</button>
-                        <span class="quantity">1</span>
-                        <button class="btn btn-success increase">+</button>
+                    <div v-if="selectedDish.id" class="quantity-control">
+                        <div class="product-card d-flex flex-column align-items-center justify-content-center">
+                            <h3>{{ selectedDish.name }}</h3>
+                            <p v-if="selectedDish.description"><em>{{
+                                selectedDish.description
+                                    }}</em></p>
+                            <p>Prezzo: {{ selectedDish.price }}€</p>
+                            <div class="d-flex justify-content-center align-items-center gap-2">
+                                <button class="btn btn-danger" @click="decreaseQuantity(selectedDish)">-</button>
+                                <span>{{ getQuantityInCart(selectedDish.id) }}</span>
+                                <button class="btn btn-success" @click="increaseQuantity(selectedDish)">+</button>
+                            </div>
+                        </div>
                     </div>
                     <div class="modal-footer d-flex flex-column justify-content-center align-items-center">
-                        <button type="button" class="f-d-button" @click="closeModal">Aggiungi al carrello</button>
+                        <p>{{ getOrderSummary() }}</p>
                     </div>
                 </div>
             </div>
         </div>
+
     </div>
 
 </template>
@@ -133,7 +137,7 @@ export default {
                 cartItem.quantity--;
             } else if (cartItem && cartItem.quantity === 1) {
                 this.store.cart.splice(this.store.cart.indexOf(cartItem), 1);
-            } else if(cartItem === undefined){
+            } else if (cartItem === undefined) {
                 alert('Hai tolto tutti gli elementi dal carrello')
             }
             this.saveCart()
@@ -142,13 +146,13 @@ export default {
         },
         increaseQuantity(product) {
             let cartItem = this.store.cart.find(item => item.id === product.id);
-            if (cartItem) {                
+            if (cartItem) {
                 cartItem.quantity++;
             } else {
                 this.addToCart(product);
             }
             this.saveCart()
-            if(product.restaurant_id != this.store.cart[0].restaurant_id){
+            if (product.restaurant_id != this.store.cart[0].restaurant_id) {
                 this.store.cart.splice(this.store.cart.indexOf(cartItem), 1)
                 this.saveCart()
                 alert('Non puoi acquistare qui!')
@@ -183,6 +187,17 @@ export default {
         },
         checkcart() {
             console.log(this.checkCart);
+        },
+        // metodo per aggiornare i piatti ordinati nella modale
+        getOrderSummary() {
+            const quantity = this.getQuantityInCart(this.selectedDish.id);
+            if (quantity === 0) {
+                return 'Nessun piatto ordinato';
+            } else if (quantity === 1) {
+                return 'Hai ordinato 1 piatto';
+            } else {
+                return `Hai ordinato ${quantity} piatti`;
+            }
         }
     },
     mounted() {
@@ -220,7 +235,7 @@ export default {
 
 
 .f-d-mini-container {
-    width: calc(100% / 6 - 40px);
+    width: calc(100% / 6);
     aspect-ratio: 1/1;
     cursor: pointer;
     border-radius: 50%;
