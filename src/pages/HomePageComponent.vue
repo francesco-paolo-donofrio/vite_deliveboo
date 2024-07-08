@@ -15,7 +15,7 @@
         <button type="button" class="btn btn-secondary mx-2 p-2" @click="resetTypes">Reset</button>
     </div> -->
     <div class="container my-4">
-        <div>Risultati trovati: {{ restaurants.length }}</div>
+        <div v-if="restaurants.length != 0">Risultati trovati: {{ restaurants.length }}</div>
         <div class="row">
             <div class="col-12 col-md-3 col-sm-6 mt-4" v-for="(item, index) in restaurants" :key="index">
                 <div class="row">
@@ -23,7 +23,7 @@
                 </div>
             </div>
             <!-- SE LA RICERCA NON DÁ NESSUN RISULTATO -->
-            <div class="col-12 col-lg-6" v-if="restaurants.length === 0">
+            <div v-if="restaurants.length === 0">
                 <h3>Nessun ristorante trovato che soddisfi questi requisiti:
                     <ul>
                         <li v-for="(name, index) in selectedtypesNames" :key="index">{{ name }}</li>
