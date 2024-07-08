@@ -27,7 +27,7 @@
                 <p class="f-d-primary-color">Prezzo medio: {{ restaurant.price }}€</p>
             </div>
         </section>
-
+        
         <!-- Modal -->
         <div v-if="showModal" class="modal fade show d-block" tabindex="-1" role="dialog"
             aria-labelledby="exampleModalLabel" aria-hidden="true" style="background-color: rgba(0, 0, 0, 0.5);">
@@ -48,7 +48,11 @@
                             <p v-if="selectedDish.price" class="align-self-start fs-5">{{ selectedDish.price }}€</p>
 
                         </div>
-
+                    </div>
+                    <div class="quantity-control d-flex justify-content-center align-items-center gap-3">
+                        <button class="btn btn-danger decrease">-</button>
+                        <span class="quantity">1</span>
+                        <button class="btn btn-success increase">+</button>
                     </div>
                     <div class="modal-footer d-flex flex-column justify-content-center align-items-center">
                         <button type="button" class="f-d-button" @click="closeModal">Aggiungi al carrello</button>
@@ -85,7 +89,8 @@ export default {
             store,
             restaurant: {},
             selectedDish: {},
-            showModal: false
+            showModal: false,
+            checkCart: false,
         };
     },
     methods: {
@@ -96,6 +101,13 @@ export default {
             });
 
         },
+        getProducts() {
+            axios.post(this.store.apiBaseUrl + '/update-quantity').then((res) => {
+                console.log(res.data.results);
+                //console.log(this.$route.params, 'prova');
+                this.product = res.data.results;
+            });
+        },
         openModal(dish) {
             this.selectedDish = dish;
             this.showModal = true;
@@ -103,11 +115,71 @@ export default {
         closeModal() {
             this.showModal = false;
             this.selectedDish = {};
+        },
+        decreaseQuantity(product) {
+            let cartItem = this.store.cart.find(item => item.id === product.id);
+            if (cartItem && cartItem.quantity > 1) {
+                cartItem.quantity--;
+            } else if (cartItem && cartItem.quantity === 1) {
+                this.store.cart.splice(this.store.cart.indexOf(cartItem), 1);
+            } else if(cartItem === undefined){
+                alert('Hai tolto tutti gli elementi dal carrello')
+            }
+            this.saveCart()
+            console.log(this.store.cart)
+            console.log(localStorage, 'localstorage');
+        },
+        increaseQuantity(product) {
+            let cartItem = this.store.cart.find(item => item.id === product.id);
+            if (cartItem) {                
+                cartItem.quantity++;
+            } else {
+                this.addToCart(product);
+            }
+            this.saveCart()
+            if(product.restaurant_id != this.store.cart[0].restaurant_id){
+                this.store.cart.splice(this.store.cart.indexOf(cartItem), 1)
+                this.saveCart()
+                alert('Non puoi acquistare qui!')
+            }
+            console.log(product);
+            console.log(this.store.cart[0].restaurant_id);
+            // console.log(this.store.cart)
+            // console.log(localStorage, 'localstorage');
+        },
+        getQuantityInCart(productId) {
+            const cartItem = this.store.cart.find(item => item.id === productId);
+            return cartItem ? cartItem.quantity : 0;
+        },
+        addToCart(product) {
+            const cartItem = this.store.cart.find(item => item.id === product.id);
+            if (cartItem) {
+                cartItem.quantity++;
+            } else {
+                this.store.cart.push({ ...product, quantity: 1 });
+            }
+
+        },
+        loadCart() {
+            const savedCart = localStorage.getItem('cart');
+            if (savedCart) {
+                this.store.cart = JSON.parse(savedCart);
+            }
+            console.log(this.store.cart);
+        },
+        saveCart() {
+            localStorage.setItem('cart', JSON.stringify(this.store.cart));
+        },
+        checkcart() {
+            console.log(this.checkCart);
         }
     },
     mounted() {
         this.getSingleRestaurant();
+        this.loadCart();
     },
+    computed: {
+    }
 }
 </script>
 
