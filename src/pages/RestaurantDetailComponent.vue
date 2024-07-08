@@ -12,18 +12,26 @@
                 <h3 class=""><em class="f-d-primary-color">Menù</em></h3>
                 <div class="">
                     <ul class="d-flex flex-wrap justify-content-around p-0">
-                        <li class="f-d-mini-container" v-for="(item, index) in restaurant.products" :key="index" @click="openModal(item)">
-                            <img class="img-fluid" :src="store.imgBasePath + item.image" :alt="item.name"> 
-                            <span class="hover-icon">+</span>                        
+                        <li class="f-d-mini-container" v-for="(item, index) in restaurant.products" :key="index"
+                            @click="openModal(item)">
+                            <img class="img-fluid" :src="store.imgBasePath + item.image" :alt="item.name">
+                            <span class="hover-icon">+</span>
                         </li>
                     </ul>
+                </div>
+                <div v-for="product in restaurant.products" :key="product.id" class="product-card">
+                    <h3>{{ product.name }}</h3>
+                    <p>Prezzo: {{ product.price }}€</p>
+                    <button @click="decreaseQuantity(product)">-</button>
+                    <span>{{ getQuantityInCart(product.id) }}</span>
+                    <button @click="increaseQuantity(product)">+</button>
                 </div>
                 <div>
                     <h3><em class="f-d-primary-color">Tipologie</em></h3>
                     <div>
                         <ul class="d-flex flex-wrap justify-content-start p-0">
                             <li class="f-d-mini-container" v-for="(item, index) in restaurant.types" :key="index">
-                                <img class="img-fluid" :src="store.imgBasePath + item.image" :alt="item.name"> 
+                                <img class="img-fluid" :src="store.imgBasePath + item.image" :alt="item.name">
                             </li>
                         </ul>
                     </div>
@@ -37,10 +45,15 @@
                     <p class="f-d-primary-color">Prezzo medio: {{ restaurant.price }}€</p>
                 </div>
             </div>
+
         </div>
-        
+
+
+
+
         <!-- Modal -->
-        <div v-if="showModal" class="modal fade show d-block" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="background-color: rgba(0, 0, 0, 0.5);">
+        <div v-if="showModal" class="modal fade show d-block" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalLabel" aria-hidden="true" style="background-color: rgba(0, 0, 0, 0.5);">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header d-flex justify-content-between">
@@ -51,12 +64,19 @@
                     </div>
                     <div class="modal-body">
                         <div class="d-flex flex-column align-items-center justify-content-center">
-                        <img v-if="selectedDish.image" :src="store.imgBasePath + selectedDish.image" :alt="selectedDish.name" class="f-d-modal-img-fluid">
-                        <p v-if="selectedDish.description" class="align-self-start"><em>{{ selectedDish.description }}</em></p>
-                        <p v-if="selectedDish.price" class="align-self-start fs-5">{{ selectedDish.price }}€</p>
-                        
+                            <img v-if="selectedDish.image" :src="store.imgBasePath + selectedDish.image"
+                                :alt="selectedDish.name" class="f-d-modal-img-fluid">
+                            <p v-if="selectedDish.description" class="align-self-start"><em>{{ selectedDish.description
+                                    }}</em></p>
+                            <p v-if="selectedDish.price" class="align-self-start fs-5">{{ selectedDish.price }}€</p>
+
+                        </div>
+
                     </div>
-                        
+                    <div class="quantity-control d-flex justify-content-center align-items-center gap-3">
+                        <button class="btn btn-danger decrease">-</button>
+                        <span class="quantity">1</span>
+                        <button class="btn btn-success increase">+</button>
                     </div>
                     <div class="modal-footer d-flex flex-column justify-content-center align-items-center">
                         <button type="button" class="f-d-button" @click="closeModal">Aggiungi al carrello</button>
@@ -65,6 +85,7 @@
             </div>
         </div>
     </div>
+
 </template>
 
 <script>
@@ -78,13 +99,21 @@ export default {
             store,
             restaurant: null,
             selectedDish: {},
-            showModal: false
+            showModal: false,
+            checkCart: false,
         };
     },
     methods: {
         getSingleRestaurant() {
             axios.get(`${this.store.apiBaseUrl}/restaurants/${this.store.item}`).then((res) => {
                 this.restaurant = res.data.results;
+            });
+        },
+        getProducts() {
+            axios.post(this.store.apiBaseUrl + '/update-quantity').then((res) => {
+                console.log(res.data.results);
+                //console.log(this.$route.params, 'prova');
+                this.product = res.data.results;
             });
         },
         openModal(dish) {
@@ -94,11 +123,71 @@ export default {
         closeModal() {
             this.showModal = false;
             this.selectedDish = {};
+        },
+        decreaseQuantity(product) {
+            let cartItem = this.store.cart.find(item => item.id === product.id);
+            if (cartItem && cartItem.quantity > 1) {
+                cartItem.quantity--;
+            } else if (cartItem && cartItem.quantity === 1) {
+                this.store.cart.splice(this.store.cart.indexOf(cartItem), 1);
+            } else if(cartItem === undefined){
+                alert('Hai tolto tutti gli elementi dal carrello')
+            }
+            this.saveCart()
+            console.log(this.store.cart)
+            console.log(localStorage, 'localstorage');
+        },
+        increaseQuantity(product) {
+            let cartItem = this.store.cart.find(item => item.id === product.id);
+            if (cartItem) {                
+                cartItem.quantity++;
+            } else {
+                this.addToCart(product);
+            }
+            this.saveCart()
+            if(product.restaurant_id != this.store.cart[0].restaurant_id){
+                this.store.cart.splice(this.store.cart.indexOf(cartItem), 1)
+                this.saveCart()
+                alert('Non puoi acquistare qui!')
+            }
+            console.log(product);
+            console.log(this.store.cart[0].restaurant_id);
+            // console.log(this.store.cart)
+            // console.log(localStorage, 'localstorage');
+        },
+        getQuantityInCart(productId) {
+            const cartItem = this.store.cart.find(item => item.id === productId);
+            return cartItem ? cartItem.quantity : 0;
+        },
+        addToCart(product) {
+            const cartItem = this.store.cart.find(item => item.id === product.id);
+            if (cartItem) {
+                cartItem.quantity++;
+            } else {
+                this.store.cart.push({ ...product, quantity: 1 });
+            }
+
+        },
+        loadCart() {
+            const savedCart = localStorage.getItem('cart');
+            if (savedCart) {
+                this.store.cart = JSON.parse(savedCart);
+            }
+            console.log(this.store.cart);
+        },
+        saveCart() {
+            localStorage.setItem('cart', JSON.stringify(this.store.cart));
+        },
+        checkcart() {
+            console.log(this.checkCart);
         }
     },
     mounted() {
         this.getSingleRestaurant();
+        this.loadCart();
     },
+    computed: {
+    }
 }
 </script>
 
@@ -149,7 +238,7 @@ export default {
     &:hover {
         opacity: 0.7;
     }
-    
+
     .hover-icon {
         display: none;
         position: absolute;
