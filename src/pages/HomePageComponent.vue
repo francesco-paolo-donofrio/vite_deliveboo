@@ -1,36 +1,37 @@
 <template>
     <HeroComponent />
     <div class="d-flex justify-content-center my-3">
-        <span v-for="(item, index) in types" :key="item.id" class="p-2 mx-2 btn-types btn-color" :class="{ selected: selectedtypes.includes(item.id) }" 
-        @click="addType(item)">{{ item.name }}</span>
-    </div>    
-    <div class="d-flex justify-content-center">
+        <span 
+            v-for="(item, index) in types" 
+            :key="item.id" 
+            class="p-2 mx-2 btn-types btn-color" 
+            :class="{ selected: isSelected(item.id) }" 
+            @click="toggleType(item.id)">
+            {{ item.name }}
+        </span>
+    </div>
+    <!-- <div class="d-flex justify-content-center">
         <button type="button" class="btn btn-primary mx-2 p-2" @click="sendTypes">Filtra</button>
         <button type="button" class="btn btn-secondary mx-2 p-2" @click="resetTypes">Reset</button>
-    </div>
+    </div> -->
     <div class="container my-4">
         <div>Risultati trovati: {{ restaurants.length }}</div>
         <div class="row">
-            <div class="col-12 col-md-3 col-sm-6 mt-4" v-for="(item, index) in restaurants">
+            <div class="col-12 col-md-3 col-sm-6 mt-4" v-for="(item, index) in restaurants" :key="index">
                 <div class="row">
                     <CardComponent :item="item" />
                 </div>
             </div>
             <!-- SE LA RICERCA NON DÁ NESSUN RISULTATO -->
-            <div class="col-12 col-lg-6" v-if="restaurants.length == 0">
+            <div class="col-12 col-lg-6" v-if="restaurants.length === 0">
                 <h3>Nessun ristorante trovato che soddisfi questi requisiti:
                     <ul>
                         <li v-for="(name, index) in selectedtypesNames" :key="index">{{ name }}</li>
                     </ul>
                 </h3>
-                <!-- inserire qui la funzione che ritorna il nome della tipologia -->
             </div>
         </div>
     </div>
-    
-
-
-
 </template>
 
 <script>
@@ -51,7 +52,6 @@ export default {
     data() {
         return {
             store,
-            params: new URLSearchParams(),          
             types: [],
             restaurants: [],
             selectedtypes: [],
@@ -61,54 +61,77 @@ export default {
     methods: {
         getTypes() {
             axios.get(this.store.apiBaseUrl + '/types').then((res) => {
-                console.log(res.data.results);
-                //console.log(this.$route.params, 'prova');
                 this.types = res.data.results;
             });
         },
-        getRestaurants() {
-            axios.get(this.store.apiBaseUrl + '/restaurants', { params: this.params }).then((res) => {
-                //console.log(this.params);
-                //console.log(res.data.results);
+        getRestaurants(params = {}) {
+            axios.get(this.store.apiBaseUrl + '/restaurants', { params }).then((res) => {
                 this.restaurants = res.data.results;
             });
         },
-        addType(item) {
-            // console.log(item.id, 'aaa');
-            if (this.selectedtypes.includes(item.id)) {
-                const index = this.selectedtypes.indexOf(item.id);
-                this.selectedtypes.splice(index, 1);
-                this.selectedtypesNames.splice(index, 1);
+        toggleType(typeId) {
+            if (this.selectedtypes.includes(typeId)) {
+                // Se già presente, rimuovi
+                this.selectedtypes = this.selectedtypes.filter(id => id !== typeId);
+                this.selectedtypesNames = this.selectedtypesNames.filter(name => name.id !== typeId.toString());
             } else {
-                this.selectedtypes.push(item.id);
-                console.log(item.name);
-                this.selectedtypesNames.push(item.name);
+                // Altrimenti aggiungi
+                this.selectedtypes.push(typeId);
+                const type = this.types.find(item => item.id === typeId);
+                if (type) {
+                    this.selectedtypesNames.push(type.name);
+                }
             }
-            //console.log(this.selectedtypes);
+            
+            // Costruisci l'oggetto query con i parametri selezionati
+            const query = {};
+            this.selectedtypes.forEach(typeId => {
+                if (!query.type_id) {
+                    query.type_id = [];
+                }
+                query.type_id.push(typeId.toString());
+            });
+            
+            // Aggiorna l'URL con i nuovi parametri
+            this.$router.push({ path: '/', query }).then(() => {
+                // Aggiorna i ristoranti con i nuovi parametri
+                this.getRestaurants(query);
+            });
+        },
+        isSelected(typeId) {
+            return this.selectedtypes.includes(typeId);
         },
         sendTypes() {
-            //console.log(this.selectedtypes);
-            this.selectedtypes.forEach(element => {
-                this.params.append("type_id", element);
-            })
-            //this.params.append("type_id", this.selectedtypes);
-            //console.log(this.params);
-            axios.get(this.store.apiBaseUrl + '/restaurants', { params: this.params }).then((res) => {
-                //console.log(this.params);
-                //console.log(res.data.results);
-                this.restaurants = res.data.results;
-                console.log(res.data.results);
-            });
-            this.params = new URLSearchParams();
+            // Questo metodo non sarà più utilizzato per aggiornare i parametri type_id
+            // Ma può rimanere come punto di riferimento per la funzionalità di filtraggio completo
         },
         resetTypes() {
             this.selectedtypes = [];
-            this.getRestaurants();
+            this.selectedtypesNames = [];
+            this.$router.push({ path: '/', query: {} }).then(() => {
+                this.getRestaurants();
+            });
         }
     },
     mounted() {
         this.getTypes();
-        this.getRestaurants();
+        this.getRestaurants(this.$route.query);
+        
+        // Se ci sono parametri type_id nell'URL al caricamento iniziale, li carichiamo
+        // const { type_id } = this.$route.query;
+        // if (type_id) {
+        //     if (Array.isArray(type_id)) {
+        //         this.selectedtypes = type_id.map(id => parseInt(id));
+        //         this.selectedtypesNames = this.selectedtypes.map(id => {
+        //             const type = this.types.find(item => item.id === id);
+        //             return type ? type.name : '';
+        //         });
+        //     } else {
+        //         this.selectedtypes = [parseInt(type_id)];
+        //         const type = this.types.find(item => item.id === parseInt(type_id));
+        //         this.selectedtypesNames = type ? [type.name] : [];
+        //     }
+        // }
     }
 }
 </script>
