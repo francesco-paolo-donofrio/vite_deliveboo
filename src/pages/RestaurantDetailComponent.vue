@@ -128,9 +128,10 @@ export default {
             let cartItem = this.store.cart.find(item => item.id === product.id);
             if (cartItem && cartItem.quantity > 1) {
                 cartItem.quantity--;
-            } else if (cartItem.quantity === 1) {
+            } else if (cartItem && cartItem.quantity === 1) {
                 this.store.cart.splice(this.store.cart.indexOf(cartItem), 1);
-
+            } else if(cartItem === undefined){
+                alert('Hai tolto tutti gli elementi dal carrello')
             }
             this.saveCart()
             console.log(this.store.cart)
@@ -138,31 +139,21 @@ export default {
         },
         increaseQuantity(product) {
             let cartItem = this.store.cart.find(item => item.id === product.id);
-            console.log(cartItem);
-            // if (this.store.cart.length > 0) {
-            //     // console.log(cartItem)
-            //     if (this.store.cart[0].restaurant_id != cartItem.restaurant_id) {
-            //         console.log(this.store.cart);
-            //         this.checkcart()
-            //         return this.checkCart = true
-            //     }
-
-            // }
-            if (cartItem) {
+            if (cartItem) {                
                 cartItem.quantity++;
             } else {
-                if (this.store.cart.length === 0 ) {
-                    this.addToCart(product);
-                    
-                } else {
-                    console.log(this.store.cart[0].restaurant_id);
-                    this.checkCart = true
-                    this.checkcart()
-                }
+                this.addToCart(product);
             }
             this.saveCart()
-            console.log(this.store.cart)
-            console.log(localStorage, 'localstorage');
+            if(product.restaurant_id != this.store.cart[0].restaurant_id){
+                this.store.cart.splice(this.store.cart.indexOf(cartItem), 1)
+                this.saveCart()
+                alert('Non puoi acquistare qui!')
+            }
+            console.log(product);
+            console.log(this.store.cart[0].restaurant_id);
+            // console.log(this.store.cart)
+            // console.log(localStorage, 'localstorage');
         },
         getQuantityInCart(productId) {
             const cartItem = this.store.cart.find(item => item.id === productId);
