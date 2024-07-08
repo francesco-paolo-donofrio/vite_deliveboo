@@ -37,5 +37,6 @@ export default {
 <style lang="scss" scoped>
 .f-d-main {
   max-height: 2000px;
+  margin-bottom: 150px;
 }
 </style>

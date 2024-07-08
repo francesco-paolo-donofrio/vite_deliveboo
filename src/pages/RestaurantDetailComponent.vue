@@ -12,9 +12,10 @@
                 <h3 class=""><em class="f-d-primary-color">Menù</em></h3>
                 <div class="">
                     <ul class="d-flex flex-wrap justify-content-around p-0">
-                        <li class="f-d-mini-container" v-for="(item, index) in restaurant.products" :key="index" @click="openModal(item)">
-                            <img class="img-fluid" :src="store.imgBasePath + item.image" :alt="item.name"> 
-                            <span class="hover-icon">+</span>                        
+                        <li class="f-d-mini-container" v-for="(item, index) in restaurant.products" :key="index"
+                            @click="openModal(item)">
+                            <img class="img-fluid" :src="store.imgBasePath + item.image" :alt="item.name">
+                            <span class="hover-icon">+</span>
                         </li>
                     </ul>
                 </div>
@@ -23,7 +24,7 @@
                     <div>
                         <ul class="d-flex flex-wrap justify-content-start p-0">
                             <li class="f-d-mini-container" v-for="(item, index) in restaurant.types" :key="index">
-                                <img class="img-fluid" :src="store.imgBasePath + item.image" :alt="item.name"> 
+                                <img class="img-fluid" :src="store.imgBasePath + item.image" :alt="item.name">
                             </li>
                         </ul>
                     </div>
@@ -38,9 +39,10 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- Modal -->
-        <div v-if="showModal" class="modal fade show d-block" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="background-color: rgba(0, 0, 0, 0.5);">
+        <div v-if="showModal" class="modal fade show d-block" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalLabel" aria-hidden="true" style="background-color: rgba(0, 0, 0, 0.5);">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header d-flex justify-content-between">
@@ -51,12 +53,19 @@
                     </div>
                     <div class="modal-body">
                         <div class="d-flex flex-column align-items-center justify-content-center">
-                        <img v-if="selectedDish.image" :src="store.imgBasePath + selectedDish.image" :alt="selectedDish.name" class="f-d-modal-img-fluid">
-                        <p v-if="selectedDish.description" class="align-self-start"><em>{{ selectedDish.description }}</em></p>
-                        <p v-if="selectedDish.price" class="align-self-start fs-5">{{ selectedDish.price }}€</p>
-                        
+                            <img v-if="selectedDish.image" :src="store.imgBasePath + selectedDish.image"
+                                :alt="selectedDish.name" class="f-d-modal-img-fluid">
+                            <p v-if="selectedDish.description" class="align-self-start"><em>{{ selectedDish.description
+                                    }}</em></p>
+                            <p v-if="selectedDish.price" class="align-self-start fs-5">{{ selectedDish.price }}€</p>
+
+                        </div>
+
                     </div>
-                        
+                    <div class="quantity-control d-flex justify-content-center align-items-center gap-3">
+                        <button class="btn btn-danger decrease">-</button>
+                        <span class="quantity">1</span>
+                        <button class="btn btn-success increase">+</button>
                     </div>
                     <div class="modal-footer d-flex flex-column justify-content-center align-items-center">
                         <button type="button" class="f-d-button" @click="closeModal">Aggiungi al carrello</button>
@@ -85,6 +94,13 @@ export default {
         getSingleRestaurant() {
             axios.get(`${this.store.apiBaseUrl}/restaurants/${this.store.item}`).then((res) => {
                 this.restaurant = res.data.results;
+            });
+        },
+        getProducts() {
+            axios.post(this.store.apiBaseUrl + '/update-quantity').then((res) => {
+                console.log(res.data.results);
+                //console.log(this.$route.params, 'prova');
+                this.product = res.data.results;
             });
         },
         openModal(dish) {
@@ -149,7 +165,7 @@ export default {
     &:hover {
         opacity: 0.7;
     }
-    
+
     .hover-icon {
         display: none;
         position: absolute;
