@@ -3,9 +3,9 @@
         <div class="container">
             <div class="row">
                 <div class="col-xl-9 col-sm-12">
-                    <h1 class="text-center"><strong class="gradientColor">{{ restaurant.name }}</strong></h1>
+                    <h1 class="text-center py-3"><strong class="gradientColor">{{ restaurant.name }}</strong></h1>
                     <div>
-                        <div class="d-flex justify-content-between align-items-center gap-3 f-d-mq-sm">
+                        <div class="d-flex justify-content-center align-items-center gap-3 f-d-mq-sm">
                             <div class="f-d-container-img">
                                 <img v-if="restaurant.image" class="f-d-img-fluid"
                                     :src="store.imgBasePath + restaurant.image" :alt="restaurant.name">
@@ -38,15 +38,36 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-3 col-sm-12 f-d-bg-gradient-secondary">
-                    <h4 class="text-center text-uppercase">Ristoranti consigliati</h4>
-
+                <div id="suggested" class="col-xl-3 col-sm-12 f-d-bg-gradient-secondary">
+                    <div>
+                    <h4 class="text-center text-uppercase">Info Utili</h4>
+                                <p><em class="fw-bold ">{{ restaurant.description }}</em></p>
+                                <p>Indirizzo: {{ restaurant.address }}</p>
+                                <p>P.IVA {{ restaurant.vat }}</p>
+                </div>
+                <div>
+                    <h4 class="text-center text-uppercase">Tipologie di {{ restaurant.name }}</h4>
+                    <ul
+                                            class="d-flex flex-wrap justify-content-center align-items-center p-0 list-unstyled">
+                                            <li v-for="(item, index) in restaurant.types" :key="index">
+                                                <div class="f-d-mini-container-type display-flex flex-column">
+                                                    <img class="img-fluid" :src="store.imgBasePath + item.image"
+                                                        :alt="item.name">
+                                                </div>
+                                                <div class="text-center">
+                                                    <p>
+                                                        {{ item.name }}
+                                                    </p>
+                                                </div>
+                                            </li>
+                                        </ul>
+                </div>
                 </div>
             </div>
         </div>
 
         <div class="f-d-bg-gradient">
-            <div class="container py-5">
+            <div class="container">
                 <div class="row">
                     <div class="col-xl-8 col-sm-12 ">
                         <h3 class="text-center text-uppercase py-3"><em class="text-white">Menù</em></h3>
@@ -77,7 +98,7 @@
                                 <div
                                     class="f-d-cart container d-flex flex-column justify-content-center align-items-center">
                                     <div class="cart d-flex flex-column align-items-center justify-content-center">
-                                        <h2>Carrello di {{ restaurant.name }}</h2>
+                                        <h2 class="text-center">Carrello di {{ restaurant.name }}</h2>
                                         <div class="f-d-border-bottom"></div>
                                         <div v-for="item in store.cart" :key="item.id">
                                             <p>x{{ item.quantity }}-{{ item.name }} - Totale: {{ item.price *
@@ -363,6 +384,14 @@ export default {
     }
 }
 
+#suggested {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
 .background-image {
     background-size: cover;
     background-repeat: no-repeat;
@@ -461,9 +490,28 @@ export default {
     align-items: center;
 }
 
+#cart-container {
+    padding: 70px 0 0 0;
+}
+
 // mediaquery 1200px, 768px, 576px
 
-@media screen and (max-width: 1200px) {}
+@media screen and (min-width: 1200px) {
+    #info-container {
+        display: none;
+    }
+    .f-d-container-img {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    gap: 20px;
+    width: 80%;
+    height: 100%;
+}
+
+}
 
 @media screen and (max-width: 576px) {
 
@@ -498,6 +546,19 @@ export default {
     }
 
     #cart-container {
+        display: none;
+    }
+
+    #info-container {
+        display: flex;
+        margin: 0 auto;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    #suggested {
         display: none;
     }
 
@@ -553,6 +614,10 @@ export default {
         background-color: white;
 
         margin-bottom: 20px;
+    }
+
+    #suggested {
+        display: none;
     }
 
     #info-container {
