@@ -1,17 +1,20 @@
 <template>
     <div class="container d-flex flex-column justify-content-center align-items-center">
-        <div class="f-d-cart cart d-flex flex-column align-items-center justify-content-center">
-            <h2>Carrello</h2>
+        <div class="f-d-cart container d-flex flex-column justify-content-center align-items-center">
+        <div class="cart d-flex flex-column align-items-center justify-content-center">
+            <h2>Carrello di</h2>
+            <div class="f-d-border-bottom"></div>
             <div v-for="item in cart" :key="item.id">
                 <p>x{{ item.quantity }}-{{ item.name }} - Totale: {{ item.price * item.quantity }}€</p>
             </div>
+            <div class="f-d-border-bottom"></div>
             <p>Totale carrello: {{ cartTotal }}€</p>
         </div>
         <div class="buttons d-flex align-items-center justify-content-center gap-3">
-            <button class="btn btn-danger" @click="emptyCart">Svuota Carrello</button>
-            <button class="btn btn-success">Procedi con il tuo ordine</button>
-
+            <button class="btn btn-danger" @click="emptyCart">Svuota</button>
+            <button class="btn btn-success">Procedi</button>
         </div>
+    </div>
     </div>
 </template>
 
@@ -63,6 +66,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@use '../assets/styles/partials/_variables' as *;
+
 .f-d-first-container {
     width: calc(100% / 2 - 40px);
     height: 500px;
@@ -90,29 +95,27 @@ export default {
     justify-content: center;
     align-items: center;
     gap: 10px;
-    width: 50%;
-    height: 50%;
+    width: 100%;
+    height: calc(100% - 20px);
     border-radius: 10px;
-    border: 2px solid black;
-    background-color: white;
+    border: 4px solid $background-fourth-color;
+    background-color: $background-primary-color;
+    color: white;
+    padding: 10px;
 }
+
+.f-d-border-bottom {
+    margin: 0 auto;
+    width: 50%;
+    height: 5px;
+    background-color: $background-fourth-color;
+    border: 1px solid $background-fourth-color;
+    border-radius: 5px;
+    margin: 5px 0 5px 0;
+}
+
 
 @media screen and (max-width: 320px) {
-
-.f-d-cart {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    width: 100%;
-    height: 90%;
-    border-radius: 10px;
-    border: 2px solid black;
-    background-color: white;
-
-    margin-bottom: 20px;
-}
 
 }
 </style>

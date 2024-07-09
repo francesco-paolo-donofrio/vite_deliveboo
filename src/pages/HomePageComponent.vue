@@ -104,11 +104,12 @@ export default {
             this.$router.push({ path: '/', query: {} }).then(() => {
                 this.getRestaurants();
             });
-        }
+        },
     },
     mounted() {
         this.getTypes();
         this.getRestaurants(this.$route.query);
+
         
         // Se ci sono parametri type_id nell'URL al caricamento iniziale, li carichiamo
         // const { type_id } = this.$route.query;

@@ -2,7 +2,7 @@
     <div v-if="restaurant">
         <div class="container">
             <div class="row">
-                <div class="col-lg-6 col-sm-12">
+                <div class="col-xl-9 col-sm-12">
                     <h1 class="text-center"><strong class="gradientColor">{{ restaurant.name }}</strong></h1>
                     <div>
                         <div class="d-flex justify-content-between align-items-center gap-3 f-d-mq-sm">
@@ -11,73 +11,99 @@
                                     :src="store.imgBasePath + restaurant.image" :alt="restaurant.name">
                                 <img v-else src="../public/images/placeholder-restaurant.png" :alt="restaurant.name">
                             </div>
-                            <div class="ps-3">
+                            <div id="info-container">
                                 <h3 class=""><em class="f-d-primary-color">Info utili</em></h3>
                                 <p><em>{{ restaurant.description }}</em></p>
                                 <p>Indirizzo: {{ restaurant.address }}</p>
-                            </div>
-                        </div>
-                        <div>
-
-                            <div class="ps-3">
-                                <h3 class="text-center"><em class="f-d-primary-color">Tipologie</em></h3>
-                                <div class="f-d-mq-320-576 ">
-                                    <ul class="d-flex flex-wrap justify-content-center align-items-center p-0 list-unstyled">
-                                        <li v-for="(item, index) in restaurant.types"
-                                            :key="index">
-                                            <div class="f-d-mini-container-type display-flex flex-column">
-                                                <img class="img-fluid" :src="store.imgBasePath + item.image"
-                                                    :alt="item.name">
-                                            </div>
-                                            <div>
-                                                <p>
-                                                    {{ item.name }}
-                                                </p>
-                                            </div>
-
-                                        </li>
-                                    </ul>
+                                <div id="types-container">
+                                    <h3 class=""><em class="f-d-primary-color">Tipologie</em></h3>
+                                    <div class="f-d-mq-320-576 ">
+                                        <ul
+                                            class="d-flex flex-wrap justify-content-center align-items-center p-0 list-unstyled">
+                                            <li v-for="(item, index) in restaurant.types" :key="index">
+                                                <div class="f-d-mini-container-type display-flex flex-column">
+                                                    <img class="img-fluid" :src="store.imgBasePath + item.image"
+                                                        :alt="item.name">
+                                                </div>
+                                                <div class="text-center">
+                                                    <p>
+                                                        {{ item.name }}
+                                                    </p>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6 col-sm-12">
-                    <div class="pt-5">
-                        <div class="f-d-cart container d-flex flex-column justify-content-center align-items-center">
-                            <div class=" cart d-flex flex-column align-items-center justify-content-center">
-                                <h2>Carrello</h2>
-                                <div v-for="item in store.cart" :key="item.id">
-                                    <p>x{{ item.quantity }}-{{ item.name }} - Totale: {{ item.price * item.quantity }}€
-                                    </p>
-                                </div>
-                                <p>Totale carrello: {{ cartTotal() }}€</p>
-                            </div>
-                            <div class="buttons d-flex align-items-center justify-content-center gap-3">
-                                <button class="btn btn-danger" @click="emptyCart">Svuota</button>
-                                <button class="btn btn-success">Procedi</button>
-                            </div>
+                <div class="col-xl-3 col-sm-12 f-d-bg-gradient-secondary">
+                    <h4 class="text-center text-uppercase">Ristoranti consigliati</h4>
 
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
 
-        <div class="row">
+        <div class="f-d-bg-gradient">
+            <div class="container py-5">
+                <div class="row">
+                    <div class="col-xl-8 col-sm-12 ">
+                        <h3 class="text-center text-uppercase py-3"><em class="text-white">Menù</em></h3>
+                        <div class="d-flex align-items-center justify-content-center flex-wrap">
+                            <div class="col-sm-12 col-xl-2" v-for="(item, index) in restaurant.products" :key="index">
+                                <div class="f-d-mini-container">
+                                    <img @click="openModal(item)" class="img-fluid"
+                                        :src="store.imgBasePath + item.image" :alt="item.name">
+                                </div>
+                                <div class="d-flex flex-column align-items-center justify-content-center gap-0">
+                                    <p class="text-center text-uppercase fw-bold single-line pointer">{{ item.name }}
+                                    </p>
+                                    <p class="text-center text-uppercase fw-bold">{{ item.price }}€</p>
+                                    <div class="d-flex justify-content-center align-items-center gap-2 my-2">
+                                        <button class="btn btn-sm btn-danger" @click="decreaseQuantity(item)">-</button>
+                                        <span>{{ getQuantityInCart(item.id) }}</span>
+                                        <button class="btn btn-sm btn-success"
+                                            @click="increaseQuantity(item)">+</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
-            <h3 class="text-center text-uppercase"><em class="f-d-primary-color">Menù</em></h3>
+                    </div>
+                    <div class="col-xl-4 col-sm-12">
+                        <div id="cart-container">
+                            <div>
+                                <div
+                                    class="f-d-cart container d-flex flex-column justify-content-center align-items-center">
+                                    <div class="cart d-flex flex-column align-items-center justify-content-center">
+                                        <h2>Carrello di {{ restaurant.name }}</h2>
+                                        <div class="f-d-border-bottom"></div>
+                                        <div v-for="item in store.cart" :key="item.id">
+                                            <p>x{{ item.quantity }}-{{ item.name }} - Totale: {{ item.price *
+                                                item.quantity
+                                                }}€
+                                            </p>
+                                        </div>
+                                        <div class="f-d-border-bottom"></div>
+                                        <p>Totale carrello: {{ cartTotal() }}€</p>
+                                    </div>
+                                    <div class="buttons d-flex align-items-center justify-content-center gap-3">
+                                        <button class="btn btn-danger" @click="emptyCart">Svuota</button>
+                                        <button class="btn btn-success">Procedi</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-            <ul class="col-sm-12 col-md-6 col-lg-4">
-                <li class="f-d-mini-container" v-for="(item, index) in restaurant.products" :key="index"
-                    @click="openModal(item)">
+                </div>
+            </div>
 
-                    <img class="img-fluid" :src="store.imgBasePath + item.image" :alt="item.name">
-
-                </li>
-            </ul>
 
         </div>
+
+
 
 
 
@@ -125,15 +151,22 @@
         </div>
 
     </div>
+    <FooterComponent></FooterComponent>
+
+
 
 </template>
 
 <script>
+import FooterComponent from '@/components/FooterComponent.vue';
 import { store } from '../store';
 import axios from 'axios';
 
 export default {
     name: 'RestaurantDetailComponent',
+    components: {
+        FooterComponent
+    },
     props: ['id'],
     data() {
         return {
@@ -156,6 +189,11 @@ export default {
             axios.get(`${this.store.apiBaseUrl}/restaurants/${this.id}`).then(res => {
                 this.restaurant = res.data.results;
                 console.log(this.restaurant);
+            });
+        },
+        getRestaurants() {
+            axios.get(this.store.apiBaseUrl + '/restaurants').then((res) => {
+                this.restaurants = res.data.results;
             });
         },
         openModal(dish) {
@@ -242,6 +280,7 @@ export default {
         }
     },
     mounted() {
+        this.getRestaurants();
         this.getSingleRestaurant();
         this.loadCart();
     },
@@ -254,28 +293,6 @@ export default {
 <style lang="scss" scoped>
 @use '../assets/styles/partials/_variables' as *;
 
-
-.f-d-first-container {
-    width: calc(70% - 40px);
-    //height: 500px;
-}
-
-.f-d-second-container {
-    width: calc(30% - 40px);
-    //height: 500px;
-}
-
-.f-d-container {
-    width: 100%;
-    //height: 600px;
-    padding: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: start;
-    gap: 20px;
-    margin-bottom: 30px;
-}
-
 .f-d-container-img {
     display: flex;
     flex-direction: column;
@@ -287,19 +304,21 @@ export default {
     aspect-ratio: 1/1;
 }
 
-
-.f-d-mini-container {
+.f-d-mini-container-img {
+    width: 150px;
+    height: 80px;
+    border-radius: 10px;
+    margin: 0 auto;
     aspect-ratio: 1/1;
     cursor: pointer;
-    border-radius: 50%;
     overflow: hidden;
-    background-color: lightgray;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
+    
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
 
     li {
         list-style-type: none;
@@ -310,9 +329,50 @@ export default {
     }
 }
 
-.f-d-mini-container-type {
+#info-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+}
+
+.f-d-mini-container {
     width: 100px;
     height: 100px;
+    margin: 0 auto;
+    border-radius: 10px;
+    aspect-ratio: 1/1;
+    cursor: pointer;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    li {
+        list-style-type: none;
+    }
+
+    &:hover {
+        opacity: 0.7;
+    }
+}
+
+.background-image {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-position: center;
+}
+
+.f-d-mini-container-type {
+    width: 50px;
+    height: 50px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -351,17 +411,59 @@ export default {
     justify-content: center;
     align-items: center;
     gap: 10px;
-    width: 50%;
-    height: 50%;
+    width: 100%;
+    height: calc(100% - 20px);
     border-radius: 10px;
-    border: 2px solid black;
-    background-color: white;
+    border: 4px solid $background-fourth-color;
+    background-color: $background-primary-color;
+    color: white;
+    padding: 10px;
 }
 
-// mediaquery
-
-@media screen and (max-width: 1200px) {
+.f-d-border-bottom {
+    margin: 0 auto;
+    width: 50%;
+    height: 5px;
+    background-color: $background-fourth-color;
+    border: 1px solid $background-fourth-color;
+    border-radius: 5px;
+    margin: 5px 0 5px 0;
 }
+
+// css per troncare la parola e farla rimanere all'interno del contenitore senza che vada a capo
+.single-line {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+}
+
+.f-d-bg-gradient {
+    background: linear-gradient(to right, $background-secondary-color, $background-primary-color, $background-secondary-color);
+    color: white;
+}
+
+.f-d-bg-gradient-secondary {
+    background: linear-gradient(to bottom, $background-primary-color, $background-secondary-color);
+    color: white;
+}
+
+.quantity-control {
+    margin-top: 10px;
+}
+
+.quantity-control button {
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+// mediaquery 1200px, 768px, 576px
+
+@media screen and (max-width: 1200px) {}
 
 @media screen and (max-width: 576px) {
 
@@ -395,6 +497,10 @@ export default {
         margin-bottom: 20px;
     }
 
+    #cart-container {
+        display: none;
+    }
+
     .f-d-mq-320 {
         display: flex;
         justify-content: center;
@@ -404,13 +510,13 @@ export default {
 
     .f-d-mini-container {
         width: 80%;
+        height: 100%;
         margin: 0 auto;
-        gap: 10px;
         aspect-ratio: 1/1;
-        cursor: pointer;
         border-radius: 50%;
         overflow: hidden;
         background-color: lightgray;
+        gap: 10px;
     }
 
     .f-d-mini-container-type {
@@ -449,6 +555,19 @@ export default {
         margin-bottom: 20px;
     }
 
+    #info-container {
+        display: flex;
+        margin: 0 auto;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    #cart-container {
+        display: none;
+    }
+
     .f-d-mq-320-576 {
         display: flex;
         justify-content: center;
@@ -463,6 +582,17 @@ export default {
         justify-content: center;
         align-items: center;
         list-style: none;
+        gap: 10px;
+    }
+
+    .f-d-mini-container {
+        width: 80%;
+        height: 100%;
+        margin: 0 auto;
+        aspect-ratio: 1/1;
+        border-radius: 50%;
+        overflow: hidden;
+        background-color: lightgray;
         gap: 10px;
     }
 
