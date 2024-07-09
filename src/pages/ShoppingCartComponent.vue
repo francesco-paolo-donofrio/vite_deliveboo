@@ -1,99 +1,90 @@
 <template>
-    <div class="container d-flex flex-column justify-content-center align-items-center">
-        <div class="f-d-cart cart d-flex flex-column align-items-center justify-content-center">
-            <h2>Carrello</h2>
-            <div v-for="item in cart" :key="item.id">
-                <p>x{{ item.quantity }}-{{ item.name }} - Totale: {{ item.price * item.quantity }}€</p>
-            </div>
-            <p>Totale carrello: {{ cartTotal }}€</p>
+    <div>
+        <h2>Shopping Cart</h2>
+        <div v-for="item in cartItems" :key="item.id">
+            {{ item.name }} - {{ item.price }} x {{ item.quantity }}
         </div>
-        <div class="buttons d-flex align-items-center justify-content-center gap-3">
-            <button class="btn btn-danger" @click="emptyCart">Svuota Carrello</button>
-            <button class="btn btn-success">Procedi con il tuo ordine</button>
-
-        </div>
+        <div id="dropin-container"></div>
+        <button @click="pay">Pay {{ totalAmount }} USD</button>
     </div>
 </template>
 
 <script>
-import { store } from '../store';
 import axios from 'axios';
+import dropin from 'braintree-web-drop-in';
 
 export default {
     data() {
         return {
-            store,
-            products: [],
-            cart: []
-        }
+            clientToken: null,
+            instance: null,
+            cartItems: [
+                { id: 1, name: 'Item 1', price: 5.00, quantity: 2 },
+                { id: 2, name: 'Item 2', price: 10.00, quantity: 1 }
+            ]
+        };
     },
     computed: {
-        cartTotal() {
-            return this.cart.reduce((total, item) => total + item.price * item.quantity, 0);
+        totalAmount() {
+            return this.cartItems.reduce((total, item) => {
+                return total + item.price * item.quantity;
+            }, 0).toFixed(2);
         }
+    },
+    mounted() {
+        this.getClientToken();
     },
     methods: {
-        getProducts() {
-            axios.get(store.apiBaseUrl + '/products')
-                .then((res) => {
-                    this.products = res.data.results;
+        getClientToken() {
+            axios.get('http://127.0.0.1:8000/api/braintree/token')
+                .then(response => {
+                    this.clientToken = response.data.token;
+                    this.initializeBraintree();
                 })
                 .catch(error => {
-                    console.error('Errore nel recupero dei prodotti:', error);
+                    console.error('Error fetching client token:', error);
                 });
         },
-        loadCart() {
-            const savedCart = localStorage.getItem('cart');
-            if (savedCart) {
-                this.cart = JSON.parse(savedCart);
-            }
+        initializeBraintree() {
+            dropin.create({
+                authorization: this.clientToken,
+                container: '#dropin-container'
+            }, (error, instance) => {
+                if (error) {
+                    console.error('Error initializing Braintree Drop-in:', error);
+                    return;
+                }
+                this.instance = instance;
+            });
         },
-        emptyCart() {
-            this.store.cart = [];
-            localStorage.clear();
-            location.reload();
+        pay() {
+            if (!this.instance) {
+                console.error('Braintree instance is not initialized');
+                return;
+            }
+
+            this.instance.requestPaymentMethod((error, payload) => {
+                if (error) {
+                    console.error('Error requesting payment method:', error);
+                    return;
+                }
+
+                axios.post('http://127.0.0.1:8000/api/braintree/checkout', {
+                    payment_method_nonce: payload.nonce,
+                    amount: this.totalAmount
+                })
+                    .then(response => {
+                        if (response.data.success) {
+                            alert('Payment successful!');
+                        } else {
+                            alert('Payment failed: ' + response.data.message);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error processing payment:', error);
+                    });
+            });
         }
-
-    },
-    created() {
-        this.getProducts();
-        this.loadCart();
     }
-}
+};
 </script>
-
-<style lang="scss" scoped>
-.f-d-first-container {
-    width: calc(100% / 2 - 40px);
-    height: 500px;
-}
-
-.f-d-second-container {
-    width: calc(100% / 2 - 40px);
-    height: 500px;
-}
-
-.f-d-container {
-    width: 100%;
-    height: 600px;
-    padding: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: start;
-    gap: 20px;
-    margin-bottom: 30px;
-}
-
-.f-d-cart {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    width: 50%;
-    height: 50%;
-    border-radius: 10px;
-    border: 2px solid black;
-    background-color: white;
-}
-</style>
