@@ -1,70 +1,82 @@
 <template>
     <div v-if="restaurant">
-        <div class="f-d-container">
-            <div class="f-d-first-container">
-                <h1 class="text-center"><strong class="gradientColor">{{ restaurant.name }}</strong></h1>
-                <div>
-                    <div class="d-flex justify-content-between align-items-center gap-3">
-                        <div class="f-d-container-img">
-                            <img v-if="restaurant.image" class="f-d-img-fluid"
-                                :src="store.imgBasePath + restaurant.image" :alt="restaurant.name">
-                            <img v-else src="../public/images/placeholder-restaurant.png" :alt="restaurant.name">
-                        </div>
-                        <div class="ps-3">
-                            <h3 class=""><em class="f-d-primary-color">Info utili</em></h3>
-                            <p><em>{{ restaurant.description }}</em></p>
-                            <p>Consegna in <strong>10 - 20 minuti</strong></p>
-                            <p>Indirizzo: {{ restaurant.address }}</p>
-                        </div>
-                    </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-sm-12">
+                    <h1 class="text-center"><strong class="gradientColor">{{ restaurant.name }}</strong></h1>
                     <div>
+                        <div class="d-flex justify-content-between align-items-center gap-3 f-d-mq-sm">
+                            <div class="f-d-container-img">
+                                <img v-if="restaurant.image" class="f-d-img-fluid"
+                                    :src="store.imgBasePath + restaurant.image" :alt="restaurant.name">
+                                <img v-else src="../public/images/placeholder-restaurant.png" :alt="restaurant.name">
+                            </div>
+                            <div class="ps-3">
+                                <h3 class=""><em class="f-d-primary-color">Info utili</em></h3>
+                                <p><em>{{ restaurant.description }}</em></p>
+                                <p>Indirizzo: {{ restaurant.address }}</p>
+                            </div>
+                        </div>
+                        <div>
 
-                        <div class="ps-3">
-                            <h3 class="text-center"><em class="f-d-primary-color">Tipologie</em></h3>
-                            <div>
-                                <ul class="d-flex flex-wrap justify-content-center align-items-center p-0">
-                                    <li class="f-d-mini-container" v-for="(item, index) in restaurant.types"
-                                        :key="index">
-                                        <img class="img-fluid" :src="store.imgBasePath + item.image" :alt="item.name">
-                                    </li>
-                                </ul>
+                            <div class="ps-3">
+                                <h3 class="text-center"><em class="f-d-primary-color">Tipologie</em></h3>
+                                <div class="f-d-mq-320-576 ">
+                                    <ul class="d-flex flex-wrap justify-content-center align-items-center p-0 list-unstyled">
+                                        <li v-for="(item, index) in restaurant.types"
+                                            :key="index">
+                                            <div class="f-d-mini-container-type display-flex flex-column">
+                                                <img class="img-fluid" :src="store.imgBasePath + item.image"
+                                                    :alt="item.name">
+                                            </div>
+                                            <div>
+                                                <p>
+                                                    {{ item.name }}
+                                                </p>
+                                            </div>
+
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="f-d-second-container">
-                <div class="pt-5">
-                    <div class="container d-flex flex-column justify-content-center align-items-center">
-                        <div class="f-d-cart cart d-flex flex-column align-items-center justify-content-center">
-                            <h2>Carrello</h2>
-                            <div v-for="item in store.cart" :key="item.id">
-                                <p>x{{ item.quantity }}-{{ item.name }} - Totale: {{ item.price * item.quantity }}€</p>
+                <div class="col-lg-6 col-sm-12">
+                    <div class="pt-5">
+                        <div class="f-d-cart container d-flex flex-column justify-content-center align-items-center">
+                            <div class=" cart d-flex flex-column align-items-center justify-content-center">
+                                <h2>Carrello</h2>
+                                <div v-for="item in store.cart" :key="item.id">
+                                    <p>x{{ item.quantity }}-{{ item.name }} - Totale: {{ item.price * item.quantity }}€
+                                    </p>
+                                </div>
+                                <p>Totale carrello: {{ cartTotal() }}€</p>
                             </div>
-                            <p>Totale carrello: {{ cartTotal() }}€</p>
-                        </div>
-                        <div class="buttons d-flex align-items-center justify-content-center gap-3">
-                                <button class="btn btn-danger" @click="emptyCart">Svuota Carrello</button>
-                                <button class="btn btn-success">Procedi con il tuo ordine</button>
+                            <div class="buttons d-flex align-items-center justify-content-center gap-3">
+                                <button class="btn btn-danger" @click="emptyCart">Svuota</button>
+                                <button class="btn btn-success">Procedi</button>
                             </div>
 
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="container">
+
+        <div class="row">
+
             <h3 class="text-center text-uppercase"><em class="f-d-primary-color">Menù</em></h3>
-            <div class="row">
-                <ul class="d-flex flex-wrap justify-content-around p-0">
-                    <li class="f-d-mini-container col-12 col-md-6 col-lg-4" v-for="(item, index) in restaurant.products"
-                        :key="index" @click="openModal(item)">
-                        
-                        <img class="img-fluid" :src="store.imgBasePath + item.image" :alt="item.name">
-                        <span class="hover-icon">+</span>
-                    
-                    </li>
-                </ul>
-            </div>
+
+            <ul class="col-sm-12 col-md-6 col-lg-4">
+                <li class="f-d-mini-container" v-for="(item, index) in restaurant.products" :key="index"
+                    @click="openModal(item)">
+
+                    <img class="img-fluid" :src="store.imgBasePath + item.image" :alt="item.name">
+
+                </li>
+            </ul>
+
         </div>
 
 
@@ -135,11 +147,11 @@ export default {
     },
     methods: {
         computed: {
-            
+
         },
         cartTotal() {
-                return this.store.cart.reduce((total, item) => total + item.price * item.quantity, 0);
-            },
+            return this.store.cart.reduce((total, item) => total + item.price * item.quantity, 0);
+        },
         getSingleRestaurant() {
             axios.get(`${this.store.apiBaseUrl}/restaurants/${this.id}`).then(res => {
                 this.restaurant = res.data.results;
@@ -242,6 +254,7 @@ export default {
 <style lang="scss" scoped>
 @use '../assets/styles/partials/_variables' as *;
 
+
 .f-d-first-container {
     width: calc(70% - 40px);
     //height: 500px;
@@ -276,7 +289,6 @@ export default {
 
 
 .f-d-mini-container {
-    width: calc(100% / 4);
     aspect-ratio: 1/1;
     cursor: pointer;
     border-radius: 50%;
@@ -288,7 +300,6 @@ export default {
     justify-content: center;
     align-items: center;
     gap: 10px;
-    position: relative;
 
     li {
         list-style-type: none;
@@ -297,21 +308,15 @@ export default {
     &:hover {
         opacity: 0.7;
     }
+}
 
-    .hover-icon {
-        display: none;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        font-size: 3rem;
-        color: black;
-        font-weight: bold;
-    }
-
-    &:hover .hover-icon {
-        display: block;
-    }
+.f-d-mini-container-type {
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
 }
 
 .modal.fade.show {
@@ -351,5 +356,115 @@ export default {
     border-radius: 10px;
     border: 2px solid black;
     background-color: white;
+}
+
+// mediaquery
+
+@media screen and (max-width: 1200px) {
+}
+
+@media screen and (max-width: 576px) {
+
+    h1 {
+        padding-top: 10px;
+    }
+
+    .f-d-container-mq {
+        height: 200px;
+    }
+
+    .f-d-mq-sm {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    .f-d-cart {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 90%;
+        border-radius: 10px;
+        border: 2px solid black;
+        background-color: white;
+
+        margin-bottom: 20px;
+    }
+
+    .f-d-mq-320 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    .f-d-mini-container {
+        width: 80%;
+        margin: 0 auto;
+        gap: 10px;
+        aspect-ratio: 1/1;
+        cursor: pointer;
+        border-radius: 50%;
+        overflow: hidden;
+        background-color: lightgray;
+    }
+
+    .f-d-mini-container-type {
+        width: 50px;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        list-style-type: none;
+    }
+}
+
+@media screen and (max-width: 320px) {
+
+    .f-d-mq-sm {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    .f-d-cart {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        width: 100%;
+        height: 90%;
+        border-radius: 10px;
+        border: 2px solid black;
+        background-color: white;
+
+        margin-bottom: 20px;
+    }
+
+    .f-d-mq-320-576 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    .f-d-mini-container-type {
+        width: 50px;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        list-style: none;
+        gap: 10px;
+    }
+
 }
 </style>

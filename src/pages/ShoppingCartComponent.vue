@@ -96,4 +96,23 @@ export default {
     border: 2px solid black;
     background-color: white;
 }
+
+@media screen and (max-width: 320px) {
+
+.f-d-cart {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    height: 90%;
+    border-radius: 10px;
+    border: 2px solid black;
+    background-color: white;
+
+    margin-bottom: 20px;
+}
+
+}
 </style>

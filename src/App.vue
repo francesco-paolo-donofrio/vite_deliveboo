@@ -4,7 +4,7 @@
     <main class="f-d-main">
       <router-view></router-view>
     </main>
-    <FooterComponent />
+    
   </div>
 </template>
 
