@@ -55,7 +55,7 @@ export default {
     position: absolute;
     width: 1000px;
     height: 500px;
-    background-color: #223440c2;
+    background-color: #223440ce;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -68,6 +68,7 @@ export default {
     justify-content: center;
     align-items: center;
   }
+  
 }
 
 @media screen and (max-width: 320px) {
@@ -80,15 +81,9 @@ export default {
     }
   }
 
-  .f-d-gradientTitle {
-    background: linear-gradient(to right, $background-fourth-color, $background-secondary-color, $background-fourth-color, $background-secondary-color, $background-fourth-color);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    text-transform: uppercase;
-    font-size: 5px;
-  }
-
   .hero-video-content {
+    width: 50%;
+    height: 50%;
     position: absolute;
     background-color: #223440c2;
     top: 50%;
@@ -102,6 +97,14 @@ export default {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+  }
+
+  .f-d-gradientTitle {
+    background: linear-gradient(to right, $background-fourth-color, $background-secondary-color, $background-fourth-color, $background-secondary-color, $background-fourth-color);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 30px;
+    text-transform: uppercase;
   }
 }
 </style>
