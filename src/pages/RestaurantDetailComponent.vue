@@ -40,28 +40,33 @@
                 </div>
                 <div id="suggested" class="col-xl-3 col-sm-12 f-d-bg-gradient-secondary">
                     <div>
-                    <h4 class="text-center text-uppercase">Info Utili</h4>
-                                <p><em class="fw-bold ">{{ restaurant.description }}</em></p>
-                                <p>Indirizzo: {{ restaurant.address }}</p>
-                                <p>P.IVA {{ restaurant.vat }}</p>
-                </div>
-                <div>
-                    <h4 class="text-center text-uppercase">Tipologie di {{ restaurant.name }}</h4>
-                    <ul
-                                            class="d-flex flex-wrap justify-content-center align-items-center p-0 list-unstyled">
-                                            <li v-for="(item, index) in restaurant.types" :key="index">
-                                                <div class="f-d-mini-container-type display-flex flex-column">
-                                                    <img class="img-fluid" :src="store.imgBasePath + item.image"
-                                                        :alt="item.name">
-                                                </div>
-                                                <div class="text-center">
-                                                    <p>
-                                                        {{ item.name }}
-                                                    </p>
-                                                </div>
-                                            </li>
-                                        </ul>
-                </div>
+                        <h4 class="text-center text-uppercase">Info di {{ restaurant.name }}</h4>
+                        <p><em class="fw-bold ">{{ restaurant.description }}</em></p>
+                        <p>Indirizzo: {{ restaurant.address }}</p>
+                        <p>P.IVA {{ restaurant.vat }}</p>
+                    </div>
+                    <div>
+                        <h4 class="text-center text-uppercase">Tipologie di {{ restaurant.name }}</h4>
+                        <ul class="d-flex flex-wrap justify-content-center align-items-center p-0 list-unstyled">
+                            <li v-for="(item, index) in restaurant.types" :key="index">
+                                <div class="f-d-mini-container-type display-flex flex-column">
+                                    <img class="img-fluid" :src="store.imgBasePath + item.image" :alt="item.name">
+                                </div>
+                                <div class="text-center">
+                                    <p>
+                                        {{ item.name }}
+                                    </p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+
+                        <h3 class="text-uppercase">Segui {{ restaurant.name }} anche su</h3>
+                        <div class="text-center"><i class="fa-brands fa-facebook"></i> | <i class="fa-brands fa-tiktok"></i> | <i
+                                class="fa-brands fa-instagram"></i></div>
+
+                    </div>
                 </div>
             </div>
         </div>
@@ -333,7 +338,7 @@ export default {
     aspect-ratio: 1/1;
     cursor: pointer;
     overflow: hidden;
-    
+
 
     img {
         width: 100%;
@@ -387,8 +392,9 @@ export default {
 #suggested {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
+    text-align: center;
     gap: 20px;
 }
 
@@ -500,16 +506,17 @@ export default {
     #info-container {
         display: none;
     }
+
     .f-d-container-img {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border-radius: 20px;
-    gap: 20px;
-    width: 80%;
-    height: 100%;
-}
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border-radius: 20px;
+        gap: 20px;
+        width: 80%;
+        height: 100%;
+    }
 
 }
 
