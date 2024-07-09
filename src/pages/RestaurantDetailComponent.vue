@@ -15,8 +15,6 @@
                             <p><em>{{ restaurant.description }}</em></p>
                             <p>Consegna in <strong>10 - 20 minuti</strong></p>
                             <p>Indirizzo: {{ restaurant.address }}</p>
-                            <p>Numero di telefono: {{ restaurant.phone }}</p>
-                            <p class="f-d-primary-color">Prezzo medio: {{ restaurant.price }}€</p>
                         </div>
                     </div>
                     <div>
@@ -41,10 +39,10 @@
                     <div class="container d-flex flex-column justify-content-center align-items-center">
                         <div class="f-d-cart cart d-flex flex-column align-items-center justify-content-center">
                             <h2>Carrello</h2>
-                            <div v-for="item in cart" :key="item.id">
+                            <div v-for="item in store.cart" :key="item.id">
                                 <p>x{{ item.quantity }}-{{ item.name }} - Totale: {{ item.price * item.quantity }}€</p>
                             </div>
-                            <p>Totale carrello: {{ cartTotal }}€</p>
+                            <p>Totale carrello: {{ cartTotal() }}€</p>
                         </div>
                         <div class="buttons d-flex align-items-center justify-content-center gap-3">
                                 <button class="btn btn-danger" @click="emptyCart">Svuota Carrello</button>
@@ -138,22 +136,15 @@ export default {
     },
     methods: {
         computed: {
-            cartTotal() {
-                return this.cart.reduce((total, item) => total + item.price * item.quantity, 0);
-            }
+            
         },
+        cartTotal() {
+                return this.store.cart.reduce((total, item) => total + item.price * item.quantity, 0);
+            },
         getSingleRestaurant() {
             axios.get(`${this.store.apiBaseUrl}/restaurants/${this.id}`).then(res => {
                 this.restaurant = res.data.results;
                 console.log(this.restaurant);
-            });
-
-        },
-        getProducts() {
-            axios.post(this.store.apiBaseUrl + '/update-quantity').then((res) => {
-                console.log(res.data.results);
-                //console.log(this.$route.params, 'prova');
-                this.product = res.data.results;
             });
         },
         openModal(dish) {
@@ -244,8 +235,6 @@ export default {
         this.loadCart();
     },
     created() {
-        this.getProducts();
-        this.loadCart();
     },
 
 }
