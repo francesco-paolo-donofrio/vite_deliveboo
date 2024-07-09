@@ -4,6 +4,7 @@ import RestaurantDetailComponent from "./pages/RestaurantDetailComponent.vue";
 import ShoppingCartComponent from "./pages/ShoppingCartComponent.vue";
 import NotFoundComponent from "./pages/NotFoundComponent.vue";
 import TypologiesListComponent from './components/TypologiesListComponent.vue';
+import CustomerFormComponent from './pages/CustomerFormComponent.vue';
 
 
 const router = createRouter({
@@ -34,7 +35,13 @@ const router = createRouter({
             path: '/:pathMatch(.*)*',
             name: 'not-found',
             component: NotFoundComponent
+        },
+        {
+            path: '/customer-form',
+            name: 'customer-form',
+            component: CustomerFormComponent
         }
+
         
     ],
 });
