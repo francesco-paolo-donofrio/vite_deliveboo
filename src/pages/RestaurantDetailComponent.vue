@@ -77,7 +77,7 @@
                     <div class="col-xl-8 col-sm-12 ">
                         <h3 class="text-center text-uppercase py-3"><em class="text-white">Menù</em></h3>
                         <div class="d-flex align-items-center justify-content-center flex-wrap">
-                            <div class="col-sm-12 col-xl-2" v-for="(item, index) in restaurant.products" :key="index">
+                            <div class="f-d-card col-sm-12 col-xl-2" v-for="(item, index) in restaurant.products" :key="index">
                                 <div class="f-d-mini-container">
                                     <img @click="openModal(item)" class="img-fluid"
                                         :src="store.imgBasePath + item.image" :alt="item.name">
@@ -389,6 +389,11 @@ export default {
     }
 }
 
+.f-d-card {
+    border: 1px solid $background-fourth-color;
+    border-radius: 10px;
+
+}
 #suggested {
     display: flex;
     flex-direction: column;
@@ -587,6 +592,14 @@ export default {
         gap: 10px;
     }
 
+    .f-d-card {
+    border: 1px solid $background-fourth-color;
+    border-left: none;
+    border-right: none;
+    border-radius: 10px;
+
+}
+
     .f-d-mini-container-type {
         width: 50px;
         height: 50px;
@@ -626,6 +639,14 @@ export default {
     #suggested {
         display: none;
     }
+
+    .f-d-card {
+    border: 1px solid $background-fourth-color;
+    border-left: none;
+    border-right: none;
+    border-radius: 10px;
+
+}
 
     #info-container {
         display: flex;
