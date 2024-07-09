@@ -6,7 +6,8 @@
                 class="fixed-header container f-d-w-80x100 d-flex margin-x-auto rounded-2 align-items-center justify-content-between">
                 <div class="d-flex h-100 align-items-center">
                     <div class="logo-img-container d-flex align-items-center">
-                        <a href="http://localhost:5174/"><img class="img-fluid rounded-circle" src="../../public/images/logo_deliveboo.png" alt="logo" /></a>
+                        <a href="http://localhost:5174/"><img class="img-fluid rounded-circle"
+                                src="../../public/images/logo_deliveboo.png" alt="logo" /></a>
                     </div>
                     <div id="f-d-nav-menu" class="d-flex h-100 d-none d-lg-block align-items-center">
                         <ul class="navbar-nav h-100 mb-2 mb-lg-0 d-flex flex-row align-items-center">
@@ -18,17 +19,23 @@
                         </ul>
                     </div>
                 </div>
+                <div class="navigation-buttons">
+                    <button @click="goBack" class="btn btn-outline-light mr-2">
+                        <i class="fas fa-arrow-left"></i>
+                    </button>
+                    <button @click="goForward" class="btn btn-outline-light"> <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
                 <div class="user-account gap-3 d-flex fs-3 align-self-stretch align-items-end">
                     <div id="f-d-nav-login-button" ref="fdNavLoginButton"
-                        class="icon-container rounded-top-2 d-flex justify-content-center order-2 w-auto"
-                        role="button">
+                        class="icon-container rounded-top-2 d-flex justify-content-center order-2 w-auto" role="button">
                         <router-link :to="{ name: 'shopping-cart' }" class="nav-link">
                             <i class="fa-solid fa-cart-shopping"></i>
-                                </router-link>
+                        </router-link>
                         <a href="http://localhost:8000/login"
                             class="text-decoration-none text-white d-flex flex-column align-items-center mx-2">
                             <i class="fa-solid fa-user"></i>
-                            
+
                         </a>
                     </div>
                     <div id="f-d-nav-kebab-button" ref="fdNavKebabButton"
@@ -160,6 +167,13 @@ export default {
         capitalizeString(string) {
             return capitalize(string);
         },
+
+        goBack() {
+            this.$router.go(-1)
+        },
+        goForward() {
+            this.$router.go(1)
+        }
     },
 };
 </script>
@@ -289,5 +303,16 @@ header {
             }
         }
     }
+}
+
+.navigation-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.navigation-buttons button {
+    display: flex;
+    align-items: center;
+    gap: 5px;
 }
 </style>
