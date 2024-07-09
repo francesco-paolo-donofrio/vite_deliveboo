@@ -45,11 +45,11 @@
                                 <p>x{{ item.quantity }}-{{ item.name }} - Totale: {{ item.price * item.quantity }}€</p>
                             </div>
                             <p>Totale carrello: {{ cartTotal }}€</p>
-                            <div class="buttons d-flex align-items-center justify-content-center gap-3">
+                        </div>
+                        <div class="buttons d-flex align-items-center justify-content-center gap-3">
                                 <button class="btn btn-danger" @click="emptyCart">Svuota Carrello</button>
                                 <button class="btn btn-success">Procedi con il tuo ordine</button>
                             </div>
-                        </div>
 
                     </div>
                 </div>
@@ -255,12 +255,12 @@ export default {
 @use '../assets/styles/partials/_variables' as *;
 
 .f-d-first-container {
-    width: calc(100% / 2 - 40px);
+    width: calc(70% - 40px);
     //height: 500px;
 }
 
 .f-d-second-container {
-    width: calc(100% / 2 - 40px);
+    width: calc(30% - 40px);
     //height: 500px;
 }
 
