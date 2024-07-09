@@ -25,7 +25,6 @@
                                 <ul class="d-flex flex-wrap justify-content-center align-items-center p-0">
                                     <li class="f-d-mini-container" v-for="(item, index) in restaurant.types"
                                         :key="index">
-                                        
                                         <img class="img-fluid" :src="store.imgBasePath + item.image" :alt="item.name">
                                     </li>
                                 </ul>
