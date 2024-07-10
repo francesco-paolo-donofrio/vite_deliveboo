@@ -101,6 +101,7 @@ export default {
   .f-d-gradientTitle {
     background: linear-gradient(to right, $background-fourth-color, $background-secondary-color, $background-fourth-color, $background-secondary-color, $background-fourth-color);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
     font-size: 30px;
     text-transform: uppercase;

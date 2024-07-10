@@ -17,15 +17,17 @@
                                 </router-link>
                             </li>
                         </ul>
+
+                    </div>
+                    <div class="navigation-buttons">
+                        <button @click="goBack" class="btn btn-outline-light mr-2">
+                            <i class="fas fa-arrow-left"></i>
+                        </button>
+                        <button @click="goForward" class="btn btn-outline-light"> <i class="fas fa-arrow-right"></i>
+                        </button>
                     </div>
                 </div>
-                <div class="navigation-buttons">
-                    <button @click="goBack" class="btn btn-outline-light mr-2">
-                        <i class="fas fa-arrow-left"></i>
-                    </button>
-                    <button @click="goForward" class="btn btn-outline-light"> <i class="fas fa-arrow-right"></i>
-                    </button>
-                </div>
+
                 <div class="user-account gap-3 d-flex fs-3 align-self-stretch align-items-end">
                     <div id="f-d-nav-login-button" ref="fdNavLoginButton"
                         class="icon-container rounded-top-2 d-flex justify-content-center order-2 w-auto" role="button">
@@ -35,7 +37,6 @@
                         <a href="http://localhost:8000/login"
                             class="text-decoration-none text-white d-flex flex-column align-items-center mx-2">
                             <i class="fa-solid fa-user"></i>
-
                         </a>
                     </div>
                     <div id="f-d-nav-kebab-button" ref="fdNavKebabButton"
@@ -77,7 +78,8 @@ export default {
     name: 'HeaderComponent',
     data() {
         return {
-
+            eventTarget: { eventElement: null, originalTemplate: '' },
+            openElement: null,
             show: false,
             menuItems: [
                 {
@@ -126,10 +128,20 @@ export default {
         },
         toggleMenu(menuItem, event) {
             const menuToOpen = this.$refs[menuItem];
+            if (!menuToOpen) {
+                console.error(`Element with ref "${menuItem}" not found`);
+                return;
+            }
+
+            if (!this.eventTarget) {
+                this.eventTarget = { eventElement: null, originalTemplate: '' };
+            }
+
             if (this.openElement === menuToOpen) {
                 menuToOpen.classList.toggle('d-none');
-                this.eventTarget.eventElement.classList.remove('active-color');
-                this.eventTarget.eventElement.innerHTML = this.eventTarget.originalTemplate;
+                if (this.eventTarget.eventElement) {
+                    this.eventTarget.eventElement.innerHTML = this.eventTarget.originalTemplate;
+                }
                 this.$refs.fdCustomNav.classList.remove('border-opened-menu');
                 this.openElement = null;
             } else {
@@ -137,7 +149,6 @@ export default {
                 this.openElement = menuToOpen;
                 this.eventTarget.eventElement = event.currentTarget;
                 this.eventTarget.originalTemplate = event.currentTarget.innerHTML;
-                event.currentTarget.classList.add('active-color');
                 event.currentTarget.innerHTML = '<i class="fa-solid fa-xmark"></i>';
                 menuToOpen.classList.toggle('d-none');
                 this.$refs.fdCustomNav.classList.add('border-opened-menu');
@@ -308,11 +319,19 @@ header {
 .navigation-buttons {
     display: flex;
     gap: 10px;
+    padding-left: 10px;
 }
 
 .navigation-buttons button {
     display: flex;
     align-items: center;
     gap: 5px;
+}
+
+@media screen and (max-width: 320px) {
+    .navigation-buttons {
+        padding-left: 0;
+        margin-left: 0;
+    }
 }
 </style>

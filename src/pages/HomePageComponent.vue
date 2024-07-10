@@ -1,21 +1,17 @@
 <template>
     <HeroComponent />
-    <div id="types" class="d-flex justify-content-center my-3">
-        <span 
-            v-for="(item, index) in types" 
-            :key="item.id" 
-            class="p-2 mx-2 btn-types btn-color" 
-            :class="{ selected: isSelected(item.id) }" 
-            @click="toggleType(item.id)">
-            {{ item.name }}
-        </span>
-    </div>
+    <CarouselComponent 
+    :types="types" 
+    :selectedTypes="selectedtypes"
+    @typeSelected="toggleType" 
+  />
+    
     <!-- <div class="d-flex justify-content-center">
         <button type="button" class="btn btn-primary mx-2 p-2" @click="sendTypes">Filtra</button>
         <button type="button" class="btn btn-secondary mx-2 p-2" @click="resetTypes">Reset</button>
     </div> -->
-    <div id="restaurants" class="container my-4">
-        <div class="text-center" v-if="restaurants.length != 0">Risultati trovati: {{ restaurants.length }}</div>
+    <div id="restaurants" class="container my-4 f-d-gradient-not-found-message">
+        <div class="text-center text-white fw-bold" v-if="restaurants.length != 0">Risultati trovati: {{ restaurants.length }}</div>
         <div class="row">
             <div class="col-12 col-md-3 col-sm-6 mt-4" v-for="(item, index) in restaurants" :key="index">
                 <div class="row">
@@ -24,11 +20,17 @@
             </div>
             <!-- SE LA RICERCA NON DÁ NESSUN RISULTATO -->
             <div v-if="restaurants.length === 0">
-                <h3 class="text-center">Nessun ristorante trovato che rientra in queste tipologie:
-                    <ul class="list-unstyled">
-                        <li v-for="(name, index) in selectedtypesNames" :key="index">{{ name }}</li>
-                        
-                    </ul>
+                <h3 class="text-center text-white fw-bold">Nessun ristorante trovato che rientra in queste tipologie:
+                    <div class="d-flex justify-content-center align-items-center">
+                    <ul class="list-unstyled w-50 d-flex justify-content-center align-items-center gap-3">
+                            <li class="f-d-fourth-color" v-for="(name, index) in selectedtypesNames" :key="index">{{ name }}</li>     
+                        </ul>
+                    </div>
+                    <div class="d-flex justify-content-center pt-3">
+                        <div class="d-flex flex-column align-items-center w-100">
+                            <img src="../../public/images/not-found.webp" alt="notFoundImg">
+                        </div>      
+                    </div>
                 </h3>
             </div>
         </div>
@@ -40,6 +42,7 @@ import { store } from '../store';
 import axios from 'axios';
 import HeroComponent from '../components/HeroComponent.vue';
 import CardComponent from '../components/CardComponent.vue';
+import CarouselComponent from '../components/CarouselComponent.vue';
 
 
 
@@ -47,8 +50,8 @@ export default {
     name: 'HomePageComponent',
     components: {
         CardComponent,
-        HeroComponent
-
+        HeroComponent,
+        CarouselComponent
     },
     data() {
         return {
@@ -132,6 +135,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@use '../assets/styles/partials/_variables' as *;
 .btn-types{
     border: 1px solid black;
     border-radius: 10px;
@@ -144,6 +148,58 @@ export default {
         }   
     }
 
+}
+
+.f-d-gradient-not-found-message {
+    background: linear-gradient(to right, $background-primary-color, #37083b, $background-primary-color, #37083b, $background-primary-color);
+    border-radius: 20px;
+}
+
+.f-d-secondary-color {
+    color: $background-secondary-color;
+}
+
+.f-d-fourth-color {
+    color: $background-fourth-color;
+}
+
+// styles carousel
+
+.typology-carousel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px 0;
+
+  .carousel-container {
+    display: flex;
+    overflow: hidden;
+    width: 80%; // Regola questa larghezza secondo le tue esigenze
+  }
+
+  .carousel-slide {
+    flex: 0 0 33.333%; // Mostra 3 elementi alla volta
+    text-align: center;
+    padding: 0 10px;
+
+    img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+    }
+  }
+
+  .nav-button {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 0 10px;
+
+    &:hover {
+      color: #007bff; // Colore al passaggio del mouse
+    }
+  }
 }
 
 </style>
