@@ -9,7 +9,7 @@
             <h2>Carrello</h2>
             <div>{{ restaurantName }}</div>
             <div v-for="item in cart" :key="item.id">
-                {{ item.name }} - {{ item.price }} x {{ item.quantity }} 
+                {{ item.name }} - {{ item.price }} x {{ item.quantity }}
             </div>
             <div class="my-2 f-d-border-bottom">Totale ordine: {{ totalAmount }} €</div>
 
@@ -19,40 +19,40 @@
                     <!-- NOME -->
                     <div class="text-secondary mb-2 text-start">
                         <label for="name" class="form-label text-dark">Nome*</label>
-                        <input type="text" name="name" class="form-control" id="name"
-                            v-model="customer.name" minlength="3" maxlength="200" placeholder="Inserisci il tuo nome" required>
+                        <input type="text" name="name" class="form-control" id="name" v-model="customer.name"
+                            minlength="3" maxlength="200" placeholder="Inserisci il tuo nome" required>
                         <div id="nameMessage" class="error-message"></div>
                     </div>
 
                     <!-- COGNOME -->
                     <div class="text-secondary mb-2 text-start">
                         <label for="surname" class="form-label text-dark">Cognome*</label>
-                        <input type="text" class="form-control" id="surname" name="surname"
-                            v-model="customer.surname" minlength="3" maxlength="200" placeholder="Inserisci il tuo cognome" required>
+                        <input type="text" class="form-control" id="surname" name="surname" v-model="customer.surname"
+                            minlength="3" maxlength="200" placeholder="Inserisci il tuo cognome" required>
                         <div id="surnameMessage" class="error-message"></div>
                     </div>
-                    
+
                     <!-- TELEFONO -->
                     <div class="text-secondary mb-2 text-start">
                         <label for="phone" class="form-label text-dark">Numero di telefono*</label>
-                        <input type="tel" class="form-control" id="phone" name="phone"
-                            v-model="customer.phone" minlength="3" maxlength="200" placeholder="Numero di telefono" required>
+                        <input type="tel" class="form-control" id="phone" name="phone" v-model="customer.phone"
+                            minlength="3" maxlength="200" placeholder="Numero di telefono" required>
                         <div id="phoneMessage" class="error-message"></div>
                     </div>
 
                     <!-- EMAIL -->
                     <div class="text-secondary mb-2 text-start">
                         <label for="email" class="form-label text-dark">Indirizzo email*</label>
-                        <input type="email" class="form-control" id="email" name="email"
-                            v-model="customer.email" minlength="3" maxlength="200" placeholder="Inserisci il tuo email" required>
+                        <input type="email" class="form-control" id="email" name="email" v-model="customer.email"
+                            minlength="3" maxlength="200" placeholder="Inserisci il tuo email" required>
                         <div id="emailMessage" class="error-message"></div>
                     </div>
 
                     <!-- INDIRIZZO -->
                     <div class="text-secondary mb-2 text-start">
                         <label for="address" class="form-label text-dark">Indirizzo di consegna*</label>
-                        <input type="text" class="form-control" id="address" name="address"
-                            v-model="customer.address" minlength="3" maxlength="200" placeholder="Inserisci il tuo indirizzo" required>
+                        <input type="text" class="form-control" id="address" name="address" v-model="customer.address"
+                            minlength="3" maxlength="200" placeholder="Inserisci il tuo indirizzo" required>
                         <div id="addressMessage" class="error-message"></div>
                     </div>
 
@@ -66,7 +66,6 @@
                 <button @click="emptyCart">Svuota Carrello</button>
             </div>
         </div>
-    </div>
     </div>
 </template>
 
@@ -212,37 +211,35 @@ export default {
 }
 
 
-.braintree-sheet__content--form .braintree-form__flexible-fields{
+.braintree-sheet__content--form .braintree-form__flexible-fields {
     display: inline-block;
-
-.f-d-cart {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    width: 100%;
-    height: calc(100% - 20px);
-    border-radius: 10px;
-    border: 4px solid $background-fourth-color;
-    background-color: $background-primary-color;
-    color: white;
-    padding: 10px;
 }
 
-.f-d-border-bottom {
-    margin: 0 auto;
-    width: 50%;
-    height: 5px;
-    background-color: $background-fourth-color;
-    border: 1px solid $background-fourth-color;
-    border-radius: 5px;
-    margin: 5px 0 5px 0;
-}
+    .f-d-cart {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        width: 100%;
+        height: calc(100% - 20px);
+        border-radius: 10px;
+        border: 4px solid $background-fourth-color;
+        background-color: $background-primary-color;
+        color: white;
+        padding: 10px;
+    }
+
+    .f-d-border-bottom {
+        margin: 0 auto;
+        width: 50%;
+        height: 5px;
+        background-color: $background-fourth-color;
+        border: 1px solid $background-fourth-color;
+        border-radius: 5px;
+        margin: 5px 0 5px 0;
+    }
 
 
-@media screen and (max-width: 320px) {
-
-}
-
+    @media screen and (max-width: 320px) {}
 </style>
