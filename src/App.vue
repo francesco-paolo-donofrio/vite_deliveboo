@@ -1,9 +1,7 @@
 <template>
   <div class="d-flex flex-column">
     <HeaderComponent />
-      <router-view></router-view>
-    
-    
+      <router-view></router-view>   
   </div>
 </template>
 
