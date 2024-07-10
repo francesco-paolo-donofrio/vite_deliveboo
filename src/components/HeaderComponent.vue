@@ -184,7 +184,6 @@ export default {
             let total = 0
             this.store.cart.forEach(element => {
                 total += element.quantity;
-                console.log(total);
             });
             return total    
         }
