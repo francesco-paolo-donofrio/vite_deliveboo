@@ -202,4 +202,10 @@ export default {
   }
 }
 
+// mediaqueries
+
+@media screen and (max-width: 320px) {
+
+}
+
 </style>

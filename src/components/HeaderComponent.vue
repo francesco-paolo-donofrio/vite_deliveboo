@@ -353,6 +353,7 @@ header {
     #f-d-nav-menu {
         display: none !important;
     }
+    
 }
 
 @media screen and (max-width: 576px) {
@@ -373,9 +374,7 @@ header {
         margin-left: 25px;
     }
 
-    #f-d-nav-login-button {
-        display: none !important; 
-    }
+    
 
 
 }

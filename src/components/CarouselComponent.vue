@@ -2,6 +2,7 @@
     <div id="types" class="d-flex justify-content-center align-items-center">
     <div class="typology-carousel">
       <button @click="scrollLeft" class="nav-button prev" v-show="canScrollLeft">&lt;</button>
+      
       <div class="carousel-container" ref="container">
         <div class="carousel-slide" v-for="type in types" :key="type.id">
           <div class="type-card" 
@@ -74,13 +75,12 @@
 
   .typology-carousel {
     position: relative;
-    width: 90%;
+    width: 100%;
     height: 300px;
     display: flex;
     align-items: center;   
     background: linear-gradient(to right, $background-secondary-color, $background-primary-color, $background-secondary-color);
     color: white;
-    border-radius: 20px;
   }
   
   .carousel-container {
@@ -138,6 +138,7 @@
     color: $background-fourth-color;
     border: none;
     padding: 15px;
+    margin: 0 15px;
     font-size: 24px;
     cursor: pointer;
     z-index: 10000;
@@ -151,4 +152,45 @@
       right: 10px;
     }
   }
+
+//   mediaqueries
+
+@media screen and (max-width: 576px) {
+  .typology-carousel {
+    border-radius: 0 !important;
+    width: 100%;
+    height: 200px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .typology-carousel {
+    border-radius: 0 !important;
+    width: 100%;
+    height: 200px;
+  }
+
+  .nav-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #223440;
+    color: $background-fourth-color;
+    border: none;
+    padding: 15px;
+    margin: 0 15px;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 10000;
+    border-radius: 10px;
+  
+    &.prev {
+      left: 10px;
+    }
+  
+    &.next {
+      right: 10px;
+    }
+  }
+}
   </style>

@@ -8,16 +8,15 @@
     </video>
     <div class="hero-video-content">
       <p class="f-d-gradientTitle">Deliveboo</p>
-      <h4 class="fst-italic">La ristorazione di Roma a casa tua</h4>
-      <div class="d-flex gap-5 align-items-center justify-content-between w-50 mt-5">
+      <h4 class="fst-italic"><em>La ristorazione di Roma a casa tua</em></h4>
+      <div class="d-flex gap-5 align-items-center justify-content-center w-50 mt-5">
         <div class="d-flex flex-column align-items-center justify-content-center gap-2">
-          <a class="text-white text-decoration-none" href="#restaurants">Ristoranti di Roma</a>
-          <a href="#restaurants" class="fa-solid fa-arrow-down fa-beat text-white text-decoration-none"></a>
-
+          <a class="text-white text-decoration-none fs-5" href="#restaurants">Ristoranti</a>
+          <a href="#restaurants" class="fa-solid fa-arrow-down fa-beat f-d-gradientTitle text-decoration-none"></a>
         </div>
         <div class="d-flex flex-column align-items-center justify-content-center gap-2">
-          <a class="text-white text-decoration-none" href="#types">Filtra per tipologie</a>
-          <a href="#types" class="fa-solid fa-arrow-down fa-beat text-white text-decoration-none"></a>
+          <a class="text-white text-decoration-none fs-5" href="#types">Tipologie</a>
+          <a href="#types" class="fa-solid fa-arrow-down fa-beat f-d-gradientTitle text-decoration-none"></a>
         </div>
       </div>
     </div>
@@ -70,6 +69,11 @@ export default {
   }
 }
 
+
+@media screen and (min-width: 1200px) {
+  
+}
+
 @media screen and (max-width: 320px) {
   #hero {
     width: 100%;
@@ -81,8 +85,8 @@ export default {
   }
 
   .hero-video-content {
-    width: 50%;
-    height: 50%;
+    width: 300px !important;
+    height: 160px !important;
     position: absolute;
     background-color: #223440c2;
     top: 50%;
@@ -96,15 +100,20 @@ export default {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    .f-d-gradientTitle {
+      font-size: 25px !important;
+    }
+    .f-d-display-none {
+  display: flex !important;
+}
   }
 
-  .f-d-gradientTitle {
-    background: linear-gradient(to right, $background-fourth-color, $background-secondary-color, $background-fourth-color, $background-secondary-color, $background-fourth-color);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-size: 30px;
-    text-transform: uppercase;
-  }
+.fst-italic {
+  display: none !important;
+}
+
+
+
 }
 </style>
