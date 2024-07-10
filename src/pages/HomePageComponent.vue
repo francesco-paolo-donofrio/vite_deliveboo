@@ -1,6 +1,6 @@
 <template>
     <HeroComponent />
-    <div class="d-flex justify-content-center my-3">
+    <div id="types" class="d-flex justify-content-center my-3">
         <span 
             v-for="(item, index) in types" 
             :key="item.id" 
@@ -14,8 +14,8 @@
         <button type="button" class="btn btn-primary mx-2 p-2" @click="sendTypes">Filtra</button>
         <button type="button" class="btn btn-secondary mx-2 p-2" @click="resetTypes">Reset</button>
     </div> -->
-    <div class="container my-4">
-        <div v-if="restaurants.length != 0">Risultati trovati: {{ restaurants.length }}</div>
+    <div id="restaurants" class="container my-4">
+        <div class="text-center" v-if="restaurants.length != 0">Risultati trovati: {{ restaurants.length }}</div>
         <div class="row">
             <div class="col-12 col-md-3 col-sm-6 mt-4" v-for="(item, index) in restaurants" :key="index">
                 <div class="row">
@@ -24,9 +24,10 @@
             </div>
             <!-- SE LA RICERCA NON DÁ NESSUN RISULTATO -->
             <div v-if="restaurants.length === 0">
-                <h3>Nessun ristorante trovato che soddisfi questi requisiti:
-                    <ul>
+                <h3 class="text-center">Nessun ristorante trovato che rientra in queste tipologie:
+                    <ul class="list-unstyled">
                         <li v-for="(name, index) in selectedtypesNames" :key="index">{{ name }}</li>
+                        
                     </ul>
                 </h3>
             </div>
@@ -104,11 +105,12 @@ export default {
             this.$router.push({ path: '/', query: {} }).then(() => {
                 this.getRestaurants();
             });
-        }
+        },
     },
     mounted() {
         this.getTypes();
         this.getRestaurants(this.$route.query);
+
         
         // Se ci sono parametri type_id nell'URL al caricamento iniziale, li carichiamo
         // const { type_id } = this.$route.query;

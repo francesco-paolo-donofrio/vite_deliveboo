@@ -11,7 +11,7 @@
             <div v-for="item in cart" :key="item.id">
                 {{ item.name }} - {{ item.price }} x {{ item.quantity }} 
             </div>
-            <div class="my-2">Totale ordine: {{ totalAmount }} €</div>
+            <div class="my-2 f-d-border-bottom">Totale ordine: {{ totalAmount }} €</div>
 
             <!-- FORM PER DATI CLIENTE -->
             <div class="container">
@@ -66,6 +66,7 @@
                 <button @click="emptyCart">Svuota Carrello</button>
             </div>
         </div>
+    </div>
     </div>
 </template>
 
@@ -187,6 +188,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@use '../assets/styles/partials/_variables' as *;
+
 .f-d-first-container {
     width: calc(100% / 2 - 40px);
     height: 500px;
@@ -208,8 +211,38 @@ export default {
     margin-bottom: 30px;
 }
 
+
 .braintree-sheet__content--form .braintree-form__flexible-fields{
     display: inline-block;
+
+.f-d-cart {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    height: calc(100% - 20px);
+    border-radius: 10px;
+    border: 4px solid $background-fourth-color;
+    background-color: $background-primary-color;
+    color: white;
+    padding: 10px;
+}
+
+.f-d-border-bottom {
+    margin: 0 auto;
+    width: 50%;
+    height: 5px;
+    background-color: $background-fourth-color;
+    border: 1px solid $background-fourth-color;
+    border-radius: 5px;
+    margin: 5px 0 5px 0;
+}
+
+
+@media screen and (max-width: 320px) {
+
 }
 
 </style>
