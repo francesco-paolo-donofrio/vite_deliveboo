@@ -8,7 +8,7 @@
         <div v-else>
             <h2>Carrello</h2>
             <div>{{ restaurantName }}</div>
-            <div v-for="item in cart" :key="item.id">
+            <div v-for="item in store.cart" :key="item.id">
                 {{ item.name }} - {{ item.price }} x {{ item.quantity }}
             </div>
             <div class="my-2 f-d-border-bottom">Totale ordine: {{ totalAmount }} €</div>
@@ -96,7 +96,7 @@ export default {
         loadCart() {
             const savedCart = localStorage.getItem('cart');
             if (savedCart) {
-                this.cart = JSON.parse(savedCart);
+                this.store.cart = JSON.parse(savedCart);
                 // if (this.cart.length > 0) {
                 //     this.getRestaurantName(this.cart[0].restaurant_id);
                 // }
@@ -171,7 +171,7 @@ export default {
     },
     computed: {
         totalAmount() {
-            return this.cart.reduce((total, item) => {
+            return this.store.cart.reduce((total, item) => {
                 return total + item.price * item.quantity;
             }, 0).toFixed(2);
         }
