@@ -53,10 +53,27 @@
                         </form>
                     </div>
                     <div id="f-d-nav-kebab-menu" ref="fdNavKebabMenu"
-                        class="bar-input active-color rounded-bottom-2 position-absolute container d-none d-lg-none">
+                        class="bar-input f-d-bg-primary-color-fade rounded-bottom-2 position-absolute container d-none d-lg-none">
                         <div class="w-100 d-flex align-content-center justify-content-center p-3">
-                            <ul class="fs-6 w-100 text-decoration-none list-unstyled text-center gap-2 m-0">
-
+                            <ul class="fs-6 w-100 text-decoration-none list-unstyled gap-2 m-0 d-flex flex-column align-items-center justify-content-center">
+                                <li>
+                                    <router-link :to="{ name: 'home' }" class="nav-link">
+                                        <i class="fa-solid fa-house"></i>
+                                        Home
+                                    </router-link>
+                                </li>
+                                <li>
+                                    <router-link :to="{ name: 'shopping-cart' }" class="nav-link">
+                                        <i class="fa-solid fa-cart-shopping"></i>
+                                        Carrello
+                                    </router-link>
+                                </li>
+                                <li>
+                                    <a href="http://localhost:8000/login" class="text-decoration-none text-white">
+                                        <i class="fa-solid fa-user"></i>
+                                        Login
+                                    </a>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -193,7 +210,11 @@ export default {
 @use '../assets/styles/partials/_variables' as *;
 
 .active-color {
-    background-color: black;
+    background-color: $background-primary-color;
+}
+
+.f-d-bg-primary-color-fade {
+    background-color: #2234409f;
 }
 
 header {
@@ -328,10 +349,34 @@ header {
     gap: 5px;
 }
 
+@media screen and (min-width: 1200px) {
+    #f-d-nav-menu {
+        display: none !important;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .navigation-buttons {
+        padding-left: 0;
+        margin-left: 130px;
+    }
+
+    #f-d-nav-login-button {
+        display: none !important; 
+    }
+
+}
+
 @media screen and (max-width: 320px) {
     .navigation-buttons {
         padding-left: 0;
-        margin-left: 0;
+        margin-left: 25px;
     }
+
+    #f-d-nav-login-button {
+        display: none !important; 
+    }
+
+
 }
 </style>

@@ -1,4 +1,5 @@
 <template>
+    <div id="types" class="d-flex justify-content-center align-items-center">
     <div class="typology-carousel">
       <button @click="scrollLeft" class="nav-button prev" v-show="canScrollLeft">&lt;</button>
       <div class="carousel-container" ref="container">
@@ -11,8 +12,9 @@
           </div>
         </div>
       </div>
-      <button @click="scrollRight" class="nav-button next" v-show="canScrollRight">&gt;</button>
+      <button @click="scrollRight" class="nav-button next">&gt;</button>
     </div>
+</div>
   </template>
   
   <script>
@@ -68,12 +70,17 @@
   </script>
   
   <style lang="scss" scoped>
+  @use '../assets/styles/partials/_variables' as *;
+
   .typology-carousel {
     position: relative;
-    width: 100%;
-    height: 300px; // Adjust as needed
+    width: 90%;
+    height: 300px;
     display: flex;
-    align-items: center;
+    align-items: center;   
+    background: linear-gradient(to right, $background-secondary-color, $background-primary-color, $background-secondary-color);
+    color: white;
+    border-radius: 20px;
   }
   
   .carousel-container {
@@ -96,6 +103,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: space-between;
     cursor: pointer;
     transition: transform 0.3s ease;
     width: 200px; // Adjust as needed
@@ -105,15 +113,15 @@
     }
   
     &.selected {
-      border: 3px solid #007bff;
+      border: 3px solid $background-fourth-color;
     }
   }
   
   .type-image {
-    width: 100%;
-    height: 150px; // Adjust as needed
+    width: 50%;
+    height: 100px; // Adjust as needed
     object-fit: cover;
-    border-radius: 10px;
+    border-radius: 20%;
   }
   
   .type-name {
@@ -126,13 +134,14 @@
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(0, 0, 0, 0.5);
-    color: white;
+    background: #223440;
+    color: $background-fourth-color;
     border: none;
     padding: 15px;
     font-size: 24px;
     cursor: pointer;
-    z-index: 1;
+    z-index: 10000;
+    border-radius: 10px;
   
     &.prev {
       left: 10px;
