@@ -217,4 +217,9 @@ export default {
     gap: 20px;
     margin-bottom: 30px;
 }
+
+.braintree-sheet__content--form .braintree-form__flexible-fields{
+    display: inline-block;
+}
+
 </style>
