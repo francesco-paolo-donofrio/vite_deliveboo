@@ -93,33 +93,24 @@ export default {
         };
     },
     methods: {
-        getProducts() {
-            axios.get(store.apiBaseUrl + '/products')
-                .then((res) => {
-                    this.products = res.data.results;
-                })
-                .catch(error => {
-                    console.error('Errore nel recupero dei prodotti:', error);
-                });
-        },
         loadCart() {
             const savedCart = localStorage.getItem('cart');
             if (savedCart) {
                 this.cart = JSON.parse(savedCart);
-                if (this.cart.length > 0) {
-                    this.getRestaurantName(this.cart[0].id);
-                }
+                // if (this.cart.length > 0) {
+                //     this.getRestaurantName(this.cart[0].restaurant_id);
+                // }
             }
         },
-        getRestaurantName(productId) {
-            axios.get(`http://127.0.0.1:8000/api/products/${productId}/restaurant`)
-                .then(response => {
-                    this.restaurantName = response.data.restaurant.name;
-                })
-                .catch(error => {
-                    console.error('Errore nel recupero del nome del ristorante:', error);
-                });
-        },
+        // getRestaurantName(productId) {
+        //     axios.get(`http://127.0.0.1:8000/api/products/${productId}/restaurant`)
+        //         .then(response => {
+        //             this.restaurantName = response.data.restaurant.name;
+        //         })
+        //         .catch(error => {
+        //             console.error('Errore nel recupero del nome del ristorante:', error);
+        //         });
+        // },
         emptyCart() {
             this.store.cart = [];
             localStorage.clear();
@@ -189,7 +180,6 @@ export default {
         this.getClientToken();
     },
     created() {
-        this.getProducts();
         this.loadCart();
         console.log(this.store.cart);
     }
