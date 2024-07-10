@@ -169,22 +169,17 @@ export default {
             }
 
             // Surname
-            if (this.customer.surname.trim() == "") {
-                this.errors.surname = 'Questo campo è obbligatorio.';
-                isValid = false;
-            }
-
             if (this.customer.surname.length < 3) {
                 this.errors.surname = 'Il cognome deve essere almeno di 3 caratteri.';
                 isValid = false;
             }
 
-            // Phone
-            if (this.customer.phone.trim() == "") {
-                this.errors.phone = 'Questo campo è obbligatorio.';
+            if (this.customer.surname.trim() == "") {
+                this.errors.surname = 'Questo campo è obbligatorio.';
                 isValid = false;
             }
 
+            // Phone
             if (!regexPhone.test(this.customer.phone)) {
                 this.errors.phone = 'Il numero di telefono deve contenere solo numeri.';
                 isValid = false;
@@ -195,25 +190,30 @@ export default {
                 isValid = false;
             }
 
-            // Email
-            if (this.customer.email.trim() == "") {
-                this.errors.email = 'Questo campo è obbligatorio.';
+            if (this.customer.phone.trim() == "") {
+                this.errors.phone = 'Questo campo è obbligatorio.';
                 isValid = false;
             }
 
+            // Email
             if (!regexEmail.test(this.customer.email)) {
                 this.errors.email = 'Indirizzo email non valido.';
                 isValid = false;
             }
 
-            // Address
-            if (this.customer.address.trim() == "") {
-                this.errors.address = 'Questo campo è obbligatorio.';
+            if (this.customer.email.trim() == "") {
+                this.errors.email = 'Questo campo è obbligatorio.';
                 isValid = false;
             }
 
+            // Address
             if (this.customer.address.length < 3) {
                 this.errors.address = 'L\'indirizzo deve essere almeno di 3 caratteri.';
+                isValid = false;
+            }
+
+            if (this.customer.address.trim() == "") {
+                this.errors.address = 'Questo campo è obbligatorio.';
                 isValid = false;
             }
 
@@ -268,6 +268,9 @@ export default {
                     .then(response => {
                         if (response.data.success) {
                             //* qui bisogna stabilire dove reindirizzare l'utente
+                            this.store.prevOrder = this.store.cart;
+                            this.store.cart = [];
+                            this.$router.push({ path: '/thank-you' });
                             alert('Payment successful!');
                         } else {
                             if (response.data.errors) {
