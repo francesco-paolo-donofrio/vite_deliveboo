@@ -267,16 +267,15 @@ export default {
                 })
                     .then(response => {
                         if (response.data.success) {
-                            //* qui bisogna stabilire dove reindirizzare l'utente
                             this.store.prevOrder = this.store.cart;
                             this.store.cart = [];
                             this.$router.push({ path: '/thank-you' });
-                            alert('Payment successful!');
+                            
                         } else {
                             if (response.data.errors) {
                                 this.handleValidationErrors(response.data.errors);
                             } else {
-                                alert('Payment failed: ' + response.data.message);
+                                this.$router.push({ path: '/oh-no'});
                             }
                         }
                     })
