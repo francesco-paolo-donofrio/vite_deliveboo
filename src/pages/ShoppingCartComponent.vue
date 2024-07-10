@@ -20,40 +20,40 @@
                     <div class="text-secondary mb-2 text-start">
                         <label for="name" class="form-label text-dark">Nome*</label>
                         <input type="text" name="name" class="form-control" id="name" v-model="customer.name"
-                            minlength="3" maxlength="200" placeholder="Inserisci il tuo nome" required>
-                        <div id="nameMessage" class="error-message"></div>
+                            minlength="3" maxlength="200" placeholder="Inserisci il tuo nome" :class="{ 'is-invalid': errors.name }" required>
+                        <div id="nameMessage" class="error-message text-danger">{{ errors.name }}</div>
                     </div>
 
                     <!-- COGNOME -->
                     <div class="text-secondary mb-2 text-start">
                         <label for="surname" class="form-label text-dark">Cognome*</label>
                         <input type="text" class="form-control" id="surname" name="surname" v-model="customer.surname"
-                            minlength="3" maxlength="200" placeholder="Inserisci il tuo cognome" required>
-                        <div id="surnameMessage" class="error-message"></div>
+                            minlength="3" maxlength="200" placeholder="Inserisci il tuo cognome" :class="{ 'is-invalid': errors.surname }" required>
+                        <div id="surnameMessage" class="error-message text-danger">{{ errors.surname }}</div>
                     </div>
 
                     <!-- TELEFONO -->
                     <div class="text-secondary mb-2 text-start">
                         <label for="phone" class="form-label text-dark">Numero di telefono*</label>
                         <input type="tel" class="form-control" id="phone" name="phone" v-model="customer.phone"
-                            minlength="3" maxlength="200" placeholder="Numero di telefono" required>
-                        <div id="phoneMessage" class="error-message"></div>
+                            minlength="3" maxlength="200" placeholder="Numero di telefono" :class="{ 'is-invalid': errors.phone }" required>
+                        <div id="phoneMessage" class="error-message text-danger">{{ errors.phone }}</div>
                     </div>
 
                     <!-- EMAIL -->
                     <div class="text-secondary mb-2 text-start">
                         <label for="email" class="form-label text-dark">Indirizzo email*</label>
                         <input type="email" class="form-control" id="email" name="email" v-model="customer.email"
-                            minlength="3" maxlength="200" placeholder="Inserisci il tuo email" required>
-                        <div id="emailMessage" class="error-message"></div>
+                            minlength="3" maxlength="200" placeholder="Inserisci il tuo email" :class="{ 'is-invalid': errors.email }" required>
+                        <div id="emailMessage" class="error-message text-danger">{{ errors.email }}</div>
                     </div>
 
                     <!-- INDIRIZZO -->
                     <div class="text-secondary mb-2 text-start">
                         <label for="address" class="form-label text-dark">Indirizzo di consegna*</label>
                         <input type="text" class="form-control" id="address" name="address" v-model="customer.address"
-                            minlength="3" maxlength="200" placeholder="Inserisci il tuo indirizzo" required>
-                        <div id="addressMessage" class="error-message"></div>
+                            minlength="3" maxlength="200" placeholder="Inserisci il tuo indirizzo" :class="{ 'is-invalid': errors.address }" required>
+                        <div id="addressMessage" class="error-message text-danger">{{ errors.address }}</div>
                     </div>
 
                     <div class="mt-3 text-dark text-start"><span>* Campi obbligatori</span></div>
@@ -84,6 +84,13 @@ export default {
             cart: [],
             restaurantName: '',
             customer: {
+                name: '',
+                surname: '',
+                phone: '',
+                email: '',
+                address: ''
+            },
+            errors: {
                 name: '',
                 surname: '',
                 phone: '',
@@ -138,9 +145,80 @@ export default {
                 this.instance = instance;
             });
         },
+        validateForm() {
+            let isValid = true;
+            const regexPhone = /^[0-9]*$/;
+            const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            
+            // Name
+            if (this.customer.name.trim().length < 3) {
+                this.errors.name = 'Il nome deve essere almeno di 3 caratteri.';
+                isValid = false;
+            }
+
+            if (this.customer.name.trim() == "") {
+                this.errors.name = 'Questo campo è obbligatorio.';
+                isValid = false;
+            }
+
+            // Surname
+            if (this.customer.surname.trim() == "") {
+                this.errors.surname = 'Questo campo è obbligatorio.';
+                isValid = false;
+            }
+
+            if (this.customer.surname.length < 3) {
+                this.errors.surname = 'Il cognome deve essere almeno di 3 caratteri.';
+                isValid = false;
+            }
+
+            // Phone
+            if (this.customer.phone.trim() == "") {
+                this.errors.phone = 'Questo campo è obbligatorio.';
+                isValid = false;
+            }
+            
+            if (!regexPhone.test(this.customer.phone)) {
+                this.errors.phone = 'Il numero di telefono deve contenere solo numeri.';
+                isValid = false;
+            }
+
+            if (this.customer.phone.length < 10) {
+                this.errors.phone = 'Hm... Il numero non sembra corretto.';
+                isValid = false;
+            }
+
+            // Email
+            if (this.customer.email.trim() == "") {
+                this.errors.email = 'Questo campo è obbligatorio.';
+                isValid = false;
+            }
+
+            if (!regexEmail.test(this.customer.email)) {
+                this.errors.email = 'Indirizzo email non valido.';
+                isValid = false;
+            }
+
+            // Address
+            if (this.customer.address.trim() == "") {
+                this.errors.address = 'Questo campo è obbligatorio.';
+                isValid = false;
+            }
+
+            if (this.customer.address.length < 3) {
+                this.errors.address = 'L\'indirizzo deve essere almeno di 3 caratteri.';
+                isValid = false;
+            }
+
+            return isValid;
+        },
         pay() {
             if (!this.instance) {
                 console.error('Braintree instance is not initialized');
+                return;
+            }
+
+            if (!this.validateForm()) {
                 return;
             }
 
@@ -211,8 +289,8 @@ export default {
 }
 
 
-.braintree-form__flexible-fields {
-    display: inline-block;
+.braintree-sheet__content--form.braintree-form__flexible-fields {
+    flex-direction: column !important;
 }
 
     .f-d-cart {
