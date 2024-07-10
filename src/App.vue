@@ -1,10 +1,9 @@
 <template>
   <div class="d-flex flex-column">
     <HeaderComponent />
-    <main class="f-d-main">
       <router-view></router-view>
-    </main>
-    <FooterComponent />
+    
+    
   </div>
 </template>
 
@@ -35,8 +34,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.f-d-main {
-  max-height: 2000px;
-  margin-bottom: 150px;
-}
+
 </style>

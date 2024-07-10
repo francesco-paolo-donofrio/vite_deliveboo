@@ -1,71 +1,135 @@
 <template>
     <div v-if="restaurant">
-        <div class="f-d-container">
-            <div class="f-d-first-container">
-                <h1 class="text-center"><strong class="gradientColor">{{ restaurant.name }}</strong></h1>
-                <div>
-                    <div class="d-flex justify-content-between align-items-center gap-3">
-                        <div class="f-d-container-img">
-                            <img v-if="restaurant.image" class="f-d-img-fluid"
-                                :src="store.imgBasePath + restaurant.image" :alt="restaurant.name">
-                            <img v-else src="../public/images/placeholder-restaurant.png" :alt="restaurant.name">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-9 col-sm-12">
+                    <h1 class="text-center py-3"><strong class="gradientColor">{{ restaurant.name }}</strong></h1>
+                    <div>
+                        <div class="d-flex justify-content-center align-items-center gap-3 f-d-mq-sm">
+                            <div class="f-d-container-img">
+                                <img v-if="restaurant.image" class="f-d-img-fluid"
+                                    :src="store.imgBasePath + restaurant.image" :alt="restaurant.name">
+                                <img v-else src="../public/images/placeholder-restaurant.png" :alt="restaurant.name">
+                            </div>
+                            <div id="info-container">
+                                <h3 class=""><em class="f-d-primary-color">Info utili</em></h3>
+                                <p><em>{{ restaurant.description }}</em></p>
+                                <p>Indirizzo: {{ restaurant.address }}</p>
+                                <div id="types-container">
+                                    <h3 class=""><em class="f-d-primary-color">Tipologie</em></h3>
+                                    <div class="f-d-mq-320-576 ">
+                                        <ul
+                                            class="d-flex flex-wrap justify-content-center align-items-center p-0 list-unstyled">
+                                            <li v-for="(item, index) in restaurant.types" :key="index">
+                                                <div class="f-d-mini-container-type display-flex flex-column">
+                                                    <img class="img-fluid" :src="store.imgBasePath + item.image"
+                                                        :alt="item.name">
+                                                </div>
+                                                <div class="text-center">
+                                                    <p>
+                                                        {{ item.name }}
+                                                    </p>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="ps-3">
-                            <h3 class=""><em class="f-d-primary-color">Info utili</em></h3>
-                            <p><em>{{ restaurant.description }}</em></p>
-                            <p>Consegna in <strong>10 - 20 minuti</strong></p>
-                            <p>Indirizzo: {{ restaurant.address }}</p>
-                        </div>
+                    </div>
+                </div>
+                <div id="suggested" class="col-xl-3 col-sm-12 f-d-bg-gradient-secondary">
+                    <div>
+                        <h4 class="text-center text-uppercase">Info di {{ restaurant.name }}</h4>
+                        <p><em class="fw-bold ">{{ restaurant.description }}</em></p>
+                        <p>Indirizzo: {{ restaurant.address }}</p>
+                        <p>P.IVA {{ restaurant.vat }}</p>
+                    </div>
+                    <div>
+                        <h4 class="text-center text-uppercase">Tipologie di {{ restaurant.name }}</h4>
+                        <ul class="d-flex flex-wrap justify-content-center align-items-center p-0 list-unstyled">
+                            <li v-for="(item, index) in restaurant.types" :key="index">
+                                <div class="f-d-mini-container-type display-flex flex-column">
+                                    <img class="img-fluid" :src="store.imgBasePath + item.image" :alt="item.name">
+                                </div>
+                                <div class="text-center">
+                                    <p>
+                                        {{ item.name }}
+                                    </p>
+                                </div>
+                            </li>
+                        </ul>
                     </div>
                     <div>
 
-                        <div class="ps-3">
-                            <h3 class="text-center"><em class="f-d-primary-color">Tipologie</em></h3>
-                            <div>
-                                <ul class="d-flex flex-wrap justify-content-center align-items-center p-0">
-                                    <li class="f-d-mini-container" v-for="(item, index) in restaurant.types"
-                                        :key="index">
-                                        <img class="img-fluid" :src="store.imgBasePath + item.image" :alt="item.name">
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="f-d-second-container">
-                <div class="pt-5">
-                    <div class="container d-flex flex-column justify-content-center align-items-center">
-                        <div class="f-d-cart cart d-flex flex-column align-items-center justify-content-center">
-                            <h2>Carrello</h2>
-                            <div v-for="item in store.cart" :key="item.id">
-                                <p>x{{ item.quantity }}-{{ item.name }} - Totale: {{ item.price * item.quantity }}€</p>
-                            </div>
-                            <p>Totale carrello: {{ cartTotal() }}€</p>
-                        </div>
-                        <div class="buttons d-flex align-items-center justify-content-center gap-3">
-                                <button class="btn btn-danger" @click="emptyCart">Svuota Carrello</button>
-                                <button class="btn btn-success">Procedi con il tuo ordine</button>
-                            </div>
+                        <h3 class="text-uppercase">Segui {{ restaurant.name }} anche su</h3>
+                        <div class="text-center"><i class="fa-brands fa-facebook"></i> | <i class="fa-brands fa-tiktok"></i> | <i
+                                class="fa-brands fa-instagram"></i></div>
 
                     </div>
                 </div>
             </div>
         </div>
-        <div class="container">
-            <h3 class="text-center text-uppercase"><em class="f-d-primary-color">Menù</em></h3>
-            <div class="row">
-                <ul class="d-flex flex-wrap justify-content-around p-0">
-                    <li class="f-d-mini-container col-12 col-md-6 col-lg-4" v-for="(item, index) in restaurant.products"
-                        :key="index" @click="openModal(item)">
-                        
-                        <img class="img-fluid" :src="store.imgBasePath + item.image" :alt="item.name">
-                        <span class="hover-icon">+</span>
-                    
-                    </li>
-                </ul>
+
+        <div class="f-d-bg-gradient">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-8 col-sm-12 ">
+                        <h3 class="text-center text-uppercase py-3"><em class="text-white">Menù</em></h3>
+                        <div class="d-flex align-items-center justify-content-center flex-wrap">
+                            <div class="f-d-card col-sm-12 col-xl-2" v-for="(item, index) in restaurant.products" :key="index">
+                                <div class="f-d-mini-container">
+                                    <img @click="openModal(item)" class="img-fluid"
+                                        :src="store.imgBasePath + item.image" :alt="item.name">
+                                </div>
+                                <div class="d-flex flex-column align-items-center justify-content-center gap-0">
+                                    <p class="text-center text-uppercase fw-bold single-line pointer">{{ item.name }}
+                                    </p>
+                                    <p class="text-center text-uppercase fw-bold">{{ item.price }}€</p>
+                                    <div class="d-flex justify-content-center align-items-center gap-2 my-2">
+                                        <button class="btn btn-sm btn-danger" @click="decreaseQuantity(item)">-</button>
+                                        <span>{{ getQuantityInCart(item.id) }}</span>
+                                        <button class="btn btn-sm btn-success"
+                                            @click="increaseQuantity(item)">+</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-xl-4 col-sm-12">
+                        <div id="cart-container">
+                            <div>
+                                <div
+                                    class="f-d-cart container d-flex flex-column justify-content-center align-items-center">
+                                    <div class="cart d-flex flex-column align-items-center justify-content-center">
+                                        <h2 class="text-center">Carrello di {{ restaurant.name }}</h2>
+                                        <div class="f-d-border-bottom"></div>
+                                        <div v-for="item in store.cart" :key="item.id">
+                                            <p>x{{ item.quantity }}-{{ item.name }} - Totale: {{ item.price *
+                                                item.quantity
+                                                }}€
+                                            </p>
+                                        </div>
+                                        <div class="f-d-border-bottom"></div>
+                                        <p>Totale carrello: {{ cartTotal() }}€</p>
+                                    </div>
+                                    <div class="buttons d-flex align-items-center justify-content-center gap-3">
+                                        <button class="btn btn-danger" @click="emptyCart">Svuota</button>
+                                        <button class="btn btn-success">Procedi</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
             </div>
+
+
         </div>
+
+
 
 
 
@@ -113,15 +177,22 @@
         </div>
 
     </div>
+    <FooterComponent></FooterComponent>
+
+
 
 </template>
 
 <script>
+import FooterComponent from '@/components/FooterComponent.vue';
 import { store } from '../store';
 import axios from 'axios';
 
 export default {
     name: 'RestaurantDetailComponent',
+    components: {
+        FooterComponent
+    },
     props: ['id'],
     data() {
         return {
@@ -135,15 +206,20 @@ export default {
     },
     methods: {
         computed: {
-            
+
         },
         cartTotal() {
-                return this.store.cart.reduce((total, item) => total + item.price * item.quantity, 0);
-            },
+            return this.store.cart.reduce((total, item) => total + item.price * item.quantity, 0);
+        },
         getSingleRestaurant() {
             axios.get(`${this.store.apiBaseUrl}/restaurants/${this.id}`).then(res => {
                 this.restaurant = res.data.results;
                 console.log(this.restaurant);
+            });
+        },
+        getRestaurants() {
+            axios.get(this.store.apiBaseUrl + '/restaurants').then((res) => {
+                this.restaurants = res.data.results;
             });
         },
         openModal(dish) {
@@ -230,6 +306,7 @@ export default {
         }
     },
     mounted() {
+        this.getRestaurants();
         this.getSingleRestaurant();
         this.loadCart();
     },
@@ -242,27 +319,6 @@ export default {
 <style lang="scss" scoped>
 @use '../assets/styles/partials/_variables' as *;
 
-.f-d-first-container {
-    width: calc(70% - 40px);
-    //height: 500px;
-}
-
-.f-d-second-container {
-    width: calc(30% - 40px);
-    //height: 500px;
-}
-
-.f-d-container {
-    width: 100%;
-    //height: 600px;
-    padding: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: start;
-    gap: 20px;
-    margin-bottom: 30px;
-}
-
 .f-d-container-img {
     display: flex;
     flex-direction: column;
@@ -274,21 +330,21 @@ export default {
     aspect-ratio: 1/1;
 }
 
-
-.f-d-mini-container {
-    width: calc(100% / 4);
+.f-d-mini-container-img {
+    width: 150px;
+    height: 80px;
+    border-radius: 10px;
+    margin: 0 auto;
     aspect-ratio: 1/1;
     cursor: pointer;
-    border-radius: 50%;
     overflow: hidden;
-    background-color: lightgray;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    position: relative;
+
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
 
     li {
         list-style-type: none;
@@ -297,21 +353,70 @@ export default {
     &:hover {
         opacity: 0.7;
     }
+}
 
-    .hover-icon {
-        display: none;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        font-size: 3rem;
-        color: black;
-        font-weight: bold;
+#info-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+}
+
+.f-d-mini-container {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+    border-radius: 10px;
+    aspect-ratio: 1/1;
+    cursor: pointer;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
     }
 
-    &:hover .hover-icon {
-        display: block;
+    li {
+        list-style-type: none;
     }
+
+    &:hover {
+        opacity: 0.7;
+    }
+}
+
+.f-d-card {
+    border: 1px solid $background-fourth-color;
+    border-radius: 10px;
+
+}
+#suggested {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    text-align: center;
+    gap: 20px;
+}
+
+.background-image {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-position: center;
+}
+
+.f-d-mini-container-type {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
 }
 
 .modal.fade.show {
@@ -346,10 +451,243 @@ export default {
     justify-content: center;
     align-items: center;
     gap: 10px;
-    width: 50%;
-    height: 50%;
+    width: 100%;
+    height: calc(100% - 20px);
     border-radius: 10px;
-    border: 2px solid black;
-    background-color: white;
+    border: 4px solid $background-fourth-color;
+    background-color: $background-primary-color;
+    color: white;
+    padding: 10px;
+}
+
+.f-d-border-bottom {
+    margin: 0 auto;
+    width: 50%;
+    height: 5px;
+    background-color: $background-fourth-color;
+    border: 1px solid $background-fourth-color;
+    border-radius: 5px;
+    margin: 5px 0 5px 0;
+}
+
+// css per troncare la parola e farla rimanere all'interno del contenitore senza che vada a capo
+.single-line {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+}
+
+.f-d-bg-gradient {
+    background: linear-gradient(to right, $background-secondary-color, $background-primary-color, $background-secondary-color);
+    color: white;
+}
+
+.f-d-bg-gradient-secondary {
+    background: linear-gradient(to bottom, $background-primary-color, $background-secondary-color);
+    color: white;
+}
+
+.quantity-control {
+    margin-top: 10px;
+}
+
+.quantity-control button {
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#cart-container {
+    padding: 70px 0 0 0;
+}
+
+// mediaquery 1200px, 768px, 576px
+
+@media screen and (min-width: 1200px) {
+    #info-container {
+        display: none;
+    }
+
+    .f-d-container-img {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border-radius: 20px;
+        gap: 20px;
+        width: 80%;
+        height: 100%;
+    }
+
+}
+
+@media screen and (max-width: 576px) {
+
+    h1 {
+        padding-top: 10px;
+    }
+
+    .f-d-container-mq {
+        height: 200px;
+    }
+
+    .f-d-mq-sm {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    .f-d-cart {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 90%;
+        border-radius: 10px;
+        border: 2px solid black;
+        background-color: white;
+
+        margin-bottom: 20px;
+    }
+
+    #cart-container {
+        display: none;
+    }
+
+    #info-container {
+        display: flex;
+        margin: 0 auto;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    #suggested {
+        display: none;
+    }
+
+    .f-d-mq-320 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    .f-d-mini-container {
+        width: 80%;
+        height: 100%;
+        margin: 0 auto;
+        aspect-ratio: 1/1;
+        border-radius: 50%;
+        overflow: hidden;
+        background-color: lightgray;
+        gap: 10px;
+    }
+
+    .f-d-card {
+    border: 1px solid $background-fourth-color;
+    border-left: none;
+    border-right: none;
+    border-radius: 10px;
+
+}
+
+    .f-d-mini-container-type {
+        width: 50px;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        list-style-type: none;
+    }
+}
+
+@media screen and (max-width: 320px) {
+
+    .f-d-mq-sm {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    .f-d-cart {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        width: 100%;
+        height: 90%;
+        border-radius: 10px;
+        border: 2px solid black;
+        background-color: white;
+
+        margin-bottom: 20px;
+    }
+
+    #suggested {
+        display: none;
+    }
+
+    .f-d-card {
+    border: 1px solid $background-fourth-color;
+    border-left: none;
+    border-right: none;
+    border-radius: 10px;
+
+}
+
+    #info-container {
+        display: flex;
+        margin: 0 auto;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    #cart-container {
+        display: none;
+    }
+
+    .f-d-mq-320-576 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    .f-d-mini-container-type {
+        width: 50px;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        list-style: none;
+        gap: 10px;
+    }
+
+    .f-d-mini-container {
+        width: 80%;
+        height: 100%;
+        margin: 0 auto;
+        aspect-ratio: 1/1;
+        border-radius: 50%;
+        overflow: hidden;
+        background-color: lightgray;
+        gap: 10px;
+    }
+
 }
 </style>
