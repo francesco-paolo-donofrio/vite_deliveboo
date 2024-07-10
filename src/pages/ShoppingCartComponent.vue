@@ -211,7 +211,7 @@ export default {
 }
 
 
-.braintree-sheet__content--form .braintree-form__flexible-fields {
+.braintree-form__flexible-fields {
     display: inline-block;
 }
 
