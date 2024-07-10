@@ -1,4 +1,7 @@
 <template>
+    <div id="types-title">
+        <h1 class="gradientColor text-center">Tipologie</h1>
+    </div>
     <div id="types" class="d-flex justify-content-center align-items-center">
     <div class="typology-carousel">
       <button @click="scrollLeft" class="nav-button prev" v-show="canScrollLeft">&lt;</button>
@@ -129,6 +132,26 @@
     font-size: 1rem;
     font-weight: bold;
   }
+
+  #types-title {
+    margin: 10px 0; /* Margin around the title */
+}
+
+.gradientColor {
+    background: linear-gradient(to right, $background-fourth-color, $background-fourth-color, $background-primary-color,  $background-fourth-color, $background-fourth-color); /* Gradient colors */
+    -webkit-background-clip: text; /* For Safari */
+    -webkit-text-fill-color: transparent; /* For Safari */
+    background-clip: text;
+    color: transparent;
+    font-size: 3rem; /* Font size */
+    font-weight: bold; /* Font weight */
+    text-align: center; /* Center alignment */
+    padding: 10px 20px; /* Padding */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Box shadow */
+    text-transform: uppercase; /* Uppercase text */
+    letter-spacing: 2px; /* Spacing between letters */
+}
   
   .nav-button {
     position: absolute;
@@ -169,6 +192,12 @@
     width: 100%;
     height: 200px;
   }
+
+  #types-title {
+    h1 {
+        font-size: 25px;
+    }
+}
 
   .nav-button {
     position: absolute;

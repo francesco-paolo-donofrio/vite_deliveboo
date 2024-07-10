@@ -15,7 +15,7 @@
           <a href="#restaurants" class="fa-solid fa-arrow-down fa-beat f-d-gradientTitle text-decoration-none"></a>
         </div>
         <div class="d-flex flex-column align-items-center justify-content-center gap-2">
-          <a class="text-white text-decoration-none fs-5" href="#types">Tipologie</a>
+          <a class="text-white text-decoration-none fs-5" href="#types-title">Tipologie</a>
           <a href="#types" class="fa-solid fa-arrow-down fa-beat f-d-gradientTitle text-decoration-none"></a>
         </div>
       </div>
@@ -70,8 +70,31 @@ export default {
 }
 
 
-@media screen and (min-width: 1200px) {
-  
+@media screen and (max-width: 576px) {
+  .hero-video-content {
+    width: 400px !important;
+    height: 250px !important;
+    position: absolute;
+    background-color: #223440c2;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    text-align: center;
+    z-index: 1;
+    display: flex;
+    border-radius: 20px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .f-d-gradientTitle {
+      font-size: 25px !important;
+    }
+    .f-d-display-none {
+  display: flex !important;
+}
+  }
 }
 
 @media screen and (max-width: 320px) {
@@ -85,8 +108,8 @@ export default {
   }
 
   .hero-video-content {
-    width: 300px !important;
-    height: 160px !important;
+    width: 250px !important;
+    height: 170px !important;
     position: absolute;
     background-color: #223440c2;
     top: 50%;

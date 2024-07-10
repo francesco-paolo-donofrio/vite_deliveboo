@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div id="header">
 
         <header class=" z-1">
             <nav id="f-d-custom-nav" ref="fdCustomNav"
@@ -373,7 +373,10 @@ header {
         padding-left: 0;
         margin-left: 25px;
     }
-
+    
+    #f-d-custom-nav {
+        width: 100% !important;
+    }
     
 
 
