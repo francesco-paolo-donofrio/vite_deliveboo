@@ -86,7 +86,7 @@ export default {
             instance: null,
             store,
             products: [],
-            cart: [],
+            //cart: [],
             restaurantName: '',
             customer: {
                 name: '',
