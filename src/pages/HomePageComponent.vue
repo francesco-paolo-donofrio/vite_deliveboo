@@ -62,6 +62,7 @@ export default {
         CarouselComponent,
         AboutUsComponent,
         FooterComponent
+
     },
     data() {
         return {

@@ -8,6 +8,7 @@
             </div>
         </div>
         <div v-else>
+
             <div class="f-d-cart">
                 <div class="cart d-flex flex-column align-items-center justify-content-center">
                 <h2 class="gradientColor">Carrello</h2>
@@ -21,6 +22,15 @@
                 <div class="my-2 f-d-border-bottom text-center"></div>
                 <div>Totale ordine: <em class="gradientColor">{{ totalAmount }}</em> €</div>
             </div>
+            </div>
+            <div class="f-d-cart container d-flex flex-column justify-content-center align-items-center">
+                <h2>Carrello</h2>
+                <div>Stai ordinando da:</div>
+                <h4>{{ cartName() }}</h4>
+                <div v-for="item in store.cart" :key="item.id">
+                    {{ item.name }} - {{ item.price }} x {{ item.quantity }}
+                </div>
+                <div class="my-2 f-d-border-bottom">Totale ordine: {{ totalAmount }} €</div>
             </div>
             <!-- FORM PER DATI CLIENTE -->
             <div class="container">
@@ -75,7 +85,7 @@
                 </form>
             </div>
 
-            <div id="dropin-container" class="container"></div>
+            <div id="dropin-container" class="container d-flex flex-column"></div>
             <div class="d-flex justify-content-center gap-2">
                 <button @click="pay">Completa l'acquisto</button>
                 <button @click="emptyCart">Svuota Carrello</button>
@@ -98,7 +108,6 @@ export default {
             products: [],
 
             //cart: [],
-            restaurantName: '',
             customer: {
                 name: '',
                 surname: '',
@@ -121,9 +130,6 @@ export default {
             const savedCart = localStorage.getItem('cart');
             if (savedCart) {
                 this.store.cart = JSON.parse(savedCart);
-                // if (this.cart.length > 0) {
-                //     this.getRestaurantName(this.cart[0].restaurant_id);
-                // }
             }
         },
         emptyCart() {
@@ -285,6 +291,9 @@ export default {
                         console.error('Error processing payment:', error);
                     });
             });
+        },
+        cartName() {
+            return localStorage.cartname;
         }
     },
     computed: {
@@ -300,7 +309,6 @@ export default {
     created() {
         this.loadCart();
         console.log(this.store.cart);
-        console.log(this.store.restaurantname);
     }
 };
 </script>
@@ -380,7 +388,7 @@ export default {
     justify-content: center;
     align-items: center;
     gap: 10px;
-    width: 100%;
+    width: 60%;
     height: calc(100% - 20px);
     border-radius: 10px;
     border: 4px solid $background-fourth-color;
@@ -390,8 +398,6 @@ export default {
 }
 
 .f-d-border-bottom {
-    margin: 0 auto;
-    width: 50%;
     height: 5px;
     background-color: $background-fourth-color;
     border: 1px solid $background-fourth-color;

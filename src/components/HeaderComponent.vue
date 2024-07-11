@@ -206,8 +206,18 @@ export default {
                 total += element.quantity;
             });
             return total    
-        }
+        },
+        loadCart() {
+            const savedCart = localStorage.getItem('cart');
+            if (savedCart) {
+                this.store.cart = JSON.parse(savedCart);
+            }
+            console.log(this.store.cart);
+        },
     },
+    mounted(){
+        this.loadCart()
+    }
     
 };
 </script>

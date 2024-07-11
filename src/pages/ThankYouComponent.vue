@@ -33,6 +33,7 @@
         </table>
         <h3 class="text-center">Grazie per averci scelto!</h3>
         <div class="text-center mb-3">A breve riceverai una mail di conferma con i dettagli del tuo ordine</div>
+        <div class="countdown container my-3 text-center">Tra {{ countdown }} secondi verrai reindirizzato in <a href="/">homepage</a> per scoprire altri fantastici ristoranti</div>
     </div>
     
     <FooterComponent id="footer"></FooterComponent>
@@ -56,15 +57,28 @@ export default {
             store,
             restaurantId: "",
             restaurantName: "",
+            countdown: 20
         }
     },
     mounted() {
+        this.startCountdown();
         // console.log(this.store.prevOrder);
         // this.getRestaurantId();
         // console.log(this.restaurantId);
         // this.getSingleRestaurant();
     },
     methods: {
+        startCountdown() {
+            const interval = setInterval(() => {
+                if (this.countdown > 0) {
+                    this.countdown--;
+                } else {
+                    clearInterval(interval);
+                    // Redirigi alla pagina del carrello
+                    window.location.href = '/';
+                }
+            }, 2000);
+        },
         totalAmount() {
             for (let i = 0; i < this.store.prevOrder.length; i++) {
                 return (this.store.prevOrder[i].price * this.store.prevOrder[i].quantity).toFixed(2);
@@ -99,9 +113,9 @@ li {
     border: none;
 }
 
-#footer{
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-}
+// #footer{
+//     position: absolute;
+//     bottom: 0;
+//     width: 100%;
+// }
 </style>
