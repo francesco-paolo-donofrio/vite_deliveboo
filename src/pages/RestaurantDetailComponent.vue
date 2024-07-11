@@ -40,32 +40,25 @@
                 </div>
                 <div id="suggested" class="col-xl-3 col-sm-12 f-d-bg-gradient-secondary">
                     <div>
-                        <h4 class="text-center text-uppercase">Info di {{ restaurant.name }}</h4>
+                        <h4 class="text-center text-uppercase">Info di "{{ restaurant.name }}"</h4>
                         <p><em class="fw-bold ">{{ restaurant.description }}</em></p>
                         <p>Indirizzo: {{ restaurant.address }}</p>
                         <p>P.IVA {{ restaurant.vat }}</p>
                     </div>
                     <div>
-                        <h4 class="text-center text-uppercase">Tipologie di {{ restaurant.name }}</h4>
-                        <ul class="d-flex flex-wrap justify-content-center align-items-center p-0 list-unstyled">
-                            <li v-for="(item, index) in restaurant.types" :key="index">
-                                <div class="f-d-mini-container-type display-flex flex-column">
-                                    <img class="img-fluid" :src="store.imgBasePath + item.image" :alt="item.name">
+                        <h4 class="text-center text-uppercase">Tipologie di "{{ restaurant.name }}"</h4>
+                        <ul class="d-flex flex-wrap flex-column justify-content-center align-items-center p-0 list-unstyled">
+                            <li class="d-flex flex-column align-items-center justify-content-center" v-for="(item, index) in restaurant.types" :key="index">
+                                <div class="f-d-mini-container-type">
+                                    <img class="img-fluid " :src="store.imgBasePath + item.image" :alt="item.name">
                                 </div>
-                                <div class="text-center">
+                                <div>
                                     <p>
                                         {{ item.name }}
                                     </p>
                                 </div>
                             </li>
                         </ul>
-                    </div>
-                    <div>
-
-                        <h3 class="text-uppercase">Segui {{ restaurant.name }} anche su</h3>
-                        <div class="text-center"><i class="fa-brands fa-facebook"></i> | <i class="fa-brands fa-tiktok"></i> | <i
-                                class="fa-brands fa-instagram"></i></div>
-
                     </div>
                 </div>
             </div>
@@ -103,7 +96,7 @@
                                 <div
                                     class="f-d-cart container d-flex flex-column justify-content-center align-items-center">
                                     <div class="cart d-flex flex-column align-items-center justify-content-center">
-                                        <h2 class="text-center">Carrello di {{ restaurant.name }}</h2>
+                                        <h2 class="text-center">Carrello di "{{ restaurant.name }}"</h2>
                                         <div class="f-d-border-bottom"></div>
                                         <div v-for="item in store.cart" :key="item.id">
                                             <p>x{{ item.quantity }}-{{ item.name }} - Totale: {{ item.price *
@@ -308,7 +301,14 @@ export default {
             } else {
                 return `Hai ordinato ${quantity} piatti`;
             }
-        }
+        },
+        // metodo per troncare il nome a 4 lettere
+        truncateName(name) {
+      if (name.length > 4) {
+        return name.slice(0, 4) + '..';
+      }
+      return name;
+    }
     },
     mounted() {
         this.getRestaurants();
@@ -398,6 +398,7 @@ export default {
 .f-d-card {
     border: 1px solid $background-fourth-color;
     border-radius: 10px;
+    margin: 10px;
 
 }
 #suggested {

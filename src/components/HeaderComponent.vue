@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div id="header">
 
         <header class=" z-1">
             <nav id="f-d-custom-nav" ref="fdCustomNav"
@@ -17,15 +17,17 @@
                                 </router-link>
                             </li>
                         </ul>
+
+                    </div>
+                    <div class="navigation-buttons">
+                        <button @click="goBack" class="btn btn-outline-light mr-2">
+                            <i class="fas fa-arrow-left"></i>
+                        </button>
+                        <button @click="goForward" class="btn btn-outline-light"> <i class="fas fa-arrow-right"></i>
+                        </button>
                     </div>
                 </div>
-                <div class="navigation-buttons">
-                    <button @click="goBack" class="btn btn-outline-light mr-2">
-                        <i class="fas fa-arrow-left"></i>
-                    </button>
-                    <button @click="goForward" class="btn btn-outline-light"> <i class="fas fa-arrow-right"></i>
-                    </button>
-                </div>
+
                 <div class="user-account gap-3 d-flex fs-3 align-self-stretch align-items-end">
                     <div id="f-d-nav-login-button" ref="fdNavLoginButton"
                         class="icon-container rounded-top-2 d-flex justify-content-center order-2 w-auto position-relative"
@@ -40,7 +42,6 @@
                         <a href="http://localhost:8000/login"
                             class="text-decoration-none text-white d-flex flex-column align-items-center mx-4">
                             <i class="fa-solid fa-user"></i>
-
                         </a>
                     </div>
                     <div id="f-d-nav-kebab-button" ref="fdNavKebabButton"
@@ -57,10 +58,27 @@
                         </form>
                     </div>
                     <div id="f-d-nav-kebab-menu" ref="fdNavKebabMenu"
-                        class="bar-input active-color rounded-bottom-2 position-absolute container d-none d-lg-none">
+                        class="bar-input f-d-bg-primary-color-fade rounded-bottom-2 position-absolute container d-none d-lg-none">
                         <div class="w-100 d-flex align-content-center justify-content-center p-3">
-                            <ul class="fs-6 w-100 text-decoration-none list-unstyled text-center gap-2 m-0">
-
+                            <ul class="fs-6 w-100 text-decoration-none list-unstyled gap-2 m-0 d-flex flex-column align-items-center justify-content-center">
+                                <li>
+                                    <router-link :to="{ name: 'home' }" class="nav-link">
+                                        <i class="fa-solid fa-house"></i>
+                                        Home
+                                    </router-link>
+                                </li>
+                                <li>
+                                    <router-link :to="{ name: 'shopping-cart' }" class="nav-link">
+                                        <i class="fa-solid fa-cart-shopping"></i>
+                                        Carrello
+                                    </router-link>
+                                </li>
+                                <li>
+                                    <a href="http://localhost:8000/login" class="text-decoration-none text-white">
+                                        <i class="fa-solid fa-user"></i>
+                                        Login
+                                    </a>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -83,7 +101,12 @@ export default {
     name: 'HeaderComponent',
     data() {
         return {
+
             store,
+
+            eventTarget: { eventElement: null, originalTemplate: '' },
+            openElement: null,
+
             show: false,
             menuItems: [
                 {
@@ -132,10 +155,20 @@ export default {
         },
         toggleMenu(menuItem, event) {
             const menuToOpen = this.$refs[menuItem];
+            if (!menuToOpen) {
+                console.error(`Element with ref "${menuItem}" not found`);
+                return;
+            }
+
+            if (!this.eventTarget) {
+                this.eventTarget = { eventElement: null, originalTemplate: '' };
+            }
+
             if (this.openElement === menuToOpen) {
                 menuToOpen.classList.toggle('d-none');
-                this.eventTarget.eventElement.classList.remove('active-color');
-                this.eventTarget.eventElement.innerHTML = this.eventTarget.originalTemplate;
+                if (this.eventTarget.eventElement) {
+                    this.eventTarget.eventElement.innerHTML = this.eventTarget.originalTemplate;
+                }
                 this.$refs.fdCustomNav.classList.remove('border-opened-menu');
                 this.openElement = null;
             } else {
@@ -143,7 +176,6 @@ export default {
                 this.openElement = menuToOpen;
                 this.eventTarget.eventElement = event.currentTarget;
                 this.eventTarget.originalTemplate = event.currentTarget.innerHTML;
-                event.currentTarget.classList.add('active-color');
                 event.currentTarget.innerHTML = '<i class="fa-solid fa-xmark"></i>';
                 menuToOpen.classList.toggle('d-none');
                 this.$refs.fdCustomNav.classList.add('border-opened-menu');
@@ -196,7 +228,11 @@ export default {
 @use '../assets/styles/partials/_variables' as *;
 
 .active-color {
-    background-color: black;
+    background-color: $background-primary-color;
+}
+
+.f-d-bg-primary-color-fade {
+    background-color: #2234409f;
 }
 
 header {
@@ -322,6 +358,7 @@ header {
 .navigation-buttons {
     display: flex;
     gap: 10px;
+    padding-left: 10px;
 }
 
 .navigation-buttons button {
@@ -329,7 +366,42 @@ header {
     align-items: center;
     gap: 5px;
 }
+
 .badge{
     font-size: 12px;
+
+
+@media screen and (min-width: 1200px) {
+    #f-d-nav-menu {
+        display: none !important;
+    }
+    
+}
+
+@media screen and (max-width: 576px) {
+    .navigation-buttons {
+        padding-left: 0;
+        margin-left: 130px;
+    }
+
+    #f-d-nav-login-button {
+        display: none !important; 
+    }
+
+}
+
+@media screen and (max-width: 320px) {
+    .navigation-buttons {
+        padding-left: 0;
+        margin-left: 25px;
+    }
+    
+    #f-d-custom-nav {
+        width: 100% !important;
+    }
+    
+
+
+
 }
 </style>
