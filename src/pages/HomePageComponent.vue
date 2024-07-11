@@ -55,7 +55,7 @@ export default {
     components: {
         CardComponent,
         HeroComponent,
-        CarouselComponent
+        CarouselComponent,
     },
     data() {
         return {
