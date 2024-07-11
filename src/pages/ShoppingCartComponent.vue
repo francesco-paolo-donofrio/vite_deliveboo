@@ -8,7 +8,7 @@
         <div v-else>
             <h2>Carrello</h2>
             <div>Stai ordinando da:</div>
-            <h4>{{ store.restaurantname }}</h4>
+            <h4>{{cartName()}}</h4>
             <div v-for="item in store.cart" :key="item.id">
                 {{ item.name }} - {{ item.price }} x {{ item.quantity }}
             </div>
@@ -89,7 +89,6 @@ export default {
             products: [],
 
             //cart: [],
-            restaurantName: '',
             customer: {
                 name: '',
                 surname: '',
@@ -112,9 +111,6 @@ export default {
             const savedCart = localStorage.getItem('cart');
             if (savedCart) {
                 this.store.cart = JSON.parse(savedCart);
-                // if (this.cart.length > 0) {
-                //     this.getRestaurantName(this.cart[0].restaurant_id);
-                // }
             }
         },
         emptyCart() {
@@ -276,6 +272,9 @@ export default {
                         console.error('Error processing payment:', error);
                     });
             });
+        },
+        cartName() {
+            return localStorage.cartname;
         }
     },
     computed: {
@@ -291,7 +290,6 @@ export default {
     created() {
         this.loadCart();
         console.log(this.store.cart);
-        console.log(this.store.restaurantname);
     }
 };
 </script>
