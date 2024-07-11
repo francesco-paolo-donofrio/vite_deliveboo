@@ -7,8 +7,10 @@
       </div>
     </video>
     <div class="hero-video-content">
+      <img class="f-d-img-logo-hero" src="../../public/images/logo_deliveboo.png" alt="logo.hero">
       <p class="f-d-gradientTitle">Deliveboo</p>
       <h4 class="fst-italic"><em>La ristorazione di Roma a casa tua</em></h4>
+      
       <div class="d-flex gap-5 align-items-center justify-content-center w-50 mt-5">
         <div class="d-flex flex-column align-items-center justify-content-center gap-2">
           <a class="text-white text-decoration-none fs-5" href="#restaurants">Ristoranti</a>
@@ -82,7 +84,7 @@ export default {
   .hero-video-content {
     position: absolute;
     width: 1000px;
-    height: 500px;
+    height: 550px;
     background-color: #223440ce;
     top: 50%;
     left: 50%;
@@ -98,11 +100,25 @@ export default {
   }
 }
 
+.f-d-img-logo-hero {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  margin-bottom: 20px;
+}
+
 
 @media screen and (max-width: 576px) {
+
+  .f-d-img-logo-hero {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  margin-bottom: 20px;
+}
   .hero-video-content {
     width: 400px !important;
-    height: 250px !important;
+    height: 300px !important;
     position: absolute;
     background-color: #223440c2;
     top: 50%;
@@ -127,6 +143,9 @@ export default {
 }
 
 @media screen and (max-width: 320px) {
+  .f-d-img-logo-hero {
+  display: none;
+}
   #hero {
     width: 100%;
     position: relative;

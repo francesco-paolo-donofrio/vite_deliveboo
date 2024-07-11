@@ -5,8 +5,8 @@
       :modules="modules"
       class="mySwiper"
     >
-      <swiper-slide><img class="w-100" src="../../public/images/placeholder-restaurant.png" alt=""></swiper-slide>
-      <swiper-slide><img class="w-100" src="../../public/images/placeholder-restaurant.png" alt=""></swiper-slide>
+      <swiper-slide><img class="w-100" src="../../public/images/avatar1.jpg" alt=""></swiper-slide>
+      <swiper-slide><img class="w-100" src="../../public/images/avatar2.avif" alt=""></swiper-slide>
       <swiper-slide><img class="w-100" src="../../public/images/placeholder-restaurant.png" alt=""></swiper-slide>
       <swiper-slide><img class="w-100" src="../../public/images/placeholder-restaurant.png" alt=""></swiper-slide>
     </swiper>

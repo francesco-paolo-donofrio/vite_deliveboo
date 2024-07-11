@@ -26,11 +26,11 @@
 
 
                 <!-- FORM PER DATI CLIENTE -->
-                <div class="container">
+                <div class="container mt-3">
                     <form class="f-d-form-cart" @submit.prevent="pay">
                         <h2 class="gradientColor fs-2">Compila per pagare</h2>
                         <!-- NOME -->
-                        <div class="text-secondary mb-2 text-start">
+                        <div class="text-secondary mb-2 text-center">
                             <label for="name" class="form-label text-dark">Nome*</label>
                             <input type="text" name="name" class="form-control" id="name" v-model="customer.name"
                                 minlength="3" maxlength="200" placeholder="Inserisci il tuo nome"
@@ -39,7 +39,7 @@
                         </div>
 
                         <!-- COGNOME -->
-                        <div class="text-secondary mb-2 text-start">
+                        <div class="text-secondary mb-2 text-center">
                             <label for="surname" class="form-label text-dark">Cognome*</label>
                             <input type="text" class="form-control" id="surname" name="surname"
                                 v-model="customer.surname" minlength="3" maxlength="200"
@@ -49,7 +49,7 @@
                         </div>
 
                         <!-- TELEFONO -->
-                        <div class="text-secondary mb-2 text-start">
+                        <div class="text-secondary mb-2 text-center">
                             <label for="phone" class="form-label text-dark">Numero di telefono*</label>
                             <input type="tel" class="form-control" id="phone" name="phone" v-model="customer.phone"
                                 minlength="3" maxlength="200" placeholder="Numero di telefono"
@@ -58,7 +58,7 @@
                         </div>
 
                         <!-- EMAIL -->
-                        <div class="text-secondary mb-2 text-start">
+                        <div class="text-secondary mb-2 text-center">
                             <label for="email" class="form-label text-dark">Indirizzo email*</label>
                             <input type="email" class="form-control" id="email" name="email" v-model="customer.email"
                                 minlength="3" maxlength="200" placeholder="Inserisci il tuo email"
@@ -67,7 +67,7 @@
                         </div>
 
                         <!-- INDIRIZZO -->
-                        <div class="text-secondary mb-2 text-start">
+                        <div class="text-secondary mb-2 text-center">
                             <label for="address" class="form-label text-dark">Indirizzo di consegna*</label>
                             <input type="text" class="form-control" id="address" name="address"
                                 v-model="customer.address" minlength="3" maxlength="200"
@@ -80,10 +80,10 @@
                     </form>
                 </div>
 
-                <div id="dropin-container" class="container d-flex flex-column"></div>
+                <div id="dropin-container" class="f-d-payment d-flex flex-column align-items-center justify-content-center"></div>
                 <div class="d-flex justify-content-center gap-2">
-                    <button @click="pay">Completa l'acquisto</button>
-                    <button @click="emptyCart">Svuota Carrello</button>
+                    <button class="f-d-button-confirm" @click="pay">Paga ora</button>
+                    <button class="f-d-button-delete" @click="emptyCart">Svuota Carrello</button>
                 </div>
             </div>
         </div>
@@ -312,6 +312,49 @@ export default {
 <style lang="scss" scoped>
 @use '../assets/styles/partials/_variables' as *;
 
+#dropin-container {
+    background-image: url(../../public/images/sfondo-card.jpg);
+    border: 2px solid $background-fourth-color;
+    margin-bottom: 20px;
+}
+
+.f-d-payment {
+    width: 550px;
+}
+
+.f-d-border-bottom {
+    margin: 0 auto;
+    width: 50%;
+    height: 5px;
+    background-color: $background-fourth-color;
+    border: 1px solid $background-fourth-color;
+    border-radius: 5px;
+    margin: 5px 0 5px 0;
+}
+
+.f-d-button-delete {
+    color: white;
+    font-weight: bold;
+    background: linear-gradient(to right, $background-primary-color, red, $background-primary-color);
+    width: 150px;
+    height: 60px;
+    border-radius: 5px;
+
+}
+
+.f-d-button-confirm{
+    color: white;
+    font-weight: bold;
+    background: linear-gradient(to right, $background-primary-color, $background-tertiary-color, $background-primary-color);
+    width: 150px;
+    height: 60px;
+    border-radius: 5px;
+    a {
+        text-decoration: none;
+        color: white;
+    }
+}
+
 .gradientColor {
     background: linear-gradient(to right, $background-fourth-color, $background-fourth-color, $background-fourth-color, $background-fourth-color, $background-fourth-color);
     /* Gradient colors */
@@ -351,15 +394,21 @@ export default {
 
 .f-d-form-cart {
     width: 100%;
+    margin: 0 auto;
+    background-image: url(../../public/images/sfondo-card.jpg);
     //height: 100%;
-    background: linear-gradient(to right, $background-secondary-color, $background-primary-color, $background-secondary-color);
+    background: linear-gradient(to right,$background-primary-color);
     border-radius: 10px;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     padding: 10px;
-    color: black;
     font-weight: normal;
-    border: 2px solid $background-fourth-color;
+    border: 2px solid $background-fourth-color; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
 }
 
 .f-d-container {
@@ -393,16 +442,30 @@ export default {
     padding: 10px;
 }
 
-.f-d-border-bottom {
-    height: 5px;
-    background-color: $background-fourth-color;
-    border: 1px solid $background-fourth-color;
-    border-radius: 5px;
-    margin: 5px 0 5px 0;
-}
+
 
 .is-invalid {
     border-color: red !important;
+}
+
+@media screen and (max-width: 576px) {
+    .f-d-form-cart {
+    width: 100%;
+    margin: 0 auto;
+    //height: 100%;
+    background: linear-gradient(to right,$background-primary-color);
+    border-radius: 10px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    padding: 10px;
+    font-weight: normal;
+    border: 2px solid $background-fourth-color; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
 }
 
 @media screen and (max-width: 320px) {
