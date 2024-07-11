@@ -11,30 +11,23 @@
 
             <div class="f-d-cart">
                 <div class="cart d-flex flex-column align-items-center justify-content-center">
-                <h2 class="gradientColor">Carrello</h2>
-                <div class="f-d-border-bottom"></div>
-                <div>Stai ordinando da:</div>
-                <h4>' {{ store.restaurantname }} '</h4>
-                <div class="f-d-border-bottom"></div>
-                <div v-for="item in store.cart" :key="item.id">
-                    {{ item.name }} - {{ item.price }} x {{ item.quantity }}
+                    <h2 class="gradientColor">Carrello</h2>
+                    <div class="f-d-border-bottom"></div>
+                    <div>Stai ordinando da:</div>
+                    <h4>{{ cartName() }}</h4>
+                    <div class="f-d-border-bottom"></div>
+                    <div v-for="item in store.cart" :key="item.id">
+                        {{ item.name }} - {{ item.price }} x {{ item.quantity }}
+                    </div>
+                    <div class="my-2 f-d-border-bottom text-center"></div>
+                    <div>Totale ordine: <em class="gradientColor">{{ totalAmount }}</em> €</div>
                 </div>
-                <div class="my-2 f-d-border-bottom text-center"></div>
-                <div>Totale ordine: <em class="gradientColor">{{ totalAmount }}</em> €</div>
             </div>
-            </div>
-            <div class="f-d-cart container d-flex flex-column justify-content-center align-items-center">
-                <h2>Carrello</h2>
-                <div>Stai ordinando da:</div>
-                <h4>{{ cartName() }}</h4>
-                <div v-for="item in store.cart" :key="item.id">
-                    {{ item.name }} - {{ item.price }} x {{ item.quantity }}
-                </div>
-                <div class="my-2 f-d-border-bottom">Totale ordine: {{ totalAmount }} €</div>
-            </div>
+
+
             <!-- FORM PER DATI CLIENTE -->
             <div class="container">
-                <form class="f-d-form-cart"  @submit.prevent="pay">
+                <form class="f-d-form-cart" @submit.prevent="pay">
                     <h2 class="gradientColor">Procedi al pagamento</h2>
                     <!-- NOME -->
                     <div class="text-secondary mb-2 text-start">
@@ -411,45 +404,45 @@ export default {
 
 @media screen and (max-width: 320px) {
     .gradientColor {
-    background: linear-gradient(to right, $background-fourth-color, $background-fourth-color, $background-fourth-color, $background-fourth-color, $background-fourth-color);
-    /* Gradient colors */
-    -webkit-background-clip: text;
-    /* For Safari */
-    -webkit-text-fill-color: transparent;
-    /* For Safari */
-    background-clip: text;
-    color: transparent;
-    font-size: 25px;
-    /* Font size */
-    font-weight: bold;
-    /* Font weight */
-    text-align: center;
-    /* Center alignment */
-    padding: 10px 20px;
-    /* Padding */
-    border-radius: 10px;
-    /* Rounded corners */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    /* Box shadow */
-    text-transform: uppercase;
-    /* Uppercase text */
-    letter-spacing: 2px;
-    /* Spacing between letters */
-}
+        background: linear-gradient(to right, $background-fourth-color, $background-fourth-color, $background-fourth-color, $background-fourth-color, $background-fourth-color);
+        /* Gradient colors */
+        -webkit-background-clip: text;
+        /* For Safari */
+        -webkit-text-fill-color: transparent;
+        /* For Safari */
+        background-clip: text;
+        color: transparent;
+        font-size: 25px;
+        /* Font size */
+        font-weight: bold;
+        /* Font weight */
+        text-align: center;
+        /* Center alignment */
+        padding: 10px 20px;
+        /* Padding */
+        border-radius: 10px;
+        /* Rounded corners */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        /* Box shadow */
+        text-transform: uppercase;
+        /* Uppercase text */
+        letter-spacing: 2px;
+        /* Spacing between letters */
+    }
 
-.f-d-cart {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    width: 100%;
-    height: calc(100% - 20px);
-    border-radius: 10px;
-    border: 4px solid $background-fourth-color;
-    background-color: $background-primary-color;
-    color: white;
-    padding: 10px;
-}
+    .f-d-cart {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        width: 100%;
+        height: calc(100% - 20px);
+        border-radius: 10px;
+        border: 4px solid $background-fourth-color;
+        background-color: $background-primary-color;
+        color: white;
+        padding: 10px;
+    }
 }
 </style>
