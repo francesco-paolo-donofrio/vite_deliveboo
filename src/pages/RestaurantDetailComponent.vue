@@ -47,25 +47,18 @@
                     </div>
                     <div>
                         <h4 class="text-center text-uppercase">Tipologie di "{{ restaurant.name }}"</h4>
-                        <ul class="d-flex flex-wrap justify-content-center align-items-center p-0 list-unstyled">
+                        <ul class="d-flex flex-wrap flex-column justify-content-center align-items-center p-0 list-unstyled">
                             <li class="d-flex flex-column align-items-center justify-content-center" v-for="(item, index) in restaurant.types" :key="index">
                                 <div class="f-d-mini-container-type">
                                     <img class="img-fluid " :src="store.imgBasePath + item.image" :alt="item.name">
                                 </div>
                                 <div>
                                     <p>
-                                        {{ truncateName(item.name) }}
+                                        {{ item.name }}
                                     </p>
                                 </div>
                             </li>
                         </ul>
-                    </div>
-                    <div>
-
-                        <h3 class="text-uppercase">Segui "{{ restaurant.name }}" anche su</h3>
-                        <div class="text-center"><i class="fa-brands fa-facebook"></i> | <i class="fa-brands fa-tiktok"></i> | <i
-                                class="fa-brands fa-instagram"></i></div>
-
                     </div>
                 </div>
             </div>
@@ -399,6 +392,7 @@ export default {
 .f-d-card {
     border: 1px solid $background-fourth-color;
     border-radius: 10px;
+    margin: 10px;
 
 }
 #suggested {

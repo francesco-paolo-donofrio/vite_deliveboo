@@ -116,7 +116,6 @@ export default {
   border: none;
   color: white;
   padding: 12px;
-  font-size: 1rem;
   border-radius: 5px;
   text-transform: uppercase;
   transition: background-color 0.3s ease, transform 0.3s ease;
