@@ -13,209 +13,194 @@
                                     <img v-else src="../public/images/placeholder-restaurant.png"
                                         :alt="restaurant.name">
                                 </div>
-                                <div id="info-container">
-                                    <h3 class=""><em class="f-d-primary-color">Info utili</em></h3>
-                                    <p><em>{{ restaurant.description }}</em></p>
-                                    <p>Indirizzo: {{ restaurant.address }}</p>
-                                    <div id="types-container">
-                                        <h3 class=""><em class="f-d-primary-color">Tipologie</em></h3>
-                                        <div class="f-d-mq-320-576 ">
-                                            <ul
-                                                class="d-flex flex-wrap justify-content-center align-items-center p-0 list-unstyled">
-                                                <li class="f-d-flex" v-for="(item, index) in restaurant.types" :key="index">
-                                                    <div class="f-d-mini-container-type display-flex flex-column">
-                                                        <img class="img-fluid" :src="store.imgBasePath + item.image"
-                                                            :alt="item.name">
-                                                    </div>
-                                                    <div class="text-center">
-                                                        <p>
-                                                            {{ item.name }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="suggested" class="col-xl-3 col-sm-12 f-d-bg-gradient-secondary">
+                        <div>
+                            <h4 class="text-center text-uppercase">Info di "{{ restaurant.name }}"</h4>
+                            <p><em class="fw-bold ">{{ restaurant.description }}</em></p>
+                            <p>Indirizzo: {{ restaurant.address }}</p>
+                            <p>P.IVA {{ restaurant.vat }}</p>
+                        </div>
+                        <div>
+                            <h4 class="text-center text-uppercase">Tipologie di "{{ restaurant.name }}"</h4>
+                            <ul
+                                class="d-flex flex-wrap flex-column justify-content-center align-items-center p-0 list-unstyled">
+                                <li class="d-flex flex-column align-items-center justify-content-center"
+                                    v-for="(item, index) in restaurant.types" :key="index">
+                                    <div class="f-d-mini-container-type">
+                                        <img class="img-fluid " :src="store.imgBasePath + item.image" :alt="item.name">
+                                    </div>
+                                    <div>
+                                        <p>
+                                            {{ item.name }}
+                                        </p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+                <div class="f-d-bg-gradient">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xl-8 col-sm-12 ">
+                                <h3 class="text-center text-uppercase py-3"><em class="text-white">Menù</em></h3>
+                                <div class="d-flex align-items-center justify-content-center flex-wrap">
+                                    <div class="f-d-card col-sm-12 col-xl-2"
+                                        v-for="(item, index) in restaurant.products" :key="index">
+
+
+                                        <div>
+                                        </div>
+
+                                        <div class="f-d-mini-container">
+                                            <img @click="openModal(item)" class="img-fluid"
+                                                :src="store.imgBasePath + item.image" :alt="item.name">
+                                        </div>
+                                        <div class="d-flex flex-column align-items-center justify-content-center gap-0">
+                                            <p class="text-center text-uppercase fw-bold single-line pointer">{{
+                                                item.name
+                                                }}
+                                            </p>
+                                            <p class="text-center text-uppercase fw-bold">{{ item.price }}€</p>
+                                            <div class="d-flex justify-content-center align-items-center gap-2 my-2">
+                                                <button class="btn btn-sm btn-danger"
+                                                    @click="decreaseQuantity(item)">-</button>
+                                                <span>{{ getQuantityInCart(item.id) }}</span>
+                                                <button class="btn btn-sm btn-success"
+                                                    @click="increaseQuantity(item)">+</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-sm-12">
+                                <div id="cart-container">
+                                    <div>
+                                        <div
+                                            class="f-d-cart container d-flex flex-column justify-content-center align-items-center">
+                                            <div v-if="store.cart.length > 0">
+                                                <div
+                                                    class="cart d-flex flex-column align-items-center justify-content-center">
+                                                    <h2 class="text-center">Stai ordinando da:</h2>
+                                                    <h4>{{ cartName() }}</h4>
+                                                    <div class="f-d-border-bottom"></div>
+                                                    <div v-for="item in store.cart" :key="item.id">
+                                                        <p>x{{ item.quantity }}-{{ item.name }} - Totale: {{ item.price
+                                                            *
+                                                            item.quantity
+                                                            }}€
                                                         </p>
                                                     </div>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                   
-                </div>
-                <div id="suggested" class="col-xl-3 col-sm-12 f-d-bg-gradient-secondary">
-                    <div>
-                        <h4 class="text-center text-uppercase">Info di "{{ restaurant.name }}"</h4>
-                        <p><em class="fw-bold ">{{ restaurant.description }}</em></p>
-                        <p>Indirizzo: {{ restaurant.address }}</p>
-                        <p>P.IVA {{ restaurant.vat }}</p>
-                    </div>
-                    <div>
-                        <h4 class="text-center text-uppercase">Tipologie di "{{ restaurant.name }}"</h4>
-                        <ul
-                            class="d-flex flex-wrap flex-column justify-content-center align-items-center p-0 list-unstyled">
-                            <li class="d-flex flex-column align-items-center justify-content-center"
-                                v-for="(item, index) in restaurant.types" :key="index">
-                                <div class="f-d-mini-container-type">
-                                    <img class="img-fluid " :src="store.imgBasePath + item.image" :alt="item.name">
-                                </div>
-                                <div>
-                                    <p>
-                                        {{ item.name }}
-                                    </p>
-                                </div>
-                            </li>
-                        </ul>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="f-d-bg-gradient">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xl-8 col-sm-12 ">
-                        <h3 class="text-center text-uppercase py-3"><em class="text-white">Menù</em></h3>
-                        <div class="d-flex align-items-center justify-content-center flex-wrap">
-                            <div class="f-d-card col-sm-12 col-xl-2" v-for="(item, index) in restaurant.products"
-                                :key="index">
-
-
-                                <div>                                    
-                                </div>
-
-                                <div class="f-d-mini-container">
-                                    <img @click="openModal(item)" class="img-fluid"
-                                        :src="store.imgBasePath + item.image" :alt="item.name">
-                                </div>
-                                <div class="d-flex flex-column align-items-center justify-content-center gap-0">
-                                    <p class="text-center text-uppercase fw-bold single-line pointer">{{ item.name }}
-                                    </p>
-                                    <p class="text-center text-uppercase fw-bold">{{ item.price }}€</p>
-                                    <div class="d-flex justify-content-center align-items-center gap-2 my-2">
-                                        <button class="btn btn-sm btn-danger" @click="decreaseQuantity(item)">-</button>
-                                        <span>{{ getQuantityInCart(item.id) }}</span>
-                                        <button class="btn btn-sm btn-success"
-                                            @click="increaseQuantity(item)">+</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-sm-12">
-                        <div id="cart-container">
-                            <div>
-                                <div
-                                    class="f-d-cart container d-flex flex-column justify-content-center align-items-center">
-                                    <div v-if="store.cart.length > 0">
-                                        <div class="cart d-flex flex-column align-items-center justify-content-center">
-                                            <h2 class="text-center">Stai ordinando da:</h2>
-                                            <h4>{{ cartName() }}</h4>
-                                            <div class="f-d-border-bottom"></div>
-                                            <div v-for="item in store.cart" :key="item.id">
-                                                <p>x{{ item.quantity }}-{{ item.name }} - Totale: {{ item.price *
-                                                    item.quantity
-                                                    }}€
-                                                </p>
+                                                    <div class="f-d-border-bottom"></div>
+                                                    <div>
+                                                        <h2>Totale carrello: {{ cartTotal() }}€</h2>
+                                                    </div>
+                                                    <div
+                                                        class="buttons d-flex align-items-center justify-content-center gap-3">
+                                                        <button class="btn btn-danger"
+                                                            @click="emptyCart">Svuota</button>
+                                                        <button class="btn btn-success">
+                                                            <router-link
+                                                                :to="{ name: 'shopping-cart' }">Procedi</router-link>
+                                                        </button>
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div class="f-d-border-bottom"></div>
-                                            <div>
-                                                <h2>Totale carrello: {{ cartTotal() }}€</h2>
-                                            </div>
-                                            <div class="buttons d-flex align-items-center justify-content-center gap-3">
-                                                <button class="btn btn-danger" @click="emptyCart">Svuota</button>
-                                                <button class="btn btn-success">
-                                                    <router-link :to="{ name: 'shopping-cart' }">Procedi</router-link>
-                                                </button>
+                                            <div v-else>
+                                                <div>Carrello vuoto!</div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div v-else>
-                                        <div>Carrello vuoto!</div>
-                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+            
+            </div>
+        </div>
+
+
+
+
+
+
+            <!-- Modal -->
+            <div v-if="showModal" class="modal fade show d-block" tabindex="-1" role="dialog"
+                aria-labelledby="exampleModalLabel" aria-hidden="true" style="background-color: rgba(0, 0, 0, 0.5);">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header d-flex justify-content-between">
+                            <h5 class="modal-title" id="exampleModalLabel">{{ selectedDish.name }} di {{ restaurant.name
+                                }}
+                            </h5>
+                            <button type="button" class="f-d-close" @click="closeModal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="d-flex flex-column align-items-center justify-content-center">
+                                <img v-if="selectedDish.image" :src="store.imgBasePath + selectedDish.image"
+                                    :alt="selectedDish.name" class="f-d-modal-img-fluid">
+                            </div>
+                        </div>
+                        <div v-if="selectedDish.id" class="quantity-control">
+                            <div class="product-card d-flex flex-column align-items-center justify-content-center">
+                                <h3>{{ selectedDish.name }}</h3>
+                                <p v-if="selectedDish.description"><em>{{
+                                    selectedDish.description
+                                        }}</em></p>
+                                <p>Prezzo: {{ selectedDish.price }}€</p>
+                                <div class="d-flex justify-content-center align-items-center gap-2">
+                                    <button class="btn btn-danger" @click="decreaseQuantity(selectedDish)">-</button>
+                                    <span>{{ getQuantityInCart(selectedDish.id) }}</span>
+                                    <button class="btn btn-success" @click="increaseQuantity(selectedDish)">+</button>
                                 </div>
                             </div>
                         </div>
-                    </div>
-
-                </div>
-            </div>
-
-
-        </div>
-
-
-
-
-
-
-        <!-- Modal -->
-        <div v-if="showModal" class="modal fade show d-block" tabindex="-1" role="dialog"
-            aria-labelledby="exampleModalLabel" aria-hidden="true" style="background-color: rgba(0, 0, 0, 0.5);">
-            <div class="modal-dialog modal-lg" role="document">
-                <div class="modal-content">
-                    <div class="modal-header d-flex justify-content-between">
-                        <h5 class="modal-title" id="exampleModalLabel">{{ selectedDish.name }} di {{ restaurant.name }}
-                        </h5>
-                        <button type="button" class="f-d-close" @click="closeModal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="d-flex flex-column align-items-center justify-content-center">
-                            <img v-if="selectedDish.image" :src="store.imgBasePath + selectedDish.image"
-                                :alt="selectedDish.name" class="f-d-modal-img-fluid">
+                        <div class="modal-footer d-flex flex-column justify-content-center align-items-center">
+                            <p>{{ getOrderSummary() }}</p>
                         </div>
                     </div>
-                    <div v-if="selectedDish.id" class="quantity-control">
-                        <div class="product-card d-flex flex-column align-items-center justify-content-center">
-                            <h3>{{ selectedDish.name }}</h3>
-                            <p v-if="selectedDish.description"><em>{{
-                                selectedDish.description
-                                    }}</em></p>
-                            <p>Prezzo: {{ selectedDish.price }}€</p>
-                            <div class="d-flex justify-content-center align-items-center gap-2">
-                                <button class="btn btn-danger" @click="decreaseQuantity(selectedDish)">-</button>
-                                <span>{{ getQuantityInCart(selectedDish.id) }}</span>
-                                <button class="btn btn-success" @click="increaseQuantity(selectedDish)">+</button>
-                            </div>
+                </div>
+            </div>
+            <!--Alert Modal-->
+            <div v-if="alertModal" class="modal fade show d-block" tabindex="-1" role="dialog"
+                aria-labelledby="exampleModalLabel" aria-hidden="true" style="background-color: rgba(0, 0, 0, 0.5);">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header d-flex justify-content-between">
+                            <h5 class="modal-title" id="exampleModalLabel">
+                                Attenzione!
+                            </h5>
+                            <button type="button" class="f-d-close" @click="closeAlertModal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <h5>Nel carrello sono presenti piatti di un altro ristorante, puoi svuotare il carrello
+                                oppure
+                                effettuare il
+                                checkout!</h5>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-danger" @click="emptyCart(); closeAlertModal()">Svuota</button>
+                            <button class="btn btn-success">Checkout</button>
                         </div>
                     </div>
-                    <div class="modal-footer d-flex flex-column justify-content-center align-items-center">
-                        <p>{{ getOrderSummary() }}</p>
-                    </div>
                 </div>
             </div>
-        </div>
-        <!--Alert Modal-->
-        <div v-if="alertModal" class="modal fade show d-block" tabindex="-1" role="dialog"
-            aria-labelledby="exampleModalLabel" aria-hidden="true" style="background-color: rgba(0, 0, 0, 0.5);">
-            <div class="modal-dialog modal-lg" role="document">
-                <div class="modal-content">
-                    <div class="modal-header d-flex justify-content-between">
-                        <h5 class="modal-title" id="exampleModalLabel">
-                            Attenzione!
-                        </h5>
-                        <button type="button" class="f-d-close" @click="closeAlertModal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <h5>Nel carrello sono presenti piatti di un altro ristorante, puoi svuotare il carrello oppure
-                            effettuare il
-                            checkout!</h5>
-                    </div>
-                    <div class="modal-footer">
-                        <button class="btn btn-danger" @click="emptyCart(); closeAlertModal()">Svuota</button>
-                        <button class="btn btn-success">Checkout</button>
-                    </div>
-                </div>
-            </div>
-        </div>
 
-    </div>
-    <FooterComponent></FooterComponent>
+        </div>
+        <FooterComponent></FooterComponent>
 
 
 
@@ -284,7 +269,7 @@ export default {
                 cartItem.quantity--;
             } else if (cartItem && cartItem.quantity === 1) {
                 this.store.cart.splice(this.store.cart.indexOf(cartItem), 1);
-               alert(`Hai rimosso ${product.name} dal carrello`);
+                alert(`Hai rimosso ${product.name} dal carrello`);
             } else if (cartItem === undefined) {
                 alert(`${product.name} di ${this.restaurant.name} non è presente nel carrello`);
             }
@@ -597,7 +582,17 @@ export default {
 }
 
 @media screen and (max-width: 576px) {
-
+    .f-d-container-img {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border-radius: 20px;
+        gap: 20px;
+        width: 80%;
+        height: 100%;
+    }
+    
     h1 {
         padding-top: 10px;
     }
@@ -774,6 +769,17 @@ export default {
         overflow: hidden;
         background-color: lightgray;
         gap: 10px;
+    }
+
+    .f-d-container-img {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border-radius: 20px;
+        gap: 20px;
+        width: 100%;
+        height: 90%;
     }
 }
 </style>
