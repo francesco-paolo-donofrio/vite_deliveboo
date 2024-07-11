@@ -7,7 +7,7 @@
         <button type="button" class="btn btn-primary mx-2 p-2" @click="sendTypes">Filtra</button>
         <button type="button" class="btn btn-secondary mx-2 p-2" @click="resetTypes">Reset</button>
     </div> -->
-    <div id="types-title">
+    <div id="restaurants-title">
         <h1 class="gradientColor text-center">Ristoranti</h1>
     </div>
     <div class="f-d-gradient-not-found-message">
@@ -40,6 +40,7 @@
             </div>
         </div>
     </div>
+    <FooterComponent />
 </template>
 
 <script>
@@ -49,6 +50,7 @@ import HeroComponent from '../components/HeroComponent.vue';
 import AboutUsComponent from '../components/AboutUsComponent.vue';
 import CardComponent from '../components/CardComponent.vue';
 import CarouselComponent from '../components/CarouselComponent.vue';
+import FooterComponent from '../components/FooterComponent.vue';
 
 
 
@@ -58,7 +60,8 @@ export default {
         CardComponent,
         HeroComponent,
         CarouselComponent,
-        AboutUsComponent
+        AboutUsComponent,
+        FooterComponent
     },
     data() {
         return {

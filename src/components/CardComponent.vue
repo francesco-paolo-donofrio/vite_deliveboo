@@ -59,8 +59,8 @@ export default {
 }
 
 .card {
-  width: 320px; /* Fissa la larghezza delle card */
-  height: 400px; /* Fissa l'altezza delle card */
+  width: 250px; /* Fissa la larghezza delle card */
+  height: 300px; /* Fissa l'altezza delle card */
   border: none;
   border-radius: 15px;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
@@ -124,6 +124,10 @@ export default {
 
 .btn:hover {
   transform: scale(1.05);
+}
+
+@media screen and (min-width: 1200px) {
+  
 }
 
 @media screen and (max-width: 576px) {
