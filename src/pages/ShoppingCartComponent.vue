@@ -6,13 +6,17 @@
             <a href="/">Clicca qui e scegli il ristorante</a>
         </div>
         <div v-else>
-            <h2>Carrello</h2>
-            <div>Stai ordinando da:</div>
-            <h4>{{cartName()}}</h4>
-            <div v-for="item in store.cart" :key="item.id">
-                {{ item.name }} - {{ item.price }} x {{ item.quantity }}
+            <div class="f-d-cart container d-flex flex-column justify-content-center align-items-center">
+                <h2>Carrello</h2>
+                <div>Stai ordinando da:</div>
+                <h4>{{ cartName() }}</h4>
+                <div v-for="item in store.cart" :key="item.id">
+                    {{ item.name }} - {{ item.price }} x {{ item.quantity }}
+                </div>
+                <div class="my-2 f-d-border-bottom">Totale ordine: {{ totalAmount }} €</div>
             </div>
-            <div class="my-2 f-d-border-bottom text-center">Totale ordine: {{ totalAmount }} €</div>
+
+
 
             <!-- FORM PER DATI CLIENTE -->
             <div class="container">
@@ -66,7 +70,7 @@
                 </form>
             </div>
 
-            <div id="dropin-container" class="container"></div>
+            <div id="dropin-container" class="container d-flex flex-column"></div>
             <div class="d-flex justify-content-center gap-2">
                 <button @click="pay">Completa l'acquisto</button>
                 <button @click="emptyCart">Svuota Carrello</button>
@@ -209,28 +213,28 @@ export default {
         },
         //Gestione di messaggi di errore per validazione BE (applica solo classe is-invalid al campo input)
         handleValidationErrors(errors) {
-        // Resetta i messaggi di errore
-        this.errorMessages = {};
+            // Resetta i messaggi di errore
+            this.errorMessages = {};
 
-        // Assegna i nuovi messaggi di errore
-        for (const key in errors) {
-            if (errors.hasOwnProperty(key)) {
-                this.errorMessages[key] = errors[key];
+            // Assegna i nuovi messaggi di errore
+            for (const key in errors) {
+                if (errors.hasOwnProperty(key)) {
+                    this.errorMessages[key] = errors[key];
+                }
             }
-        }
 
-        // Scorri sui campi e applica la classe di errore se necessario
-        for (const key in this.customer) {
-            if (this.customer.hasOwnProperty(key)) {
-                const input = document.getElementById(key);
-                if (errors[`customer.${key}`]) {
-                    input.classList.add('is-invalid');
-                } else {
-                    input.classList.remove('is-invalid');
+            // Scorri sui campi e applica la classe di errore se necessario
+            for (const key in this.customer) {
+                if (this.customer.hasOwnProperty(key)) {
+                    const input = document.getElementById(key);
+                    if (errors[`customer.${key}`]) {
+                        input.classList.add('is-invalid');
+                    } else {
+                        input.classList.remove('is-invalid');
+                    }
                 }
             }
         }
-    }
         ,
         pay() {
             if (!this.instance) {
@@ -259,12 +263,12 @@ export default {
                             this.store.prevOrder = this.store.cart;
                             this.store.cart = [];
                             this.$router.push({ path: '/thank-you' });
-                            
+
                         } else {
                             if (response.data.errors) {
                                 this.handleValidationErrors(response.data.errors);
                             } else {
-                                this.$router.push({ path: '/oh-no'});
+                                this.$router.push({ path: '/oh-no' });
                             }
                         }
                     })
@@ -329,7 +333,7 @@ export default {
     justify-content: center;
     align-items: center;
     gap: 10px;
-    width: 100%;
+    width: 60%;
     height: calc(100% - 20px);
     border-radius: 10px;
     border: 4px solid $background-fourth-color;
@@ -339,8 +343,6 @@ export default {
 }
 
 .f-d-border-bottom {
-    margin: 0 auto;
-    width: 50%;
     height: 5px;
     background-color: $background-fourth-color;
     border: 1px solid $background-fourth-color;
