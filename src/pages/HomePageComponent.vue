@@ -1,5 +1,6 @@
 <template>
     <HeroComponent />
+    <AboutUsComponent />
     <CarouselComponent :types="types" :selectedTypes="selectedtypes" @typeSelected="toggleType" />
 
     <!-- <div class="d-flex justify-content-center">
@@ -45,6 +46,7 @@
 import { store } from '../store';
 import axios from 'axios';
 import HeroComponent from '../components/HeroComponent.vue';
+import AboutUsComponent from '../components/AboutUsComponent.vue';
 import CardComponent from '../components/CardComponent.vue';
 import CarouselComponent from '../components/CarouselComponent.vue';
 
@@ -55,7 +57,8 @@ export default {
     components: {
         CardComponent,
         HeroComponent,
-        CarouselComponent
+        CarouselComponent,
+        AboutUsComponent
     },
     data() {
         return {

@@ -97,6 +97,7 @@
     }
   }
   
+  
   .carousel-slide {
     flex: 0 0 auto;
     margin: 0 10px;
@@ -134,7 +135,7 @@
   }
 
   #types-title {
-    margin: 10px 0; /* Margin around the title */
+    scroll-margin-bottom: 150px;
 }
 
 .gradientColor {

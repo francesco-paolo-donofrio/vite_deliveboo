@@ -3,9 +3,9 @@
       <div class="card">
         <img class="card-img-top" :src="getImage" :alt="item.name">
         <div class="card-body">
-          <h5 class="card-title">{{ item.name }}</h5>
+          <h5 class="card-title single-line">{{ item.name }}</h5>
           <div class="d-flex align-items-center justify-content-center">
-              <small class="card-text single-line" v-for="(type, index) in item.types" :key="index"> {{ type.name }}<span v-if="index < item.types.length - 1">, </span></small>
+              <small class="card-text " v-for="(type, index) in item.types" :key="index"> {{ type.name }}<span v-if="index < item.types.length - 1">, </span></small>
           </div>
           <RouterLink :to="{ name: 'restaurant-detail', params: { id: item.id } }" class="btn btn-success">Visualizza Ristorante</RouterLink>
         </div>
@@ -126,6 +126,26 @@ export default {
   transform: scale(1.05);
 }
 
+@media screen and (max-width: 576px) {
+    .card {
+  width: 250px; /* Fissa la larghezza delle card */
+  height: 300px; /* Fissa l'altezza delle card */
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+  background-color: #fff;
+}
+}
+
+.card-img-top {
+  width: 100%;
+  height: 80px; /* Fissa l'altezza dell'immagine */
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
 @media screen and (max-width: 320px) {
     .card {
   width: 250px; /* Fissa la larghezza delle card */
@@ -137,9 +157,16 @@ export default {
   overflow: hidden;
   background-color: #fff;
 }
+
+.single-line {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+}
 .card-img-top {
   width: 100%;
-  height: 220px; /* Fissa l'altezza dell'immagine */
+  height: 100px; /* Fissa l'altezza dell'immagine */
   object-fit: cover;
   transition: transform 0.3s ease;
 }
