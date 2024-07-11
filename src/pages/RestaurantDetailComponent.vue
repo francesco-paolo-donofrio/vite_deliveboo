@@ -47,8 +47,10 @@
                     </div>
                     <div>
                         <h4 class="text-center text-uppercase">Tipologie di "{{ restaurant.name }}"</h4>
-                        <ul class="d-flex flex-wrap flex-column justify-content-center align-items-center p-0 list-unstyled">
-                            <li class="d-flex flex-column align-items-center justify-content-center" v-for="(item, index) in restaurant.types" :key="index">
+                        <ul
+                            class="d-flex flex-wrap flex-column justify-content-center align-items-center p-0 list-unstyled">
+                            <li class="d-flex flex-column align-items-center justify-content-center"
+                                v-for="(item, index) in restaurant.types" :key="index">
                                 <div class="f-d-mini-container-type">
                                     <img class="img-fluid " :src="store.imgBasePath + item.image" :alt="item.name">
                                 </div>
@@ -70,7 +72,10 @@
                     <div class="col-xl-8 col-sm-12 ">
                         <h3 class="text-center text-uppercase py-3"><em class="text-white">Menù</em></h3>
                         <div class="d-flex align-items-center justify-content-center flex-wrap">
-                            <div class="f-d-card col-sm-12 col-xl-2" v-for="(item, index) in restaurant.products" :key="index">
+                            <div class="f-d-card col-sm-12 col-xl-2" v-for="(item, index) in restaurant.products"
+                                :key="index">
+                                <div>                                    
+                                </div>
                                 <div class="f-d-mini-container">
                                     <img @click="openModal(item)" class="img-fluid"
                                         :src="store.imgBasePath + item.image" :alt="item.name">
@@ -88,28 +93,37 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
                     <div class="col-xl-4 col-sm-12">
                         <div id="cart-container">
                             <div>
                                 <div
                                     class="f-d-cart container d-flex flex-column justify-content-center align-items-center">
-                                    <div class="cart d-flex flex-column align-items-center justify-content-center">
-                                        <h2 class="text-center">Carrello di "{{ restaurant.name }}"</h2>
-                                        <div class="f-d-border-bottom"></div>
-                                        <div v-for="item in store.cart" :key="item.id">
-                                            <p>x{{ item.quantity }}-{{ item.name }} - Totale: {{ item.price *
-                                                item.quantity
-                                                }}€
-                                            </p>
+                                    <div v-if="store.cart.length > 0">
+                                        <div class="cart d-flex flex-column align-items-center justify-content-center">
+                                            <h2 class="text-center">Stai ordinando da:</h2>
+                                            <h4>{{ cartName() }}</h4>
+                                            <div class="f-d-border-bottom"></div>
+                                            <div v-for="item in store.cart" :key="item.id">
+                                                <p>x{{ item.quantity }}-{{ item.name }} - Totale: {{ item.price *
+                                                    item.quantity
+                                                    }}€
+                                                </p>
+                                            </div>
+                                            <div class="f-d-border-bottom"></div>
+                                            <div>
+                                                <h2>Totale carrello: {{ cartTotal() }}€</h2>
+                                            </div>
+                                            <div class="buttons d-flex align-items-center justify-content-center gap-3">
+                                                <button class="btn btn-danger" @click="emptyCart">Svuota</button>
+                                                <button class="btn btn-success">
+                                                    <router-link :to="{ name: 'shopping-cart' }">Procedi</router-link>
+                                                </button>
+                                            </div>
                                         </div>
-                                        <div class="f-d-border-bottom"></div>
-                                        <p>Totale carrello: {{ cartTotal() }}€</p>
                                     </div>
-                                    <div class="buttons d-flex align-items-center justify-content-center gap-3">
-                                        <button class="btn btn-danger" @click="emptyCart">Svuota</button>
-                                        <button class="btn btn-success">Procedi</button>
+                                    <div v-else>
+                                        <div>Carrello vuoto!</div>
                                     </div>
                                 </div>
                             </div>
@@ -143,10 +157,7 @@
                         <div class="d-flex flex-column align-items-center justify-content-center">
                             <img v-if="selectedDish.image" :src="store.imgBasePath + selectedDish.image"
                                 :alt="selectedDish.name" class="f-d-modal-img-fluid">
-
-
                         </div>
-
                     </div>
                     <div v-if="selectedDish.id" class="quantity-control">
                         <div class="product-card d-flex flex-column align-items-center justify-content-center">
@@ -164,6 +175,31 @@
                     </div>
                     <div class="modal-footer d-flex flex-column justify-content-center align-items-center">
                         <p>{{ getOrderSummary() }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Alert Modal-->
+        <div v-if="alertModal" class="modal fade show d-block" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalLabel" aria-hidden="true" style="background-color: rgba(0, 0, 0, 0.5);">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header d-flex justify-content-between">
+                        <h5 class="modal-title" id="exampleModalLabel">
+                            Attenzione!
+                        </h5>
+                        <button type="button" class="f-d-close" @click="closeAlertModal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <h5>Nel carrello sono presenti piatti di un altro ristorante, puoi svuotare il carrello oppure
+                            effettuare il
+                            checkout!</h5>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-danger" @click="emptyCart(); closeAlertModal()">Svuota</button>
+                        <button class="btn btn-success">Checkout</button>
                     </div>
                 </div>
             </div>
@@ -191,9 +227,10 @@ export default {
         return {
             store,
             restaurant: {},
-            restaurantname:"",
+            restaurantname: "",
             selectedDish: {},
             showModal: false,
+            alertModal: false,
             checkCart: false,
             cart: [],
         };
@@ -226,13 +263,19 @@ export default {
             this.showModal = false;
             this.selectedDish = {};
         },
+        openAlertModal() {
+            this.alertModal = true
+        },
+        closeAlertModal() {
+            this.alertModal = false
+        },
         decreaseQuantity(product) {
             let cartItem = this.store.cart.find(item => item.id === product.id);
             if (cartItem && cartItem.quantity > 1) {
                 cartItem.quantity--;
             } else if (cartItem && cartItem.quantity === 1) {
                 this.store.cart.splice(this.store.cart.indexOf(cartItem), 1);
-                alert(`Hai rimosso ${product.name} di ${this.restaurant.name} dal carrello`);
+               alert(`Hai rimosso ${product.name} dal carrello`);
             } else if (cartItem === undefined) {
                 alert(`${product.name} di ${this.restaurant.name} non è presente nel carrello`);
             }
@@ -251,11 +294,11 @@ export default {
             if (product.restaurant_id != this.store.cart[0].restaurant_id) {
                 this.store.cart.splice(this.store.cart.indexOf(cartItem), 1)
                 this.saveCart()
-                alert('Hai gia altri articoli di altri ristoranti nel carrello, svuota il carrello o procedi con il tuo ordine!')
+                // alert('Hai gia altri articoli di altri ristoranti nel carrello, svuota il carrello o procedi con il tuo ordine!')
+                this.openAlertModal()
             }
             console.log(product);
             console.log(this.store.cart[0].restaurant_id);
-            this.store.restaurantname = this.restaurantname
             // console.log(this.store.cart)
             // console.log(localStorage, 'localstorage');
         },
@@ -269,9 +312,8 @@ export default {
                 cartItem.quantity++;
             } else {
                 this.store.cart.push({ ...product, quantity: 1 });
-                
+                this.cartName()
             }
-
         },
         loadCart() {
             const savedCart = localStorage.getItem('cart');
@@ -289,7 +331,6 @@ export default {
         emptyCart() {
             this.store.cart = [];
             localStorage.clear();
-            
         },
         // metodo per aggiornare i piatti ordinati nella modale
         getOrderSummary() {
@@ -304,19 +345,29 @@ export default {
         },
         // metodo per troncare il nome a 4 lettere
         truncateName(name) {
-      if (name.length > 4) {
-        return name.slice(0, 4) + '..';
-      }
-      return name;
-    }
+            if (name.length > 4) {
+                return name.slice(0, 4) + '..';
+            }
+            return name;
+        },
+        cartName() {
+            let name = localStorage.getItem('cartname')
+            if (!name) {
+                localStorage.setItem('cartname', this.restaurantname)
+                return localStorage.cartname;
+            } else {
+                return localStorage.cartname;
+            }
+        }
     },
     mounted() {
         this.getRestaurants();
         this.getSingleRestaurant();
         this.loadCart();
-        
+
     },
     created() {
+
     },
 
 }
@@ -401,6 +452,7 @@ export default {
     margin: 10px;
 
 }
+
 #suggested {
     display: flex;
     flex-direction: column;
@@ -600,12 +652,12 @@ export default {
     }
 
     .f-d-card {
-    border: 1px solid $background-fourth-color;
-    border-left: none;
-    border-right: none;
-    border-radius: 10px;
+        border: 1px solid $background-fourth-color;
+        border-left: none;
+        border-right: none;
+        border-radius: 10px;
 
-}
+    }
 
     .f-d-mini-container-type {
         width: 50px;
@@ -648,12 +700,12 @@ export default {
     }
 
     .f-d-card {
-    border: 1px solid $background-fourth-color;
-    border-left: none;
-    border-right: none;
-    border-radius: 10px;
+        border: 1px solid $background-fourth-color;
+        border-left: none;
+        border-right: none;
+        border-radius: 10px;
 
-}
+    }
 
     #info-container {
         display: flex;
@@ -695,6 +747,5 @@ export default {
         background-color: lightgray;
         gap: 10px;
     }
-
 }
 </style>
