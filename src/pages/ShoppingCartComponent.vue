@@ -120,7 +120,6 @@ export default {
         emptyCart() {
             this.store.cart = [];
             localStorage.clear();
-            location.reload();
         },
         getClientToken() {
             axios.get('http://127.0.0.1:8000/api/braintree/token')

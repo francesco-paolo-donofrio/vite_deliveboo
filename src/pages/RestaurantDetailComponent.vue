@@ -289,7 +289,7 @@ export default {
         emptyCart() {
             this.store.cart = [];
             localStorage.clear();
-            location.reload();
+            
         },
         // metodo per aggiornare i piatti ordinati nella modale
         getOrderSummary() {

@@ -369,7 +369,7 @@ header {
 
 .badge{
     font-size: 12px;
-
+}
 
 @media screen and (min-width: 1200px) {
     #f-d-nav-menu {
@@ -400,8 +400,6 @@ header {
         width: 100% !important;
     }
     
-
-
-
 }
+
 </style>
