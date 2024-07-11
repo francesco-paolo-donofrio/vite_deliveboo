@@ -5,10 +5,10 @@
       :modules="modules"
       class="mySwiper"
     >
-      <swiper-slide><img src="../../public/images/placeholder-restaurant.png" alt=""></swiper-slide>
-      <swiper-slide>Slide 2</swiper-slide>
-      <swiper-slide>Slide 3</swiper-slide>
-      <swiper-slide>Slide 4</swiper-slide>
+      <swiper-slide><img class="w-100" src="../../public/images/foto-curriculum-min.png" alt=""></swiper-slide>
+      <swiper-slide><img class="w-100" src="../../public/images/foto-curriculum-min.png" alt=""></swiper-slide>
+      <swiper-slide><img class="w-100" src="../../public/images/foto-curriculum-min.png" alt=""></swiper-slide>
+      <swiper-slide><img class="w-100" src="../../public/images/foto-curriculum-min.png" alt=""></swiper-slide>
     </swiper>
   </template>
   

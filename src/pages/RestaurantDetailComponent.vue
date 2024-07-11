@@ -1,64 +1,69 @@
 <template>
     <div v-if="restaurant">
-        <div class="container">
-            <div class="row">
-                <div class="col-xl-9 col-sm-12">
-                    <h1 class="text-center py-3"><strong class="gradientColor">{{ restaurant.name }}</strong></h1>
-                    <div>
-                        <div class="d-flex justify-content-center align-items-center gap-3 f-d-mq-sm">
-                            <div class="f-d-container-img">
-                                <img v-if="restaurant.image" class="f-d-img-fluid"
-                                    :src="store.imgBasePath + restaurant.image" :alt="restaurant.name">
-                                <img v-else src="../public/images/placeholder-restaurant.png" :alt="restaurant.name">
-                            </div>
-                            <div id="info-container">
-                                <h3 class=""><em class="f-d-primary-color">Info utili</em></h3>
-                                <p><em>{{ restaurant.description }}</em></p>
-                                <p>Indirizzo: {{ restaurant.address }}</p>
-                                <div id="types-container">
-                                    <h3 class=""><em class="f-d-primary-color">Tipologie</em></h3>
-                                    <div class="f-d-mq-320-576 ">
-                                        <ul
-                                            class="d-flex flex-wrap justify-content-center align-items-center p-0 list-unstyled">
-                                            <li v-for="(item, index) in restaurant.types" :key="index">
-                                                <div class="f-d-mini-container-type display-flex flex-column">
-                                                    <img class="img-fluid" :src="store.imgBasePath + item.image"
-                                                        :alt="item.name">
-                                                </div>
-                                                <div class="text-center">
-                                                    <p>
-                                                        {{ item.name }}
-                                                    </p>
-                                                </div>
-                                            </li>
-                                        </ul>
+        <div class="f-d-bg-image">
+            <div class="container ">
+                <div class="row">
+                    <div class="col-xl-9 col-sm-12">
+                        <h1 class="text-center py-3"><strong class="gradientColor">{{ restaurant.name }}</strong></h1>
+                        <div>
+                            <div class="d-flex justify-content-center align-items-center gap-3 f-d-mq-sm">
+                                <div class="f-d-container-img">
+                                    <img v-if="restaurant.image" class="f-d-img-fluid"
+                                        :src="store.imgBasePath + restaurant.image" :alt="restaurant.name">
+                                    <img v-else src="../public/images/placeholder-restaurant.png"
+                                        :alt="restaurant.name">
+                                </div>
+                                <div id="info-container">
+                                    <h3 class=""><em class="f-d-primary-color">Info utili</em></h3>
+                                    <p><em>{{ restaurant.description }}</em></p>
+                                    <p>Indirizzo: {{ restaurant.address }}</p>
+                                    <div id="types-container">
+                                        <h3 class=""><em class="f-d-primary-color">Tipologie</em></h3>
+                                        <div class="f-d-mq-320-576 ">
+                                            <ul
+                                                class="d-flex flex-wrap justify-content-center align-items-center p-0 list-unstyled">
+                                                <li class="f-d-flex" v-for="(item, index) in restaurant.types" :key="index">
+                                                    <div class="f-d-mini-container-type display-flex flex-column">
+                                                        <img class="img-fluid" :src="store.imgBasePath + item.image"
+                                                            :alt="item.name">
+                                                    </div>
+                                                    <div class="text-center">
+                                                        <p>
+                                                            {{ item.name }}
+                                                        </p>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div id="suggested" class="col-xl-3 col-sm-12 f-d-bg-gradient-secondary">
-                    <div>
-                        <h4 class="text-center text-uppercase">Info di "{{ restaurant.name }}"</h4>
-                        <p><em class="fw-bold ">{{ restaurant.description }}</em></p>
-                        <p>Indirizzo: {{ restaurant.address }}</p>
-                        <p>P.IVA {{ restaurant.vat }}</p>
-                    </div>
-                    <div>
-                        <h4 class="text-center text-uppercase">Tipologie di "{{ restaurant.name }}"</h4>
-                        <ul class="d-flex flex-wrap flex-column justify-content-center align-items-center p-0 list-unstyled">
-                            <li class="d-flex flex-column align-items-center justify-content-center" v-for="(item, index) in restaurant.types" :key="index">
-                                <div class="f-d-mini-container-type">
-                                    <img class="img-fluid " :src="store.imgBasePath + item.image" :alt="item.name">
-                                </div>
-                                <div>
-                                    <p>
-                                        {{ item.name }}
-                                    </p>
-                                </div>
-                            </li>
-                        </ul>
+                    <div id="suggested" class="col-xl-3 col-sm-12 f-d-bg-gradient-secondary">
+                        <div>
+                            <h4 class="text-center text-uppercase">Info di "{{ restaurant.name }}"</h4>
+                            <p><em class="fw-bold ">{{ restaurant.description }}</em></p>
+                            <p>Indirizzo: {{ restaurant.address }}</p>
+                            <p>P.IVA {{ restaurant.vat }}</p>
+                        </div>
+                        <div>
+                            <h4 class="text-center text-uppercase">Tipologie di "{{ restaurant.name }}"</h4>
+                            <ul
+                                class="d-flex flex-wrap flex-column justify-content-center align-items-center p-0 list-unstyled">
+                                <li class="d-flex flex-column align-items-center justify-content-center"
+                                    v-for="(item, index) in restaurant.types" :key="index">
+                                    <div class="f-d-mini-container-type">
+                                        <img class="img-fluid " :src="store.imgBasePath + item.image" :alt="item.name">
+                                    </div>
+                                    <div>
+                                        <p>
+                                            {{ item.name }}
+                                        </p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -70,7 +75,8 @@
                     <div class="col-xl-8 col-sm-12 ">
                         <h3 class="text-center text-uppercase py-3"><em class="text-white">Menù</em></h3>
                         <div class="d-flex align-items-center justify-content-center flex-wrap">
-                            <div class="f-d-card col-sm-12 col-xl-2" v-for="(item, index) in restaurant.products" :key="index">
+                            <div class="f-d-card col-sm-12 col-xl-2" v-for="(item, index) in restaurant.products"
+                                :key="index">
                                 <div class="f-d-mini-container">
                                     <img @click="openModal(item)" class="img-fluid"
                                         :src="store.imgBasePath + item.image" :alt="item.name">
@@ -191,7 +197,7 @@ export default {
         return {
             store,
             restaurant: {},
-            restaurantname:"",
+            restaurantname: "",
             selectedDish: {},
             showModal: false,
             checkCart: false,
@@ -269,7 +275,7 @@ export default {
                 cartItem.quantity++;
             } else {
                 this.store.cart.push({ ...product, quantity: 1 });
-                
+
             }
 
         },
@@ -289,7 +295,7 @@ export default {
         emptyCart() {
             this.store.cart = [];
             localStorage.clear();
-            
+
         },
         // metodo per aggiornare i piatti ordinati nella modale
         getOrderSummary() {
@@ -304,17 +310,17 @@ export default {
         },
         // metodo per troncare il nome a 4 lettere
         truncateName(name) {
-      if (name.length > 4) {
-        return name.slice(0, 4) + '..';
-      }
-      return name;
-    }
+            if (name.length > 4) {
+                return name.slice(0, 4) + '..';
+            }
+            return name;
+        }
     },
     mounted() {
         this.getRestaurants();
         this.getSingleRestaurant();
         this.loadCart();
-        
+        window.scrollTo(0, 0);
     },
     created() {
     },
@@ -334,6 +340,10 @@ export default {
     width: 60%;
     height: 40%;
     aspect-ratio: 1/1;
+}
+
+.f-d-bg-image {
+    background-image: url(../../public/images/sfondo-card.jpg);
 }
 
 .f-d-mini-container-img {
@@ -401,6 +411,7 @@ export default {
     margin: 10px;
 
 }
+
 #suggested {
     display: flex;
     flex-direction: column;
@@ -599,13 +610,21 @@ export default {
         gap: 10px;
     }
 
-    .f-d-card {
-    border: 1px solid $background-fourth-color;
-    border-left: none;
-    border-right: none;
-    border-radius: 10px;
+    .f-d-flex {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
 
-}
+    .f-d-card {
+        border: 1px solid $background-fourth-color;
+        border-left: none;
+        border-right: none;
+        border-radius: 10px;
+
+    }
 
     .f-d-mini-container-type {
         width: 50px;
@@ -643,17 +662,25 @@ export default {
         margin-bottom: 20px;
     }
 
+    .f-d-flex {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
     #suggested {
         display: none;
     }
 
     .f-d-card {
-    border: 1px solid $background-fourth-color;
-    border-left: none;
-    border-right: none;
-    border-radius: 10px;
+        border: 1px solid $background-fourth-color;
+        border-left: none;
+        border-right: none;
+        border-radius: 10px;
 
-}
+    }
 
     #info-container {
         display: flex;

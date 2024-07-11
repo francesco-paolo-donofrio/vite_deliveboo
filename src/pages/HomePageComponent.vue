@@ -169,7 +169,7 @@ export default {
 }
 
 .gradientColor {
-    background: linear-gradient(to right, $background-fourth-color, $background-fourth-color, $background-primary-color, $background-fourth-color, $background-fourth-color);
+    background: linear-gradient(to right, $background-fourth-color, $background-fourth-color, $background-primary-color, $background-fourth-color, $background-primary-color,  $background-fourth-color, $background-fourth-color);
     /* Gradient colors */
     -webkit-background-clip: text;
     /* For Safari */
@@ -196,7 +196,7 @@ export default {
 }
 
 .f-d-gradient-not-found-message {
-    background: linear-gradient(to right, $background-secondary-color, $background-primary-color, $background-secondary-color);
+    background: linear-gradient(to top, $background-secondary-color, $background-primary-color);
     color: white;
 }
 

@@ -1,5 +1,7 @@
 <template>
+    <h1 class="gradientColorTitle">Panoramica</h1>
     <div class="container">
+        
         <div class="about-us-container">
             <div>
 
@@ -88,6 +90,7 @@ export default {
     animation: borderAnimation 5s infinite;
     padding: 10px;
     border-radius: 10px;
+    background-image: url('../../public/images/sfondo-card.jpg');
 }
 
 .f-d-bounce {
@@ -129,6 +132,23 @@ export default {
     border: 2px solid black;
     animation: borderAnimation 5s infinite;
     border-radius: 10px;
+    background-image: url('../../public/images/sfondo-card.jpg');
+}
+
+.gradientColorTitle {
+    background: linear-gradient(to right, $background-fourth-color, $background-fourth-color, $background-primary-color, $background-fourth-color, $background-primary-color,  $background-fourth-color, $background-fourth-color); /* Gradient colors */
+    -webkit-background-clip: text; /* For Safari */
+    -webkit-text-fill-color: transparent; /* For Safari */
+    background-clip: text;
+    color: transparent;
+    font-size: 3rem; /* Font size */
+    font-weight: bold; /* Font weight */
+    text-align: center; /* Center alignment */
+    padding: 10px 20px; /* Padding */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Box shadow */
+    text-transform: uppercase; /* Uppercase text */
+    letter-spacing: 2px; /* Spacing between letters */
 }
 
 .f-d-mini-container {
@@ -146,7 +166,7 @@ export default {
 }
 
 .gradientColor {
-    background: linear-gradient(to right, $background-primary-color, $background-fourth-color, $background-primary-color, $background-fourth-color, $background-primary-color);
+    background: linear-gradient(to right, $background-primary-color, $background-secondary-color, $background-primary-color, $background-secondary-color, $background-primary-color);
     /* Gradient colors */
     -webkit-background-clip: text;
     /* For Safari */
@@ -170,6 +190,7 @@ export default {
     /* Uppercase text */
     letter-spacing: 2px;
     /* Spacing between letters */
+    
 }
 
 .gradientColorSmall {
@@ -309,6 +330,22 @@ export default {
     border: 2px solid black;
     animation: borderAnimation 5s infinite;
     border-radius: 10px;
+}
+
+.gradientColorTitle {
+    background: linear-gradient(to right, $background-fourth-color, $background-fourth-color, $background-primary-color, $background-fourth-color, $background-primary-color,  $background-fourth-color, $background-fourth-color); /* Gradient colors */
+    -webkit-background-clip: text; /* For Safari */
+    -webkit-text-fill-color: transparent; /* For Safari */
+    background-clip: text;
+    color: transparent;
+    font-size: 25px;
+    font-weight: bold; /* Font weight */
+    text-align: center; /* Center alignment */
+    padding: 10px 20px; /* Padding */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Box shadow */
+    text-transform: uppercase; /* Uppercase text */
+    letter-spacing: 2px; /* Spacing between letters */
 }
 
 .about-us-container {
