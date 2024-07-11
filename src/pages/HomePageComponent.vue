@@ -256,5 +256,32 @@ export default {
             font-size: 25px;
         }
     }
+
+    .gradientColor {
+    background: linear-gradient(to right, $background-fourth-color, $background-fourth-color, $background-primary-color, $background-fourth-color, $background-fourth-color);
+    /* Gradient colors */
+    -webkit-background-clip: text;
+    /* For Safari */
+    -webkit-text-fill-color: transparent;
+    /* For Safari */
+    background-clip: text;
+    color: transparent;
+    font-size: 25px;
+    /* Font size */
+    font-weight: bold;
+    /* Font weight */
+    text-align: center;
+    /* Center alignment */
+    padding: 10px 20px;
+    /* Padding */
+    border-radius: 10px;
+    /* Rounded corners */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* Box shadow */
+    text-transform: uppercase;
+    /* Uppercase text */
+    letter-spacing: 2px;
+    /* Spacing between letters */
+}
 }
 </style>
