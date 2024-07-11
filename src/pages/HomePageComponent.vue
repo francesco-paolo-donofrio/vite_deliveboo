@@ -209,6 +209,8 @@ export default {
     color: $background-fourth-color;
 }
 
+
+
 // styles carousel
 
 .typology-carousel {

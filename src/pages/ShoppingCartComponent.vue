@@ -1,87 +1,90 @@
 <template>
     <div class="cart text-center mt-3">
-        <div v-if="this.store.cart.length < 1">
+        <div class="d-flex justify-content-center align-items-center flex-column" v-if="this.store.cart.length < 1">
             <div class="f-d-cart">
                 <h2>Carrello... vuoto!</h2>
                 <div>Ordina ora il tuo piatto preferito!</div>
-                <a class="gradientColor" href="/">Clicca qui e scegli il ristorante</a>
+                <a class="gradientColor fs-3" href="/">Clicca qui e scegli il ristorante</a>
             </div>
         </div>
         <div v-else>
-
-            <div class="f-d-cart">
-                <div class="cart d-flex flex-column align-items-center justify-content-center">
-                    <h2 class="gradientColor">Carrello</h2>
-                    <div class="f-d-border-bottom"></div>
-                    <div>Stai ordinando da:</div>
-                    <h4>{{ cartName() }}</h4>
-                    <div class="f-d-border-bottom"></div>
-                    <div v-for="item in store.cart" :key="item.id">
-                        {{ item.name }} - {{ item.price }} x {{ item.quantity }}
+            <div class="d-flex justify-content-center align-items-center flex-column">
+                <div class="f-d-cart">
+                    <div class="cart d-flex flex-column align-items-center justify-content-center">
+                        <h2 class="gradientColor fs-1">Carrello</h2>
+                        <div class="f-d-border-bottom"></div>
+                        <div>Stai ordinando da:</div>
+                        <h4>{{ cartName() }}</h4>
+                        <div class="f-d-border-bottom"></div>
+                        <div v-for="item in store.cart" :key="item.id">
+                            {{ item.name }} - {{ item.price }} x {{ item.quantity }}
+                        </div>
+                        <div class="my-2 f-d-border-bottom text-center"></div>
+                        <div>Totale ordine: <em class="gradientColor fs-3">{{ totalAmount }}</em> €</div>
                     </div>
-                    <div class="my-2 f-d-border-bottom text-center"></div>
-                    <div>Totale ordine: <em class="gradientColor">{{ totalAmount }}</em> €</div>
                 </div>
-            </div>
 
 
-            <!-- FORM PER DATI CLIENTE -->
-            <div class="container">
-                <form class="f-d-form-cart" @submit.prevent="pay">
-                    <h2 class="gradientColor">Procedi al pagamento</h2>
-                    <!-- NOME -->
-                    <div class="text-secondary mb-2 text-start">
-                        <label for="name" class="form-label text-dark">Nome*</label>
-                        <input type="text" name="name" class="form-control" id="name" v-model="customer.name"
-                            minlength="3" maxlength="200" placeholder="Inserisci il tuo nome"
-                            :class="{ 'is-invalid': errors.name }" required>
-                        <div id="nameMessage" class="error-message text-danger">{{ errors.name }}</div>
-                    </div>
+                <!-- FORM PER DATI CLIENTE -->
+                <div class="container">
+                    <form class="f-d-form-cart" @submit.prevent="pay">
+                        <h2 class="gradientColor fs-2">Compila per pagare</h2>
+                        <!-- NOME -->
+                        <div class="text-secondary mb-2 text-start">
+                            <label for="name" class="form-label text-dark">Nome*</label>
+                            <input type="text" name="name" class="form-control" id="name" v-model="customer.name"
+                                minlength="3" maxlength="200" placeholder="Inserisci il tuo nome"
+                                :class="{ 'is-invalid': errors.name }" required>
+                            <div id="nameMessage" class="error-message text-danger">{{ errors.name }}</div>
+                        </div>
 
-                    <!-- COGNOME -->
-                    <div class="text-secondary mb-2 text-start">
-                        <label for="surname" class="form-label text-dark">Cognome*</label>
-                        <input type="text" class="form-control" id="surname" name="surname" v-model="customer.surname"
-                            minlength="3" maxlength="200" placeholder="Inserisci il tuo cognome"
-                            :class="{ 'is-invalid': errors.surname }" required>
-                        <div id="surnameMessage" class="error-message text-danger">{{ errors.surname }}</div>
-                    </div>
+                        <!-- COGNOME -->
+                        <div class="text-secondary mb-2 text-start">
+                            <label for="surname" class="form-label text-dark">Cognome*</label>
+                            <input type="text" class="form-control" id="surname" name="surname"
+                                v-model="customer.surname" minlength="3" maxlength="200"
+                                placeholder="Inserisci il tuo cognome" :class="{ 'is-invalid': errors.surname }"
+                                required>
+                            <div id="surnameMessage" class="error-message text-danger">{{ errors.surname }}</div>
+                        </div>
 
-                    <!-- TELEFONO -->
-                    <div class="text-secondary mb-2 text-start">
-                        <label for="phone" class="form-label text-dark">Numero di telefono*</label>
-                        <input type="tel" class="form-control" id="phone" name="phone" v-model="customer.phone"
-                            minlength="3" maxlength="200" placeholder="Numero di telefono"
-                            :class="{ 'is-invalid': errors.phone }" required>
-                        <div id="phoneMessage" class="error-message text-danger">{{ errors.phone }}</div>
-                    </div>
+                        <!-- TELEFONO -->
+                        <div class="text-secondary mb-2 text-start">
+                            <label for="phone" class="form-label text-dark">Numero di telefono*</label>
+                            <input type="tel" class="form-control" id="phone" name="phone" v-model="customer.phone"
+                                minlength="3" maxlength="200" placeholder="Numero di telefono"
+                                :class="{ 'is-invalid': errors.phone }" required>
+                            <div id="phoneMessage" class="error-message text-danger">{{ errors.phone }}</div>
+                        </div>
 
-                    <!-- EMAIL -->
-                    <div class="text-secondary mb-2 text-start">
-                        <label for="email" class="form-label text-dark">Indirizzo email*</label>
-                        <input type="email" class="form-control" id="email" name="email" v-model="customer.email"
-                            minlength="3" maxlength="200" placeholder="Inserisci il tuo email"
-                            :class="{ 'is-invalid': errors.email }" required>
-                        <div id="emailMessage" class="error-message text-danger">{{ errors.email }}</div>
-                    </div>
+                        <!-- EMAIL -->
+                        <div class="text-secondary mb-2 text-start">
+                            <label for="email" class="form-label text-dark">Indirizzo email*</label>
+                            <input type="email" class="form-control" id="email" name="email" v-model="customer.email"
+                                minlength="3" maxlength="200" placeholder="Inserisci il tuo email"
+                                :class="{ 'is-invalid': errors.email }" required>
+                            <div id="emailMessage" class="error-message text-danger">{{ errors.email }}</div>
+                        </div>
 
-                    <!-- INDIRIZZO -->
-                    <div class="text-secondary mb-2 text-start">
-                        <label for="address" class="form-label text-dark">Indirizzo di consegna*</label>
-                        <input type="text" class="form-control" id="address" name="address" v-model="customer.address"
-                            minlength="3" maxlength="200" placeholder="Inserisci il tuo indirizzo"
-                            :class="{ 'is-invalid': errors.address }" required>
-                        <div id="addressMessage" class="error-message text-danger">{{ errors.address }}</div>
-                    </div>
+                        <!-- INDIRIZZO -->
+                        <div class="text-secondary mb-2 text-start">
+                            <label for="address" class="form-label text-dark">Indirizzo di consegna*</label>
+                            <input type="text" class="form-control" id="address" name="address"
+                                v-model="customer.address" minlength="3" maxlength="200"
+                                placeholder="Inserisci il tuo indirizzo" :class="{ 'is-invalid': errors.address }"
+                                required>
+                            <div id="addressMessage" class="error-message text-danger">{{ errors.address }}</div>
+                        </div>
 
-                    <div class="mt-3 text-dark text-start"><span>* Campi obbligatori</span></div>
-                </form>
-            </div>
+                        <div class="mt-3 text-dark text-start"><span>* Campi obbligatori</span></div>
+                    </form>
+                </div>
 
-            <div id="dropin-container" class="container d-flex flex-column"></div>
-            <div class="d-flex justify-content-center gap-2">
-                <button @click="pay">Completa l'acquisto</button>
-                <button @click="emptyCart">Svuota Carrello</button>
+                <div id="dropin-container" class="container d-flex flex-column"></div>
+                <div class="d-flex justify-content-center gap-2">
+                    <button @click="pay">Completa l'acquisto</button>
+                    <button @click="emptyCart">Svuota Carrello</button>
+                </div>
             </div>
         </div>
     </div>

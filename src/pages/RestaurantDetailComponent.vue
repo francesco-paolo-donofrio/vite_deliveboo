@@ -69,10 +69,10 @@
                                             </p>
                                             <p class="text-center text-uppercase fw-bold">{{ item.price }}€</p>
                                             <div class="d-flex justify-content-center align-items-center gap-2 my-2">
-                                                <button class="btn btn-sm btn-danger"
+                                                <button class="btn btn-sm f-d-delete-bg"
                                                     @click="decreaseQuantity(item)">-</button>
                                                 <span>{{ getQuantityInCart(item.id) }}</span>
-                                                <button class="btn btn-sm btn-success"
+                                                <button class="btn btn-sm f-d-confirm-bg"
                                                     @click="increaseQuantity(item)">+</button>
                                             </div>
                                         </div>
@@ -103,9 +103,9 @@
                                                     </div>
                                                     <div
                                                         class="buttons d-flex align-items-center justify-content-center gap-3">
-                                                        <button class="btn btn-danger"
+                                                        <button class="f-d-button-delete"
                                                             @click="emptyCart">Svuota</button>
-                                                        <button class="btn btn-success">
+                                                        <button class="f-d-button-confirm">
                                                             <router-link
                                                                 :to="{ name: 'shopping-cart' }">Procedi</router-link>
                                                         </button>
@@ -139,7 +139,7 @@
                 <div class="modal-dialog modal-lg" role="document">
                     <div class="modal-content">
                         <div class="modal-header d-flex justify-content-between">
-                            <h5 class="modal-title" id="exampleModalLabel">{{ selectedDish.name }} di {{ restaurant.name
+                            <h5 class="modal-title fs-3 gradientColor fw-bold" id="exampleModalLabel">{{ selectedDish.name }} di {{ restaurant.name
                                 }}
                             </h5>
                             <button type="button" class="f-d-close" @click="closeModal" aria-label="Close">
@@ -154,20 +154,20 @@
                         </div>
                         <div v-if="selectedDish.id" class="quantity-control">
                             <div class="product-card d-flex flex-column align-items-center justify-content-center">
-                                <h3>{{ selectedDish.name }}</h3>
+                                <h3 class="gradientColor fw-bold" >{{ selectedDish.name }}</h3>
                                 <p v-if="selectedDish.description"><em>{{
                                     selectedDish.description
                                         }}</em></p>
                                 <p>Prezzo: {{ selectedDish.price }}€</p>
                                 <div class="d-flex justify-content-center align-items-center gap-2">
-                                    <button class="btn btn-danger" @click="decreaseQuantity(selectedDish)">-</button>
+                                    <button class="btn f-d-delete-bg" @click="decreaseQuantity(selectedDish)">-</button>
                                     <span>{{ getQuantityInCart(selectedDish.id) }}</span>
-                                    <button class="btn btn-success" @click="increaseQuantity(selectedDish)">+</button>
+                                    <button class="btn f-d-confirm-bg" @click="increaseQuantity(selectedDish)">+</button>
                                 </div>
                             </div>
                         </div>
                         <div class="modal-footer d-flex flex-column justify-content-center align-items-center">
-                            <p>{{ getOrderSummary() }}</p>
+                            <p class="fw-bold">{{ getOrderSummary() }}</p>
                         </div>
                     </div>
                 </div>
@@ -178,7 +178,7 @@
                 <div class="modal-dialog modal-lg" role="document">
                     <div class="modal-content">
                         <div class="modal-header d-flex justify-content-between">
-                            <h5 class="modal-title" id="exampleModalLabel">
+                            <h5 class="modal-title fs-2" id="exampleModalLabel">
                                 Attenzione!
                             </h5>
                             <button type="button" class="f-d-close" @click="closeAlertModal" aria-label="Close">
@@ -186,14 +186,14 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <h5>Nel carrello sono presenti piatti di un altro ristorante, puoi svuotare il carrello
+                            <h5 class="fs-4">Nel carrello sono presenti piatti di un altro ristorante, puoi svuotare il carrello
                                 oppure
                                 effettuare il
                                 checkout!</h5>
                         </div>
                         <div class="modal-footer">
-                            <button class="btn btn-danger" @click="emptyCart(); closeAlertModal()">Svuota</button>
-                            <button class="btn btn-success">Checkout</button>
+                            <button class="f-d-button-delete" @click="emptyCart(); closeAlertModal()">Svuota</button>
+                            <button class="f-d-button-confirm">Checkout</button>
                         </div>
                     </div>
                 </div>
@@ -559,6 +559,40 @@ export default {
 
 #cart-container {
     padding: 70px 0 0 0;
+}
+
+.f-d-button-delete {
+    color: white;
+    font-weight: bold;
+    background: linear-gradient(to right, $background-primary-color, red, $background-primary-color);
+    width: 100px;
+    height: 60px;
+    border-radius: 5px;
+
+}
+
+
+.f-d-delete-bg {
+    background: linear-gradient(to right, $background-primary-color, red, $background-primary-color);
+    color: white;
+}
+
+.f-d-confirm-bg {
+    background: linear-gradient(to right, $background-primary-color, $background-tertiary-color, $background-primary-color);
+    color: white;
+}
+
+.f-d-button-confirm{
+    color: white;
+    font-weight: bold;
+    background: linear-gradient(to right, $background-primary-color, $background-tertiary-color, $background-primary-color);
+    width: 100px;
+    height: 60px;
+    border-radius: 5px;
+    a {
+        text-decoration: none;
+        color: white;
+    }
 }
 
 // mediaquery 1200px, 768px, 576px
