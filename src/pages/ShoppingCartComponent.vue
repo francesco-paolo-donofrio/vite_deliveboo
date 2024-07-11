@@ -1,11 +1,28 @@
 <template>
     <div class="cart text-center mt-3">
         <div v-if="this.store.cart.length < 1">
-            <h2>Carrello... vuoto!</h2>
-            <div>Ordina ora il tuo piatto preferito!</div>
-            <a href="/">Clicca qui e scegli il ristorante</a>
+            <div class="f-d-cart">
+                <h2>Carrello... vuoto!</h2>
+                <div>Ordina ora il tuo piatto preferito!</div>
+                <a class="gradientColor" href="/">Clicca qui e scegli il ristorante</a>
+            </div>
         </div>
         <div v-else>
+
+            <div class="f-d-cart">
+                <div class="cart d-flex flex-column align-items-center justify-content-center">
+                <h2 class="gradientColor">Carrello</h2>
+                <div class="f-d-border-bottom"></div>
+                <div>Stai ordinando da:</div>
+                <h4>' {{ store.restaurantname }} '</h4>
+                <div class="f-d-border-bottom"></div>
+                <div v-for="item in store.cart" :key="item.id">
+                    {{ item.name }} - {{ item.price }} x {{ item.quantity }}
+                </div>
+                <div class="my-2 f-d-border-bottom text-center"></div>
+                <div>Totale ordine: <em class="gradientColor">{{ totalAmount }}</em> €</div>
+            </div>
+            </div>
             <div class="f-d-cart container d-flex flex-column justify-content-center align-items-center">
                 <h2>Carrello</h2>
                 <div>Stai ordinando da:</div>
@@ -15,12 +32,10 @@
                 </div>
                 <div class="my-2 f-d-border-bottom">Totale ordine: {{ totalAmount }} €</div>
             </div>
-
-
-
             <!-- FORM PER DATI CLIENTE -->
             <div class="container">
-                <form @submit.prevent="pay">
+                <form class="f-d-form-cart"  @submit.prevent="pay">
+                    <h2 class="gradientColor">Procedi al pagamento</h2>
                     <!-- NOME -->
                     <div class="text-secondary mb-2 text-start">
                         <label for="name" class="form-label text-dark">Nome*</label>
@@ -301,6 +316,33 @@ export default {
 <style lang="scss" scoped>
 @use '../assets/styles/partials/_variables' as *;
 
+.gradientColor {
+    background: linear-gradient(to right, $background-fourth-color, $background-fourth-color, $background-fourth-color, $background-fourth-color, $background-fourth-color);
+    /* Gradient colors */
+    -webkit-background-clip: text;
+    /* For Safari */
+    -webkit-text-fill-color: transparent;
+    /* For Safari */
+    background-clip: text;
+    color: transparent;
+    font-size: 3rem;
+    /* Font size */
+    font-weight: bold;
+    /* Font weight */
+    text-align: center;
+    /* Center alignment */
+    padding: 10px 20px;
+    /* Padding */
+    border-radius: 10px;
+    /* Rounded corners */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* Box shadow */
+    text-transform: uppercase;
+    /* Uppercase text */
+    letter-spacing: 2px;
+    /* Spacing between letters */
+}
+
 .f-d-first-container {
     width: calc(100% / 2 - 40px);
     height: 500px;
@@ -309,6 +351,19 @@ export default {
 .f-d-second-container {
     width: calc(100% / 2 - 40px);
     height: 500px;
+}
+
+.f-d-form-cart {
+    width: 100%;
+    //height: 100%;
+    background: linear-gradient(to right, $background-secondary-color, $background-primary-color, $background-secondary-color);
+    border-radius: 10px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    padding: 10px;
+    color: black;
+    font-weight: normal;
+    border: 2px solid $background-fourth-color;
 }
 
 .f-d-container {
@@ -354,5 +409,47 @@ export default {
     border-color: red !important;
 }
 
-@media screen and (max-width: 320px) {}
+@media screen and (max-width: 320px) {
+    .gradientColor {
+    background: linear-gradient(to right, $background-fourth-color, $background-fourth-color, $background-fourth-color, $background-fourth-color, $background-fourth-color);
+    /* Gradient colors */
+    -webkit-background-clip: text;
+    /* For Safari */
+    -webkit-text-fill-color: transparent;
+    /* For Safari */
+    background-clip: text;
+    color: transparent;
+    font-size: 25px;
+    /* Font size */
+    font-weight: bold;
+    /* Font weight */
+    text-align: center;
+    /* Center alignment */
+    padding: 10px 20px;
+    /* Padding */
+    border-radius: 10px;
+    /* Rounded corners */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* Box shadow */
+    text-transform: uppercase;
+    /* Uppercase text */
+    letter-spacing: 2px;
+    /* Spacing between letters */
+}
+
+.f-d-cart {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    height: calc(100% - 20px);
+    border-radius: 10px;
+    border: 4px solid $background-fourth-color;
+    background-color: $background-primary-color;
+    color: white;
+    padding: 10px;
+}
+}
 </style>

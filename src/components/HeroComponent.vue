@@ -12,11 +12,11 @@
       <div class="d-flex gap-5 align-items-center justify-content-center w-50 mt-5">
         <div class="d-flex flex-column align-items-center justify-content-center gap-2">
           <a class="text-white text-decoration-none fs-5" href="#restaurants">Ristoranti</a>
-          <a href="#restaurants" class="fa-solid fa-arrow-down fa-beat f-d-gradientTitle text-decoration-none"></a>
+          <a href="#restaurants" id="restaurantsLink" class="fa-solid fa-arrow-down fa-beat f-d-gradientTitle text-decoration-none"></a>
         </div>
         <div class="d-flex flex-column align-items-center justify-content-center gap-2">
           <a class="text-white text-decoration-none fs-5" href="#types-title">Tipologie</a>
-          <a href="#types" class="fa-solid fa-arrow-down fa-beat f-d-gradientTitle text-decoration-none"></a>
+          <a href="#types" id="typesLink" class="fa-solid fa-arrow-down fa-beat f-d-gradientTitle text-decoration-none"></a>
         </div>
       </div>
     </div>
@@ -27,6 +27,35 @@
 <script>
 export default {
   name: 'HeroComponent',
+
+  data() {
+    return {
+      
+    }
+  },
+  methods: {
+    scrollToTypes(event) {
+      event.preventDefault();
+      const typesTitle = document.getElementById('types-title');
+      const yOffset = -100; // 100px above the element
+      const y = typesTitle.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      window.scrollTo({top: y, behavior: 'smooth'});
+    },
+    scrollToRestaurants(event) {
+      event.preventDefault();
+      const restaurantsTitle = document.getElementById('restaurants-title');
+      const yOffset = -100; // 100px above the element
+      const y = restaurantsTitle.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      window.scrollTo({top: y, behavior: 'smooth'});
+    },
+    },
+    mounted() {
+      const typesLink = document.getElementById('typesLink');
+    typesLink.addEventListener('click', this.scrollToTypes);
+
+    const restaurantsLink = document.getElementById('restaurantsLink');
+    restaurantsLink.addEventListener('click', this.scrollToRestaurants);
+    }
 }
 </script>
 
