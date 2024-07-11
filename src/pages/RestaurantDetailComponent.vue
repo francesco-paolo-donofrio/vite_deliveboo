@@ -191,6 +191,7 @@ export default {
         return {
             store,
             restaurant: {},
+            restaurantname:"",
             selectedDish: {},
             showModal: false,
             checkCart: false,
@@ -207,7 +208,9 @@ export default {
         getSingleRestaurant() {
             axios.get(`${this.store.apiBaseUrl}/restaurants/${this.id}`).then(res => {
                 this.restaurant = res.data.results;
+                this.restaurantname = res.data.results.name
                 console.log(this.restaurant);
+                console.log(this.restaurantname);
             });
         },
         getRestaurants() {
@@ -252,6 +255,7 @@ export default {
             }
             console.log(product);
             console.log(this.store.cart[0].restaurant_id);
+            this.store.restaurantname = this.restaurantname
             // console.log(this.store.cart)
             // console.log(localStorage, 'localstorage');
         },
@@ -265,6 +269,7 @@ export default {
                 cartItem.quantity++;
             } else {
                 this.store.cart.push({ ...product, quantity: 1 });
+                
             }
 
         },
@@ -309,6 +314,7 @@ export default {
         this.getRestaurants();
         this.getSingleRestaurant();
         this.loadCart();
+        
     },
     created() {
     },

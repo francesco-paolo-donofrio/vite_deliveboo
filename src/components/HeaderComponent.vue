@@ -30,12 +30,17 @@
 
                 <div class="user-account gap-3 d-flex fs-3 align-self-stretch align-items-end">
                     <div id="f-d-nav-login-button" ref="fdNavLoginButton"
-                        class="icon-container rounded-top-2 d-flex justify-content-center order-2 w-auto" role="button">
+                        class="icon-container rounded-top-2 d-flex justify-content-center order-2 w-auto position-relative"
+                        role="button">
+                        <span class="position-absolute top-0 start-30 translate-middle badge rounded-pill bg-danger">
+                            {{ cartbadge() }}
+                            <span class="visually-hidden">unread messages</span>
+                        </span>
                         <router-link :to="{ name: 'shopping-cart' }" class="nav-link">
                             <i class="fa-solid fa-cart-shopping"></i>
                         </router-link>
                         <a href="http://localhost:8000/login"
-                            class="text-decoration-none text-white d-flex flex-column align-items-center mx-2">
+                            class="text-decoration-none text-white d-flex flex-column align-items-center mx-4">
                             <i class="fa-solid fa-user"></i>
                         </a>
                     </div>
@@ -89,14 +94,19 @@
 
 <script>
 import ShoppingCartComponent from '@/pages/ShoppingCartComponent.vue';
+import { store } from '../store';
 
 
 export default {
     name: 'HeaderComponent',
     data() {
         return {
+
+            store,
+
             eventTarget: { eventElement: null, originalTemplate: '' },
             openElement: null,
+
             show: false,
             menuItems: [
                 {
@@ -201,8 +211,16 @@ export default {
         },
         goForward() {
             this.$router.go(1)
+        },
+        cartbadge(){
+            let total = 0
+            this.store.cart.forEach(element => {
+                total += element.quantity;
+            });
+            return total    
         }
     },
+    
 };
 </script>
 
@@ -349,6 +367,10 @@ header {
     gap: 5px;
 }
 
+.badge{
+    font-size: 12px;
+
+
 @media screen and (min-width: 1200px) {
     #f-d-nav-menu {
         display: none !important;
@@ -378,6 +400,7 @@ header {
         width: 100% !important;
     }
     
+
 
 
 }

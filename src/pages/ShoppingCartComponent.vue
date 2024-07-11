@@ -7,11 +7,12 @@
         </div>
         <div v-else>
             <h2>Carrello</h2>
-            <div>{{ restaurantName }}</div>
+            <div>Stai ordinando da:</div>
+            <h4>{{ store.restaurantname }}</h4>
             <div v-for="item in store.cart" :key="item.id">
                 {{ item.name }} - {{ item.price }} x {{ item.quantity }}
             </div>
-            <div class="my-2 f-d-border-bottom">Totale ordine: {{ totalAmount }} €</div>
+            <div class="my-2 f-d-border-bottom text-center">Totale ordine: {{ totalAmount }} €</div>
 
             <!-- FORM PER DATI CLIENTE -->
             <div class="container">
@@ -86,6 +87,7 @@ export default {
             instance: null,
             store,
             products: [],
+
             //cart: [],
             restaurantName: '',
             customer: {
@@ -115,15 +117,6 @@ export default {
                 // }
             }
         },
-        // getRestaurantName(productId) {
-        //     axios.get(`http://127.0.0.1:8000/api/products/${productId}/restaurant`)
-        //         .then(response => {
-        //             this.restaurantName = response.data.restaurant.name;
-        //         })
-        //         .catch(error => {
-        //             console.error('Errore nel recupero del nome del ristorante:', error);
-        //         });
-        // },
         emptyCart() {
             this.store.cart = [];
             localStorage.clear();
@@ -263,7 +256,8 @@ export default {
                 axios.post('http://127.0.0.1:8000/api/braintree/checkout', {
                     payment_method_nonce: payload.nonce,
                     amount: this.totalAmount,
-                    customer: this.customer
+                    customer: this.customer,
+                    products: this.store.cart
                 })
                     .then(response => {
                         if (response.data.success) {
@@ -298,6 +292,7 @@ export default {
     created() {
         this.loadCart();
         console.log(this.store.cart);
+        console.log(this.store.restaurantname);
     }
 };
 </script>
