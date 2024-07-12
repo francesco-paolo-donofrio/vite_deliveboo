@@ -1,12 +1,13 @@
 <template>
     <HeroComponent />
+    <AboutUsComponent />
     <CarouselComponent :types="types" :selectedTypes="selectedtypes" @typeSelected="toggleType" />
 
     <!-- <div class="d-flex justify-content-center">
         <button type="button" class="btn btn-primary mx-2 p-2" @click="sendTypes">Filtra</button>
         <button type="button" class="btn btn-secondary mx-2 p-2" @click="resetTypes">Reset</button>
     </div> -->
-    <div id="types-title">
+    <div id="restaurants-title">
         <h1 class="gradientColor text-center">Ristoranti</h1>
     </div>
     <div class="f-d-gradient-not-found-message">
@@ -39,14 +40,17 @@
             </div>
         </div>
     </div>
+    <FooterComponent />
 </template>
 
 <script>
 import { store } from '../store';
 import axios from 'axios';
 import HeroComponent from '../components/HeroComponent.vue';
+import AboutUsComponent from '../components/AboutUsComponent.vue';
 import CardComponent from '../components/CardComponent.vue';
 import CarouselComponent from '../components/CarouselComponent.vue';
+import FooterComponent from '../components/FooterComponent.vue';
 
 
 
@@ -55,7 +59,10 @@ export default {
     components: {
         CardComponent,
         HeroComponent,
-        CarouselComponent
+        CarouselComponent,
+        AboutUsComponent,
+        FooterComponent
+
     },
     data() {
         return {
@@ -163,7 +170,7 @@ export default {
 }
 
 .gradientColor {
-    background: linear-gradient(to right, $background-fourth-color, $background-fourth-color, $background-primary-color, $background-fourth-color, $background-fourth-color);
+    background: linear-gradient(to right, $background-fourth-color, $background-fourth-color, $background-primary-color, $background-fourth-color, $background-primary-color,  $background-fourth-color, $background-fourth-color);
     /* Gradient colors */
     -webkit-background-clip: text;
     /* For Safari */
@@ -190,7 +197,7 @@ export default {
 }
 
 .f-d-gradient-not-found-message {
-    background: linear-gradient(to right, $background-secondary-color, $background-primary-color, $background-secondary-color);
+    background: linear-gradient(to top, $background-secondary-color, $background-primary-color);
     color: white;
 }
 
@@ -201,6 +208,8 @@ export default {
 .f-d-fourth-color {
     color: $background-fourth-color;
 }
+
+
 
 // styles carousel
 
@@ -250,5 +259,32 @@ export default {
             font-size: 25px;
         }
     }
+
+    .gradientColor {
+    background: linear-gradient(to right, $background-fourth-color, $background-fourth-color, $background-primary-color, $background-fourth-color, $background-fourth-color);
+    /* Gradient colors */
+    -webkit-background-clip: text;
+    /* For Safari */
+    -webkit-text-fill-color: transparent;
+    /* For Safari */
+    background-clip: text;
+    color: transparent;
+    font-size: 25px;
+    /* Font size */
+    font-weight: bold;
+    /* Font weight */
+    text-align: center;
+    /* Center alignment */
+    padding: 10px 20px;
+    /* Padding */
+    border-radius: 10px;
+    /* Rounded corners */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* Box shadow */
+    text-transform: uppercase;
+    /* Uppercase text */
+    letter-spacing: 2px;
+    /* Spacing between letters */
+}
 }
 </style>

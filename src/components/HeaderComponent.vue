@@ -39,7 +39,7 @@
                         <router-link :to="{ name: 'shopping-cart' }" class="nav-link">
                             <i class="fa-solid fa-cart-shopping"></i>
                         </router-link>
-                        <a href="http://localhost:8000/login"
+                        <a id="f-d-not-visible"href="http://localhost:8000/login"
                             class="text-decoration-none text-white d-flex flex-column align-items-center mx-4">
                             <i class="fa-solid fa-user"></i>
                         </a>
@@ -66,18 +66,6 @@
                                         <i class="fa-solid fa-house"></i>
                                         Home
                                     </router-link>
-                                </li>
-                                <li>
-                                    <router-link :to="{ name: 'shopping-cart' }" class="nav-link">
-                                        <i class="fa-solid fa-cart-shopping"></i>
-                                        Carrello
-                                    </router-link>
-                                </li>
-                                <li>
-                                    <a href="http://localhost:8000/login" class="text-decoration-none text-white">
-                                        <i class="fa-solid fa-user"></i>
-                                        Login
-                                    </a>
                                 </li>
                             </ul>
                         </div>
@@ -218,8 +206,18 @@ export default {
                 total += element.quantity;
             });
             return total    
-        }
+        },
+        loadCart() {
+            const savedCart = localStorage.getItem('cart');
+            if (savedCart) {
+                this.store.cart = JSON.parse(savedCart);
+            }
+            console.log(this.store.cart);
+        },
     },
+    mounted(){
+        this.loadCart()
+    }
     
 };
 </script>
@@ -385,21 +383,23 @@ header {
     }
 
     #f-d-nav-login-button {
-        display: none !important; 
+        .f-d-not-visible {
+            display: none !important; 
+        }
     }
 
 }
 
 @media screen and (max-width: 320px) {
     .navigation-buttons {
-        padding-left: 0;
-        margin-left: 25px;
+        margin-left: 0;
     }
+
+    
     
     #f-d-custom-nav {
         width: 100% !important;
     }
-    
-}
 
+}
 </style>

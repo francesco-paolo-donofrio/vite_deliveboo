@@ -82,7 +82,7 @@
     height: 300px;
     display: flex;
     align-items: center;   
-    background: linear-gradient(to right, $background-secondary-color, $background-primary-color, $background-secondary-color);
+    background: linear-gradient(to top, $background-primary-color, $background-secondary-color, $background-primary-color);
     color: white;
   }
   
@@ -96,6 +96,7 @@
       display: none;  // Chrome, Safari and Opera
     }
   }
+  
   
   .carousel-slide {
     flex: 0 0 auto;
@@ -134,11 +135,11 @@
   }
 
   #types-title {
-    margin: 10px 0; /* Margin around the title */
+    scroll-margin-bottom: 150px;
 }
 
 .gradientColor {
-    background: linear-gradient(to right, $background-fourth-color, $background-fourth-color, $background-primary-color,  $background-fourth-color, $background-fourth-color); /* Gradient colors */
+    background: linear-gradient(to right, $background-fourth-color, $background-fourth-color, $background-primary-color, $background-fourth-color, $background-primary-color,  $background-fourth-color, $background-fourth-color); /* Gradient colors */
     -webkit-background-clip: text; /* For Safari */
     -webkit-text-fill-color: transparent; /* For Safari */
     background-clip: text;

@@ -1,75 +1,90 @@
 <template>
     <div class="cart text-center mt-3">
-        <div v-if="this.store.cart.length < 1">
-            <h2>Carrello... vuoto!</h2>
-            <div>Ordina ora il tuo piatto preferito!</div>
-            <a href="/">Clicca qui e scegli il ristorante</a>
+        <div class="d-flex justify-content-center align-items-center flex-column" v-if="this.store.cart.length < 1">
+            <div class="f-d-cart">
+                <h2>Carrello... vuoto!</h2>
+                <div>Ordina ora il tuo piatto preferito!</div>
+                <a class="gradientColor fs-3" href="/">Clicca qui e scegli il ristorante</a>
+            </div>
         </div>
         <div v-else>
-            <h2>Carrello</h2>
-            <div>Stai ordinando da:</div>
-            <h4>{{ store.restaurantname }}</h4>
-            <div v-for="item in store.cart" :key="item.id">
-                {{ item.name }} - {{ item.price }} x {{ item.quantity }}
-            </div>
-            <div class="my-2 f-d-border-bottom text-center">Totale ordine: {{ totalAmount }} €</div>
-
-            <!-- FORM PER DATI CLIENTE -->
-            <div class="container">
-                <form @submit.prevent="pay">
-                    <!-- NOME -->
-                    <div class="text-secondary mb-2 text-start">
-                        <label for="name" class="form-label text-dark">Nome*</label>
-                        <input type="text" name="name" class="form-control" id="name" v-model="customer.name"
-                            minlength="3" maxlength="200" placeholder="Inserisci il tuo nome"
-                            :class="{ 'is-invalid': errors.name }" required>
-                        <div id="nameMessage" class="error-message text-danger">{{ errors.name }}</div>
+            <div class="d-flex justify-content-center align-items-center flex-column">
+                <div class="f-d-cart">
+                    <div class="cart d-flex flex-column align-items-center justify-content-center">
+                        <h2 class="gradientColor fs-1">Carrello</h2>
+                        <div class="f-d-border-bottom"></div>
+                        <div>Stai ordinando da:</div>
+                        <h4>{{ cartName() }}</h4>
+                        <div class="f-d-border-bottom"></div>
+                        <div v-for="item in store.cart" :key="item.id">
+                            {{ item.name }} - {{ item.price }} x {{ item.quantity }}
+                        </div>
+                        <div class="my-2 f-d-border-bottom text-center"></div>
+                        <div>Totale ordine: <em class="gradientColor fs-3">{{ totalAmount }}</em> €</div>
                     </div>
+                </div>
 
-                    <!-- COGNOME -->
-                    <div class="text-secondary mb-2 text-start">
-                        <label for="surname" class="form-label text-dark">Cognome*</label>
-                        <input type="text" class="form-control" id="surname" name="surname" v-model="customer.surname"
-                            minlength="3" maxlength="200" placeholder="Inserisci il tuo cognome"
-                            :class="{ 'is-invalid': errors.surname }" required>
-                        <div id="surnameMessage" class="error-message text-danger">{{ errors.surname }}</div>
-                    </div>
 
-                    <!-- TELEFONO -->
-                    <div class="text-secondary mb-2 text-start">
-                        <label for="phone" class="form-label text-dark">Numero di telefono*</label>
-                        <input type="tel" class="form-control" id="phone" name="phone" v-model="customer.phone"
-                            minlength="3" maxlength="200" placeholder="Numero di telefono"
-                            :class="{ 'is-invalid': errors.phone }" required>
-                        <div id="phoneMessage" class="error-message text-danger">{{ errors.phone }}</div>
-                    </div>
+                <!-- FORM PER DATI CLIENTE -->
+                <div class="container mt-3">
+                    <form class="f-d-form-cart" @submit.prevent="pay">
+                        <h2 class="gradientColor fs-2">Compila per pagare</h2>
+                        <!-- NOME -->
+                        <div class="text-secondary mb-2 text-center">
+                            <label for="name" class="form-label text-dark">Nome*</label>
+                            <input type="text" name="name" class="form-control" id="name" v-model="customer.name"
+                                minlength="3" maxlength="200" placeholder="Inserisci il tuo nome"
+                                :class="{ 'is-invalid': errors.name }" required>
+                            <div id="nameMessage" class="error-message text-danger">{{ errors.name }}</div>
+                        </div>
 
-                    <!-- EMAIL -->
-                    <div class="text-secondary mb-2 text-start">
-                        <label for="email" class="form-label text-dark">Indirizzo email*</label>
-                        <input type="email" class="form-control" id="email" name="email" v-model="customer.email"
-                            minlength="3" maxlength="200" placeholder="Inserisci il tuo email"
-                            :class="{ 'is-invalid': errors.email }" required>
-                        <div id="emailMessage" class="error-message text-danger">{{ errors.email }}</div>
-                    </div>
+                        <!-- COGNOME -->
+                        <div class="text-secondary mb-2 text-center">
+                            <label for="surname" class="form-label text-dark">Cognome*</label>
+                            <input type="text" class="form-control" id="surname" name="surname"
+                                v-model="customer.surname" minlength="3" maxlength="200"
+                                placeholder="Inserisci il tuo cognome" :class="{ 'is-invalid': errors.surname }"
+                                required>
+                            <div id="surnameMessage" class="error-message text-danger">{{ errors.surname }}</div>
+                        </div>
 
-                    <!-- INDIRIZZO -->
-                    <div class="text-secondary mb-2 text-start">
-                        <label for="address" class="form-label text-dark">Indirizzo di consegna*</label>
-                        <input type="text" class="form-control" id="address" name="address" v-model="customer.address"
-                            minlength="3" maxlength="200" placeholder="Inserisci il tuo indirizzo"
-                            :class="{ 'is-invalid': errors.address }" required>
-                        <div id="addressMessage" class="error-message text-danger">{{ errors.address }}</div>
-                    </div>
+                        <!-- TELEFONO -->
+                        <div class="text-secondary mb-2 text-center">
+                            <label for="phone" class="form-label text-dark">Numero di telefono*</label>
+                            <input type="tel" class="form-control" id="phone" name="phone" v-model="customer.phone"
+                                minlength="3" maxlength="200" placeholder="Numero di telefono"
+                                :class="{ 'is-invalid': errors.phone }" required>
+                            <div id="phoneMessage" class="error-message text-danger">{{ errors.phone }}</div>
+                        </div>
 
-                    <div class="mt-3 text-dark text-start"><span>* Campi obbligatori</span></div>
-                </form>
-            </div>
+                        <!-- EMAIL -->
+                        <div class="text-secondary mb-2 text-center">
+                            <label for="email" class="form-label text-dark">Indirizzo email*</label>
+                            <input type="email" class="form-control" id="email" name="email" v-model="customer.email"
+                                minlength="3" maxlength="200" placeholder="Inserisci il tuo email"
+                                :class="{ 'is-invalid': errors.email }" required>
+                            <div id="emailMessage" class="error-message text-danger">{{ errors.email }}</div>
+                        </div>
 
-            <div id="dropin-container" class="container"></div>
-            <div class="d-flex justify-content-center gap-2">
-                <button @click="pay">Completa l'acquisto</button>
-                <button @click="emptyCart">Svuota Carrello</button>
+                        <!-- INDIRIZZO -->
+                        <div class="text-secondary mb-2 text-center">
+                            <label for="address" class="form-label text-dark">Indirizzo di consegna*</label>
+                            <input type="text" class="form-control" id="address" name="address"
+                                v-model="customer.address" minlength="3" maxlength="200"
+                                placeholder="Inserisci il tuo indirizzo" :class="{ 'is-invalid': errors.address }"
+                                required>
+                            <div id="addressMessage" class="error-message text-danger">{{ errors.address }}</div>
+                        </div>
+
+                        <div class="mt-3 text-dark text-start"><span>* Campi obbligatori</span></div>
+                    </form>
+                </div>
+
+                <div id="dropin-container" class="f-d-payment d-flex flex-column align-items-center justify-content-center"></div>
+                <div class="d-flex justify-content-center gap-2">
+                    <button class="f-d-button-confirm" @click="pay">Paga ora</button>
+                    <button class="f-d-button-delete" @click="emptyCart">Svuota Carrello</button>
+                </div>
             </div>
         </div>
     </div>
@@ -89,7 +104,6 @@ export default {
             products: [],
 
             //cart: [],
-            restaurantName: '',
             customer: {
                 name: '',
                 surname: '',
@@ -112,9 +126,6 @@ export default {
             const savedCart = localStorage.getItem('cart');
             if (savedCart) {
                 this.store.cart = JSON.parse(savedCart);
-                // if (this.cart.length > 0) {
-                //     this.getRestaurantName(this.cart[0].restaurant_id);
-                // }
             }
         },
         emptyCart() {
@@ -213,28 +224,28 @@ export default {
         },
         //Gestione di messaggi di errore per validazione BE (applica solo classe is-invalid al campo input)
         handleValidationErrors(errors) {
-        // Resetta i messaggi di errore
-        this.errorMessages = {};
+            // Resetta i messaggi di errore
+            this.errorMessages = {};
 
-        // Assegna i nuovi messaggi di errore
-        for (const key in errors) {
-            if (errors.hasOwnProperty(key)) {
-                this.errorMessages[key] = errors[key];
+            // Assegna i nuovi messaggi di errore
+            for (const key in errors) {
+                if (errors.hasOwnProperty(key)) {
+                    this.errorMessages[key] = errors[key];
+                }
             }
-        }
 
-        // Scorri sui campi e applica la classe di errore se necessario
-        for (const key in this.customer) {
-            if (this.customer.hasOwnProperty(key)) {
-                const input = document.getElementById(key);
-                if (errors[`customer.${key}`]) {
-                    input.classList.add('is-invalid');
-                } else {
-                    input.classList.remove('is-invalid');
+            // Scorri sui campi e applica la classe di errore se necessario
+            for (const key in this.customer) {
+                if (this.customer.hasOwnProperty(key)) {
+                    const input = document.getElementById(key);
+                    if (errors[`customer.${key}`]) {
+                        input.classList.add('is-invalid');
+                    } else {
+                        input.classList.remove('is-invalid');
+                    }
                 }
             }
         }
-    }
         ,
         pay() {
             if (!this.instance) {
@@ -263,12 +274,12 @@ export default {
                             this.store.prevOrder = this.store.cart;
                             this.store.cart = [];
                             this.$router.push({ path: '/thank-you' });
-                            
+
                         } else {
                             if (response.data.errors) {
                                 this.handleValidationErrors(response.data.errors);
                             } else {
-                                this.$router.push({ path: '/oh-no'});
+                                this.$router.push({ path: '/oh-no' });
                             }
                         }
                     })
@@ -276,6 +287,9 @@ export default {
                         console.error('Error processing payment:', error);
                     });
             });
+        },
+        cartName() {
+            return localStorage.cartname;
         }
     },
     computed: {
@@ -291,13 +305,82 @@ export default {
     created() {
         this.loadCart();
         console.log(this.store.cart);
-        console.log(this.store.restaurantname);
     }
 };
 </script>
 
 <style lang="scss" scoped>
 @use '../assets/styles/partials/_variables' as *;
+
+#dropin-container {
+    background-image: url(../../public/images/sfondo-card.jpg);
+    border: 2px solid $background-fourth-color;
+    margin-bottom: 20px;
+}
+
+.f-d-payment {
+    width: 550px;
+}
+
+.f-d-border-bottom {
+    margin: 0 auto;
+    width: 50%;
+    height: 5px;
+    background-color: $background-fourth-color;
+    border: 1px solid $background-fourth-color;
+    border-radius: 5px;
+    margin: 5px 0 5px 0;
+}
+
+.f-d-button-delete {
+    color: white;
+    font-weight: bold;
+    background: linear-gradient(to right, $background-primary-color, red, $background-primary-color);
+    width: 150px;
+    height: 60px;
+    border-radius: 5px;
+
+}
+
+.f-d-button-confirm{
+    color: white;
+    font-weight: bold;
+    background: linear-gradient(to right, $background-primary-color, $background-tertiary-color, $background-primary-color);
+    width: 150px;
+    height: 60px;
+    border-radius: 5px;
+    a {
+        text-decoration: none;
+        color: white;
+    }
+}
+
+.gradientColor {
+    background: linear-gradient(to right, $background-fourth-color, $background-fourth-color, $background-fourth-color, $background-fourth-color, $background-fourth-color);
+    /* Gradient colors */
+    -webkit-background-clip: text;
+    /* For Safari */
+    -webkit-text-fill-color: transparent;
+    /* For Safari */
+    background-clip: text;
+    color: transparent;
+    font-size: 3rem;
+    /* Font size */
+    font-weight: bold;
+    /* Font weight */
+    text-align: center;
+    /* Center alignment */
+    padding: 10px 20px;
+    /* Padding */
+    border-radius: 10px;
+    /* Rounded corners */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* Box shadow */
+    text-transform: uppercase;
+    /* Uppercase text */
+    letter-spacing: 2px;
+    /* Spacing between letters */
+}
 
 .f-d-first-container {
     width: calc(100% / 2 - 40px);
@@ -307,6 +390,25 @@ export default {
 .f-d-second-container {
     width: calc(100% / 2 - 40px);
     height: 500px;
+}
+
+.f-d-form-cart {
+    width: 100%;
+    margin: 0 auto;
+    background-image: url(../../public/images/sfondo-card.jpg);
+    //height: 100%;
+    background: linear-gradient(to right,$background-primary-color);
+    border-radius: 10px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    padding: 10px;
+    font-weight: normal;
+    border: 2px solid $background-fourth-color; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
 }
 
 .f-d-container {
@@ -331,7 +433,7 @@ export default {
     justify-content: center;
     align-items: center;
     gap: 10px;
-    width: 100%;
+    width: 60%;
     height: calc(100% - 20px);
     border-radius: 10px;
     border: 4px solid $background-fourth-color;
@@ -340,19 +442,73 @@ export default {
     padding: 10px;
 }
 
-.f-d-border-bottom {
-    margin: 0 auto;
-    width: 50%;
-    height: 5px;
-    background-color: $background-fourth-color;
-    border: 1px solid $background-fourth-color;
-    border-radius: 5px;
-    margin: 5px 0 5px 0;
-}
+
 
 .is-invalid {
     border-color: red !important;
 }
 
-@media screen and (max-width: 320px) {}
+@media screen and (max-width: 576px) {
+    .f-d-form-cart {
+    width: 100%;
+    margin: 0 auto;
+    //height: 100%;
+    background: linear-gradient(to right,$background-primary-color);
+    border-radius: 10px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    padding: 10px;
+    font-weight: normal;
+    border: 2px solid $background-fourth-color; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+}
+
+@media screen and (max-width: 320px) {
+    .gradientColor {
+        background: linear-gradient(to right, $background-fourth-color, $background-fourth-color, $background-fourth-color, $background-fourth-color, $background-fourth-color);
+        /* Gradient colors */
+        -webkit-background-clip: text;
+        /* For Safari */
+        -webkit-text-fill-color: transparent;
+        /* For Safari */
+        background-clip: text;
+        color: transparent;
+        font-size: 25px;
+        /* Font size */
+        font-weight: bold;
+        /* Font weight */
+        text-align: center;
+        /* Center alignment */
+        padding: 10px 20px;
+        /* Padding */
+        border-radius: 10px;
+        /* Rounded corners */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        /* Box shadow */
+        text-transform: uppercase;
+        /* Uppercase text */
+        letter-spacing: 2px;
+        /* Spacing between letters */
+    }
+
+    .f-d-cart {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        width: 100%;
+        height: calc(100% - 20px);
+        border-radius: 10px;
+        border: 4px solid $background-fourth-color;
+        background-color: $background-primary-color;
+        color: white;
+        padding: 10px;
+    }
+}
 </style>
