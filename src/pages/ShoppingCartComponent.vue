@@ -145,7 +145,8 @@ export default {
         initializeBraintree() {
             dropin.create({
                 authorization: this.clientToken,
-                container: '#dropin-container'
+                container: '#dropin-container',
+                locale: 'it_IT'
             }, (error, instance) => {
                 if (error) {
                     console.error('Error initializing Braintree Drop-in:', error);
