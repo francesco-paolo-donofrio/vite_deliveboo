@@ -19,13 +19,13 @@
                         </ul>
 
                     </div>
-                    <!-- <div class="navigation-buttons">
+                    <div class="navigation-buttons">
                         <button @click="goBack" class="btn btn-outline-light mr-2">
                             <i class="fas fa-arrow-left"></i>
                         </button>
                         <button @click="goForward" class="btn btn-outline-light"> <i class="fas fa-arrow-right"></i>
                         </button>
-                    </div> -->
+                    </div>
                 </div>
 
                 <div class="user-account gap-3 d-flex fs-3 align-self-stretch align-items-end">
