@@ -24,15 +24,17 @@
                 <div v-if="restaurants.length === 0">
                     <h3 class="text-center text-white fw-bold">Nessun ristorante trovato che rientra in queste
                         tipologie:
-                        <div class="d-flex justify-content-center align-items-center">
-                            <ul class="list-unstyled w-50 d-flex justify-content-center align-items-center gap-3">
+                        <div class="d-flex justify-content-center align-items-center f-d-fourth-color">
+                            <span class="my-1" v-for="(name, index) in selectedtypesNames" :key="index">{{
+                                    name }}<span v-if="index < selectedtypesNames.length - 1">,&nbsp;</span></span>
+                            <!-- <ul class="list-unstyled w-50 d-flex justify-content-center align-items-center gap-3">
                                 <li class="f-d-fourth-color" v-for="(name, index) in selectedtypesNames" :key="index">{{
-                                    name }}</li>
-                            </ul>
+                                    name }},</li>
+                            </ul> -->
                         </div>
                         <div class="d-flex justify-content-center pt-3">
                             <div class="d-flex flex-column align-items-center w-100">
-                                <img src="../../public/images/not-found.webp" alt="notFoundImg">
+                                <img src="../../public/images/empty.png " alt="notFoundImg">
                             </div>
                         </div>
                     </h3>
