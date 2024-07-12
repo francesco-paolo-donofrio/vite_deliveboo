@@ -177,8 +177,8 @@ export default {
                 isValid = false;
             }
 
-            if (this.customer.phone.length < 10) {
-                this.errors.phone = 'Hm... Il numero non sembra corretto.';
+            if (this.customer.phone.length != 10) {
+                this.errors.phone = 'Hm... Il numero non sembra corretto: deve essere di 10 cifre';
                 isValid = false;
             }
 
