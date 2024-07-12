@@ -137,16 +137,58 @@ export default {
         text-decoration: none;
         color: white;
     }
-}
+  }
+  .card-img-top {
+    width: 100%;
+    height: 80px; /* Fissa l'altezza dell'immagine */
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
 
 @media screen and (min-width: 1200px) {
-  
+  .card {
+  width: 250px; /* Fissa la larghezza delle card */
+  height: 250px; /* Fissa l'altezza delle card */
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+  background-color: #fff;
 }
+}
+
+@media screen and (min-width: 1024px) {
+  .card {
+  width: 250px; /* Fissa la larghezza delle card */
+  height: 250px; /* Fissa l'altezza delle card */
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+  background-color: #fff;
+}
+}
+
+@media screen and (max-width: 768px) {
+  .card {
+  width: 250px; /* Fissa la larghezza delle card */
+  height: 250px; /* Fissa l'altezza delle card */
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+  background-color: #fff;
+}
+}
+
 
 @media screen and (max-width: 576px) {
     .card {
   width: 250px; /* Fissa la larghezza delle card */
-  height: 300px; /* Fissa l'altezza delle card */
+  height: 280px; /* Fissa l'altezza delle card */
   border: none;
   border-radius: 15px;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
@@ -162,11 +204,62 @@ export default {
   object-fit: cover;
   transition: transform 0.3s ease;
 }
+@media screen and (max-width: 425px) {
+    .card {
+  width: 250px; /* Fissa la larghezza delle card */
+  height: 280px; /* Fissa l'altezza delle card */
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+  background-color: #fff;
+}
+
+.single-line {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+}
+.card-img-top {
+  width: 100%;
+  height: 100px; /* Fissa l'altezza dell'immagine */
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+}
+
+@media screen and (max-width: 375px) {
+    .card {
+  width: 250px; /* Fissa la larghezza delle card */
+  height: 280px; /* Fissa l'altezza delle card */
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+  background-color: #fff;
+}
+
+.single-line {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+}
+.card-img-top {
+  width: 100%;
+  height: 100px; /* Fissa l'altezza dell'immagine */
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+}
 
 @media screen and (max-width: 320px) {
     .card {
   width: 250px; /* Fissa la larghezza delle card */
-  height: 300px; /* Fissa l'altezza delle card */
+  height: 280px; /* Fissa l'altezza delle card */
   border: none;
   border-radius: 15px;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);

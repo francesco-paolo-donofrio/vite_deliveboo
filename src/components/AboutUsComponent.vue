@@ -242,6 +242,122 @@ export default {
     /* Spacing between letters */
 }
 
+@media screen and (max-width: 1024px) {
+    .container {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .maps-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    text-align: center;
+    padding: 10px;
+    border: 2px solid black;
+    animation: borderAnimation 5s infinite;
+    border-radius: 10px;
+}
+
+.about-us-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    border: 2px solid black;
+    animation: borderAnimation 5s infinite;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.f-d-img-payment {
+    width: 10cap;
+    height: 50px;
+}
+
+.f-d-mini-container {
+    text-align: center;
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    flex-direction: column;
+    border: 2px solid black;
+    animation: borderAnimation 5s infinite;
+    border-radius: 10px;
+    border-top: none;
+}
+
+
+    
+}
+
+@media screen and (max-width: 768px) {
+    .container {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .maps-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    text-align: center;
+    padding: 10px;
+    border: 2px solid black;
+    animation: borderAnimation 5s infinite;
+    border-radius: 10px;
+}
+
+.about-us-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    border: 2px solid black;
+    animation: borderAnimation 5s infinite;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.f-d-img-payment {
+    width: 10cap;
+    height: 50px;
+}
+
+.f-d-mini-container {
+    text-align: center;
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    flex-direction: column;
+    border: 2px solid black;
+    animation: borderAnimation 5s infinite;
+    border-radius: 10px;
+    border-top: none;
+}
+
+
+    
+}
+
 @media screen and (max-width: 576px) {
     .container {
         width: 100%;
@@ -298,6 +414,204 @@ export default {
 
 
     
+}
+
+@media screen and (max-width: 425px) {
+    .container {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .f-d-flag {
+        display: flex;
+        flex-direction: column;    
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        gap: 20px;
+    }
+
+    .maps-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    text-align: center;
+    padding: 10px;
+    border: 2px solid black;
+    animation: borderAnimation 5s infinite;
+    border-radius: 10px;
+}
+
+.gradientColorTitle {
+    background: linear-gradient(to right, $background-fourth-color, $background-fourth-color, $background-primary-color, $background-fourth-color, $background-primary-color,  $background-fourth-color, $background-fourth-color); /* Gradient colors */
+    -webkit-background-clip: text; /* For Safari */
+    -webkit-text-fill-color: transparent; /* For Safari */
+    background-clip: text;
+    color: transparent;
+    font-size: 25px;
+    font-weight: bold; /* Font weight */
+    text-align: center; /* Center alignment */
+    padding: 10px 20px; /* Padding */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Box shadow */
+    text-transform: uppercase; /* Uppercase text */
+    letter-spacing: 2px; /* Spacing between letters */
+}
+
+.about-us-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    border: 2px solid black;
+    animation: borderAnimation 5s infinite;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.f-d-img-payment {
+    width: 10cap;
+    height: 50px;
+}
+
+.f-d-mini-container {
+    display: none;
+}
+
+.gradientColor {
+    background: linear-gradient(to right, $background-primary-color, $background-fourth-color, $background-primary-color, $background-fourth-color, $background-primary-color);
+    /* Gradient colors */
+    -webkit-background-clip: text;
+    /* For Safari */
+    -webkit-text-fill-color: transparent;
+    /* For Safari */
+    background-clip: text;
+    color: transparent;
+    font-size: 18px;
+    /* Font size */
+    font-weight: bold;
+    /* Font weight */
+    text-align: center;
+    /* Center alignment */
+    padding: 10px 20px;
+    /* Padding */
+    border-radius: 10px;
+    /* Rounded corners */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* Box shadow */
+    text-transform: uppercase;
+    /* Uppercase text */
+    letter-spacing: 2px;
+    /* Spacing between letters */
+}
+
+}
+
+@media screen and (max-width: 375px) {
+    .container {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .f-d-flag {
+        display: flex;
+        flex-direction: column;    
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        gap: 20px;
+    }
+
+    .maps-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    text-align: center;
+    padding: 10px;
+    border: 2px solid black;
+    animation: borderAnimation 5s infinite;
+    border-radius: 10px;
+}
+
+.gradientColorTitle {
+    background: linear-gradient(to right, $background-fourth-color, $background-fourth-color, $background-primary-color, $background-fourth-color, $background-primary-color,  $background-fourth-color, $background-fourth-color); /* Gradient colors */
+    -webkit-background-clip: text; /* For Safari */
+    -webkit-text-fill-color: transparent; /* For Safari */
+    background-clip: text;
+    color: transparent;
+    font-size: 25px;
+    font-weight: bold; /* Font weight */
+    text-align: center; /* Center alignment */
+    padding: 10px 20px; /* Padding */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Box shadow */
+    text-transform: uppercase; /* Uppercase text */
+    letter-spacing: 2px; /* Spacing between letters */
+}
+
+.about-us-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    border: 2px solid black;
+    animation: borderAnimation 5s infinite;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.f-d-img-payment {
+    width: 10cap;
+    height: 50px;
+}
+
+.f-d-mini-container {
+    display: none;
+}
+
+.gradientColor {
+    background: linear-gradient(to right, $background-primary-color, $background-fourth-color, $background-primary-color, $background-fourth-color, $background-primary-color);
+    /* Gradient colors */
+    -webkit-background-clip: text;
+    /* For Safari */
+    -webkit-text-fill-color: transparent;
+    /* For Safari */
+    background-clip: text;
+    color: transparent;
+    font-size: 18px;
+    /* Font size */
+    font-weight: bold;
+    /* Font weight */
+    text-align: center;
+    /* Center alignment */
+    padding: 10px 20px;
+    /* Padding */
+    border-radius: 10px;
+    /* Rounded corners */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* Box shadow */
+    text-transform: uppercase;
+    /* Uppercase text */
+    letter-spacing: 2px;
+    /* Spacing between letters */
+}
+
 }
 
 @media screen and (max-width: 320px) {

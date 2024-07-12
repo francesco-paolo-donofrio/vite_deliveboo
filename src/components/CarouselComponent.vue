@@ -187,6 +187,80 @@
   }
 }
 
+@media screen and (max-width: 425px) {
+  .typology-carousel {
+    border-radius: 0 !important;
+    width: 100%;
+    height: 200px;
+  }
+
+  #types-title {
+    h1 {
+        font-size: 25px;
+    }
+}
+
+  .nav-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #223440;
+    color: $background-fourth-color;
+    border: none;
+    padding: 15px;
+    margin: 0 15px;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 10000;
+    border-radius: 10px;
+  
+    &.prev {
+      left: 10px;
+    }
+  
+    &.next {
+      right: 10px;
+    }
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .typology-carousel {
+    border-radius: 0 !important;
+    width: 100%;
+    height: 200px;
+  }
+
+  #types-title {
+    h1 {
+        font-size: 25px;
+    }
+}
+
+  .nav-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #223440;
+    color: $background-fourth-color;
+    border: none;
+    padding: 15px;
+    margin: 0 15px;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 10000;
+    border-radius: 10px;
+  
+    &.prev {
+      left: 10px;
+    }
+  
+    &.next {
+      right: 10px;
+    }
+  }
+}
+
 @media screen and (max-width: 320px) {
   .typology-carousel {
     border-radius: 0 !important;

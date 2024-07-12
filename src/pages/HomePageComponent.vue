@@ -15,8 +15,8 @@
             <div class="text-center text-white fw-bold" v-if="restaurants.length != 0">Risultati trovati: {{
                 restaurants.length }}</div>
             <div class="row">
-                <div class="col-12 col-md-3 col-sm-6 mt-4 d-flex justify-content-center align-items-center" v-for="(item, index) in restaurants" :key="index">
-                    <div class="row ">
+                <div class="col-12 col-xl-3 col-lg-4 col-md-6 col-sm-6 mt-4 d-flex justify-content-center align-items-center" v-for="(item, index) in restaurants" :key="index">
+                    <div class="f-d-row">
                         <CardComponent :item="item" />
                     </div>
                 </div>
@@ -251,7 +251,55 @@ export default {
 }
 
 // mediaqueries
-@media screen and (max-width: 576px) {}
+
+@media screen and (max-width: 768px) {
+    .f-d-row {
+        display: flex;
+        align-items: start;
+        justify-content: start;
+        flex-wrap: wrap;
+    }
+    #types-title {
+        h1 {
+            font-size: 40px;
+        }
+    }
+
+}
+@media screen and (max-width: 576px) {
+    #types-title {
+        h1 {
+            font-size: 25px;
+        }
+    }
+
+    .gradientColor {
+    background: linear-gradient(to right, $background-fourth-color, $background-fourth-color, $background-primary-color, $background-fourth-color, $background-fourth-color);
+    /* Gradient colors */
+    -webkit-background-clip: text;
+    /* For Safari */
+    -webkit-text-fill-color: transparent;
+    /* For Safari */
+    background-clip: text;
+    color: transparent;
+    font-size: 25px;
+    /* Font size */
+    font-weight: bold;
+    /* Font weight */
+    text-align: center;
+    /* Center alignment */
+    padding: 10px 20px;
+    /* Padding */
+    border-radius: 10px;
+    /* Rounded corners */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* Box shadow */
+    text-transform: uppercase;
+    /* Uppercase text */
+    letter-spacing: 2px;
+    /* Spacing between letters */
+}
+}
 
 @media screen and (max-width: 320px) {
     #types-title {

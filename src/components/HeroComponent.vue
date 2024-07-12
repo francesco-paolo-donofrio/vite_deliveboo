@@ -107,6 +107,40 @@ export default {
   margin-bottom: 20px;
 }
 
+@media screen and (max-width: 768px) {
+
+.f-d-img-logo-hero {
+width: 50px;
+height: 50px;
+object-fit: cover;
+margin-bottom: 20px;
+}
+.hero-video-content {
+  width: 400px !important;
+  height: 300px !important;
+  position: absolute;
+  background-color: #223440c2;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  text-align: center;
+  z-index: 1;
+  display: flex;
+  border-radius: 20px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .f-d-gradientTitle {
+    font-size: 25px !important;
+  }
+  .f-d-display-none {
+display: flex !important;
+}
+}
+}
+
 
 @media screen and (max-width: 576px) {
 
@@ -140,6 +174,98 @@ export default {
   display: flex !important;
 }
   }
+}
+
+@media screen and (max-width: 425px) {
+  .f-d-img-logo-hero {
+  display: none;
+}
+  #hero {
+    width: 100%;
+    position: relative;
+
+    video {
+      width: 100%;
+    }
+  }
+
+  .hero-video-content {
+    width: 250px !important;
+    height: 170px !important;
+    position: absolute;
+    background-color: #223440c2;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    text-align: center;
+    z-index: 1;
+    display: flex;
+    border-radius: 20px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .f-d-gradientTitle {
+      font-size: 25px !important;
+    }
+    .f-d-display-none {
+  display: flex !important;
+}
+  }
+
+.fst-italic {
+  display: none !important;
+}
+
+
+
+}
+
+@media screen and (max-width: 375px) {
+  .f-d-img-logo-hero {
+  display: none;
+}
+  #hero {
+    width: 100%;
+    position: relative;
+
+    video {
+      width: 100%;
+    }
+  }
+
+  .hero-video-content {
+    width: 250px !important;
+    height: 170px !important;
+    position: absolute;
+    background-color: #223440c2;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    text-align: center;
+    z-index: 1;
+    display: flex;
+    border-radius: 20px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .f-d-gradientTitle {
+      font-size: 25px !important;
+    }
+    .f-d-display-none {
+  display: flex !important;
+}
+  }
+
+.fst-italic {
+  display: none !important;
+}
+
+
+
 }
 
 @media screen and (max-width: 320px) {
