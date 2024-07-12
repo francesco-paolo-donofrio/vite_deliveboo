@@ -81,8 +81,9 @@ export default {
         },
         totalAmount() {
             for (let i = 0; i < this.store.prevOrder.length; i++) {
-                return (this.store.prevOrder[i].price * this.store.prevOrder[i].quantity).toFixed(2);
+                let sum = this.store.prevOrder[i].price * this.store.prevOrder[i].quantity;
             }
+            return sum.toFixed(2);
         },
         totalPrice(item) {
             return (item.price * item.quantity).toFixed(2);
