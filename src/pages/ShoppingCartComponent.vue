@@ -1,5 +1,5 @@
 <template>
-    <div class="cart text-center mt-3">
+    <div class="cart text-center my-3">
         <div class="d-flex justify-content-center align-items-center flex-column" v-if="this.store.cart.length < 1">
             <div class="f-d-cart">
                 <h2>Carrello... vuoto!</h2>
@@ -8,8 +8,8 @@
             </div>
         </div>
         <div v-else>
-            <div class="d-flex justify-content-center align-items-center flex-column">
-                <div class="f-d-cart">
+            <div class="f-d-father-container">
+                <div class="f-d-cart mt-3">
                     <div class="cart d-flex flex-column align-items-center justify-content-center">
                         <h2 class="gradientColor fs-1">Carrello</h2>
                         <div class="f-d-border-bottom"></div>
@@ -24,66 +24,70 @@
                     </div>
                 </div>
 
+                <div class="d-flex flex-column justify-content-between align-items-center">
+                    <!-- FORM PER DATI CLIENTE -->
+                    <div class="container mt-3">
+                        <form class="f-d-form-cart" @submit.prevent="pay">
+                            <h2 class="fs-3">Compila il form per effettuare il pagamento</h2>
+                            <!-- NOME -->
+                            <div class="text-secondary mb-2">
+                                <label for="name" class="form-label text-start text-dark">Nome*</label>
+                                <input type="text" name="name" class="form-control" id="name" v-model="customer.name"
+                                    minlength="3" maxlength="200" placeholder="Inserisci il tuo nome"
+                                    :class="{ 'is-invalid': errors.name }" required>
+                                <div id="nameMessage" class="error-message text-danger">{{ errors.name }}</div>
+                            </div>
 
-                <!-- FORM PER DATI CLIENTE -->
-                <div class="container mt-3">
-                    <form class="f-d-form-cart" @submit.prevent="pay">
-                        <h2 class="gradientColor fs-2">Compila per pagare</h2>
-                        <!-- NOME -->
-                        <div class="text-secondary mb-2 text-center">
-                            <label for="name" class="form-label text-dark">Nome*</label>
-                            <input type="text" name="name" class="form-control" id="name" v-model="customer.name"
-                                minlength="3" maxlength="200" placeholder="Inserisci il tuo nome"
-                                :class="{ 'is-invalid': errors.name }" required>
-                            <div id="nameMessage" class="error-message text-danger">{{ errors.name }}</div>
+                            <!-- COGNOME -->
+                            <div class="text-secondary mb-2">
+                                <label for="surname" class="form-label text-dark">Cognome*</label>
+                                <input type="text" class="form-control" id="surname" name="surname"
+                                    v-model="customer.surname" minlength="3" maxlength="200"
+                                    placeholder="Inserisci il tuo cognome" :class="{ 'is-invalid': errors.surname }"
+                                    required>
+                                <div id="surnameMessage" class="error-message text-danger">{{ errors.surname }}</div>
+                            </div>
+
+                            <!-- TELEFONO -->
+                            <div class="text-secondary mb-2 ">
+                                <label for="phone" class="form-label text-dark">Numero di telefono*</label>
+                                <input type="tel" class="form-control" id="phone" name="phone" v-model="customer.phone"
+                                    minlength="3" maxlength="200" placeholder="Numero di telefono"
+                                    :class="{ 'is-invalid': errors.phone }" required>
+                                <div id="phoneMessage" class="error-message text-danger">{{ errors.phone }}</div>
+                            </div>
+
+                            <!-- EMAIL -->
+                            <div class="text-secondary mb-2 ">
+                                <label for="email" class="form-label text-dark">Indirizzo email*</label>
+                                <input type="email" class="form-control" id="email" name="email"
+                                    v-model="customer.email" minlength="3" maxlength="200"
+                                    placeholder="Inserisci il tuo email" :class="{ 'is-invalid': errors.email }"
+                                    required>
+                                <div id="emailMessage" class="error-message text-danger">{{ errors.email }}</div>
+                            </div>
+
+                            <!-- INDIRIZZO -->
+                            <div class="text-secondary mb-2 ">
+                                <label for="address" class="form-label text-dark">Indirizzo di consegna*</label>
+                                <input type="text" class="form-control" id="address" name="address"
+                                    v-model="customer.address" minlength="3" maxlength="200"
+                                    placeholder="Inserisci il tuo indirizzo" :class="{ 'is-invalid': errors.address }"
+                                    required>
+                                <div id="addressMessage" class="error-message text-danger">{{ errors.address }}</div>
+                            </div>
+
+                            <div class="mt-3 text-dark text-start"><span>* Campi obbligatori</span></div>
+                        </form>
+                    </div>
+                    <div>
+                        <div id="dropin-container"
+                            class="f-d-payment d-flex flex-column align-items-center justify-content-center"></div>
+                        <div class="d-flex justify-content-center gap-2">
+                            <button class="f-d-button-delete" @click="emptyCart">Svuota Carrello</button>
+                            <button class="f-d-button-confirm" @click="pay">Paga ora</button>
                         </div>
-
-                        <!-- COGNOME -->
-                        <div class="text-secondary mb-2 text-center">
-                            <label for="surname" class="form-label text-dark">Cognome*</label>
-                            <input type="text" class="form-control" id="surname" name="surname"
-                                v-model="customer.surname" minlength="3" maxlength="200"
-                                placeholder="Inserisci il tuo cognome" :class="{ 'is-invalid': errors.surname }"
-                                required>
-                            <div id="surnameMessage" class="error-message text-danger">{{ errors.surname }}</div>
-                        </div>
-
-                        <!-- TELEFONO -->
-                        <div class="text-secondary mb-2 text-center">
-                            <label for="phone" class="form-label text-dark">Numero di telefono*</label>
-                            <input type="tel" class="form-control" id="phone" name="phone" v-model="customer.phone"
-                                minlength="3" maxlength="200" placeholder="Numero di telefono"
-                                :class="{ 'is-invalid': errors.phone }" required>
-                            <div id="phoneMessage" class="error-message text-danger">{{ errors.phone }}</div>
-                        </div>
-
-                        <!-- EMAIL -->
-                        <div class="text-secondary mb-2 text-center">
-                            <label for="email" class="form-label text-dark">Indirizzo email*</label>
-                            <input type="email" class="form-control" id="email" name="email" v-model="customer.email"
-                                minlength="3" maxlength="200" placeholder="Inserisci il tuo email"
-                                :class="{ 'is-invalid': errors.email }" required>
-                            <div id="emailMessage" class="error-message text-danger">{{ errors.email }}</div>
-                        </div>
-
-                        <!-- INDIRIZZO -->
-                        <div class="text-secondary mb-2 text-center">
-                            <label for="address" class="form-label text-dark">Indirizzo di consegna*</label>
-                            <input type="text" class="form-control" id="address" name="address"
-                                v-model="customer.address" minlength="3" maxlength="200"
-                                placeholder="Inserisci il tuo indirizzo" :class="{ 'is-invalid': errors.address }"
-                                required>
-                            <div id="addressMessage" class="error-message text-danger">{{ errors.address }}</div>
-                        </div>
-
-                        <div class="mt-3 text-dark text-start"><span>* Campi obbligatori</span></div>
-                    </form>
-                </div>
-
-                <div id="dropin-container" class="f-d-payment d-flex flex-column align-items-center justify-content-center"></div>
-                <div class="d-flex justify-content-center gap-2">
-                    <button class="f-d-button-confirm" @click="pay">Paga ora</button>
-                    <button class="f-d-button-delete" @click="emptyCart">Svuota Carrello</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -312,14 +316,16 @@ export default {
 <style lang="scss" scoped>
 @use '../assets/styles/partials/_variables' as *;
 
-#dropin-container {
-    background-image: url(../../public/images/sfondo-card.jpg);
-    border: 2px solid $background-fourth-color;
-    margin-bottom: 20px;
+.f-d-father-container {
+    display: flex;
+    justify-content: center;
+    align-items: start;    
 }
 
 .f-d-payment {
     width: 550px;
+    background-image: url(../../public/images/sfondo-card.jpg);
+    margin-bottom: 20px;
 }
 
 .f-d-border-bottom {
@@ -342,13 +348,14 @@ export default {
 
 }
 
-.f-d-button-confirm{
+.f-d-button-confirm {
     color: white;
     font-weight: bold;
     background: linear-gradient(to right, $background-primary-color, $background-tertiary-color, $background-primary-color);
     width: 150px;
     height: 60px;
     border-radius: 5px;
+
     a {
         text-decoration: none;
         color: white;
@@ -397,18 +404,25 @@ export default {
     margin: 0 auto;
     background-image: url(../../public/images/sfondo-card.jpg);
     //height: 100%;
-    background: linear-gradient(to right,$background-primary-color);
+    background: linear-gradient(to right, $background-primary-color);
     border-radius: 10px;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     padding: 10px;
     font-weight: normal;
-    border: 2px solid $background-fourth-color; 
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
+    border-bottom: none;
+    text-align: start !important;
+    font-weight: bold;
+
+    h2 {
+        color: $background-primary-color;
+        text-transform: uppercase;
+        font-weight: bold;
+        text-align: center;
+        margin-bottom: 10px;
+        font-size: 1px;
+    }
+    
 }
 
 .f-d-container {
@@ -436,7 +450,7 @@ export default {
     width: 60%;
     height: calc(100% - 20px);
     border-radius: 10px;
-    border: 4px solid $background-fourth-color;
+    border: 2px solid $background-fourth-color;
     background-color: $background-primary-color;
     color: white;
     padding: 10px;
@@ -448,27 +462,19 @@ export default {
     border-color: red !important;
 }
 
-@media screen and (max-width: 576px) {
-    .f-d-form-cart {
-    width: 100%;
-    margin: 0 auto;
-    //height: 100%;
-    background: linear-gradient(to right,$background-primary-color);
-    border-radius: 10px;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    padding: 10px;
-    font-weight: normal;
-    border: 2px solid $background-fourth-color; 
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-}
-}
+@media screen and (max-width: 768px) {
+    .f-d-father-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        width: 100%;
+        height: 100%;
+        padding: 20px;
+        margin-bottom: 30px;
+    }
 
-@media screen and (max-width: 320px) {
     .gradientColor {
         background: linear-gradient(to right, $background-fourth-color, $background-fourth-color, $background-fourth-color, $background-fourth-color, $background-fourth-color);
         /* Gradient colors */
@@ -503,12 +509,124 @@ export default {
         align-items: center;
         gap: 10px;
         width: 100%;
-        height: calc(100% - 20px);
         border-radius: 10px;
         border: 4px solid $background-fourth-color;
         background-color: $background-primary-color;
         color: white;
-        padding: 10px;
     }
+
+
+
+    .f-d-form-cart {
+        margin: 0 auto;
+        //height: 100%;
+        background: linear-gradient(to right, $background-primary-color);
+        border-radius: 10px;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        padding: 10px;
+        font-weight: normal;
+        
+    }
+
+    .f-d-payment {
+    background-image: url(../../public/images/sfondo-card.jpg);
+    margin-bottom: 20px;
+}
+}
+
+@media screen and (max-width: 576px) {
+    .f-d-form-cart {
+        width: 100%;
+        margin: 0 auto;
+        //height: 100%;
+        background: linear-gradient(to right, $background-primary-color);
+        border-radius: 10px;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        padding: 10px;
+        font-weight: normal;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .f-d-father-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        width: 100%;
+        height: 100%;
+        padding: 20px;
+        margin-bottom: 30px;
+    }
+
+    .gradientColor {
+        background: linear-gradient(to right, $background-fourth-color, $background-fourth-color, $background-fourth-color, $background-fourth-color, $background-fourth-color);
+        /* Gradient colors */
+        -webkit-background-clip: text;
+        /* For Safari */
+        -webkit-text-fill-color: transparent;
+        /* For Safari */
+        background-clip: text;
+        color: transparent;
+        font-size: 25px;
+        /* Font size */
+        font-weight: bold;
+        /* Font weight */
+        text-align: center;
+        /* Center alignment */
+        padding: 10px 20px;
+        /* Padding */
+        border-radius: 10px;
+        /* Rounded corners */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        /* Box shadow */
+        text-transform: uppercase;
+        /* Uppercase text */
+        letter-spacing: 2px;
+        /* Spacing between letters */
+    }
+
+    .f-d-cart {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        width: 100%;
+        border-radius: 10px;
+        border: 4px solid $background-fourth-color;
+        background-color: $background-primary-color;
+        color: white;
+    }
+
+
+
+    .f-d-form-cart {
+        width: 300px;
+        margin: 0 auto;
+        //height: 100%;
+        background: linear-gradient(to right, $background-primary-color);
+        border-radius: 10px;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        padding: 10px;
+        font-weight: normal;
+        border: 2px solid $background-fourth-color;
+        
+    }
+
+    .f-d-payment {
+    width: 300px;
+    background-image: url(../../public/images/sfondo-card.jpg);
+    margin-bottom: 20px;
+}
 }
 </style>

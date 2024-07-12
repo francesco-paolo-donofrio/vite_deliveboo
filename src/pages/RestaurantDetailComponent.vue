@@ -160,7 +160,7 @@
                                         }}</em></p>
                                 <p>Prezzo: {{ selectedDish.price }}€</p>
                                 <div class="d-flex justify-content-center align-items-center gap-2">
-                                    <button class="btn f-d-delete-bg" @click="decreaseQuantity(selectedDish)">-</button>
+                                    <button class="f-d-button-delete" @click="decreaseQuantity(selectedDish)">-</button>
                                     <span>{{ getQuantityInCart(selectedDish.id) }}</span>
                                     <button class="btn f-d-confirm-bg" @click="increaseQuantity(selectedDish)">+</button>
                                 </div>
@@ -550,8 +550,8 @@ export default {
 }
 
 .quantity-control button {
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    height: 40px;
     padding: 0;
     display: flex;
     justify-content: center;
@@ -562,6 +562,22 @@ export default {
     padding: 70px 0 0 0;
 }
 
+.f-d-delete-bg {
+    font-weight: bold;
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(to right, $background-primary-color, red, $background-primary-color);
+    color: white;
+}
+
+.f-d-confirm-bg {
+    font-weight: bold;
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(to right, $background-primary-color, $background-tertiary-color, $background-primary-color);
+    color: white;
+}
+
 .f-d-button-delete {
     color: white;
     font-weight: bold;
@@ -569,18 +585,6 @@ export default {
     width: 100px;
     height: 60px;
     border-radius: 5px;
-
-}
-
-
-.f-d-delete-bg {
-    background: linear-gradient(to right, $background-primary-color, red, $background-primary-color);
-    color: white;
-}
-
-.f-d-confirm-bg {
-    background: linear-gradient(to right, $background-primary-color, $background-tertiary-color, $background-primary-color);
-    color: white;
 }
 
 .f-d-button-confirm{
