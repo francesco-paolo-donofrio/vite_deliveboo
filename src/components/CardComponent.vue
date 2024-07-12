@@ -7,7 +7,7 @@
           <div class="d-flex align-items-center justify-content-center">
               <small class="card-text " v-for="(type, index) in item.types" :key="index"> {{ type.name }} <span v-if="index < item.types.length - 1">,</span></small>
           </div>
-          <RouterLink :to="{ name: 'restaurant-detail', params: { id: item.id } }" class="btn f-d-button-confirm-homepage">Visualizza</RouterLink>
+          <RouterLink :to="{ name: 'restaurant-detail', params: { id: item.slug } }" class="btn f-d-button-confirm-homepage">Visualizza</RouterLink>
         </div>
       </div>
     </section>
