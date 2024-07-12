@@ -45,86 +45,85 @@
                 </div>
             </div>
 
-                <div class="f-d-bg-gradient">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-xl-8 col-sm-12 ">
-                                <h3 class="text-center text-uppercase py-3"><em class="text-white">Menù</em></h3>
-                                <div class="d-flex align-items-center justify-content-center flex-wrap">
-                                    <div class="f-d-card col-sm-12 col-xl-2"
-                                        v-for="(item, index) in restaurant.products" :key="index">
+            <div class="f-d-bg-gradient">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-8 col-sm-12 ">
+                            <h3 class="text-center text-uppercase py-3"><em class="text-white">Menù</em></h3>
+                            <div class="d-flex align-items-center justify-content-center flex-wrap">
+                                <div class="f-d-card col-sm-12 col-lg-3 col-xl-2" v-for="(item, index) in restaurant.products"
+                                    :key="index">
 
 
-                                        <div>
-                                        </div>
+                                    <div>
+                                    </div>
 
-                                        <div class="f-d-mini-container">
-                                            <img @click="openModal(item)" class="img-fluid"
-                                                :src="store.imgBasePath + item.image" :alt="item.name">
-                                        </div>
-                                        <div class="d-flex flex-column align-items-center justify-content-center gap-0">
-                                            <p class="text-center text-uppercase fw-bold single-line pointer">{{
-                                                item.name
-                                                }}
-                                            </p>
-                                            <p class="text-center text-uppercase fw-bold">{{ item.price }}€</p>
-                                            <div class="d-flex justify-content-center align-items-center gap-2 my-2">
-                                                <button class="btn btn-sm f-d-delete-bg"
-                                                    @click="decreaseQuantity(item)">-</button>
-                                                <span>{{ getQuantityInCart(item.id) }}</span>
-                                                <button class="btn btn-sm f-d-confirm-bg"
-                                                    @click="increaseQuantity(item)">+</button>
-                                            </div>
+                                    <div class="f-d-mini-container">
+                                        <img @click="openModal(item)" class="img-fluid"
+                                            :src="store.imgBasePath + item.image" :alt="item.name">
+                                    </div>
+                                    <div class="d-flex flex-column align-items-center justify-content-center gap-0">
+                                        <p class="text-center text-uppercase fw-bold single-line pointer">{{
+                                            item.name
+                                        }}
+                                        </p>
+                                        <p class="text-center text-uppercase fw-bold">{{ item.price }}€</p>
+                                        <div class="d-flex justify-content-center align-items-center gap-2 my-2">
+                                            <button class="btn btn-sm f-d-delete-bg"
+                                                @click="decreaseQuantity(item)">-</button>
+                                            <span>{{ getQuantityInCart(item.id) }}</span>
+                                            <button class="btn btn-sm f-d-confirm-bg"
+                                                @click="increaseQuantity(item)">+</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-xl-4 col-sm-12">
-                                <div id="cart-container">
-                                    <div>
-                                        <div
-                                            class="f-d-cart container d-flex flex-column justify-content-center align-items-center">
-                                            <div v-if="store.cart.length > 0">
+                        </div>
+                        <div class="col-xl-4 col-sm-12">
+                            <div id="cart-container">
+                                <div>
+                                    <div
+                                        class="f-d-cart container d-flex flex-column justify-content-center align-items-center">
+                                        <div v-if="store.cart.length > 0">
+                                            <div
+                                                class="cart d-flex flex-column align-items-center justify-content-center">
+                                                <h2 class="text-center">Stai ordinando da:</h2>
+                                                <h4>{{ cartName() }}</h4>
+                                                <div class="f-d-border-bottom"></div>
+                                                <div v-for="item in store.cart" :key="item.id">
+                                                    <p>x{{ item.quantity }}-{{ item.name }} - Totale: {{ item.price
+                                                        *
+                                                        item.quantity
+                                                        }}€
+                                                    </p>
+                                                </div>
+                                                <div class="f-d-border-bottom"></div>
+                                                <div>
+                                                    <h2>Totale carrello: {{ cartTotal() }}€</h2>
+                                                </div>
                                                 <div
-                                                    class="cart d-flex flex-column align-items-center justify-content-center">
-                                                    <h2 class="text-center">Stai ordinando da:</h2>
-                                                    <h4>{{ cartName() }}</h4>
-                                                    <div class="f-d-border-bottom"></div>
-                                                    <div v-for="item in store.cart" :key="item.id">
-                                                        <p>x{{ item.quantity }}-{{ item.name }} - Totale: {{ item.price
-                                                            *
-                                                            item.quantity
-                                                            }}€
-                                                        </p>
-                                                    </div>
-                                                    <div class="f-d-border-bottom"></div>
-                                                    <div>
-                                                        <h2>Totale carrello: {{ cartTotal() }}€</h2>
-                                                    </div>
-                                                    <div
-                                                        class="buttons d-flex align-items-center justify-content-center gap-3">
-                                                        <button class="f-d-button-delete"
-                                                            @click="emptyCart">Svuota</button>
-                                                        <button class="f-d-button-confirm">
-                                                            <router-link
-                                                                :to="{ name: 'shopping-cart' }">Procedi</router-link>
-                                                        </button>
-                                                    </div>
+                                                    class="buttons d-flex align-items-center justify-content-center gap-3">
+                                                    <button class="f-d-button-delete" @click="emptyCart">Svuota</button>
+                                                    <button class="f-d-button-confirm">
+                                                        <router-link
+                                                            :to="{ name: 'shopping-cart' }">Procedi</router-link>
+                                                    </button>
                                                 </div>
                                             </div>
-                                            <div v-else>
-                                                <div>Carrello vuoto!</div>
-                                            </div>
+                                        </div>
+                                        <div v-else>
+                                            <div>Carrello vuoto!</div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
                         </div>
+
                     </div>
+                </div>
 
 
-            
+
             </div>
         </div>
 
@@ -133,75 +132,77 @@
 
 
 
-            <!-- Modal -->
-            <div v-if="showModal" class="modal fade show d-block" tabindex="-1" role="dialog"
-                aria-labelledby="exampleModalLabel" aria-hidden="true" style="background-color: rgba(0, 0, 0, 0.5);">
-                <div class="modal-dialog modal-lg" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header d-flex justify-content-between">
-                            <h5 class="modal-title fs-3 gradientColor fw-bold" id="exampleModalLabel">{{ selectedDish.name }} di {{ restaurant.name
-                                }}
-                            </h5>
-                            <button type="button" class="f-d-close" @click="closeModal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
+        <!-- Modal -->
+        <div v-if="showModal" class="modal fade show d-block" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalLabel" aria-hidden="true" style="background-color: rgba(0, 0, 0, 0.5);">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header d-flex justify-content-between">
+                        <h5 class="modal-title fs-3 gradientColor fw-bold" id="exampleModalLabel">{{ selectedDish.name
+                            }} di {{ restaurant.name
+                            }}
+                        </h5>
+                        <button type="button" class="f-d-close" @click="closeModal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="d-flex flex-column align-items-center justify-content-center">
+                            <img v-if="selectedDish.image" :src="store.imgBasePath + selectedDish.image"
+                                :alt="selectedDish.name" class="f-d-modal-img-fluid">
                         </div>
-                        <div class="modal-body">
-                            <div class="d-flex flex-column align-items-center justify-content-center">
-                                <img v-if="selectedDish.image" :src="store.imgBasePath + selectedDish.image"
-                                    :alt="selectedDish.name" class="f-d-modal-img-fluid">
+                    </div>
+                    <div v-if="selectedDish.id" class="quantity-control">
+                        <div class="product-card d-flex flex-column align-items-center justify-content-center">
+                            <h3 class="gradientColor fw-bold">{{ selectedDish.name }}</h3>
+                            <p v-if="selectedDish.description"><em>{{
+                                selectedDish.description
+                            }}</em></p>
+                            <p>Prezzo: {{ selectedDish.price }}€</p>
+                            <div class="d-flex justify-content-center align-items-center gap-2">
+                                <button class="f-d-button-delete" @click="decreaseQuantity(selectedDish)">-</button>
+                                <span>{{ getQuantityInCart(selectedDish.id) }}</span>
+                                <button class="btn f-d-confirm-bg" @click="increaseQuantity(selectedDish)">+</button>
                             </div>
                         </div>
-                        <div v-if="selectedDish.id" class="quantity-control">
-                            <div class="product-card d-flex flex-column align-items-center justify-content-center">
-                                <h3 class="gradientColor fw-bold" >{{ selectedDish.name }}</h3>
-                                <p v-if="selectedDish.description"><em>{{
-                                    selectedDish.description
-                                        }}</em></p>
-                                <p>Prezzo: {{ selectedDish.price }}€</p>
-                                <div class="d-flex justify-content-center align-items-center gap-2">
-                                    <button class="f-d-button-delete" @click="decreaseQuantity(selectedDish)">-</button>
-                                    <span>{{ getQuantityInCart(selectedDish.id) }}</span>
-                                    <button class="btn f-d-confirm-bg" @click="increaseQuantity(selectedDish)">+</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer d-flex flex-column justify-content-center align-items-center">
-                            <p class="fw-bold">{{ getOrderSummary() }}</p>
-                        </div>
+                    </div>
+                    <div class="modal-footer d-flex flex-column justify-content-center align-items-center">
+                        <p class="fw-bold">{{ getOrderSummary() }}</p>
                     </div>
                 </div>
             </div>
-            <!--Alert Modal-->
-            <div v-if="alertModal" class="modal fade show d-block" tabindex="-1" role="dialog"
-                aria-labelledby="exampleModalLabel" aria-hidden="true" style="background-color: rgba(0, 0, 0, 0.5);">
-                <div class="modal-dialog modal-lg" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header d-flex justify-content-between">
-                            <h5 class="modal-title fs-2" id="exampleModalLabel">
-                                Attenzione!
-                            </h5>
-                            <button type="button" class="f-d-close" @click="closeAlertModal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <h5 class="fs-4">Nel carrello sono presenti piatti di un altro ristorante, puoi svuotare il carrello
-                                oppure
-                                effettuare il
-                                checkout!</h5>
-                        </div>
-                        <div class="modal-footer">
-                            <button class="f-d-button-delete" @click="emptyCart(); closeAlertModal()">Svuota</button>
-                            <button class="f-d-button-confirm"><router-link
+        </div>
+        <!--Alert Modal-->
+        <div v-if="alertModal" class="modal fade show d-block" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalLabel" aria-hidden="true" style="background-color: rgba(0, 0, 0, 0.5);">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header d-flex justify-content-between">
+                        <h5 class="modal-title fs-2" id="exampleModalLabel">
+                            Attenzione!
+                        </h5>
+                        <button type="button" class="f-d-close" @click="closeAlertModal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <h5 class="fs-4">Nel carrello sono presenti piatti di un altro ristorante, puoi svuotare il
+                            carrello
+                            oppure
+                            effettuare il
+                            checkout!</h5>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="f-d-button-delete" @click="emptyCart(); closeAlertModal()">Svuota</button>
+                        <button class="f-d-button-confirm"><router-link
                                 :to="{ name: 'shopping-cart' }">Procedi</router-link></button>
-                        </div>
                     </div>
                 </div>
             </div>
-
         </div>
-        <FooterComponent></FooterComponent>
+
+    </div>
+    <FooterComponent></FooterComponent>
 
 
 
@@ -587,13 +588,14 @@ export default {
     border-radius: 5px;
 }
 
-.f-d-button-confirm{
+.f-d-button-confirm {
     color: white;
     font-weight: bold;
     background: linear-gradient(to right, $background-primary-color, $background-tertiary-color, $background-primary-color);
     width: 100px;
     height: 60px;
     border-radius: 5px;
+
     a {
         text-decoration: none;
         color: white;
@@ -620,6 +622,131 @@ export default {
 
 }
 
+@media screen and (max-width: 1024px) {
+    #suggested {
+    margin-bottom: 20px;
+}
+
+.f-d-container-img {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border-radius: 20px;
+        gap: 20px;
+        width: 100%;
+        height: 100%;
+    }
+
+    .f-d-container-img {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border-radius: 20px;
+        gap: 20px;
+        width: 100%;
+        height: 100%;
+    }
+
+}
+
+@media screen and (max-width: 768px) {
+
+.f-d-mq-sm {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.f-d-cart {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    height: 90%;
+    border-radius: 10px;
+    border: 2px solid black;
+    background-color: white;
+
+    margin-bottom: 20px;
+}
+
+.f-d-flex {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+
+
+.f-d-card {
+    border: 1px solid $background-fourth-color;
+    border-left: none;
+    border-right: none;
+    border-radius: 10px;
+
+}
+
+#info-container {
+    display: flex;
+    margin: 0 auto;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+#cart-container {
+    display: none;
+}
+
+.f-d-mq-320-576 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.f-d-mini-container-type {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    gap: 10px;
+}
+
+.f-d-mini-container {
+    width: 70%;
+    height: 70%;
+    margin: 0 auto;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: lightgray;
+    gap: 10px;
+}
+
+.f-d-container-img {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    gap: 20px;
+    width: 80%;
+    height: 80%;
+}
+}
+
 @media screen and (max-width: 576px) {
     .f-d-container-img {
         display: flex;
@@ -631,7 +758,7 @@ export default {
         width: 80%;
         height: 100%;
     }
-    
+
     h1 {
         padding-top: 10px;
     }
@@ -721,6 +848,202 @@ export default {
         align-items: center;
         gap: 10px;
         list-style-type: none;
+    }
+}
+
+@media screen and (max-width: 425px) {
+
+    .f-d-mq-sm {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    .f-d-cart {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        width: 100%;
+        height: 90%;
+        border-radius: 10px;
+        border: 2px solid black;
+        background-color: white;
+
+        margin-bottom: 20px;
+    }
+
+    .f-d-flex {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    #suggested {
+        display: none;
+    }
+
+    .f-d-card {
+        border: 1px solid $background-fourth-color;
+        border-left: none;
+        border-right: none;
+        border-radius: 10px;
+
+    }
+
+    #info-container {
+        display: flex;
+        margin: 0 auto;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    #cart-container {
+        display: none;
+    }
+
+    .f-d-mq-320-576 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    .f-d-mini-container-type {
+        width: 50px;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        list-style: none;
+        gap: 10px;
+    }
+
+    .f-d-mini-container {
+        width: 80%;
+        height: 80%;
+        margin: 0 auto;
+        aspect-ratio: 1/1;
+        border-radius: 50%;
+        overflow: hidden;
+        background-color: lightgray;
+        gap: 10px;
+    }
+
+    .f-d-container-img {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border-radius: 20px;
+        gap: 20px;
+        width: 100%;
+        height: 100%;
+    }
+}
+
+@media screen and (max-width: 375px) {
+
+    .f-d-mq-sm {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    .f-d-cart {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        width: 100%;
+        height: 90%;
+        border-radius: 10px;
+        border: 2px solid black;
+        background-color: white;
+
+        margin-bottom: 20px;
+    }
+
+    .f-d-flex {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    #suggested {
+        display: none;
+    }
+
+    .f-d-card {
+        border: 1px solid $background-fourth-color;
+        border-left: none;
+        border-right: none;
+        border-radius: 10px;
+
+    }
+
+    #info-container {
+        display: flex;
+        margin: 0 auto;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    #cart-container {
+        display: none;
+    }
+
+    .f-d-mq-320-576 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    .f-d-mini-container-type {
+        width: 50px;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        list-style: none;
+        gap: 10px;
+    }
+
+    .f-d-mini-container {
+        width: 80%;
+        height: 80%;
+        margin: 0 auto;
+        aspect-ratio: 1/1;
+        border-radius: 50%;
+        overflow: hidden;
+        background-color: lightgray;
+        gap: 10px;
+    }
+
+    .f-d-container-img {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border-radius: 20px;
+        gap: 20px;
+        width: 100%;
+        height: 100%;
     }
 }
 
