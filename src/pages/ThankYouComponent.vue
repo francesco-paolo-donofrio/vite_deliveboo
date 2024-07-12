@@ -82,7 +82,7 @@ export default {
         totalAmount() {
             let sum = 0;
             for (let i = 0; i < this.store.prevOrder.length; i++) {
-               sum = this.store.prevOrder[i].price * this.store.prevOrder[i].quantity;
+               sum += this.store.prevOrder[i].price * this.store.prevOrder[i].quantity;
             }
             return sum.toFixed(2);
         },
