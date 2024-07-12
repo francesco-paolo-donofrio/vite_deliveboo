@@ -193,7 +193,8 @@
                         </div>
                         <div class="modal-footer">
                             <button class="f-d-button-delete" @click="emptyCart(); closeAlertModal()">Svuota</button>
-                            <button class="f-d-button-confirm">Checkout</button>
+                            <button class="f-d-button-confirm"><router-link
+                                :to="{ name: 'shopping-cart' }">Procedi</router-link></button>
                         </div>
                     </div>
                 </div>
