@@ -1,8 +1,7 @@
 <template>
     <HeroComponent />
-    <AboutUsComponent />
+    <DescriptionComponent />
     <CarouselComponent :types="types" :selectedTypes="selectedtypes" @typeSelected="toggleType" />
-
     <!-- <div class="d-flex justify-content-center">
         <button type="button" class="btn btn-primary mx-2 p-2" @click="sendTypes">Filtra</button>
         <button type="button" class="btn btn-secondary mx-2 p-2" @click="resetTypes">Reset</button>
@@ -40,6 +39,7 @@
             </div>
         </div>
     </div>
+    <AboutUsComponent />
     <FooterComponent />
 </template>
 
@@ -47,6 +47,7 @@
 import { store } from '../store';
 import axios from 'axios';
 import HeroComponent from '../components/HeroComponent.vue';
+import DescriptionComponent from '../components/DescriptionComponent.vue';
 import AboutUsComponent from '../components/AboutUsComponent.vue';
 import CardComponent from '../components/CardComponent.vue';
 import CarouselComponent from '../components/CarouselComponent.vue';
@@ -59,6 +60,7 @@ export default {
     components: {
         CardComponent,
         HeroComponent,
+        DescriptionComponent,
         CarouselComponent,
         AboutUsComponent,
         FooterComponent
@@ -167,6 +169,10 @@ export default {
 #types-title {
     margin: 10px 0;
     /* Margin around the title */
+}
+
+#restaurants-title {
+    background-image: url('../../public/images/sfondo-card.jpg');
 }
 
 .gradientColor {

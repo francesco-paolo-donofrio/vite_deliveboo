@@ -3,9 +3,9 @@
       <div class="card">
         <img class="card-img-top" :src="getImage" :alt="item.name">
         <div class="card-body">
-          <h5 class="card-title single-line">{{ item.name }}</h5>
+          <h5 class="card-title single-line fw-bold">{{ item.name }}</h5>
           <div class="d-flex align-items-center justify-content-center">
-              <small class="card-text " v-for="(type, index) in item.types" :key="index"> {{ type.name }} <span v-if="index < item.types.length - 1">,</span></small>
+              <small class="card-text " v-for="(type, index) in item.types" :key="index">{{ type.name }}<span v-if="index < item.types.length - 1">,</span></small>
           </div>
           <RouterLink :to="{ name: 'restaurant-detail', params: { id: item.id } }" class="btn f-d-button-confirm-homepage">Visualizza</RouterLink>
         </div>
@@ -89,6 +89,7 @@ export default {
   padding: 20px;
   text-align: center;
   height: calc(100% - 220px); /* Compensa l'altezza dell'immagine */
+  background-image: url('../../public/images/sfondo-card.jpg');
 }
 
 .card-title {
@@ -106,6 +107,7 @@ export default {
   display: block;
   margin-bottom: 20px;
   color: #555;
+  font-weight: bold;
 }
 
 .btn {
@@ -129,7 +131,7 @@ export default {
 .f-d-button-confirm-homepage{
     color: white;
     font-weight: bold;
-    background: linear-gradient(to right, $background-primary-color, $background-tertiary-color, $background-primary-color);
+    background: linear-gradient(to right, $background-primary-color, $background-secondary-color, $background-primary-color, $background-secondary-color, $background-primary-color);
     width: 100%;
     height: auto;
     border-radius: 5px;

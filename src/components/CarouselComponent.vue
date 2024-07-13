@@ -136,6 +136,7 @@
 
   #types-title {
     scroll-margin-bottom: 150px;
+    background-image: url('../../public/images/sfondo-card.jpg');
 }
 
 .gradientColor {

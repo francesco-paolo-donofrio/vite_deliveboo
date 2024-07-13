@@ -1,5 +1,7 @@
 <template>
-    <h1 class="gradientColorTitle">Panoramica</h1>
+    <div class="f-d-bg-title">
+    <h1 class="gradientColorTitle">Chi siamo</h1>
+</div>
     <div class="container">
         
         <div class="about-us-container">
@@ -21,18 +23,18 @@
                     <img class="f-d-img-payment" src="../../public/images/braintree.png" alt="">
                 </div>
                 <div class="f-d-mini-container ">
-                    <h4 class="gradientColorSmall f-d-bounce"><a href="http://localhost:8000/login">Registrati</a></h4>
+                    <h4 class="f-d-bounce "><a href="http://localhost:8000/login">Registrati</a></h4>
                     <ul class="align-items-start">
-                        <li>
+                        <li class="text-start">
                             Registrati e accedi
                         </li>
-                        <li>
-                            Crea un nuovo ristorante
+                        <li class="text-start">
+                            Crea ristorante
                         </li>
-                        <li>
-                            Aggiungi i tuoi prodotti
+                        <li class="text-start">
+                            Aggiungi prodotti
                         </li>
-                        <li>
+                        <li class="text-start">
                             Vendi i tuoi prodotti!
                         </li>
                         
@@ -67,6 +69,10 @@ export default {
 <style lang="scss" scoped>
 @use '../assets/styles/partials/_variables' as *;
 
+.f-d-bg-title {
+    background-image: url('../../public/images/sfondo-card.jpg');
+}
+
 .container {
     display: flex;
     justify-content: space-between;
@@ -75,8 +81,9 @@ export default {
 }
 
 .f-d-img-payment {
-    width: 150px;
-    height: 100px;
+    width: 180px;
+    height: 130px;
+    border-radius: 10px;
 }
 
 .about-us-container {
@@ -91,13 +98,6 @@ export default {
     padding: 10px;
     border-radius: 10px;
     background-image: url('../../public/images/sfondo-card.jpg');
-}
-
-.f-d-bounce {
-    display: inline-block;
-      animation: bounce 4s infinite;
-      text-decoration: none;
-      color: inherit;
 }
 
 @keyframes bounce {
@@ -189,10 +189,31 @@ export default {
     text-transform: uppercase;
     /* Uppercase text */
     letter-spacing: 2px;
-    /* Spacing between letters */
-    
+    /* Spacing between letters */    
 }
 
+.f-d-bounce {
+    display: inline-block;
+      animation: bounce 4s infinite;
+      text-decoration: none;
+      color: inherit;
+      background-color: $background-primary-color;
+      
+      border-radius: 5px;
+      cursor: pointer;
+      padding: 0 10px 0 10px;
+      
+      a {
+      text-decoration: none;
+      color: $background-fourth-color;
+      text-transform: uppercase;
+      &:hover {
+        color: $background-fifth-color;
+      }
+      
+      }
+      
+}
 .gradientColorSmall {
     background: linear-gradient(to right, $background-primary-color, $background-primary-color, $background-primary-color, $background-primary-color, $background-primary-color);
     /* Gradient colors */

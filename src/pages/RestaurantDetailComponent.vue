@@ -67,7 +67,9 @@
                                             item.name
                                         }}
                                         </p>
+                                        <div class="f-d-border-bottom-card"></div>
                                         <p class="text-center text-uppercase fw-bold">{{ item.price }}€</p>
+                                        <div class="f-d-border-bottom-card"></div>
                                         <div class="d-flex justify-content-center align-items-center gap-2 my-2">
                                             <button class="btn btn-sm f-d-delete-bg"
                                                 @click="decreaseQuantity(item)">-</button>
@@ -446,11 +448,19 @@ export default {
 }
 
 .f-d-card {
-    border: 1px solid $background-fourth-color;
+    border: 3px solid $background-fourth-color;
     border-radius: 10px;
     margin: 10px;
-
+    animation: borderAnimation 25s infinite;
 }
+
+@keyframes borderAnimation {
+      0% { border-color: $background-fourth-color; }
+      25% { border-color: $background-secondary-color; }
+      50% { border-color: $background-fourth-color;}
+      75% { border-color: $background-secondary-color; }
+      100% { border-color:$background-fourth-color; }
+    }
 
 #suggested {
     display: flex;
@@ -526,6 +536,17 @@ export default {
     border: 1px solid $background-fourth-color;
     border-radius: 5px;
     margin: 5px 0 5px 0;
+}
+
+.f-d-border-bottom-card {
+    width: 30%; 
+    margin: 0 auto;
+    height: 3px;
+    border: 1px solid $background-fourth-color;
+    background-color: $background-secondary-color;
+    border-radius: 5px;
+    margin: 5px 0 5px 0;
+    animation: borderAnimation 25s infinite;  
 }
 
 // css per troncare la parola e farla rimanere all'interno del contenitore senza che vada a capo
@@ -725,8 +746,8 @@ export default {
 }
 
 .f-d-mini-container {
-    width: 70%;
-    height: 70%;
+    width: 50%;
+    height: 50%;
     margin: 0 auto;
     aspect-ratio: 1/1;
     border-radius: 50%;
