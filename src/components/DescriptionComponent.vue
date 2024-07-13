@@ -6,7 +6,8 @@
         <div class="row ">
             <div class="col-lg-4">
                 <div class="f-d-admin-show">
-                    <h2 class="gradientColor">Amministratori</h2>
+                    <h2 class="gradientColor">Ordina Online</h2>
+                    <p class="gradientColorSmall-text"><em class="fw-bold">Ordina</em> online i tuoi piatti preferiti e attendi l'ordine direttamente dal divano di casa</p>
                     <CardDescriptionComponent />
                     <p>Fondata dall'idea di 4 studenti di Informatica e appassionati di cucina, <em
                             class="fw-bold gradientColorSmall">Deliveboo</em> è pronta ad entrare in scena a Roma,
@@ -17,19 +18,21 @@
             </div>
             <div class="col-lg-4">
                 <div class="maps-container">
-                    <h2 class="gradientColor">Amministratori</h2>
-                    <CardDescriptionComponent />
+                    <h2 class="gradientColor">Ristoratore</h2>
+                    <p class="gradientColorSmall-text"><em class="fw-bold">Gestisci</em> e controlla i tuoi ordini grazie al servizio di email offerto da Deliveboo</p>
                     <p>Fondata dall'idea di 4 studenti di Informatica e appassionati di cucina, <em
                             class="fw-bold gradientColorSmall">Deliveboo</em> è pronta ad entrare in scena a Roma,
                         provando ad
                         accontentare
                         e aiutando a sfamare i clienti della Capitale italiana.</p>
                 </div>
+                
             </div>
             <div class="col-lg-4">
                 <div class="about-us-container">
                     <div>
-                        <h2 class="gradientColor">La nostra Azienda</h2>
+                        <h2 class="gradientColor">Offerte</h2>
+                        <p class="gradientColorSmall-text"><em class="fw-bold">Approfitta</em> delle numerose offerte di Deliveboo per ordinare i piatti amati dalla tua famiglia</p>
                         
                     </div>
                     <div class="f-d-flag d-flex align-items-center justify-content-between">
@@ -328,7 +331,7 @@ export default {
 }
 
 .gradientColorSmall-text {
-    background: linear-gradient(to right, $background-tertiary-color, $background-fourth-color, $background-tertiary-color, $background-fourth-color, $background-tertiary-color);
+    background: linear-gradient(to right, $background-primary-color, $background-primary-color, $background-primary-color, $background-primary-color, $background-primary-color);
     /* Gradient colors */
     -webkit-background-clip: text;
     /* For Safari */
@@ -336,8 +339,6 @@ export default {
     /* For Safari */
     background-clip: text;
     color: transparent;
-    /* Font size */
-    font-weight: bold;
     /* Font weight */
     text-align: center;
     /* Padding */
