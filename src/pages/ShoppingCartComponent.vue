@@ -1,5 +1,8 @@
 <template>
-    <div class="cart text-center mt-3">
+    <div v-if="this.isLoading" class="loader">
+        Caricamento...
+    </div>
+    <div v-else class="cart text-center mt-3">
         <div class="d-flex justify-content-center align-items-center flex-column" v-if="this.store.cart.length < 1">
             <div class="f-d-cart">
                 <h2>Carrello... vuoto!</h2>
@@ -80,7 +83,8 @@
                     </form>
                 </div>
 
-                <div id="dropin-container" class="f-d-payment d-flex flex-column align-items-center justify-content-center"></div>
+                <div id="dropin-container"
+                    class="f-d-payment d-flex flex-column align-items-center justify-content-center"></div>
                 <div class="d-flex justify-content-center gap-2">
                     <button class="f-d-button-confirm" @click="pay">Paga ora</button>
                     <button class="f-d-button-delete" @click="emptyCart">Svuota Carrello</button>
@@ -102,6 +106,7 @@ export default {
             instance: null,
             store,
             products: [],
+            isLoading: false,
 
             //cart: [],
             customer: {
@@ -258,9 +263,12 @@ export default {
                 return;
             }
 
+            this.isLoading = true;
+
             this.instance.requestPaymentMethod((error, payload) => {
                 if (error) {
                     console.error('Error requesting payment method:', error);
+                    this.isLoading = false;
                     return;
                 }
 
@@ -286,6 +294,9 @@ export default {
                     })
                     .catch(error => {
                         console.error('Error processing payment:', error);
+                    })
+                    .finally(() => {
+                        this.isLoading = false;
                     });
             });
         },
@@ -343,13 +354,14 @@ export default {
 
 }
 
-.f-d-button-confirm{
+.f-d-button-confirm {
     color: white;
     font-weight: bold;
     background: linear-gradient(to right, $background-primary-color, $background-tertiary-color, $background-primary-color);
     width: 150px;
     height: 60px;
     border-radius: 5px;
+
     a {
         text-decoration: none;
         color: white;
@@ -398,13 +410,13 @@ export default {
     margin: 0 auto;
     background-image: url(../../public/images/sfondo-card.jpg);
     //height: 100%;
-    background: linear-gradient(to right,$background-primary-color);
+    background: linear-gradient(to right, $background-primary-color);
     border-radius: 10px;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     padding: 10px;
     font-weight: normal;
-    border: 2px solid $background-fourth-color; 
+    border: 2px solid $background-fourth-color;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -449,24 +461,31 @@ export default {
     border-color: red !important;
 }
 
+.loader {
+    /* Stili per il loader */
+    text-align: center;
+    font-size: 24px;
+    margin-top: 20px;
+}
+
 @media screen and (max-width: 576px) {
     .f-d-form-cart {
-    width: 100%;
-    margin: 0 auto;
-    //height: 100%;
-    background: linear-gradient(to right,$background-primary-color);
-    border-radius: 10px;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    padding: 10px;
-    font-weight: normal;
-    border: 2px solid $background-fourth-color; 
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-}
+        width: 100%;
+        margin: 0 auto;
+        //height: 100%;
+        background: linear-gradient(to right, $background-primary-color);
+        border-radius: 10px;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        padding: 10px;
+        font-weight: normal;
+        border: 2px solid $background-fourth-color;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+    }
 }
 
 @media screen and (max-width: 320px) {
