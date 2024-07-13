@@ -1,6 +1,6 @@
 <template>
     <div class="f-d-bg-title">
-    <h1 class="gradientColorTitle">Deliveboo, <em class="gradientColorMini">una cucina online a Roma, solo per te</em></h1>
+    <h1 class="gradientColorTitle">Deliveboo, <em class="gradientColorMini">la ristorazione a portata di mano</em></h1>
 </div>
     <div class="container">
         <div class="row ">
@@ -191,7 +191,7 @@ export default {
 }
 
 .gradientColorMini {
-    background: linear-gradient(to right, $background-primary-color, $background-primary-color, $background-primary-color, $background-fourth-color, $background-primary-color, $background-fourth-color, $background-primary-color);
+    background: linear-gradient(to right, $background-primary-color, $background-primary-color);
     /* Gradient colors */
     -webkit-background-clip: text;
     /* For Safari */
@@ -199,7 +199,7 @@ export default {
     /* For Safari */
     background-clip: text;
     color: transparent;
-    font-size: 1rem;
+    font-size: 23px;
     /* Font size */
     font-weight: bold;
     /* Font weight */
