@@ -1,7 +1,7 @@
 <template>
-    <div v-if="this.isLoading" class="f-d-form-cart d-none" id="loader">
+    <!-- <div v-if="this.isLoading" class="f-d-form-cart d-none" id="loader">
         Caricamento...
-    </div>
+    </div> -->
     <div class="cart text-center mt-3">
         <div class="d-flex justify-content-center align-items-center flex-column" v-if="this.store.cart.length < 1">
             <div class="f-d-cart">
@@ -263,8 +263,6 @@ export default {
                 return;
             }
 
-            this.isLoading = true;
-
             this.instance.requestPaymentMethod((error, payload) => {
                 if (error) {
                     console.error('Error requesting payment method:', error);
@@ -309,7 +307,6 @@ export default {
     },
     mounted() {
         this.getClientToken();
-        this.isLoading = false;
     },
     created() {
         this.loadCart();
