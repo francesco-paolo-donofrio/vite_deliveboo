@@ -1,7 +1,14 @@
 <template>
-    <h2 class="container my-3">Riepilogo del tuo ultimo ordine:</h2>
+<div class ="shadow-container my-4">
+    <div class="card-2 text-center container my-3">
+        <i class="pt-4 fa-regular fa-circle-check"></i>
+        <h5 class="text-center pt-4">Il pagamento è andato a buon fine
+        <br>Grazie per averci scelto!</h5>
+        <h6 class="text-center">L'ordine è stato preso in carico da:<br>{{ restaurantName }}</h6>
+
+    <h6 id="order-summary" class="ps-4 my-3">Riepilogo dell'ordine:</h6>
     <div class="container">
-        <div class="my-3">Il tuo piatto è servito dal ristorante {{ this.restaurantName }}</div>
+       
         <table class="table borderless">
             <thead>
                 <tr>
@@ -31,10 +38,12 @@
                 </tr>
             </tbody>
         </table>
-        <h3 class="text-center">Grazie per averci scelto!</h3>
-        <div class="text-center mb-3">A breve riceverai una mail di conferma con i dettagli del tuo ordine</div>
-        <div class="countdown container my-3 text-center">Tra {{ countdown }} secondi verrai reindirizzato in <a href="/">homepage</a> per scoprire altri fantastici ristoranti</div>
+        <div class="px-2"><small id="footer-text" class="text-center">A breve riceverai un'email di conferma con i dettagli dell'ordine</small></div>
+       <div class="countdown container my-3 text-center">Tra {{ countdown }} secondi verrai reindirizzato alla <a href="/">homepage</a> per scoprire altri fantastici ristoranti</div>
     </div>
+    </div>
+   
+</div>
     
     <FooterComponent id="footer"></FooterComponent>
 </template>
@@ -63,9 +72,9 @@ export default {
     mounted() {
         this.startCountdown();
         // console.log(this.store.prevOrder);
-        // this.getRestaurantId();
+        this.getRestaurantId();
         // console.log(this.restaurantId);
-        // this.getSingleRestaurant();
+        this.getSingleRestaurant();
     },
     methods: {
         startCountdown() {
@@ -115,9 +124,139 @@ li {
     border: none;
 }
 
-// #footer{
-//     position: absolute;
-//     bottom: 0;
-//     width: 100%;
-// }
+.shadow-container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0; 
+}
+
+.card-2 {
+    width: 800px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-shadow: rgba(0, 0, 0, 0.4) -5px 5px, rgba(0, 0, 0, 0.3) -10px 10px, rgba(0, 46, 170, 0.2) -15px 15px, rgba(0, 0, 0, 0.1) -10px 10px, rgba(0, 0, 0, 0.05) 0 0;
+    margin: 0 auto;
+    padding: 20px; 
+}
+
+.fa-circle-check {
+    color: green;
+    font-size: 4.5em;
+}
+
+h5 {
+    font-size: 1.5em;
+    text-align: center;
+}
+
+h6 {
+    font-size: 1em;
+    text-align: center;
+}
+
+#footer-text {
+    font-size: 1em;
+    text-align: center;
+}
+
+.countdown {
+    font-size: 0.5em;
+    text-align: center;
+}
+/* MEDIA QUERIES' */
+
+/* Tablet (768px e oltre) */
+@media (max-width: 768px) {
+    .card-2 {
+        width: 600px;
+        margin: 20px;
+    }
+
+    .fa-circle-check {
+        font-size: 3em;
+    }
+
+    h5 {
+        font-size: 1.5em;
+    }
+
+    h6 {
+        font-size: 1.2em;
+    }
+
+    #footer-text {
+        font-size: 0.8em;
+    }
+
+    .countdown {
+        font-size: 0.5em;
+    }
+}
+
+/* Smartphone medi (480px e oltre) */
+@media (max-width: 480px) {
+    .card-2 {
+        width: 400px;
+        margin: 15px; 
+    }
+
+    .fa-circle-check {
+        font-size: 2.5em;
+    }
+
+    h5 {
+        font-size: 1.2em;
+    }
+
+    h6 {
+        font-size: 1em;
+    }
+
+    #footer-text {
+        font-size: 0.7em;
+    }
+
+    .countdown {
+        font-size: 0.4em;
+    }
+}
+
+/* Smartphone piccoli (320px e oltre) */
+@media (max-width: 320px) {
+    .card-2 {
+        width: 300px;
+        margin: 10px; 
+    }
+
+    .fa-circle-check {
+        font-size: 2em;
+    }
+
+    h5 {
+        font-size: 0.8em;
+    }
+
+    h6 {
+        font-size: 0.6em;
+    }
+
+    #footer-text {
+        font-size: 0.5em;
+    }
+
+    .countdown {
+        font-size: 0.4em;
+    }
+
+    .table {
+        display: none;
+    }
+
+    #order-summary{
+        display: none;
+    }
+}
 </style>
