@@ -383,7 +383,7 @@ header {
 
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 425px) {
     .navigation-buttons {
         margin-left: 0;
     }
@@ -392,6 +392,32 @@ header {
     
     #f-d-custom-nav {
         width: 100% !important;
+    }
+
+}
+
+@media screen and (max-width: 375px) {
+    .navigation-buttons {
+        margin-left: 0;
+    }
+
+    
+    
+    #f-d-custom-nav {
+        width: 100% !important;
+    }
+
+}
+
+@media screen and (max-width: 320px) {
+    .navigation-buttons {
+        margin-left: 0;
+    }
+
+    
+    
+    #f-d-custom-nav {
+        width: 105% !important;
     }
 
 }

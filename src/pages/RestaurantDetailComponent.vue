@@ -50,9 +50,14 @@
                     <div class="row">
                         <div class="col-xl-8 col-sm-12 ">
                             <h3 class="text-center text-uppercase py-3"><em class="text-white">Menù</em></h3>
+
+                            <div class="d-flex align-items-center justify-content-center flex-wrap">
+                                <div class="f-d-card col-sm-12 col-lg-3 col-xl-2" v-for="(item, index) in restaurant.products"
+
                             <h5 class="text-center py-3">{{ infoMessage}}</h5>
                             <div class="d-flex align-items-center justify-content-center flex-wrap">
                                 <div class="f-d-card col-sm-12 col-xl-2" v-for="(item, index) in restaurant.products"
+
                                     :key="index">
 
 
@@ -68,7 +73,10 @@
                                             item.name
                                         }}
                                         </p>
+
+                                        <div class="f-d-border-bottom-card"></div>
                                         <p class="text-center text-uppercase fw-bold">{{ item.price }}€</p>
+                                        <div class="f-d-border-bottom-card"></div>
                                         <div class="d-flex justify-content-center align-items-center gap-2 my-2">
                                             <button class="btn btn-sm f-d-delete-bg"
                                                 @click="decreaseQuantity(item)">-</button>
@@ -119,6 +127,7 @@
                                 </div>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -185,7 +194,14 @@
                     <div class="modal-body">
                         <h5 class="fs-4">Nel carrello sono presenti piatti di un altro ristorante, puoi svuotare il
                             carrello
-                            oppure
+                            oppure completare il pagamento
+                      </h5>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="f-d-button-delete" @click="emptyCart(); closeAlertModal()">Svuota</button>
+                        <button class="f-d-button-confirm"><router-link
+                                :to="{ name: 'shopping-cart' }">Procedi</router-link></button>
+
                             effettuare l'ordine</h5>
                     </div>
                     <div class="modal-footer">
@@ -196,6 +212,7 @@
                 </div>
             </div>
         </div>
+
     </div>
     <FooterComponent></FooterComponent>
 
@@ -448,11 +465,19 @@ export default {
 }
 
 .f-d-card {
-    border: 1px solid $background-fourth-color;
+    border: 3px solid $background-fourth-color;
     border-radius: 10px;
     margin: 10px;
-
+    animation: borderAnimation 25s infinite;
 }
+
+@keyframes borderAnimation {
+      0% { border-color: $background-fourth-color; }
+      25% { border-color: $background-secondary-color; }
+      50% { border-color: $background-fourth-color;}
+      75% { border-color: $background-secondary-color; }
+      100% { border-color:$background-fourth-color; }
+    }
 
 #suggested {
     display: flex;
@@ -530,6 +555,17 @@ export default {
     margin: 5px 0 5px 0;
 }
 
+.f-d-border-bottom-card {
+    width: 30%; 
+    margin: 0 auto;
+    height: 3px;
+    border: 1px solid $background-fourth-color;
+    background-color: $background-secondary-color;
+    border-radius: 5px;
+    margin: 5px 0 5px 0;
+    animation: borderAnimation 25s infinite;  
+}
+
 // css per troncare la parola e farla rimanere all'interno del contenitore senza che vada a capo
 .single-line {
     white-space: nowrap;
@@ -553,8 +589,8 @@ export default {
 }
 
 .quantity-control button {
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    height: 40px;
     padding: 0;
     display: flex;
     justify-content: center;
@@ -565,6 +601,23 @@ export default {
     padding: 70px 0 0 0;
 }
 
+.f-d-delete-bg {
+    font-weight: bold;
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(to right, $background-primary-color, red, $background-primary-color);
+    color: white;
+}
+
+.f-d-confirm-bg {
+    font-weight: bold;
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(to right, $background-primary-color, $background-tertiary-color, $background-primary-color);
+    color: white;
+}
+
+
 .f-d-button-delete {
     color: white;
     font-weight: bold;
@@ -572,19 +625,8 @@ export default {
     width: 100px;
     height: 60px;
     border-radius: 5px;
-
 }
 
-
-.f-d-delete-bg {
-    background: linear-gradient(to right, $background-primary-color, red, $background-primary-color);
-    color: white;
-}
-
-.f-d-confirm-bg {
-    background: linear-gradient(to right, $background-primary-color, $background-tertiary-color, $background-primary-color);
-    color: white;
-}
 
 .f-d-button-confirm {
     color: white;
@@ -618,6 +660,131 @@ export default {
         height: 100%;
     }
 
+}
+
+@media screen and (max-width: 1024px) {
+    #suggested {
+    margin-bottom: 20px;
+}
+
+.f-d-container-img {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border-radius: 20px;
+        gap: 20px;
+        width: 100%;
+        height: 100%;
+    }
+
+    .f-d-container-img {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border-radius: 20px;
+        gap: 20px;
+        width: 100%;
+        height: 100%;
+    }
+
+}
+
+@media screen and (max-width: 768px) {
+
+.f-d-mq-sm {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.f-d-cart {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    height: 90%;
+    border-radius: 10px;
+    border: 2px solid black;
+    background-color: white;
+
+    margin-bottom: 20px;
+}
+
+.f-d-flex {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+
+
+.f-d-card {
+    border: 1px solid $background-fourth-color;
+    border-left: none;
+    border-right: none;
+    border-radius: 10px;
+
+}
+
+#info-container {
+    display: flex;
+    margin: 0 auto;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+#cart-container {
+    display: none;
+}
+
+.f-d-mq-320-576 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.f-d-mini-container-type {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    gap: 10px;
+}
+
+.f-d-mini-container {
+    width: 50%;
+    height: 50%;
+    margin: 0 auto;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: lightgray;
+    gap: 10px;
+}
+
+.f-d-container-img {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    gap: 20px;
+    width: 80%;
+    height: 80%;
+}
 }
 
 @media screen and (max-width: 576px) {
@@ -721,6 +888,202 @@ export default {
         align-items: center;
         gap: 10px;
         list-style-type: none;
+    }
+}
+
+@media screen and (max-width: 425px) {
+
+    .f-d-mq-sm {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    .f-d-cart {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        width: 100%;
+        height: 90%;
+        border-radius: 10px;
+        border: 2px solid black;
+        background-color: white;
+
+        margin-bottom: 20px;
+    }
+
+    .f-d-flex {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    #suggested {
+        display: none;
+    }
+
+    .f-d-card {
+        border: 1px solid $background-fourth-color;
+        border-left: none;
+        border-right: none;
+        border-radius: 10px;
+
+    }
+
+    #info-container {
+        display: flex;
+        margin: 0 auto;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    #cart-container {
+        display: none;
+    }
+
+    .f-d-mq-320-576 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    .f-d-mini-container-type {
+        width: 50px;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        list-style: none;
+        gap: 10px;
+    }
+
+    .f-d-mini-container {
+        width: 80%;
+        height: 80%;
+        margin: 0 auto;
+        aspect-ratio: 1/1;
+        border-radius: 50%;
+        overflow: hidden;
+        background-color: lightgray;
+        gap: 10px;
+    }
+
+    .f-d-container-img {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border-radius: 20px;
+        gap: 20px;
+        width: 100%;
+        height: 100%;
+    }
+}
+
+@media screen and (max-width: 375px) {
+
+    .f-d-mq-sm {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    .f-d-cart {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        width: 100%;
+        height: 90%;
+        border-radius: 10px;
+        border: 2px solid black;
+        background-color: white;
+
+        margin-bottom: 20px;
+    }
+
+    .f-d-flex {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    #suggested {
+        display: none;
+    }
+
+    .f-d-card {
+        border: 1px solid $background-fourth-color;
+        border-left: none;
+        border-right: none;
+        border-radius: 10px;
+
+    }
+
+    #info-container {
+        display: flex;
+        margin: 0 auto;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    #cart-container {
+        display: none;
+    }
+
+    .f-d-mq-320-576 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    .f-d-mini-container-type {
+        width: 50px;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        list-style: none;
+        gap: 10px;
+    }
+
+    .f-d-mini-container {
+        width: 80%;
+        height: 80%;
+        margin: 0 auto;
+        aspect-ratio: 1/1;
+        border-radius: 50%;
+        overflow: hidden;
+        background-color: lightgray;
+        gap: 10px;
+    }
+
+    .f-d-container-img {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border-radius: 20px;
+        gap: 20px;
+        width: 100%;
+        height: 100%;
     }
 }
 

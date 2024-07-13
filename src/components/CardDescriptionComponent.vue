@@ -5,11 +5,25 @@
       :modules="modules"
       class="mySwiper"
     >
-    
-      <swiper-slide><img class="w-100" src="../../public/images/avatar1.jpg" alt=""></swiper-slide>
-      <swiper-slide><img class="w-100" src="../../public/images/avatar2.avif" alt=""></swiper-slide>
-      <swiper-slide><img class="w-100" src="../../public/images/placeholder-restaurant.png" alt=""></swiper-slide>
-      <swiper-slide><img class="w-100" src="../../public/images/placeholder-restaurant.png" alt=""></swiper-slide>
+    <swiper-slide class="bg-dark">
+        <div class="d-flex flex-column align-items-center justify-content-center">
+        <h4 class="">Registrati</h4>
+        <img class="w-100" src="../../public/images/img-backend2.png" alt="">
+      </div>
+      </swiper-slide>
+      <swiper-slide class="bg-dark">
+        <div class="d-flex flex-column align-items-center justify-content-center">
+        <h4 class="">Compila il form</h4>
+        <img class="w-100" src="../../public/images/img-backend3.png" alt="">
+      </div>
+      </swiper-slide>
+      <swiper-slide class="bg-dark">
+        <div class="d-flex flex-column align-items-center justify-content-center">
+        <h4 class="">Organizza</h4>
+        <img class="w-100" src="../../public/images/img-backend.png" alt="">
+      </div>
+      </swiper-slide>
+      
     </swiper>
   </template>
   
