@@ -1,8 +1,8 @@
 <template>
-    <div v-if="this.isLoading" class="loader">
+    <div v-if="this.isLoading" class="f-d-form-cart d-none" id="loader">
         Caricamento...
     </div>
-    <div v-else class="cart text-center mt-3">
+    <div class="cart text-center mt-3">
         <div class="d-flex justify-content-center align-items-center flex-column" v-if="this.store.cart.length < 1">
             <div class="f-d-cart">
                 <h2>Carrello... vuoto!</h2>
@@ -268,7 +268,6 @@ export default {
             this.instance.requestPaymentMethod((error, payload) => {
                 if (error) {
                     console.error('Error requesting payment method:', error);
-                    this.isLoading = false;
                     return;
                 }
 
@@ -295,9 +294,6 @@ export default {
                     .catch(error => {
                         console.error('Error processing payment:', error);
                     })
-                    .finally(() => {
-                        this.isLoading = false;
-                    });
             });
         },
         cartName() {
@@ -313,6 +309,7 @@ export default {
     },
     mounted() {
         this.getClientToken();
+        this.isLoading = false;
     },
     created() {
         this.loadCart();
@@ -466,6 +463,18 @@ export default {
     text-align: center;
     font-size: 24px;
     margin-top: 20px;
+    border: 2px solid $background-fourth-color;
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 100px;
+    width: 80%;
+    height: 100vh;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: $background-primary-color;
+    color: $background-fourth-color;
 }
 
 @media screen and (max-width: 576px) {
