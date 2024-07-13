@@ -5,7 +5,6 @@
     <!-- <div v-if="this.isLoading" class="f-d-form-cart d-none" id="loader">
         Caricamento...
     </div> -->
-    <div class="cart text-center mt-3">
 
         <div class="d-flex justify-content-center align-items-center flex-column" v-if="this.store.cart.length < 1">
             <div class="f-d-cart">
@@ -493,6 +492,7 @@ export default {
         padding: 20px;
         margin-bottom: 30px;
     }
+}
 
     .gradientColor {
         background: linear-gradient(to right, $background-fourth-color, $background-fourth-color, $background-fourth-color, $background-fourth-color, $background-fourth-color);
@@ -551,6 +551,7 @@ export default {
     .f-d-payment {
     background-image: url(../../public/images/sfondo-card.jpg);
     margin-bottom: 20px;
+    }
 
 .loader {
     /* Stili per il loader */

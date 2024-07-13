@@ -51,10 +51,10 @@
                         <div class="col-xl-8 col-sm-12 ">
                             <h3 class="text-center text-uppercase py-3"><em class="text-white">Menù</em></h3>
 
-                            <div class="d-flex align-items-center justify-content-center flex-wrap">
-                                <div class="f-d-card col-sm-12 col-lg-3 col-xl-2" v-for="(item, index) in restaurant.products"
+                            <!-- <div class="d-flex align-items-center justify-content-center flex-wrap">
+                                <div class="f-d-card col-sm-12 col-lg-3 col-xl-2" v-for="(item, index) in restaurant.products" -->
 
-                            <h5 class="text-center py-3">{{ infoMessage}}</h5>
+                            <h5> class="text-center py-3">{{ infoMessage}}</h5>
                             <div class="d-flex align-items-center justify-content-center flex-wrap">
                                 <div class="f-d-card col-sm-12 col-xl-2" v-for="(item, index) in restaurant.products"
 
@@ -196,13 +196,6 @@
                             carrello
                             oppure completare il pagamento
                       </h5>
-                    </div>
-                    <div class="modal-footer">
-                        <button class="f-d-button-delete" @click="emptyCart(); closeAlertModal()">Svuota</button>
-                        <button class="f-d-button-confirm"><router-link
-                                :to="{ name: 'shopping-cart' }">Procedi</router-link></button>
-
-                            effettuare l'ordine</h5>
                     </div>
                     <div class="modal-footer">
                         <button class="f-d-button-delete" @click="emptyCart(); closeAlertModal()">Svuota</button>
