@@ -7,7 +7,7 @@
         <button type="button" class="btn btn-secondary mx-2 p-2" @click="resetTypes">Reset</button>
     </div> -->
     <div id="restaurants-title">
-        <h1 class="gradientColor text-center">Ristoranti</h1>
+        <h1 class="gradientColor text-center">Ristoranti, <em class="gradientColorMini">ordina dal tuo ristorante preferito</em></h1>
     </div>
     <div class="f-d-gradient-not-found-message">
         <div id="restaurants" class="container my-4 ">
@@ -173,6 +173,33 @@ export default {
     /* Margin around the title */
 }
 
+.gradientColorMini {
+    background: linear-gradient(to right, $background-primary-color, $background-primary-color);
+    /* Gradient colors */
+    -webkit-background-clip: text;
+    /* For Safari */
+    -webkit-text-fill-color: transparent;
+    /* For Safari */
+    background-clip: text;
+    color: transparent;
+    font-size: 23px;
+    /* Font size */
+    font-weight: bold;
+    /* Font weight */
+    text-align: center;
+    /* Center alignment */
+    padding: 10px 20px;
+    /* Padding */
+    border-radius: 10px;
+    /* Rounded corners */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* Box shadow */
+    text-transform: uppercase;
+    /* Uppercase text */
+    letter-spacing: 2px;
+    /* Spacing between letters */
+
+}
 #restaurants-title {
     background-image: url('../../public/images/sfondo-card.jpg');
 }

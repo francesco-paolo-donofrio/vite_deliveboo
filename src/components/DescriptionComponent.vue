@@ -1,38 +1,60 @@
 <template>
     <div class="f-d-bg-title">
-    <h1 class="gradientColorTitle">Deliveboo, <em class="gradientColorMini">la ristorazione a portata di mano</em></h1>
-</div>
+        <h1 class="gradientColorTitle">Deliveboo, <em class="gradientColorMini">la ristorazione a portata di mano</em>
+        </h1>
+    </div>
     <div class="container">
         <div class="row ">
-            <div class="col-lg-4">
-                <div class="f-d-admin-show">
-                    <h2 class="gradientColor">Ordina Online</h2>
-                    <p class="gradientColorSmall-text"><em class="fw-bold">Ordina</em> online i tuoi piatti preferiti e attendi l'ordine direttamente dal divano di casa</p>
-                    <CardDescriptionComponent />
-                    <p>Fondata dall'idea di 4 studenti di Informatica e appassionati di cucina, <em
-                            class="fw-bold gradientColorSmall">Deliveboo</em> è pronta ad entrare in scena a Roma,
-                        provando ad
-                        accontentare
-                        e aiutando a sfamare i clienti della Capitale italiana.</p>
+            <div class="col-lg-6">
+                <div class="about-us-container">
+                    <div class="d-flex flex-column align-items-center justify-content-center">
+                        <h2 class="gradientColor">Ordina Online</h2>
+                        <p class="gradientColorSmall-text"><em class="fw-bold">Ordina</em> online i tuoi piatti
+                            preferiti e attendi l'ordine direttamente dal divano</p>
+                        <p class="d-flex align-items-center flex-column justify-content-center"><em
+                                class="fw-bold gradientColor">Scegli...</em> <em
+                                class="fw-bold gradientColor">Ordina...</em> <em
+                                class="fw-bold gradientColor">Clicca....!</em></p>
+                    </div>
+                    <div class="f-d-flag d-flex align-items-center justify-content-between">
+                        <div class="f-d-mini-container">
+                            <h4 class="gradientColorSmall">Pagamento sicuro con</h4>
+                            <img class="f-d-img-payment" src="../../public/images/braintree.png" alt="">
+                        </div>
+                        <div class="f-d-mini-container">
+                            <h4 class=""><a href="#types-title" id="typesLink"
+                                    class="fa-solid fa-arrow-down fa-beat text-decoration-none gradientColor">Scegli</a>
+                            </h4><br>
+                            <h4 class=""><a href="#types-title" id="typesLink"
+                                    class="text-decoration-none gradientColor">un</a></h4><br>
+                            <h4 class=""><a href="#types-title" id="typesLink"
+                                    class="text-decoration-none gradientColor">Ristorante</a></h4><br>
+                        </div>
+                    </div>
+
                 </div>
             </div>
-            <div class="col-lg-4">
+            <div class="col-lg-6">
                 <div class="maps-container">
-                    <h2 class="gradientColor">Ristoratore</h2>
-                    <p class="gradientColorSmall-text"><em class="fw-bold">Gestisci</em> e controlla i tuoi ordini grazie al servizio di email offerto da Deliveboo</p>
-                    <p>Fondata dall'idea di 4 studenti di Informatica e appassionati di cucina, <em
-                            class="fw-bold gradientColorSmall">Deliveboo</em> è pronta ad entrare in scena a Roma,
-                        provando ad
-                        accontentare
-                        e aiutando a sfamare i clienti della Capitale italiana.</p>
+                    <div>
+                        <h2 class="gradientColor">Ristoratore?</h2>
+                        <p class="gradientColorSmall-text"><em class="fw-bold">Controlla</em> e <em
+                                class="fw-bold">Gestisci</em> i tuoi ordini grazie al servizio di email offerto da <em
+                                class="fw-bold">Deliveboo</em></p>
+                    </div>
+                    <div class="f-d-flag d-flex align-items-center justify-content-between">
+                        <div class="f-d-mini-container-ristoratore">
+                            <CardDescriptionComponent />
+                        </div>
+                    </div>
                 </div>
-                
+
             </div>
-            <div class="col-lg-4">
+            <!-- <div class="col-lg-4">
                 <div class="about-us-container">
                     <div>
-                        <h2 class="gradientColor">Offerte</h2>
-                        <p class="gradientColorSmall-text"><em class="fw-bold">Approfitta</em> delle numerose offerte di Deliveboo per ordinare i piatti amati dalla tua famiglia</p>
+                        <h2 class="gradientColor">Ristoratore</h2>
+                        <p class="gradientColorSmall-text"><em class="fw-bold">Gestisci</em> e <em class="fw-bold">Controlla</em> i tuoi ordini grazie al servizio di email offerto da <em class="fw-bold">Deliveboo</em></p>
                         
                     </div>
                     <div class="f-d-flag d-flex align-items-center justify-content-between">
@@ -61,7 +83,7 @@
                     </div>
                 </div>
                 
-            </div>
+            </div> -->
         </div>
     </div>
     <div class="container">
@@ -101,7 +123,7 @@ export default {
     height: 100px;
 }
 
-.f-d-admin-show{
+.f-d-admin-show {
     width: 100%;
     height: 500px;
     display: flex;
@@ -110,7 +132,7 @@ export default {
     align-items: center;
     text-align: center;
     border: 2px solid black;
-    animation: borderAnimation 5s infinite;
+    animation: borderAnimation 20s infinite;
     padding: 10px;
     border-radius: 10px;
     background-image: url('../../public/images/sfondo-card.jpg');
@@ -118,14 +140,15 @@ export default {
 
 .about-us-container {
     width: 100%;
-    height: 500px;
+    height: 600px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
     text-align: center;
     border: 2px solid black;
-    animation: borderAnimation 5s infinite;
+    animation: borderAnimation 20s infinite;
+    font-size: 20px;
     padding: 10px;
     border-radius: 10px;
     background-image: url('../../public/images/sfondo-card.jpg');
@@ -133,18 +156,20 @@ export default {
 
 .maps-container {
     width: 100%;
-    height: 500px;
+    height: 600px;
     display: flex;
     flex-direction: column;
-    justify-content: start;
+    justify-content: space-between;
     align-items: center;
     text-align: center;
+    font-size: 20px;
     padding: 10px;
     border: 2px solid black;
-    animation: borderAnimation 5s infinite;
+    animation: borderAnimation 20s infinite;
     border-radius: 10px;
     background-image: url('../../public/images/sfondo-card.jpg');
 }
+
 @keyframes bounce {
 
     0%,
@@ -215,7 +240,7 @@ export default {
     /* Uppercase text */
     letter-spacing: 2px;
     /* Spacing between letters */
-    
+
 }
 
 
@@ -255,7 +280,19 @@ export default {
     justify-content: start;
     flex-direction: column;
     border: 2px solid black;
-    animation: borderAnimation 5s infinite;
+    animation: borderAnimation 20s infinite;
+    border-radius: 10px;
+    border-top: none;
+}
+
+.f-d-mini-container-ristoratore {
+    text-align: center;
+    width: 400px;
+    height: 280px;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    flex-direction: column;
     border-radius: 10px;
     border-top: none;
 }
@@ -269,7 +306,7 @@ export default {
     /* For Safari */
     background-clip: text;
     color: transparent;
-    font-size: 1,5rem;
+    font-size: 1, 5rem;
     /* Font size */
     font-weight: bold;
     /* Font weight */

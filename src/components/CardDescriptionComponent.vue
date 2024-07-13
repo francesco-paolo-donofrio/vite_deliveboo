@@ -5,22 +5,28 @@
       :modules="modules"
       class="mySwiper"
     >
-    <swiper-slide class="bg-dark">
+    <swiper-slide>
         <div class="d-flex flex-column align-items-center justify-content-center">
-        <h4 class="">Registrati</h4>
+        <h4><a class="text-decoration-none text-white" href="http://localhost:8000/login">Registrati</a></h4>
         <img class="w-100" src="../../public/images/img-backend2.png" alt="">
       </div>
       </swiper-slide>
-      <swiper-slide class="bg-dark">
+      <swiper-slide>
         <div class="d-flex flex-column align-items-center justify-content-center">
         <h4 class="">Compila il form</h4>
         <img class="w-100" src="../../public/images/img-backend3.png" alt="">
       </div>
       </swiper-slide>
-      <swiper-slide class="bg-dark">
+      <swiper-slide>
         <div class="d-flex flex-column align-items-center justify-content-center">
-        <h4 class="">Organizza</h4>
+        <h4 class="">Gestisci il tuo ristorante</h4>
         <img class="w-100" src="../../public/images/img-backend.png" alt="">
+      </div>
+      </swiper-slide>
+      <swiper-slide>
+        <div class="d-flex flex-column align-items-center justify-content-center">
+        <h4 class="mt-3">Controlla gli ordini dall'E-mail</h4>
+        <img class="w-100" src="../../public/images/img-backend4.png" alt="">
       </div>
       </swiper-slide>
       
@@ -54,9 +60,8 @@
   <style lang="scss" scoped>
   @use '../assets/styles/partials/_variables' as *;
   .mySwiper {
-    width: 200px;
-    height: 200px;
-    margin: 20px auto;
+    width: 100%;
+    height: 100%;
 
     .swiper-slide {
       display: flex;
@@ -73,15 +78,15 @@
     }
 
     .swiper-slide:nth-child(2n) {
-      background-color: $background-secondary-color;
+      background-color: $background-primary-color;
     }
 
     .swiper-slide:nth-child(3n) {
-      background-color: $background-tertiary-color;
+      background-color: $background-primary-color;
     }
 
     .swiper-slide:nth-child(4n) {
-      background-color: $background-fourth-color;
+      background-color: $background-primary-color;
     }
   }
   </style>
