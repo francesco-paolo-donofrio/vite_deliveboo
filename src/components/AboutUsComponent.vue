@@ -6,9 +6,7 @@
         
         <div class="about-us-container">
             <div>
-
-
-                <h2 class="gradientColor">La nostra Azienda</h2>
+                <h2 class="gradientColor">Ristoratore?</h2>
                 <p class="">
                     Benvenuti nella nostra applicazione di food delivery! <em
                         class="fw-bold gradientColorSmall">Deliveboo</em> offre un servizio rapido e affidabile per
@@ -17,15 +15,17 @@
                     come un <em class="fw-bold gradientColorSmall">Ristoratore</em> per gestire il tuo ristorante!
                 </p>
             </div>
-            <div class="f-d-flag d-flex align-items-center justify-content-between">
-                <div class="f-d-mini-container">
+            <!-- <div class="f-d-flag d-flex align-items-center justify-content-between"> -->
+                <!-- <div class="f-d-mini-container">
                     <h4 class="gradientColorSmall">Pagamento con</h4>
                     <img class="f-d-img-payment" src="../../public/images/braintree.png" alt="">
-                </div>
-                <div class="f-d-mini-container ">
-                    <h4 class="f-d-bounce "><a href="http://localhost:8000/login">Registrati</a></h4>
-                    <ul class="align-items-start">
-                        <li class="text-start">
+
+                </div> -->
+                <h4 class="f-d-mini-cta f-d-bounce"><a href="http://localhost:8000/login">Registrati</a>
+                    <!-- <h4 class="gradientColorSmall f-d-bounce "><a href="http://localhost:8000/login">Registrati</a></h4> -->
+                    <!-- <ul class="align-items-start">
+                        <li>
+
                             Registrati e accedi
                         </li>
                         <li class="text-start">
@@ -38,9 +38,9 @@
                             Vendi i tuoi prodotti!
                         </li>
                         
-                    </ul>
-                </div>
-            </div>
+                    </ul> -->
+                </h4>
+            <!-- </div> -->
         </div>
         <div class="maps-container">
             <h2 class="gradientColor">Amministratori</h2>
@@ -90,7 +90,7 @@ export default {
     width: calc(100% / 2 - 40px);
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    // justify-content: space-between;
     align-items: center;
     text-align: center;
     border: 2px solid black;
@@ -163,6 +163,33 @@ export default {
     animation: borderAnimation 5s infinite;
     border-radius: 10px;
     border-top: none;
+}
+
+.f-d-mini-cta{
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    flex-direction: column;
+    border: 2px solid black;
+    animation: borderAnimation 5s infinite;
+    border-radius: 10px;
+    margin-top: 30px;
+    background-color: #223440;
+    border-radius: 10px;
+    /* Rounded corners */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    a{
+        padding: 20px 40px;
+        border-radius: 10px;
+        color: white;  
+        text-decoration: none;
+        text-transform: uppercase;
+    }
+    :hover{
+        background-color: white;
+        color: #223440;   
+    }
 }
 
 .gradientColor {

@@ -50,8 +50,14 @@
                     <div class="row">
                         <div class="col-xl-8 col-sm-12 ">
                             <h3 class="text-center text-uppercase py-3"><em class="text-white">Menù</em></h3>
+
                             <div class="d-flex align-items-center justify-content-center flex-wrap">
                                 <div class="f-d-card col-sm-12 col-lg-3 col-xl-2" v-for="(item, index) in restaurant.products"
+
+                            <h5 class="text-center py-3">{{ infoMessage}}</h5>
+                            <div class="d-flex align-items-center justify-content-center flex-wrap">
+                                <div class="f-d-card col-sm-12 col-xl-2" v-for="(item, index) in restaurant.products"
+
                                     :key="index">
 
 
@@ -67,6 +73,7 @@
                                             item.name
                                         }}
                                         </p>
+
                                         <div class="f-d-border-bottom-card"></div>
                                         <p class="text-center text-uppercase fw-bold">{{ item.price }}€</p>
                                         <div class="f-d-border-bottom-card"></div>
@@ -123,9 +130,6 @@
 
                     </div>
                 </div>
-
-
-
             </div>
         </div>
 
@@ -162,7 +166,7 @@
                             }}</em></p>
                             <p>Prezzo: {{ selectedDish.price }}€</p>
                             <div class="d-flex justify-content-center align-items-center gap-2">
-                                <button class="f-d-button-delete" @click="decreaseQuantity(selectedDish)">-</button>
+                                <button class="btn f-d-delete-bg" @click="decreaseQuantity(selectedDish)">-</button>
                                 <span>{{ getQuantityInCart(selectedDish.id) }}</span>
                                 <button class="btn f-d-confirm-bg" @click="increaseQuantity(selectedDish)">+</button>
                             </div>
@@ -190,14 +194,20 @@
                     <div class="modal-body">
                         <h5 class="fs-4">Nel carrello sono presenti piatti di un altro ristorante, puoi svuotare il
                             carrello
-                            oppure
-                            effettuare il
-                            checkout!</h5>
+                            oppure completare il pagamento
+                      </h5>
                     </div>
                     <div class="modal-footer">
                         <button class="f-d-button-delete" @click="emptyCart(); closeAlertModal()">Svuota</button>
                         <button class="f-d-button-confirm"><router-link
                                 :to="{ name: 'shopping-cart' }">Procedi</router-link></button>
+
+                            effettuare l'ordine</h5>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="f-d-button-delete" @click="emptyCart(); closeAlertModal()">Svuota</button>
+                        <button class="f-d-button-confirm"><router-link :to="{ name: 'shopping-cart' }">Effettua
+                                l'ordine</router-link></button>
                     </div>
                 </div>
             </div>
@@ -231,6 +241,7 @@ export default {
             alertModal: false,
             checkCart: false,
             cart: [],
+            infoMessage: '',
         };
     },
     methods: {
@@ -273,13 +284,19 @@ export default {
                 cartItem.quantity--;
             } else if (cartItem && cartItem.quantity === 1) {
                 this.store.cart.splice(this.store.cart.indexOf(cartItem), 1);
-                alert(`Hai rimosso ${product.name} dal carrello`);
+                this.showmessage(`Hai rimosso ${product.name} dal carrello`);
             } else if (cartItem === undefined) {
-                alert(`${product.name} di ${this.restaurant.name} non è presente nel carrello`);
+                this.showmessage(`${product.name} non è presente nel carrello`);
             }
             this.saveCart();
             console.log(this.store.cart);
             console.log(localStorage, 'localstorage');
+        },
+        showmessage(msg) {
+            this.infoMessage = msg;
+            setTimeout(() => {
+                this.infoMessage = '';
+            }, 3000);
         },
         increaseQuantity(product) {
             let cartItem = this.store.cart.find(item => item.id === product.id);
@@ -600,6 +617,7 @@ export default {
     color: white;
 }
 
+
 .f-d-button-delete {
     color: white;
     font-weight: bold;
@@ -608,6 +626,7 @@ export default {
     height: 60px;
     border-radius: 5px;
 }
+
 
 .f-d-button-confirm {
     color: white;

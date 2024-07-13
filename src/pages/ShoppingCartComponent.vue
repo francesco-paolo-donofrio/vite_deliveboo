@@ -1,5 +1,12 @@
 <template>
+
     <div class="cart text-center my-3">
+
+    <!-- <div v-if="this.isLoading" class="f-d-form-cart d-none" id="loader">
+        Caricamento...
+    </div> -->
+    <div class="cart text-center mt-3">
+
         <div class="d-flex justify-content-center align-items-center flex-column" v-if="this.store.cart.length < 1">
             <div class="f-d-cart">
                 <h2>Carrello... vuoto!</h2>
@@ -87,7 +94,7 @@
                             <button class="f-d-button-delete" @click="emptyCart">Svuota Carrello</button>
                             <button class="f-d-button-confirm" @click="pay">Paga ora</button>
                         </div>
-                    </div>
+                    </div>                                 
                 </div>
             </div>
         </div>
@@ -106,6 +113,7 @@ export default {
             instance: null,
             store,
             products: [],
+            isLoading: false,
 
             //cart: [],
             customer: {
@@ -149,7 +157,8 @@ export default {
         initializeBraintree() {
             dropin.create({
                 authorization: this.clientToken,
-                container: '#dropin-container'
+                container: '#dropin-container',
+                locale: 'it_IT'
             }, (error, instance) => {
                 if (error) {
                     console.error('Error initializing Braintree Drop-in:', error);
@@ -289,7 +298,7 @@ export default {
                     })
                     .catch(error => {
                         console.error('Error processing payment:', error);
-                    });
+                    })
             });
         },
         cartName() {
@@ -410,6 +419,7 @@ export default {
     overflow: hidden;
     padding: 10px;
     font-weight: normal;
+
     border-bottom: none;
     text-align: start !important;
     font-weight: bold;
@@ -423,6 +433,14 @@ export default {
         font-size: 1px;
     }
     
+
+    border: 2px solid $background-fourth-color;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+
 }
 
 .f-d-container {
@@ -461,6 +479,7 @@ export default {
 .is-invalid {
     border-color: red !important;
 }
+
 
 @media screen and (max-width: 768px) {
     .f-d-father-container {
@@ -532,7 +551,45 @@ export default {
     .f-d-payment {
     background-image: url(../../public/images/sfondo-card.jpg);
     margin-bottom: 20px;
+
+.loader {
+    /* Stili per il loader */
+    text-align: center;
+    font-size: 24px;
+    margin-top: 20px;
+    border: 2px solid $background-fourth-color;
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 100px;
+    width: 80%;
+    height: 100vh;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: $background-primary-color;
+    color: $background-fourth-color;
+
 }
+
+@media screen and (max-width: 576px) {
+    .f-d-form-cart {
+        width: 100%;
+        margin: 0 auto;
+        //height: 100%;
+        background: linear-gradient(to right, $background-primary-color);
+        border-radius: 10px;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        padding: 10px;
+        font-weight: normal;
+        border: 2px solid $background-fourth-color;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+    }
 }
 
 @media screen and (max-width: 576px) {
