@@ -7,13 +7,7 @@
         <div class="about-us-container">
             <div>
                 <h2 class="gradientColor">Ristoratore?</h2>
-                <p class="">
-                    Benvenuti nella nostra applicazione di food delivery! <em
-                        class="fw-bold gradientColorSmall">Deliveboo</em> offre un servizio rapido e affidabile per
-                    la
-                    consegna di cibo dai migliori ristoranti di Roma. Ordina i tuoi piatti preferiti oppure registrati
-                    come un <em class="fw-bold gradientColorSmall">Ristoratore</em> per gestire il tuo ristorante!
-                </p>
+                
             </div>
             <!-- <div class="f-d-flag d-flex align-items-center justify-content-between"> -->
                 <!-- <div class="f-d-mini-container">

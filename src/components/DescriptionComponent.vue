@@ -5,7 +5,7 @@
 </div>
     <div class="container mt-5">
         <div class="row ">
-            <div class="col-lg-4">
+            <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="about-us-container">
                     <div class="d-flex flex-column align-items-center justify-content-center">
                         <h2 class="gradientColor-green">Ordina Online</h2>
@@ -16,8 +16,8 @@
                                 class="fw-bold gradientColor-3times">Ordina...</em> <em
                                 class="fw-bold gradientColor-3times">Clicca....!</em></p>
                     </div>
-                    <div class="f-d-flag d-flex align-items-center justify-content-between gap-5">
-                        <div class="f-d-mini-container">
+                    <div class="f-d-flag d-flex align-items-center justify-content-between gap-5 display-none-newClass">
+                        <div class="f-d-mini-container ">
                             <h4 class="gradientColorSmall-payment">Pagamento sicuro con</h4>
                             <img class="f-d-img-payment" src="../../public/images/braintree.png" alt="">
                         </div>
@@ -38,7 +38,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4">
+            <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="maps-container">
                     <div>
                         <h2 class="gradientColor-orange">Il corriere..</h2>
@@ -46,13 +46,13 @@
                             assicurando che i tuoi piatti arrivino puntualmente e in perfette condizioni. </p>
                     </div>
                     <div class="d-flex align-items-center justify-content-between">
-                        <div class="f-d-mini-container-ristoratore">
+                        <div class="f-d-mini-container-ristoratore f-d-text-d-none">
                         </div>
                     </div>
                 </div>
 
             </div>
-            <div class="col-lg-4">
+            <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="maps-container">
                     <h2 class="gradientColor-orange">Chi siamo</h2>
             <CardAboutUsComponent />
@@ -610,9 +610,28 @@ export default {
         gap: 20px;
     }
 
-    .maps-container {
+    .about-us-container {
         width: 100%;
         display: flex;
+        height: auto;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        text-align: center;
+        border: 2px solid black;
+        animation: borderAnimation 5s infinite;
+        padding: 10px;
+        border-radius: 10px;
+    }
+
+    .f-d-text-d-none {
+    display: none;
+  }
+
+  .maps-container {
+        width: 100%;
+        display: flex;
+        height: auto;
         flex-direction: column;
         justify-content: start;
         align-items: center;
@@ -620,18 +639,6 @@ export default {
         padding: 10px;
         border: 2px solid black;
         animation: borderAnimation 5s infinite;
-        border-radius: 10px;
-    }
-
-    .about-us-container {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        align-items: center;
-        text-align: center;
-        border: 2px solid $background-tertiary-color;
-        padding: 10px;
         border-radius: 10px;
     }
 
@@ -639,22 +646,6 @@ export default {
         width: 10cap;
         height: 50px;
     }
-
-    .f-d-mini-container {
-        text-align: center;
-        width: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: start;
-        flex-direction: column;
-        border: 2px solid black;
-        animation: borderAnimation 5s infinite;
-        border-radius: 10px;
-        border-top: none;
-    }
-
-
-
 }
 
 @media screen and (max-width: 768px) {
@@ -697,22 +688,6 @@ export default {
         width: 10cap;
         height: 50px;
     }
-
-    .f-d-mini-container {
-        text-align: center;
-        width: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: start;
-        flex-direction: column;
-        border: 2px solid black;
-        animation: borderAnimation 5s infinite;
-        border-radius: 10px;
-        border-top: none;
-    }
-
-
-
 }
 
 @media screen and (max-width: 576px) {
@@ -756,19 +731,6 @@ export default {
         height: 50px;
     }
 
-    .f-d-mini-container {
-        text-align: center;
-        width: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: start;
-        flex-direction: column;
-        border: 2px solid black;
-        animation: borderAnimation 5s infinite;
-        border-radius: 10px;
-        border-top: none;
-    }
-
 
 
 }
@@ -795,6 +757,7 @@ export default {
     .maps-container {
         width: 100%;
         display: flex;
+        height: auto;
         flex-direction: column;
         justify-content: start;
         align-items: center;
@@ -833,6 +796,8 @@ export default {
 
     .about-us-container {
         width: 100%;
+        margin: 0 auto;
+        height: auto;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
@@ -843,15 +808,15 @@ export default {
         padding: 10px;
         border-radius: 10px;
     }
+    .f-d-text-d-none {
+    display: none;
+  }
 
     .f-d-img-payment {
         width: 10cap;
         height: 50px;
     }
 
-    .f-d-mini-container {
-        display: none;
-    }
 
     .gradientColor {
         background: linear-gradient(to right, $background-primary-color, $background-fourth-color, $background-primary-color, $background-fourth-color, $background-primary-color);
@@ -907,6 +872,7 @@ export default {
     .maps-container {
         width: 100%;
         display: flex;
+        height: auto;
         flex-direction: column;
         justify-content: start;
         align-items: center;
@@ -945,6 +911,8 @@ export default {
 
     .about-us-container {
         width: 100%;
+        margin: 0 auto;
+        height: auto;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
@@ -955,14 +923,13 @@ export default {
         padding: 10px;
         border-radius: 10px;
     }
+    .f-d-text-d-none {
+    display: none;
+  }
 
     .f-d-img-payment {
         width: 10cap;
         height: 50px;
-    }
-
-    .f-d-mini-container {
-        display: none;
     }
 
     .f-d-text-d-none {
@@ -1022,6 +989,8 @@ export default {
 
     .maps-container {
         width: 100%;
+        height: auto;
+        margin: 0 auto;
         display: flex;
         flex-direction: column;
         justify-content: start;
@@ -1061,6 +1030,8 @@ export default {
 
     .about-us-container {
         width: 100%;
+        margin: 0 auto;
+        height: auto;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
@@ -1075,10 +1046,6 @@ export default {
     .f-d-img-payment {
         width: 10cap;
         height: 50px;
-    }
-
-    .f-d-mini-container {
-        display: none;
     }
 
     .gradientColor {
@@ -1108,5 +1075,40 @@ export default {
         /* Spacing between letters */
     }
 
+    .f-d-text-d-none {
+    display: none;
+  }
+
+  .gradientColorSmall-text-right {
+    font-size: 14px;
+  }
+
+  .f-d-mini-container-choose {
+    text-align: center;
+    width: 100%;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    flex-direction: column;
+    border: 2px solid $background-primary-color;
+    border-radius: 10px;
+    padding: 5px;
+    animation: 1s borderAnimation infinite;
+    background-color: white;
+    cursor: pointer;
+    text-decoration: none;
+        color: inherit;
+
+    &:hover {
+        border: 2px solid white;
+        background-color: rgba(255, 166, 0, 0.151);
+        animation: none;
+
+        & span {
+            animation: none;
+        }
+    }
+}
 }
 </style>
