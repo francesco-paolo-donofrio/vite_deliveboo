@@ -2,7 +2,7 @@
   <!-- Div invisibile per il posizionamento dell'ancora -->
   <div id="anchor-types-title" class="anchor-spacer"></div>
   <div id="types-title">
-    <h1 class="gradientColor text-center">Tipologie, <em class="gradientColorMini">scegli la tua tipologia preferita</em></h1>
+    <h1 class="gradientColor text-center">Tipologie <p class="gradientColorMini"><em>scegli la tua tipologia preferita</em></p></h1>
   </div>
   <div id="types" class="d-flex justify-content-center align-items-center">
     <div class="typology-carousel">
@@ -139,10 +139,6 @@ export default {
   margin-top: 10px;
   font-size: 1rem;
   font-weight: bold;
-}
-
-#types-title {
-  scroll-margin-bottom: 150px;
 }
 
 .gradientColorMini {

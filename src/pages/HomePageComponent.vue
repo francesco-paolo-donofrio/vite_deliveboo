@@ -1,13 +1,14 @@
 <template>
     <HeroComponent />
     <DescriptionComponent />
+    <RestaurantQuestions />
     <CarouselComponent :types="types" :selectedTypes="selectedtypes" @typeSelected="toggleType" />
     <!-- <div class="d-flex justify-content-center">
         <button type="button" class="btn btn-primary mx-2 p-2" @click="sendTypes">Filtra</button>
         <button type="button" class="btn btn-secondary mx-2 p-2" @click="resetTypes">Reset</button>
     </div> -->
-    <div id="restaurants-title">
-        <h1 class="gradientColor text-center">Ristoranti, <em class="gradientColorMini">ordina dal tuo ristorante preferito</em></h1>
+    <div id="restaurants-title" class="d-flex justify-content-center align-items-center flex-column">
+        <h1 class="gradientColor text-center">Ristoranti, <p class="gradientColorMini"><em>ordina dal tuo ristorante preferito</em></p></h1>
     </div>
     <div class="f-d-gradient-not-found-message">
         <div id="restaurants" class="container my-4 ">
@@ -50,6 +51,7 @@ import { store } from '../store';
 import axios from 'axios';
 import HeroComponent from '../components/HeroComponent.vue';
 import DescriptionComponent from '../components/DescriptionComponent.vue';
+import RestaurantQuestions from '../components/RestaurantQuestions.vue';
 import AboutUsComponent from '../components/AboutUsComponent.vue';
 import CardComponent from '../components/CardComponent.vue';
 import CarouselComponent from '../components/CarouselComponent.vue';
@@ -63,6 +65,7 @@ export default {
         CardComponent,
         HeroComponent,
         DescriptionComponent,
+        RestaurantQuestions,
         CarouselComponent,
         AboutUsComponent,
         FooterComponent

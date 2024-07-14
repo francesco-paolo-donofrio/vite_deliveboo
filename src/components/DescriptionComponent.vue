@@ -1,11 +1,10 @@
-gradientColor-gr<template>
-    <div class="f-d-bg-title ">
-        <h1 class="gradientColorTitle">Deliveboo, <em class="gradientColorMini">la ristorazione a portata di mano</em>
-        </h1>
-    </div>
+<template>
+    <div class="f-d-bg-title">
+    <h1 class="gradientColorTitle">Deliveboo <p class="gradientColorMini"><em>la ristorazione a portata di mano</em></p></h1>
+</div>
     <div class="container mt-5">
         <div class="row ">
-            <div class="col-lg-6">
+            <div class="col-lg-4">
                 <div class="about-us-container">
                     <div class="d-flex flex-column align-items-center justify-content-center">
                         <h2 class="gradientColor-green">Ordina Online</h2>
@@ -22,26 +21,26 @@ gradientColor-gr<template>
                             <img class="f-d-img-payment" src="../../public/images/braintree.png" alt="">
                         </div>
                         <a href="#types-title" id="typesLink" class="f-d-mini-container-choose">
-                            <h4 class="f-d-bounce-choose">
+                            <h5 class="f-d-bounce-choose">
                                 <span class="fa-solid fa-arrow-down fa-fade"></span> Scegli <span
                                     class="fa-solid fa-arrow-down fa-fade"></span>
 
-                            </h4><br>
-                            <h4 class="f-d-bounce-choose">
-                                una 
-                            </h4><br>
-                            <h4 class="f-d-bounce-choose">
-                                Tipologia
-                            </h4><br>
+                            </h5><br>
+                            <h5 class="f-d-bounce-choose">
+                                un 
+                            </h5><br>
+                            <h5 class="f-d-bounce-choose">
+                                Ristorante
+                            </h5><br>
                         </a>
 
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6">
+            <div class="col-lg-4">
                 <div class="maps-container">
                     <div>
-                        <h2 class="gradientColor-orange">Il corriere è in arrivo..</h2>
+                        <h2 class="gradientColor-orange">Il corriere..</h2>
                         <p class="gradientColorSmall-text-right">Non temere! <br> Ogni consegna viene trattata con cura,
                             assicurando che i tuoi piatti arrivino puntualmente e in perfette condizioni. </p>
                     </div>
@@ -52,51 +51,15 @@ gradientColor-gr<template>
                 </div>
 
             </div>
-            <div class="col-lg-12">
-                <div class="maps-container-ristoratore mt-4">
-                    <div>
-                        <h2 class="gradientColor-brown">Ristoratore?</h2>
-                        <p class="gradientColorSmall-text-down"><em class="fw-bold">Controlla</em> e <em
-                                class="fw-bold">Gestisci</em> i tuoi ordini grazie al servizio di EMail offerto da <em
-                                class="fw-bold">Deliveboo</em><br>Inizia a guadagnare anche tu grazie alla
-                            collaborazione
-                            con <em class="fw-bold">Deliveboo</em></p>
-                    </div>
-                    <div class="d-flex align-items-start justify-content-between gap-5">
-                        <div class="f-d-mini-container-ristoratore-great">
-                            <CardDescriptionComponent />
-                        </div>
-                        <div class="f-d-mini-container-ristoratore-small ">
-                            <h4 class="f-d-bounce "><a href="http://localhost:8000/login">Registrati</a></h4>
-                            <ul class="align-items-start">
-                                <li class="text-start f-d-primary-color fw-bold">
-                                    <em class="fw-bold">Registrati</em> alla tua area riservata
-                                </li>
-                                <li class="text-start f-d-primary-color fw-bold">
-                                    <em class="fw-bold">Crea</em> il tuo ristorante
-                                </li>
-                                <li class="text-start f-d-primary-color fw-bold">
-                                    <em class="fw-bold">Aggiungi</em> i piatti al tuo ristorante
-                                </li>
-                                <li class="text-start f-d-primary-color fw-bold">
-                                    <em class="fw-bold">Vendi</em> i tuoi prodotti!
-                                </li>
-                                <li class="text-start f-d-primary-color fw-bold">
-                                    <em class="fw-bold">Controlla</em> gli ordini in tempo reale
-                                </li>
-                                <li class="text-start f-d-primary-color fw-bold">
-                                    <em class="fw-bold">Analizza</em> i profitti tramite i grafici
-                                </li>
-                                <li class="text-start f-d-primary-color fw-bold">
-                                    <em class="fw-bold">Gestisci</em> le Email e i relativi ordini
-                                </li>
-
-                            </ul>
-                        </div>
-                    </div>
+            <div class="col-lg-4">
+                <div class="maps-container">
+                    <h2 class="gradientColor-orange">Chi siamo</h2>
+            <CardAboutUsComponent />
+            <p class="gradientColorSmall-text-right">Fondata dall'idea di 4 studenti di Informatica e appassionati di cucina, <em
+                    class="fw-bold gradientColorSmall">Deliveboo</em> entra in scena nelle piazze romane più affamata che mai </p>
                 </div>
-
             </div>
+            
             <!-- <div class="col-lg-4">
                 <div class="about-us-container">
                     <div>
@@ -142,12 +105,14 @@ gradientColor-gr<template>
 </template>
 
 <script>
+import CardAboutUsComponent from './CardAboutUsComponent.vue';
 import CardDescriptionComponent from './CardDescriptionComponent.vue';
 
 export default {
     name: 'DescriptionComponent',
     components: {
-        CardDescriptionComponent
+        CardDescriptionComponent,
+        CardAboutUsComponent
     },
     mounted() {
         console.log('DescriptionComponent montato');
@@ -168,6 +133,7 @@ export default {
 .f-d-img-payment {
     width: 150px;
     height: 100px;
+    border-radius: 10px;
 }
 
 .f-d-admin-show {
@@ -355,7 +321,7 @@ export default {
 .f-d-mini-container {
     text-align: center;
     width: 50%;
-    height: 180px;
+    height: 145px;
     display: flex;
     align-items: center;
     justify-content: start;
@@ -367,22 +333,23 @@ export default {
 .f-d-mini-container-choose {
     text-align: center;
     width: 50%;
-    height: 180px;
+    height: 145px;
     display: flex;
     align-items: center;
     justify-content: start;
     flex-direction: column;
     border: 2px solid $background-primary-color;
     border-radius: 10px;
+    padding: 5px;
     animation: 1s borderAnimation infinite;
     background-color: white;
     cursor: pointer;
-    padding: 5px;
     text-decoration: none;
         color: inherit;
 
     &:hover {
-        border: 2px solid $background-fourth-color;
+        border: 2px solid white;
+        background-color: rgba(255, 166, 0, 0.151);
         animation: none;
 
         & span {
@@ -407,8 +374,8 @@ export default {
 
 .f-d-mini-container-ristoratore {
     text-align: center;
-    width: 500px;
-    height: 263px;
+    width: 355px;
+    height: 240px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -564,10 +531,11 @@ export default {
     text-decoration: none;
     color: inherit;
     background-color: $background-primary-color;
+    margin: 0;
+    padding: 0;
 
     border-radius: 5px;
     cursor: pointer;
-    padding: 0 10px 0 10px;
 
     text-decoration: none;
     color: $background-fourth-color;
