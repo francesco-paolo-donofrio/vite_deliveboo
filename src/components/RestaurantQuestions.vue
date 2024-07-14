@@ -1,17 +1,17 @@
 <template>
+    <div class="f-d-background-gradient">
     <div class="f-d-bg-title d-flex flex-column align-items-center justify-content-center">
-    <h1 class="gradientColorTitle">Registrati <p class="gradientColorMini"><em>gestisci il tuo ristorante</em></p></h1>
+    <h1 class="gradientColorTitle">Registrati <p class="gradientColorMini f-d-text-d-none"><em>gestisci il tuo ristorante</em></p></h1>
 </div>
-    <div>
+    <div class="container">
         <div class="col-lg-12">
-                <div class="maps-container-ristoratore mt-4">
+
+                <div class="maps-container-ristoratore">
                     <div>
                         <h2 class="gradientColor-brown">Ristoratore?</h2>
                         <p class="gradientColorSmall-text-down"><em class="fw-bold">Controlla</em> e <em
-                                class="fw-bold">Gestisci</em> i tuoi ordini grazie al servizio di EMail offerto da <em
-                                class="fw-bold">Deliveboo</em><br>Inizia a guadagnare anche tu grazie alla
-                            collaborazione
-                            con <em class="fw-bold">Deliveboo</em></p>
+                                class="fw-bold">Gestisci</em> i tuoi ordini grazie al servizio di E-Mail offerto da <em
+                                class="fw-bold">Deliveboo</em><br>GUADAGNA ANCHE TU GRAZIE A  <em class="fw-bold">DELIVEBOO</em></p>
                     </div>
                     <div class="d-flex align-items-start justify-content-between gap-5">
                         <div class="f-d-mini-container-ristoratore-great">
@@ -49,6 +49,7 @@
 
             </div>
     </div>
+</div>
 </template>
 
 <script>
@@ -70,6 +71,10 @@
     justify-content: center;
     align-items: center;
     border-radius: 10px;
+}
+
+.f-d-background-gradient {
+    background: linear-gradient(to right, $background-primary-color, $background-secondary-color, $background-primary-color);
 }
 .gradientColorTitle {
     background: linear-gradient(to right, $background-fourth-color, $background-fourth-color, $background-primary-color, $background-fourth-color, $background-primary-color,  $background-fourth-color, $background-fourth-color); /* Gradient colors */
@@ -124,8 +129,6 @@
     text-align: center;
     font-size: 20px;
     padding: 10px;
-    border: 5px solid $background-secondary-color;
-    border-radius: 10px;
     background-image: url('../../public/images/sfondo-card.jpg');
 }
 
@@ -206,6 +209,31 @@
         text-decoration: none;
         color: $background-fourth-color;
         text-transform: uppercase;
+    }
+}
+
+@keyframes bounce {
+
+0%,
+20%,
+50%,
+80%,
+100% {
+    transform: translateY(0);
+}
+
+40% {
+    transform: translateY(-30px);
+}
+
+60% {
+    transform: translateY(-15px);
+}
+}
+
+@media screen and (max-width: 320px) {
+    .f-d-text-d-none {
+    display: none;
     }
 }
 </style>

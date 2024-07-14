@@ -223,8 +223,7 @@ export default {
 .anchor-spacer {
   position: relative;
   top: -50px;
-  /* Regola questo valore per il posizionamento desiderato */
-  height: 50px;
+  
   /* Altezza dello spazio di ancoraggio */
   visibility: hidden;
   /* Nasconde il div */

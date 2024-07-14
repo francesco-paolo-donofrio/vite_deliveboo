@@ -1,6 +1,7 @@
 <template>
+    <div class="f-d-background-gradient">
     <div class="f-d-bg-title">
-    <h1 class="gradientColorTitle">Deliveboo <p class="gradientColorMini"><em>la ristorazione a portata di mano</em></p></h1>
+    <h1 class="gradientColorTitle">Deliveboo <p class="gradientColorMini f-d-text-d-none"><em>la ristorazione a portata di mano</em></p></h1>
 </div>
     <div class="container mt-5">
         <div class="row ">
@@ -59,49 +60,9 @@
                     class="fw-bold gradientColorSmall">Deliveboo</em> entra in scena nelle piazze romane più affamata che mai </p>
                 </div>
             </div>
-            
-            <!-- <div class="col-lg-4">
-                <div class="about-us-container">
-                    <div>
-                        <h2 class="gradientColor">Ristoratore</h2>
-                        <p class="gradientColorSmall-text"><em class="fw-bold">Gestisci</em> e <em class="fw-bold">Controlla</em> i tuoi ordini grazie al servizio di email offerto da <em class="fw-bold">Deliveboo</em></p>
-                        
-                    </div>
-                    <div class="f-d-flag d-flex align-items-center justify-content-between">
-                        <div class="f-d-mini-container">
-                            <h4 class="gradientColorSmall">Pagamento con</h4>
-                            <img class="f-d-img-payment" src="../../public/images/braintree.png" alt="">
-                        </div>
-                        <div class="f-d-mini-container ">
-                            <h4 class="f-d-bounce "><a href="http://localhost:8000/login">Registrati</a></h4>
-                            <ul class="align-items-start">
-                                <li class="text-start">
-                                    Registrati e accedi
-                                </li>
-                                <li class="text-start">
-                                    Crea ristorante
-                                </li>
-                                <li class="text-start">
-                                    Aggiungi prodotti
-                                </li>
-                                <li class="text-start">
-                                    Vendi i tuoi prodotti!
-                                </li>
-
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                
-            </div> -->
         </div>
     </div>
-    <div class="container">
-
-
-
-    </div>
-
+</div>
 </template>
 
 <script>
@@ -262,6 +223,9 @@ export default {
     background-image: url('../../public/images/sfondo-card.jpg');
 }
 
+.f-d-background-gradient {
+    background: linear-gradient(to right, $background-primary-color, $background-secondary-color, $background-primary-color);
+}
 .gradientColorMini {
     background: linear-gradient(to right, $background-primary-color, $background-primary-color);
     /* Gradient colors */
@@ -916,6 +880,9 @@ export default {
         /* Spacing between letters */
     }
 
+    .f-d-text-d-none {
+    display: none;
+  }
 }
 
 @media screen and (max-width: 375px) {
@@ -998,6 +965,10 @@ export default {
         display: none;
     }
 
+    .f-d-text-d-none {
+    display: none;
+  }
+
     .gradientColor {
         background: linear-gradient(to right, $background-primary-color, $background-fourth-color, $background-primary-color, $background-fourth-color, $background-primary-color);
         /* Gradient colors */
@@ -1028,6 +999,9 @@ export default {
 }
 
 @media screen and (max-width: 320px) {
+    .f-d-text-d-none {
+    display: none;
+  }
     .container {
         width: 100%;
         display: flex;
