@@ -18,7 +18,7 @@
                             <CardDescriptionComponent />
                         </div>
                         <div class="f-d-mini-container-ristoratore-small ">
-                            <h4 class="f-d-bounce "><a href="http://localhost:8000/login">Clicca e Registrati</a></h4>
+                            <h4 class="f-d-bounce "><a href="http://localhost:8000">Clicca e Registrati</a></h4>
                             <ul class="align-items-start">
                                 <li class="text-start f-d-primary-color fw-bold">
                                     <em class="fw-bold">Registrati</em> alla tua area riservata
