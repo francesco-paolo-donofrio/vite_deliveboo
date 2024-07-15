@@ -292,7 +292,7 @@ export default {
                     .then(response => {
                         if (response.data.success) {
                             this.store.prevOrder = this.store.cart;
-                            this.store.cart = [];
+                            this.emptyCart();
                             this.$router.push({ path: '/thank-you' });
 
                         } else {
