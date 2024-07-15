@@ -50,7 +50,6 @@
 
 <script>
 import { store } from '../store';
-import axios from 'axios';
 import HeroComponent from '../components/HeroComponent.vue';
 import FooterComponent from '../components/FooterComponent.vue';
 
