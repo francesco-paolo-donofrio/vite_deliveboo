@@ -699,8 +699,8 @@ export default {
     width: 100%;
     height: 90%;
     border-radius: 10px;
-    border: 2px solid black;
-    background-color: white;
+    border: 4px solid $background-fourth-color;
+        background-color: $background-primary-color;
 
     margin-bottom: 20px;
 }
@@ -730,10 +730,6 @@ export default {
     justify-content: center;
     align-items: center;
     text-align: center;
-}
-
-#cart-container {
-    display: none;
 }
 
 .f-d-mq-320-576 {
@@ -812,14 +808,10 @@ export default {
         width: 100%;
         height: 90%;
         border-radius: 10px;
-        border: 2px solid black;
-        background-color: white;
+        border: 4px solid $background-fourth-color;
+        background-color: $background-primary-color;
 
         margin-bottom: 20px;
-    }
-
-    #cart-container {
-        display: none;
     }
 
     #info-container {
@@ -899,8 +891,8 @@ export default {
         width: 100%;
         height: 90%;
         border-radius: 10px;
-        border: 2px solid black;
-        background-color: white;
+        border: 4px solid $background-fourth-color;
+        background-color: $background-primary-color;
 
         margin-bottom: 20px;
     }
@@ -932,10 +924,6 @@ export default {
         justify-content: center;
         align-items: center;
         text-align: center;
-    }
-
-    #cart-container {
-        display: none;
     }
 
     .f-d-mq-320-576 {
@@ -997,8 +985,8 @@ export default {
         width: 100%;
         height: 90%;
         border-radius: 10px;
-        border: 2px solid black;
-        background-color: white;
+        border: 4px solid $background-fourth-color;
+        background-color: $background-primary-color;
 
         margin-bottom: 20px;
     }
@@ -1030,10 +1018,6 @@ export default {
         justify-content: center;
         align-items: center;
         text-align: center;
-    }
-
-    #cart-container {
-        display: none;
     }
 
     .f-d-mq-320-576 {
@@ -1095,8 +1079,8 @@ export default {
         width: 100%;
         height: 90%;
         border-radius: 10px;
-        border: 2px solid black;
-        background-color: white;
+        border: 4px solid $background-fourth-color;
+        background-color: $background-primary-color;
 
         margin-bottom: 20px;
     }
@@ -1128,10 +1112,6 @@ export default {
         justify-content: center;
         align-items: center;
         text-align: center;
-    }
-
-    #cart-container {
-        display: none;
     }
 
     .f-d-mq-320-576 {

@@ -7,7 +7,7 @@
         </div>
         <div class="container">
             <div class="row ">
-                <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12">
                     <div class="about-us-container">
                             <p class="gradientColorMini-homepage align-self-start text-start">Benvenuti nella nostra applicazione di food
                                 delivery!</p>
@@ -45,7 +45,7 @@
                     </div> -->
                     </div>
                 </div>
-                <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12">
                     <div class="maps-container">
                         <!-- <div>
                         <h2 class="gradientColor-orange">Il corriere..</h2>
@@ -662,7 +662,7 @@ export default {
     .maps-container {
         width: 100%;
         display: flex;
-        height: auto;
+        height: 635px;
         flex-direction: column;
         justify-content: start;
         align-items: center;
@@ -692,6 +692,7 @@ export default {
     .maps-container {
         width: 100%;
         display: flex;
+        height: 500px;
         flex-direction: column;
         justify-content: start;
         align-items: center;
@@ -734,6 +735,7 @@ export default {
     .maps-container {
         width: 100%;
         display: flex;
+        height: 450px;
         flex-direction: column;
         justify-content: start;
         align-items: center;
@@ -788,7 +790,7 @@ export default {
     .maps-container {
         width: 100%;
         display: flex;
-        height: auto;
+        height: 350px;
         flex-direction: column;
         justify-content: start;
         align-items: center;
@@ -904,7 +906,7 @@ export default {
     .maps-container {
         width: 100%;
         display: flex;
-        height: auto;
+        height: 330px;
         flex-direction: column;
         justify-content: start;
         align-items: center;
