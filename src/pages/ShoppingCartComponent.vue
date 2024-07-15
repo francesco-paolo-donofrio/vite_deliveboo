@@ -6,7 +6,8 @@
         Caricamento...
     </div> -->
 
-        <div class="d-flex justify-content-center align-items-center flex-column pt-5" v-if="this.store.cart.length < 1">
+        <div class="d-flex justify-content-center align-items-center flex-column pt-5"
+            v-if="this.store.cart.length < 1">
             <div class="f-d-cart ">
                 <h2>Carrello... vuoto!</h2>
                 <div>Ordina ora il tuo piatto preferito!</div>
@@ -14,91 +15,102 @@
             </div>
         </div>
         <div v-else>
-            <div class="f-d-father-container f-d-bg-cart">
-                <div class="f-d-cart mt-3">
-                    <div class="cart d-flex flex-column align-items-center justify-content-center">
-                        <h2 class="gradientColor fs-1">Carrello</h2>
-                        <div class="f-d-border-bottom"></div>
-                        <div>Stai ordinando da:</div>
-                        <h4>{{ cartName() }}</h4>
-                        <div class="f-d-border-bottom"></div>
-                        <div v-for="item in store.cart" :key="item.id">
-                            {{ item.name }} - {{ item.price }} x {{ item.quantity }}
-                        </div>
-                        <div class="my-2 f-d-border-bottom text-center"></div>
-                        <div>Totale ordine: <em class="gradientColor fs-3">{{ totalAmount }}</em> €</div>
-                    </div>
-                </div>
+            <div class="f-d-bg-cart">
+                <!-- <div class="f-d-father-container ">
+
+                </div> -->
 
                 <div class="d-flex flex-column justify-content-between align-items-center">
                     <!-- FORM PER DATI CLIENTE -->
-                    <div class="container mt-3">
-                        <form class="f-d-form-cart" @submit.prevent="pay">
-                            <h2 class="fs-3">Compila il form per effettuare il pagamento</h2>
-                            <!-- NOME -->
-                            <div
-                                class="text-secondary mb-2 d-flex align-items-center justify-content-start flex-column">
-                                <label for="name" class="form-label text-start text-white">Nome*</label>
-                                <input type="text" name="name" class="form-control" id="name" v-model="customer.name"
-                                    minlength="3" maxlength="200" placeholder="Inserisci il tuo nome"
-                                    :class="{ 'is-invalid': errors.name }" required>
-                                <div id="nameMessage" class="error-message text-danger">{{ errors.name }}</div>
+                    <div class="container mt-5">
+                        <div class="f-d-cart">
+                            <div class="cart d-flex flex-column align-items-center justify-content-center">
+                                <h2 class="gradientColor fs-1">Carrello</h2>
+                                <div class="f-d-border-bottom"></div>
+                                <div>Stai ordinando da:</div>
+                                <h4>{{ cartName() }}</h4>
+                                <div class="f-d-border-bottom"></div>
+                                <div v-for="item in store.cart" :key="item.id">
+                                    {{ item.name }} - {{ item.price }} x {{ item.quantity }}
+                                </div>
+                                <div class="my-2 f-d-border-bottom text-center"></div>
+                                <div>Totale ordine: <em class="gradientColor fs-3">{{ totalAmount }}</em> €</div>
                             </div>
+                        </div>
+                        <div>
+                            <form class="f-d-form-cart mt-5" @submit.prevent="pay">
+                                <h2 class="fs-3">Compila il form per effettuare il pagamento</h2>
+                                <!-- NOME -->
+                                <div
+                                    class="text-secondary mb-2 d-flex align-items-center justify-content-start flex-column">
+                                    <label for="name" class="form-label text-start text-white">Nome*</label>
+                                    <input type="text" name="name" class="form-control" id="name"
+                                        v-model="customer.name" minlength="3" maxlength="200"
+                                        placeholder="Inserisci il tuo nome" :class="{ 'is-invalid': errors.name }"
+                                        required>
+                                    <div id="nameMessage" class="error-message text-danger">{{ errors.name }}</div>
+                                </div>
 
-                            <!-- COGNOME -->
-                            <div
-                                class="text-secondary mb-2 d-flex align-items-center justify-content-start flex-column">
-                                <label for="surname" class="form-label text-white">Cognome*</label>
-                                <input type="text" class="form-control" id="surname" name="surname"
-                                    v-model="customer.surname" minlength="3" maxlength="200"
-                                    placeholder="Inserisci il tuo cognome" :class="{ 'is-invalid': errors.surname }"
-                                    required>
-                                <div id="surnameMessage" class="error-message text-danger">{{ errors.surname }}</div>
+                                <!-- COGNOME -->
+                                <div
+                                    class="text-secondary mb-2 d-flex align-items-center justify-content-start flex-column">
+                                    <label for="surname" class="form-label text-white">Cognome*</label>
+                                    <input type="text" class="form-control" id="surname" name="surname"
+                                        v-model="customer.surname" minlength="3" maxlength="200"
+                                        placeholder="Inserisci il tuo cognome" :class="{ 'is-invalid': errors.surname }"
+                                        required>
+                                    <div id="surnameMessage" class="error-message text-danger">{{ errors.surname }}
+                                    </div>
+                                </div>
+
+                                <!-- TELEFONO -->
+                                <div
+                                    class="text-secondary mb-2 d-flex align-items-center justify-content-start flex-column">
+                                    <label for="phone" class="form-label text-white">Numero di telefono*</label>
+                                    <input type="tel" class="form-control" id="phone" name="phone"
+                                        v-model="customer.phone" minlength="3" maxlength="200"
+                                        placeholder="Numero di telefono" :class="{ 'is-invalid': errors.phone }"
+                                        required>
+                                    <div id="phoneMessage" class="error-message text-danger">{{ errors.phone }}</div>
+                                </div>
+
+                                <!-- EMAIL -->
+                                <div
+                                    class="text-secondary mb-2 d-flex align-items-center justify-content-start flex-column">
+                                    <label for="email" class="form-label text-white">Indirizzo email*</label>
+                                    <input type="email" class="form-control" id="email" name="email"
+                                        v-model="customer.email" minlength="3" maxlength="200"
+                                        placeholder="Inserisci il tuo email" :class="{ 'is-invalid': errors.email }"
+                                        required>
+                                    <div id="emailMessage" class="error-message text-danger">{{ errors.email }}</div>
+                                </div>
+
+                                <!-- INDIRIZZO -->
+                                <div
+                                    class="text-secondary mb-2 d-flex align-items-center justify-content-start flex-column">
+                                    <label for="address" class="form-label text-white">Indirizzo di consegna*</label>
+                                    <input type="text" class="form-control" id="address" name="address"
+                                        v-model="customer.address" minlength="3" maxlength="200"
+                                        placeholder="Inserisci il tuo indirizzo"
+                                        :class="{ 'is-invalid': errors.address }" required>
+                                    <div id="addressMessage" class="error-message text-danger">{{ errors.address }}
+                                    </div>
+                                </div>
+
+                                <div class="mt-3 text-white text-start"><span>* Campi obbligatori</span></div>
+                                <div>
+                                <div id="dropin-container" class="f-d-payment">
+
+                                </div>
+                                <div class="d-flex justify-content-center gap-2 mb-3">
+                                    <button class="f-d-button-delete" @click="emptyCart">Svuota Carrello</button>
+                                    <button class="f-d-button-confirm" @click="pay">Paga ora</button>
+                                </div>
+
                             </div>
-
-                            <!-- TELEFONO -->
-                            <div
-                                class="text-secondary mb-2 d-flex align-items-center justify-content-start flex-column">
-                                <label for="phone" class="form-label text-white">Numero di telefono*</label>
-                                <input type="tel" class="form-control" id="phone" name="phone" v-model="customer.phone"
-                                    minlength="3" maxlength="200" placeholder="Numero di telefono"
-                                    :class="{ 'is-invalid': errors.phone }" required>
-                                <div id="phoneMessage" class="error-message text-danger">{{ errors.phone }}</div>
-                            </div>
-
-                            <!-- EMAIL -->
-                            <div
-                                class="text-secondary mb-2 d-flex align-items-center justify-content-start flex-column">
-                                <label for="email" class="form-label text-white">Indirizzo email*</label>
-                                <input type="email" class="form-control" id="email" name="email"
-                                    v-model="customer.email" minlength="3" maxlength="200"
-                                    placeholder="Inserisci il tuo email" :class="{ 'is-invalid': errors.email }"
-                                    required>
-                                <div id="emailMessage" class="error-message text-danger">{{ errors.email }}</div>
-                            </div>
-
-                            <!-- INDIRIZZO -->
-                            <div
-                                class="text-secondary mb-2 d-flex align-items-center justify-content-start flex-column">
-                                <label for="address" class="form-label text-white">Indirizzo di consegna*</label>
-                                <input type="text" class="form-control" id="address" name="address"
-                                    v-model="customer.address" minlength="3" maxlength="200"
-                                    placeholder="Inserisci il tuo indirizzo" :class="{ 'is-invalid': errors.address }"
-                                    required>
-                                <div id="addressMessage" class="error-message text-danger">{{ errors.address }}</div>
-                            </div>
-
-                            <div class="mt-3 text-white text-start"><span>* Campi obbligatori</span></div>
-                        </form>
-                    </div>
-                    <div>
-                        <div id="dropin-container" class="f-d-payment">
+                            </form>
                             
                         </div>
-                        <div class="d-flex justify-content-center gap-2 mb-3">
-                                <button class="f-d-button-delete" @click="emptyCart">Svuota Carrello</button>
-                                <button class="f-d-button-confirm" @click="pay">Paga ora</button>
-                            </div>
 
                     </div>
                 </div>
@@ -338,7 +350,8 @@ export default {
 }
 
 .f-d-father-container {
-    width: 100%;
+    width: 50%;
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -432,7 +445,7 @@ export default {
     justify-content: center;
     align-items: center;
     gap: 10px;
-    width: 60%;
+    width: 100%;
     border-radius: 10px;
     border: 2px solid $background-fourth-color;
     background-color: $background-primary-color;
@@ -441,7 +454,7 @@ export default {
 }
 
 .f-d-form-cart {
-    width: 100% !important;
+    width: 70%;
     margin: 0 auto;
     border: 4px solid $background-fourth-color;
     background-color: $background-primary-color;
@@ -466,7 +479,7 @@ export default {
         font-size: 1px;
     }
 
-    
+
 
 }
 
@@ -537,8 +550,9 @@ export default {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin: 0 auto;
     gap: 10px;
-    width: 100%;
+    width: 70%;
     border-radius: 10px;
     border: 4px solid $background-fourth-color;
     background-color: $background-primary-color;
@@ -561,7 +575,6 @@ export default {
 
 .f-d-payment {
     width: 80%;
-    background-image: url(../../public/images/sfondo-card.jpg);
     margin-bottom: 20px;
 }
 
@@ -605,7 +618,61 @@ export default {
     }
 }
 
-@media screen and (max-width: 576px) {
+@media screen and (max-width: 425px) {
+    .f-d-father-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        width: 100%;
+        height: 100%;
+        padding: 20px;
+        margin-bottom: 30px;
+    }
+
+    .gradientColor {
+        background: linear-gradient(to right, $background-fourth-color, $background-fourth-color, $background-fourth-color, $background-fourth-color, $background-fourth-color);
+        /* Gradient colors */
+        -webkit-background-clip: text;
+        /* For Safari */
+        -webkit-text-fill-color: transparent;
+        /* For Safari */
+        background-clip: text;
+        color: transparent;
+        font-size: 25px;
+        /* Font size */
+        font-weight: bold;
+        /* Font weight */
+        text-align: center;
+        /* Center alignment */
+        padding: 10px 20px;
+        /* Padding */
+        border-radius: 10px;
+        /* Rounded corners */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        /* Box shadow */
+        text-transform: uppercase;
+        /* Uppercase text */
+        letter-spacing: 2px;
+        /* Spacing between letters */
+    }
+
+    .f-d-cart {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        width: 100%;
+        border-radius: 10px;
+        border: 4px solid $background-fourth-color;
+        background-color: $background-primary-color;
+        color: white;
+    }
+
+
+
     .f-d-form-cart {
         width: 100%;
         margin: 0 auto;
@@ -616,11 +683,91 @@ export default {
         overflow: hidden;
         padding: 10px;
         font-weight: normal;
+        border: 2px solid $background-fourth-color;
+
+    }
+
+    .f-d-payment {
+        width: 300px;
+        background-image: url(../../public/images/sfondo-card.jpg);
+        margin-bottom: 20px;
+    }
+}
+
+
+@media screen and (max-width: 375px) {
+    .f-d-father-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        width: 100%;
+        height: 100%;
+        padding: 20px;
+        margin-bottom: 30px;
+    }
+
+    .gradientColor {
+        background: linear-gradient(to right, $background-fourth-color, $background-fourth-color, $background-fourth-color, $background-fourth-color, $background-fourth-color);
+        /* Gradient colors */
+        -webkit-background-clip: text;
+        /* For Safari */
+        -webkit-text-fill-color: transparent;
+        /* For Safari */
+        background-clip: text;
+        color: transparent;
+        font-size: 25px;
+        /* Font size */
+        font-weight: bold;
+        /* Font weight */
+        text-align: center;
+        /* Center alignment */
+        padding: 10px 20px;
+        /* Padding */
+        border-radius: 10px;
+        /* Rounded corners */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        /* Box shadow */
+        text-transform: uppercase;
+        /* Uppercase text */
+        letter-spacing: 2px;
+        /* Spacing between letters */
+    }
+
+    .f-d-cart {
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         gap: 10px;
+        width: 100%;
+        border-radius: 10px;
+        border: 4px solid $background-fourth-color;
+        background-color: $background-primary-color;
+        color: white;
+    }
+
+
+
+    .f-d-form-cart {
+        width: 100%;
+        margin: 0 auto;
+        //height: 100%;
+        background: linear-gradient(to right, $background-primary-color);
+        border-radius: 10px;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        padding: 10px;
+        font-weight: normal;
+        border: 2px solid $background-fourth-color;
+
+    }
+
+    .f-d-payment {
+        width: 300px;
+        background-image: url(../../public/images/sfondo-card.jpg);
+        margin-bottom: 20px;
     }
 }
 
@@ -680,7 +827,7 @@ export default {
 
 
     .f-d-form-cart {
-        width: 300px;
+        width: 100%;
         margin: 0 auto;
         //height: 100%;
         background: linear-gradient(to right, $background-primary-color);

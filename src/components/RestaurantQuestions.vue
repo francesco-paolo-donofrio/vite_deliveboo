@@ -1,10 +1,10 @@
 <template>
     <div class="f-d-background-gradient">
     <div class="f-d-bg-title d-flex flex-column align-items-center justify-content-center">
-    <h1 class="gradientColorTitle">Registrati <p class="gradientColorMini f-d-text-d-none"><em>gestisci il tuo ristorante</em></p></h1>
+    <h1 class="gradientColorTitle">Registrati <p class="gradientColorMini f-d-text-d-none">gestisci il tuo ristorante</p></h1>
 </div>
     <div class="container">
-        <div class="col-lg-12">
+        <div class="col-lg-12 p-5">
 
                 <div class="maps-container-ristoratore">
                     <div>
@@ -18,7 +18,7 @@
                             <CardDescriptionComponent />
                         </div>
                         <div class="f-d-mini-container-ristoratore-small ">
-                            <h4 class="f-d-bounce "><a href="http://localhost:8000/login">Registrati</a></h4>
+                            <h4 class="f-d-bounce "><a href="http://localhost:8000/login">Clicca e Registrati</a></h4>
                             <ul class="align-items-start">
                                 <li class="text-start f-d-primary-color fw-bold">
                                     <em class="fw-bold">Registrati</em> alla tua area riservata
