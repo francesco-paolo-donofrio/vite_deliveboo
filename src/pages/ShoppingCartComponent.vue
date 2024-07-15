@@ -20,7 +20,7 @@
             </div>
         </div>
         <div v-else>
-            <div class="f-d-father-container">
+            <div class="f-d-father-container f-d-bg-cart">
                 <div class="f-d-cart mt-3">
                     <div class="cart d-flex flex-column align-items-center justify-content-center">
                         <h2 class="gradientColor fs-1">Carrello</h2>
@@ -42,8 +42,9 @@
                         <form class="f-d-form-cart" @submit.prevent="pay">
                             <h2 class="fs-3">Compila il form per effettuare il pagamento</h2>
                             <!-- NOME -->
-                            <div class="text-secondary mb-2">
-                                <label for="name" class="form-label text-start text-dark">Nome*</label>
+                            <div
+                                class="text-secondary mb-2 d-flex align-items-center justify-content-start flex-column">
+                                <label for="name" class="form-label text-start text-white">Nome*</label>
                                 <input type="text" name="name" class="form-control" id="name" v-model="customer.name"
                                     minlength="3" maxlength="200" placeholder="Inserisci il tuo nome"
                                     :class="{ 'is-invalid': errors.name }" required>
@@ -51,8 +52,9 @@
                             </div>
 
                             <!-- COGNOME -->
-                            <div class="text-secondary mb-2">
-                                <label for="surname" class="form-label text-dark">Cognome*</label>
+                            <div
+                                class="text-secondary mb-2 d-flex align-items-center justify-content-start flex-column">
+                                <label for="surname" class="form-label text-white">Cognome*</label>
                                 <input type="text" class="form-control" id="surname" name="surname"
                                     v-model="customer.surname" minlength="3" maxlength="200"
                                     placeholder="Inserisci il tuo cognome" :class="{ 'is-invalid': errors.surname }"
@@ -61,8 +63,9 @@
                             </div>
 
                             <!-- TELEFONO -->
-                            <div class="text-secondary mb-2 ">
-                                <label for="phone" class="form-label text-dark">Numero di telefono*</label>
+                            <div
+                                class="text-secondary mb-2 d-flex align-items-center justify-content-start flex-column">
+                                <label for="phone" class="form-label text-white">Numero di telefono*</label>
                                 <input type="tel" class="form-control" id="phone" name="phone" v-model="customer.phone"
                                     minlength="3" maxlength="200" placeholder="Numero di telefono"
                                     :class="{ 'is-invalid': errors.phone }" required>
@@ -70,8 +73,9 @@
                             </div>
 
                             <!-- EMAIL -->
-                            <div class="text-secondary mb-2 ">
-                                <label for="email" class="form-label text-dark">Indirizzo email*</label>
+                            <div
+                                class="text-secondary mb-2 d-flex align-items-center justify-content-start flex-column">
+                                <label for="email" class="form-label text-white">Indirizzo email*</label>
                                 <input type="email" class="form-control" id="email" name="email"
                                     v-model="customer.email" minlength="3" maxlength="200"
                                     placeholder="Inserisci il tuo email" :class="{ 'is-invalid': errors.email }"
@@ -80,8 +84,9 @@
                             </div>
 
                             <!-- INDIRIZZO -->
-                            <div class="text-secondary mb-2 ">
-                                <label for="address" class="form-label text-dark">Indirizzo di consegna*</label>
+                            <div
+                                class="text-secondary mb-2 d-flex align-items-center justify-content-start flex-column">
+                                <label for="address" class="form-label text-white">Indirizzo di consegna*</label>
                                 <input type="text" class="form-control" id="address" name="address"
                                     v-model="customer.address" minlength="3" maxlength="200"
                                     placeholder="Inserisci il tuo indirizzo" :class="{ 'is-invalid': errors.address }"
@@ -89,15 +94,16 @@
                                 <div id="addressMessage" class="error-message text-danger">{{ errors.address }}</div>
                             </div>
 
-                            <div class="mt-3 text-dark text-start"><span>* Campi obbligatori</span></div>
+                            <div class="mt-3 text-white text-start"><span>* Campi obbligatori</span></div>
                         </form>
                     </div>
                     <div>
-                        <div id="dropin-container"
-                            class="f-d-payment d-flex flex-column align-items-center justify-content-center"></div>
-                        <div class="d-flex justify-content-center gap-2">
-                            <button class="f-d-button-delete" @click="emptyCart">Svuota Carrello</button>
-                            <button class="f-d-button-confirm" @click="pay">Paga ora</button>
+                        <div id="dropin-container" class="f-d-payment">
+                            
+                        </div>
+                        <div class="d-flex justify-content-center gap-2 mb-3">
+                                <button class="f-d-button-delete" @click="emptyCart">Svuota Carrello</button>
+                                <button class="f-d-button-confirm" @click="pay">Paga ora</button>
                         </div>
                     </div>
                 </div>
@@ -335,16 +341,30 @@ export default {
 <style lang="scss" scoped>
 @use '../assets/styles/partials/_variables' as *;
 
+.f-d-bg-cart {
+    width: 100%;
+    height: 100%;
+    background-image: url(../../public/images/sfondo-card.jpg);
+}
+
 .f-d-father-container {
+    width: 100%;
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    align-items: start;
+    //align-items: start;
+    align-items: center;
+
 }
 
 .f-d-payment {
-    width: 550px;
-    background-image: url(../../public/images/sfondo-card.jpg);
+    width: 100%;
+    margin: 0 auto;
     margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .f-d-border-bottom {
@@ -418,39 +438,45 @@ export default {
     height: 500px;
 }
 
-.f-d-form-cart {
-    width: 100%;
-    margin: 0 auto;
-    background-image: url(../../public/images/sfondo-card.jpg);
-    //height: 100%;
-    background: linear-gradient(to right, $background-primary-color);
-    border-radius: 10px;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    padding: 10px;
-    font-weight: normal;
-
-    border-bottom: none;
-    text-align: start !important;
-    font-weight: bold;
-
-    h2 {
-        color: $background-primary-color;
-        text-transform: uppercase;
-        font-weight: bold;
-        text-align: center;
-        margin-bottom: 10px;
-        font-size: 1px;
-    }
-
-
-    border: 2px solid $background-fourth-color;
+.f-d-cart {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 10px;
+    width: 60%;
+    border-radius: 10px;
+    border: 2px solid $background-fourth-color;
+    background-color: $background-primary-color;
+    color: white;
+    padding: 10px;
+}
 
+.f-d-form-cart {
+    width: 100% !important;
+    margin: 0 auto;
+    border: 4px solid $background-fourth-color;
+    background-color: $background-primary-color;
+    color: white;
+    border-radius: 10px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    font-weight: bold;
+
+    h2 {
+        color: $background-fourth-color;
+        text-transform: uppercase;
+        font-weight: bold;
+        text-align: center;
+        margin-bottom: 10px;
+        font-size: 1px;
+    } 
 }
 
 .f-d-container {
@@ -468,23 +494,6 @@ export default {
 .braintree-sheet__content--form.braintree-form__flexible-fields {
     flex-direction: column !important;
 }
-
-.f-d-cart {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    width: 60%;
-    height: calc(100% - 20px);
-    border-radius: 10px;
-    border: 2px solid $background-fourth-color;
-    background-color: $background-primary-color;
-    color: white;
-    padding: 10px;
-}
-
-
 
 .is-invalid {
     border-color: red !important;
@@ -560,6 +569,7 @@ export default {
 }
 
 .f-d-payment {
+    width: 80%;
     background-image: url(../../public/images/sfondo-card.jpg);
     margin-bottom: 20px;
 }
@@ -586,7 +596,8 @@ export default {
     // width: 300px;
     border-radius: 10px;
     border: 1px solid $background-fourth-color;
-    background-image: url(../../public/images/sfondo-card.jpg);}
+    background-image: url(../../public/images/sfondo-card.jpg);
+}
 
 .loader-image{
     width: 80%;

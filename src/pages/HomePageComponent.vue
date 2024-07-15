@@ -1,13 +1,14 @@
 <template>
     <HeroComponent />
     <DescriptionComponent />
+    <RestaurantQuestions />
     <CarouselComponent :types="types" :selectedTypes="selectedtypes" @typeSelected="toggleType" />
     <!-- <div class="d-flex justify-content-center">
         <button type="button" class="btn btn-primary mx-2 p-2" @click="sendTypes">Filtra</button>
         <button type="button" class="btn btn-secondary mx-2 p-2" @click="resetTypes">Reset</button>
     </div> -->
-    <div id="restaurants-title">
-        <h1 class="gradientColor text-center">Ristoranti</h1>
+    <div id="restaurants-title" class="d-flex justify-content-center align-items-center flex-column">
+        <h1 class="gradientColor text-center">Ristoranti <p class="gradientColorMini f-d-text-d-none"><em>ordina dal tuo ristorante preferito</em></p></h1>
     </div>
     <div class="f-d-gradient-not-found-message">
         <div id="restaurants" class="container my-4 ">
@@ -41,7 +42,6 @@
             </div>
         </div>
     </div>
-    <AboutUsComponent />
     <FooterComponent />
 </template>
 
@@ -50,6 +50,7 @@ import { store } from '../store';
 import axios from 'axios';
 import HeroComponent from '../components/HeroComponent.vue';
 import DescriptionComponent from '../components/DescriptionComponent.vue';
+import RestaurantQuestions from '../components/RestaurantQuestions.vue';
 import AboutUsComponent from '../components/AboutUsComponent.vue';
 import CardComponent from '../components/CardComponent.vue';
 import CarouselComponent from '../components/CarouselComponent.vue';
@@ -63,6 +64,7 @@ export default {
         CardComponent,
         HeroComponent,
         DescriptionComponent,
+        RestaurantQuestions,
         CarouselComponent,
         AboutUsComponent,
         FooterComponent
@@ -173,6 +175,33 @@ export default {
     /* Margin around the title */
 }
 
+.gradientColorMini {
+    background: linear-gradient(to right, $background-primary-color, $background-primary-color);
+    /* Gradient colors */
+    -webkit-background-clip: text;
+    /* For Safari */
+    -webkit-text-fill-color: transparent;
+    /* For Safari */
+    background-clip: text;
+    color: transparent;
+    font-size: 23px;
+    /* Font size */
+    font-weight: bold;
+    /* Font weight */
+    text-align: center;
+    /* Center alignment */
+    padding: 10px 20px;
+    /* Padding */
+    border-radius: 10px;
+    /* Rounded corners */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* Box shadow */
+    text-transform: uppercase;
+    /* Uppercase text */
+    letter-spacing: 2px;
+    /* Spacing between letters */
+
+}
 #restaurants-title {
     background-image: url('../../public/images/sfondo-card.jpg');
 }
@@ -281,39 +310,8 @@ export default {
         }
     }
 
-    .gradientColor {
-    background: linear-gradient(to right, $background-fourth-color, $background-fourth-color, $background-primary-color, $background-fourth-color, $background-fourth-color);
-    /* Gradient colors */
-    -webkit-background-clip: text;
-    /* For Safari */
-    -webkit-text-fill-color: transparent;
-    /* For Safari */
-    background-clip: text;
-    color: transparent;
-    font-size: 25px;
-    /* Font size */
-    font-weight: bold;
-    /* Font weight */
-    text-align: center;
-    /* Center alignment */
-    padding: 10px 20px;
-    /* Padding */
-    border-radius: 10px;
-    /* Rounded corners */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    /* Box shadow */
-    text-transform: uppercase;
-    /* Uppercase text */
-    letter-spacing: 2px;
-    /* Spacing between letters */
-}
-}
-
-@media screen and (max-width: 320px) {
-    #types-title {
-        h1 {
-            font-size: 25px;
-        }
+    .f-d-text-d-none {
+        display: none;
     }
 
     .gradientColor {
@@ -342,5 +340,117 @@ export default {
     letter-spacing: 2px;
     /* Spacing between letters */
 }
+}
+
+@media screen and (max-width: 425px) {
+    
+    .f-d-text-d-none {
+        display: none;
+    }
+
+    .gradientColor {
+    background: linear-gradient(to right, $background-fourth-color, $background-fourth-color, $background-primary-color, $background-fourth-color, $background-fourth-color);
+    /* Gradient colors */
+    -webkit-background-clip: text;
+    /* For Safari */
+    -webkit-text-fill-color: transparent;
+    /* For Safari */
+    background-clip: text;
+    color: transparent;
+    font-size: 25px;
+    /* Font size */
+    font-weight: bold;
+    /* Font weight */
+    text-align: center;
+    /* Center alignment */
+    padding: 10px 20px;
+    /* Padding */
+    border-radius: 10px;
+    /* Rounded corners */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* Box shadow */
+    text-transform: uppercase;
+    /* Uppercase text */
+    letter-spacing: 2px;
+    /* Spacing between letters */
+}
+
+
+}
+
+@media screen and (max-width: 375px) {
+    
+    .f-d-text-d-none {
+        display: none;
+    }
+
+    .gradientColor {
+    background: linear-gradient(to right, $background-fourth-color, $background-fourth-color, $background-primary-color, $background-fourth-color, $background-fourth-color);
+    /* Gradient colors */
+    -webkit-background-clip: text;
+    /* For Safari */
+    -webkit-text-fill-color: transparent;
+    /* For Safari */
+    background-clip: text;
+    color: transparent;
+    font-size: 25px;
+    /* Font size */
+    font-weight: bold;
+    /* Font weight */
+    text-align: center;
+    /* Center alignment */
+    padding: 10px 20px;
+    /* Padding */
+    border-radius: 10px;
+    /* Rounded corners */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* Box shadow */
+    text-transform: uppercase;
+    /* Uppercase text */
+    letter-spacing: 2px;
+    /* Spacing between letters */
+}
+
+
+}
+
+@media screen and (max-width: 320px) {
+    #types-title {
+        h1 {
+            font-size: 25px;
+        }
+    }
+    .f-d-text-d-none {
+        display: none;
+    }
+
+    .gradientColor {
+    background: linear-gradient(to right, $background-fourth-color, $background-fourth-color, $background-primary-color, $background-fourth-color, $background-fourth-color);
+    /* Gradient colors */
+    -webkit-background-clip: text;
+    /* For Safari */
+    -webkit-text-fill-color: transparent;
+    /* For Safari */
+    background-clip: text;
+    color: transparent;
+    font-size: 25px;
+    /* Font size */
+    font-weight: bold;
+    /* Font weight */
+    text-align: center;
+    /* Center alignment */
+    padding: 10px 20px;
+    /* Padding */
+    border-radius: 10px;
+    /* Rounded corners */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* Box shadow */
+    text-transform: uppercase;
+    /* Uppercase text */
+    letter-spacing: 2px;
+    /* Spacing between letters */
+}
+
+
 }
 </style>

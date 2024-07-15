@@ -2,7 +2,7 @@
   <!-- Div invisibile per il posizionamento dell'ancora -->
   <div id="anchor-types-title" class="anchor-spacer"></div>
   <div id="types-title">
-    <h1 class="gradientColor text-center">Tipologie</h1>
+    <h1 class="gradientColor text-center">Tipologie <p class="gradientColorMini f-d-text-d-none"><em>scegli la tua tipologia preferita</em></p></h1>
   </div>
   <div id="types" class="d-flex justify-content-center align-items-center">
     <div class="typology-carousel">
@@ -141,8 +141,32 @@ export default {
   font-weight: bold;
 }
 
-#types-title {
-  scroll-margin-bottom: 150px;
+.gradientColorMini {
+    background: linear-gradient(to right, $background-primary-color, $background-primary-color);
+    /* Gradient colors */
+    -webkit-background-clip: text;
+    /* For Safari */
+    -webkit-text-fill-color: transparent;
+    /* For Safari */
+    background-clip: text;
+    color: transparent;
+    font-size: 23px;
+    /* Font size */
+    font-weight: bold;
+    /* Font weight */
+    text-align: center;
+    /* Center alignment */
+    padding: 10px 20px;
+    /* Padding */
+    border-radius: 10px;
+    /* Rounded corners */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* Box shadow */
+    text-transform: uppercase;
+    /* Uppercase text */
+    letter-spacing: 2px;
+    /* Spacing between letters */
+
 }
 
 .gradientColor {
@@ -199,8 +223,7 @@ export default {
 .anchor-spacer {
   position: relative;
   top: -50px;
-  /* Regola questo valore per il posizionamento desiderato */
-  height: 50px;
+  
   /* Altezza dello spazio di ancoraggio */
   visibility: hidden;
   /* Nasconde il div */
@@ -213,6 +236,10 @@ export default {
     border-radius: 0 !important;
     width: 100%;
     height: 200px;
+  }
+
+  .f-d-text-d-none {
+    display: none;
   }
 }
 
@@ -228,6 +255,10 @@ export default {
         font-size: 25px;
     }
 }
+
+.f-d-text-d-none {
+    display: none;
+  }
 
   .nav-button {
     position: absolute;
@@ -265,6 +296,9 @@ export default {
         font-size: 25px;
     }
 }
+.f-d-text-d-none {
+    display: none;
+  }
 
   .nav-button {
     position: absolute;
@@ -301,6 +335,10 @@ export default {
     h1 {
       font-size: 25px;
     }
+  }
+
+  .f-d-text-d-none {
+    display: none;
   }
 
   .nav-button {
