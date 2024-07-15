@@ -10,12 +10,6 @@
       <img class="f-d-img-logo-hero f-d-text-d-none" src="../../public/images/logo_deliveboo.png" alt="logo.hero">
       <p class="f-d-gradientTitle">Deliveboo</p>
       <h4 class="fst-italic f-d-text-d-none gradientColor-small"><em class="fw-light">"La ristorazione di Roma a casa tua"</em></h4>
-      <p class="f-d-text-d-none fs-5">
-        Benvenuti nella nostra applicazione di food delivery! <em class="fw-bold gradientColorSmall">Deliveboo</em>
-        offre un servizio rapido e affidabile per
-        la
-        consegna di cibo dai migliori ristoranti di Roma.
-      </p>
 
       <div class="d-flex gap-5 align-items-center justify-content-center w-50 mt-5">
         <div class="d-flex flex-column align-items-center justify-content-center gap-2">
