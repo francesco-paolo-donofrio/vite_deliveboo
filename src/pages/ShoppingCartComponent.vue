@@ -107,12 +107,12 @@
                                 <div id="dropin-container" class="f-d-payment">
 
                                 </div>
-                                <div class="d-flex justify-content-center gap-2 mb-3">
+                            </div>
+                            </form>
+                            <div class="d-flex justify-content-center gap-2 mb-3">
                                     <button class="f-d-button-delete" @click="emptyCart">Svuota Carrello</button>
                                     <button class="f-d-button-confirm" @click="pay">Paga ora</button>
                                 </div>
-                            </div>
-                            </form>
                         </div>
                     </div>
                 </div>
