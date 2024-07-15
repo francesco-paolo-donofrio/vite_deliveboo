@@ -54,7 +54,7 @@
                             <!-- <div class="d-flex align-items-center justify-content-center flex-wrap">
                                 <div class="f-d-card col-sm-12 col-lg-3 col-xl-2" v-for="(item, index) in restaurant.products" -->
 
-                            <h5> class="text-center py-3">{{ infoMessage}}</h5>
+                            <!-- <h5> class="text-center py-3">{{ infoMessage}}</h5> -->
                             <div class="d-flex align-items-center justify-content-center flex-wrap">
                                 <div class="f-d-card col-sm-12 col-xl-2" v-for="(item, index) in restaurant.products"
 

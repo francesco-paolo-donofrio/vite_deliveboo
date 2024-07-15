@@ -1,19 +1,13 @@
 <template>
     <div class="f-d-bg-title">
-    <h1 class="gradientColorTitle">Chi siamo</h1>
+    <h1 class="gradientColorTitle">Chi siamo, <em class="gradientColorMini">La Nostra Storia e Visione</em></h1>
 </div>
     <div class="container">
         
         <div class="about-us-container">
             <div>
                 <h2 class="gradientColor">Ristoratore?</h2>
-                <p class="">
-                    Benvenuti nella nostra applicazione di food delivery! <em
-                        class="fw-bold gradientColorSmall">Deliveboo</em> offre un servizio rapido e affidabile per
-                    la
-                    consegna di cibo dai migliori ristoranti di Roma. Ordina i tuoi piatti preferiti oppure registrati
-                    come un <em class="fw-bold gradientColorSmall">Ristoratore</em> per gestire il tuo ristorante!
-                </p>
+                
             </div>
             <!-- <div class="f-d-flag d-flex align-items-center justify-content-between"> -->
                 <!-- <div class="f-d-mini-container">
@@ -163,6 +157,34 @@ export default {
     animation: borderAnimation 5s infinite;
     border-radius: 10px;
     border-top: none;
+}
+
+.gradientColorMini {
+    background: linear-gradient(to right, $background-primary-color, $background-primary-color);
+    /* Gradient colors */
+    -webkit-background-clip: text;
+    /* For Safari */
+    -webkit-text-fill-color: transparent;
+    /* For Safari */
+    background-clip: text;
+    color: transparent;
+    font-size: 23px;
+    /* Font size */
+    font-weight: bold;
+    /* Font weight */
+    text-align: center;
+    /* Center alignment */
+    padding: 10px 20px;
+    /* Padding */
+    border-radius: 10px;
+    /* Rounded corners */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* Box shadow */
+    text-transform: uppercase;
+    /* Uppercase text */
+    letter-spacing: 2px;
+    /* Spacing between letters */
+
 }
 
 .f-d-mini-cta{
