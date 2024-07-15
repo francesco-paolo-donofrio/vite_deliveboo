@@ -1,22 +1,29 @@
 <template>
     <div class="f-d-background-gradient">
-    <div class="f-d-bg-title">
-    <h1 class="gradientColorTitle">Deliveboo <p class="gradientColorMini f-d-text-d-none"><em>la ristorazione a portata di mano</em></p></h1>
-</div>
-    <div class="container mt-5">
-        <div class="row ">
-            <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <div class="about-us-container">
-                    <div class="d-flex flex-column align-items-center justify-content-center">
-                        <h2 class="gradientColor-green">Ordina Online</h2>
-                        <p class="gradientColorSmall-text-left"><em class="fw-bold">Ordina</em> online i tuoi piatti
-                            preferiti e attendi l'ordine comodamente dal divano</p>
-                        <p class="d-flex align-items-center flex-column justify-content-center"><em
+        <div class="f-d-bg-title">
+            <h1 class="gradientColorTitle">Deliveboo <p class="gradientColorMini f-d-text-d-none">la ristorazione a
+                        portata di mano</p>
+            </h1>
+        </div>
+        <div class="container">
+            <div class="row ">
+                <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="about-us-container">
+                            <p class="gradientColorMini-homepage align-self-start text-start">Benvenuti nella nostra applicazione di food
+                                delivery!</p>
+                            <p class="gradientColorSmall-text-left text-start p-3"> Deliveboo
+                                offre un servizio rapido e affidabile per
+                                la
+                                consegna di cibo dai migliori ristoranti di Roma. <br> <strong>Ordina</strong> online
+                                i tuoi piatti
+                                preferiti e attendi l'ordine comodamente dal divano</p>
+                            <!-- <p class="d-flex align-items-center flex-column justify-content-center"><em
                                 class="fw-bold gradientColor-3times">Scegli...</em> <em
                                 class="fw-bold gradientColor-3times">Ordina...</em> <em
-                                class="fw-bold gradientColor-3times">Clicca....!</em></p>
-                    </div>
-                    <div class="f-d-flag d-flex align-items-center justify-content-between gap-5 display-none-newClass">
+                                class="fw-bold gradientColor-3times">Clicca....!</em></p> -->
+                        
+
+                        <!-- <div class="f-d-flag d-flex align-items-center justify-content-between gap-5 display-none-newClass">
                         <div class="f-d-mini-container ">
                             <h4 class="gradientColorSmall-payment">Pagamento sicuro con</h4>
                             <img class="f-d-img-payment" src="../../public/images/braintree.png" alt="">
@@ -35,12 +42,12 @@
                             </h5><br>
                         </a>
 
+                    </div> -->
                     </div>
                 </div>
-            </div>
-            <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <div class="maps-container">
-                    <div>
+                <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="maps-container">
+                        <!-- <div>
                         <h2 class="gradientColor-orange">Il corriere..</h2>
                         <p class="gradientColorSmall-text-right">Non temere! <br> Ogni consegna viene trattata con cura,
                             assicurando che i tuoi piatti arrivino puntualmente e in perfette condizioni. </p>
@@ -48,21 +55,21 @@
                     <div class="d-flex align-items-center justify-content-between">
                         <div class="f-d-mini-container-ristoratore f-d-text-d-none">
                         </div>
+                    </div> -->
                     </div>
-                </div>
 
-            </div>
-            <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                </div>
+                <!-- <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="maps-container">
                     <h2 class="gradientColor-orange">Chi siamo</h2>
             <CardAboutUsComponent />
             <p class="gradientColorSmall-text-right">Fondata dall'idea di 4 studenti di Informatica e appassionati di cucina, <em
                     class="fw-bold gradientColorSmall">Deliveboo</em> entra in scena nelle piazze romane più affamata che mai </p>
                 </div>
+            </div> -->
             </div>
         </div>
     </div>
-</div>
 </template>
 
 <script>
@@ -132,29 +139,56 @@ export default {
     height: 500px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     text-align: center;
-    border: 5px solid $background-secondary-color;
     font-size: 20px;
     padding: 10px;
     border-radius: 10px;
-    background-image: url('../../public/images/sfondo-card.jpg');
+    color: white;
+    
 }
 
 .maps-container {
     width: 100%;
-    height: 500px;
+    height: 100%;
+    font-size: 20px;
+    padding: 10px;
+    border-radius: 10px;
+    background-image: url('../../public/images/healthy-food.png');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
     text-align: center;
-    font-size: 20px;
-    padding: 10px;
-    border: 5px solid $background-secondary-color;
+}
+
+.gradientColorMini-homepage {
+    
+    background: linear-gradient(to right, $background-secondary-color, $background-fourth-color, $background-secondary-color, $background-fourth-color, $background-secondary-color);
+    -webkit-background-clip: text;
+    /* For Safari */
+    -webkit-text-fill-color: transparent;
+    /* For Safari */
+    background-clip: text;
+    color: transparent;
+    font-size: 2.5rem;
+    /* Font size */
+    font-weight: bold;
+    /* Font weight */
+    text-align: center;
+    /* Center alignment */
+    padding: 10px 20px;
+    /* Padding */
     border-radius: 10px;
-    background-image: url('../../public/images/sfondo-card.jpg');
+    /* Box shadow */
+    text-transform: uppercase;
+    /* Uppercase text */
+    letter-spacing: 2px;
+    /* Spacing between letters */
 }
 
 .gradientColor-choose-restaurant {
@@ -224,8 +258,9 @@ export default {
 }
 
 .f-d-background-gradient {
-    background: linear-gradient(to right, $background-primary-color, $background-secondary-color, $background-primary-color);
+    background-color: $background-primary-color;
 }
+
 .gradientColorMini {
     background: linear-gradient(to right, $background-primary-color, $background-primary-color);
     /* Gradient colors */
@@ -309,7 +344,7 @@ export default {
     background-color: white;
     cursor: pointer;
     text-decoration: none;
-        color: inherit;
+    color: inherit;
 
     &:hover {
         border: 2px solid white;
@@ -386,7 +421,6 @@ export default {
 
 .gradientColor-green {
     color: $background-primary-color;
-    background-color: $background-fourth-color;
     /* Font weight */
     text-align: center;
     /* Padding */
@@ -395,7 +429,7 @@ export default {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     font-weight: bold;
 
-    font-size: 1, 5rem;
+    font-size: 2,5rem;
     padding: 10px 20px;
     text-transform: uppercase;
     /* Uppercase text */
@@ -568,16 +602,13 @@ export default {
 }
 
 .gradientColorSmall-text-left {
-    color: $background-primary-color;
-
-    font-size: 18px;
+    color: white;
+    font-weight: light;
+    font-size: 22px;
     /* Font weight */
     text-align: center;
     /* Padding */
     border-radius: 10px;
-    /* Rounded corners */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    font-weight: bold;
     /* Uppercase text */
     letter-spacing: 2px;
     /* Spacing between letters */
@@ -625,10 +656,10 @@ export default {
     }
 
     .f-d-text-d-none {
-    display: none;
-  }
+        display: none;
+    }
 
-  .maps-container {
+    .maps-container {
         width: 100%;
         display: flex;
         height: auto;
@@ -808,9 +839,10 @@ export default {
         padding: 10px;
         border-radius: 10px;
     }
+
     .f-d-text-d-none {
-    display: none;
-  }
+        display: none;
+    }
 
     .f-d-img-payment {
         width: 10cap;
@@ -846,8 +878,8 @@ export default {
     }
 
     .f-d-text-d-none {
-    display: none;
-  }
+        display: none;
+    }
 }
 
 @media screen and (max-width: 375px) {
@@ -923,9 +955,10 @@ export default {
         padding: 10px;
         border-radius: 10px;
     }
+
     .f-d-text-d-none {
-    display: none;
-  }
+        display: none;
+    }
 
     .f-d-img-payment {
         width: 10cap;
@@ -933,8 +966,8 @@ export default {
     }
 
     .f-d-text-d-none {
-    display: none;
-  }
+        display: none;
+    }
 
     .gradientColor {
         background: linear-gradient(to right, $background-primary-color, $background-fourth-color, $background-primary-color, $background-fourth-color, $background-primary-color);
@@ -967,8 +1000,9 @@ export default {
 
 @media screen and (max-width: 320px) {
     .f-d-text-d-none {
-    display: none;
-  }
+        display: none;
+    }
+
     .container {
         width: 100%;
         display: flex;
@@ -1076,39 +1110,39 @@ export default {
     }
 
     .f-d-text-d-none {
-    display: none;
-  }
+        display: none;
+    }
 
-  .gradientColorSmall-text-right {
-    font-size: 14px;
-  }
+    .gradientColorSmall-text-right {
+        font-size: 14px;
+    }
 
-  .f-d-mini-container-choose {
-    text-align: center;
-    width: 100%;
-    height: 150px;
-    display: flex;
-    align-items: center;
-    justify-content: start;
-    flex-direction: column;
-    border: 2px solid $background-primary-color;
-    border-radius: 10px;
-    padding: 5px;
-    animation: 1s borderAnimation infinite;
-    background-color: white;
-    cursor: pointer;
-    text-decoration: none;
+    .f-d-mini-container-choose {
+        text-align: center;
+        width: 100%;
+        height: 150px;
+        display: flex;
+        align-items: center;
+        justify-content: start;
+        flex-direction: column;
+        border: 2px solid $background-primary-color;
+        border-radius: 10px;
+        padding: 5px;
+        animation: 1s borderAnimation infinite;
+        background-color: white;
+        cursor: pointer;
+        text-decoration: none;
         color: inherit;
 
-    &:hover {
-        border: 2px solid white;
-        background-color: rgba(255, 166, 0, 0.151);
-        animation: none;
-
-        & span {
+        &:hover {
+            border: 2px solid white;
+            background-color: rgba(255, 166, 0, 0.151);
             animation: none;
+
+            & span {
+                animation: none;
+            }
         }
     }
-}
 }
 </style>
