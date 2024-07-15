@@ -1,14 +1,19 @@
 <template>
 
-    <div class="cart text-center">
-
-        <!-- <div v-if="this.isLoading" class="f-d-form-cart d-none" id="loader">
-        Caricamento...
-    </div> -->
-
-        <div class="d-flex justify-content-center align-items-center flex-column pt-5"
-            v-if="this.store.cart.length < 1">
-            <div class="f-d-cart ">
+    <div class="cart text-center my-3">
+        <!-- Loader -->
+        <div v-if="isLoading" class="loader-overlay">
+            <div class="loader d-flex flex-column justify-content-center align-items-center">
+                <div class="my-2">
+                    Caricamento...
+                </div> 
+                <div class="loader-image">
+                    <img src="../../public/images/delivery.webp" alt="loading">
+                </div>
+            </div>
+        </div>
+        <div class="d-flex justify-content-center align-items-center flex-column" v-if="this.store.cart.length < 1">
+            <div class="f-d-cart">
                 <h2>Carrello... vuoto!</h2>
                 <div>Ordina ora il tuo piatto preferito!</div>
                 <a class="gradientColor fs-3" href="/">Clicca qui e scegli il ristorante</a>
@@ -111,7 +116,6 @@
                             </form>
                             
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -288,6 +292,8 @@ export default {
                 return;
             }
 
+            this.isLoading = true;
+            
             this.instance.requestPaymentMethod((error, payload) => {
                 if (error) {
                     console.error('Error requesting payment method:', error);
@@ -303,7 +309,7 @@ export default {
                     .then(response => {
                         if (response.data.success) {
                             this.store.prevOrder = this.store.cart;
-                            this.store.cart = [];
+                            this.emptyCart();
                             this.$router.push({ path: '/thank-you' });
 
                         } else {
@@ -316,6 +322,9 @@ export default {
                     })
                     .catch(error => {
                         console.error('Error processing payment:', error);
+                    })
+                    .finally(() => {
+                        this.isLoading = false;
                     })
             });
         },
@@ -355,7 +364,9 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    //align-items: start;
     align-items: center;
+
 }
 
 .f-d-payment {
@@ -479,9 +490,7 @@ export default {
         font-size: 1px;
     }
 
-
-
-}
+    } 
 
 .f-d-container {
     width: 100%;
@@ -578,24 +587,58 @@ export default {
     margin-bottom: 20px;
 }
 
-.loader {
-    /* Stili per il loader */
-    text-align: center;
-    font-size: 24px;
-    margin-top: 20px;
-    border: 2px solid $background-fourth-color;
-    border-radius: 10px;
-    padding: 20px;
-    margin-top: 100px;
-    width: 80%;
-    height: 100vh;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: $background-primary-color;
-    color: $background-fourth-color;
+//* LOADER */
 
+.loader-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    /* Semi-trasparente */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.loader {
+    font-size: 2rem;
+    text-align: center;
+    // width: 300px;
+    border-radius: 10px;
+    border: 1px solid $background-fourth-color;
+    background-image: url(../../public/images/sfondo-card.jpg);
+}
+
+.loader-image{
+    width: 80%;
+    img{
+        width: 100%;
+    }
+}
+
+/* Media queries for responsiveness */
+
+/* For tablets and larger screens */
+@media (min-width: 768px) {
+    .loader {
+        width: 60%;
+        max-width: 400px;
+    }
+}
+
+/* For mobile phones */
+@media (max-width: 767px) {
+    .loader {
+        width: 90%;
+        max-width: 280px;
+    }
+
+    .loader-image {
+        width: 80%;
+    }
 }
 
 @media screen and (max-width: 576px) {
