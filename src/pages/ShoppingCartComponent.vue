@@ -1,11 +1,17 @@
 <template>
 
     <div class="cart text-center my-3">
-
-    <!-- <div v-if="this.isLoading" class="f-d-form-cart d-none" id="loader">
-        Caricamento...
-    </div> -->
-
+        <!-- Loader -->
+        <div v-if="isLoading" class="loader-overlay">
+            <div class="loader d-flex flex-column justify-content-center">
+                <div class="my-2">
+                    Caricamento...
+                </div> 
+                <div class="loader-image">
+                    <img src="../../public/images/delivery.webp" alt="">
+                </div>
+            </div>
+        </div>
         <div class="d-flex justify-content-center align-items-center flex-column" v-if="this.store.cart.length < 1">
             <div class="f-d-cart">
                 <h2>Carrello... vuoto!</h2>
@@ -93,7 +99,7 @@
                             <button class="f-d-button-delete" @click="emptyCart">Svuota Carrello</button>
                             <button class="f-d-button-confirm" @click="pay">Paga ora</button>
                         </div>
-                    </div>                                 
+                    </div>
                 </div>
             </div>
         </div>
@@ -269,6 +275,8 @@ export default {
                 return;
             }
 
+            this.isLoading = true;
+            
             this.instance.requestPaymentMethod((error, payload) => {
                 if (error) {
                     console.error('Error requesting payment method:', error);
@@ -297,6 +305,9 @@ export default {
                     })
                     .catch(error => {
                         console.error('Error processing payment:', error);
+                    })
+                    .finally(() => {
+                        this.isLoading = false;
                     })
             });
         },
@@ -327,7 +338,7 @@ export default {
 .f-d-father-container {
     display: flex;
     justify-content: center;
-    align-items: start;    
+    align-items: start;
 }
 
 .f-d-payment {
@@ -431,7 +442,7 @@ export default {
         margin-bottom: 10px;
         font-size: 1px;
     }
-    
+
 
     border: 2px solid $background-fourth-color;
     display: flex;
@@ -494,83 +505,91 @@ export default {
     }
 }
 
-    .gradientColor {
-        background: linear-gradient(to right, $background-fourth-color, $background-fourth-color, $background-fourth-color, $background-fourth-color, $background-fourth-color);
-        /* Gradient colors */
-        -webkit-background-clip: text;
-        /* For Safari */
-        -webkit-text-fill-color: transparent;
-        /* For Safari */
-        background-clip: text;
-        color: transparent;
-        font-size: 25px;
-        /* Font size */
-        font-weight: bold;
-        /* Font weight */
-        text-align: center;
-        /* Center alignment */
-        padding: 10px 20px;
-        /* Padding */
-        border-radius: 10px;
-        /* Rounded corners */
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        /* Box shadow */
-        text-transform: uppercase;
-        /* Uppercase text */
-        letter-spacing: 2px;
-        /* Spacing between letters */
-    }
+.gradientColor {
+    background: linear-gradient(to right, $background-fourth-color, $background-fourth-color, $background-fourth-color, $background-fourth-color, $background-fourth-color);
+    /* Gradient colors */
+    -webkit-background-clip: text;
+    /* For Safari */
+    -webkit-text-fill-color: transparent;
+    /* For Safari */
+    background-clip: text;
+    color: transparent;
+    font-size: 25px;
+    /* Font size */
+    font-weight: bold;
+    /* Font weight */
+    text-align: center;
+    /* Center alignment */
+    padding: 10px 20px;
+    /* Padding */
+    border-radius: 10px;
+    /* Rounded corners */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* Box shadow */
+    text-transform: uppercase;
+    /* Uppercase text */
+    letter-spacing: 2px;
+    /* Spacing between letters */
+}
 
-    .f-d-cart {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 10px;
-        width: 100%;
-        border-radius: 10px;
-        border: 4px solid $background-fourth-color;
-        background-color: $background-primary-color;
-        color: white;
-    }
+.f-d-cart {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    border-radius: 10px;
+    border: 4px solid $background-fourth-color;
+    background-color: $background-primary-color;
+    color: white;
+}
 
 
 
-    .f-d-form-cart {
-        margin: 0 auto;
-        //height: 100%;
-        background: linear-gradient(to right, $background-primary-color);
-        border-radius: 10px;
-        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-        overflow: hidden;
-        padding: 10px;
-        font-weight: normal;
-        
-    }
+.f-d-form-cart {
+    margin: 0 auto;
+    //height: 100%;
+    background: linear-gradient(to right, $background-primary-color);
+    border-radius: 10px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    padding: 10px;
+    font-weight: normal;
 
-    .f-d-payment {
+}
+
+.f-d-payment {
     background-image: url(../../public/images/sfondo-card.jpg);
     margin-bottom: 20px;
-    }
+}
+
+//* LOADER */
+
+.loader-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    /* Semi-trasparente */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
 
 .loader {
-    /* Stili per il loader */
+    font-size: 2rem;
     text-align: center;
-    font-size: 24px;
-    margin-top: 20px;
-    border: 2px solid $background-fourth-color;
+    // width: 300px;
     border-radius: 10px;
-    padding: 20px;
-    margin-top: 100px;
-    width: 80%;
-    height: 100vh;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: $background-primary-color;
-    color: $background-fourth-color;
+    border: 1px solid $background-fourth-color;
+    background-image: url(../../public/images/sfondo-card.jpg);}
 
+.loader-image{
+    width: 50%;
 }
 
 @media screen and (max-width: 576px) {
@@ -678,13 +697,13 @@ export default {
         padding: 10px;
         font-weight: normal;
         border: 2px solid $background-fourth-color;
-        
+
     }
 
     .f-d-payment {
-    width: 300px;
-    background-image: url(../../public/images/sfondo-card.jpg);
-    margin-bottom: 20px;
-}
+        width: 300px;
+        background-image: url(../../public/images/sfondo-card.jpg);
+        margin-bottom: 20px;
+    }
 }
 </style>
