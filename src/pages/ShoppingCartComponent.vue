@@ -1,6 +1,6 @@
 <template>
 
-    <div class="cart text-center my-3">
+    <div class="cart text-center">
         <!-- Loader -->
         <div v-if="isLoading" class="loader-overlay">
             <div class="loader d-flex flex-column justify-content-center align-items-center">
@@ -111,10 +111,8 @@
                                     <button class="f-d-button-delete" @click="emptyCart">Svuota Carrello</button>
                                     <button class="f-d-button-confirm" @click="pay">Paga ora</button>
                                 </div>
-
                             </div>
                             </form>
-                            
                         </div>
                     </div>
                 </div>
