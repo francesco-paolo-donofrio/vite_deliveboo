@@ -7,6 +7,7 @@ export const store = reactive({
   cart:[],
   restaurantname:'',
   prevOrder: [],
+  prevname: "",
 
 });
 

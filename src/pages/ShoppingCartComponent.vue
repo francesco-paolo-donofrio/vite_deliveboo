@@ -36,7 +36,7 @@
                                 <h4>{{ cartName() }}</h4>
                                 <div class="f-d-border-bottom"></div>
                                 <div v-for="item in store.cart" :key="item.id">
-                                    {{ item.name }} - {{ item.price }} x {{ item.quantity }}
+                                    {{ item.name }} - {{ item.price }}€ x {{ item.quantity }}
                                 </div>
                                 <div class="my-2 f-d-border-bottom text-center"></div>
                                 <div>Totale ordine: <em class="gradientColor fs-3">{{ totalAmount }}</em> €</div>
@@ -107,12 +107,12 @@
                                 <div id="dropin-container" class="f-d-payment">
 
                                 </div>
-                                <div class="d-flex justify-content-center gap-2 mb-3">
+                            </div>
+                            </form>
+                            <div class="d-flex justify-content-center gap-2 mb-3">
                                     <button class="f-d-button-delete" @click="emptyCart">Svuota Carrello</button>
                                     <button class="f-d-button-confirm" @click="pay">Paga ora</button>
                                 </div>
-                            </div>
-                            </form>
                         </div>
                     </div>
                 </div>
@@ -307,6 +307,7 @@ export default {
                     .then(response => {
                         if (response.data.success) {
                             this.store.prevOrder = this.store.cart;
+                            this.store.prevname = localStorage.cartname
                             this.emptyCart();
                             this.$router.push({ path: '/thank-you' });
 
