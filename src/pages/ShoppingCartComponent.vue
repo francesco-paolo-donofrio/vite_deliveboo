@@ -36,7 +36,7 @@
                                 <h4>{{ cartName() }}</h4>
                                 <div class="f-d-border-bottom"></div>
                                 <div v-for="item in store.cart" :key="item.id">
-                                    {{ item.name }} - {{ item.price }}€ x {{ item.quantity }}
+                                    {{ item.name }} - {{ item.price }}€ x {{ item.quantity }} = {{ this.totalPrice(item) }} €
                                 </div>
                                 <div class="my-2 f-d-border-bottom text-center"></div>
                                 <div>Totale ordine: <em class="gradientColor fs-3">{{ totalAmount }}</em> €</div>
@@ -329,7 +329,10 @@ export default {
         },
         cartName() {
             return localStorage.cartname;
-        }
+        },
+        totalPrice(item) {
+            return (item.price * item.quantity).toFixed(2);
+        },
     },
     computed: {
         totalAmount() {
