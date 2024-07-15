@@ -37,11 +37,7 @@
                             <i class="fa-solid fa-user"></i>
                         </a>
                     </div>
-                    <div id="f-d-nav-kebab-button" ref="fdNavKebabButton"
-                        class="icon-container rounded-top-2 d-lg-none order-1" role="button"
-                        @click="toggleMenu('fdNavKebabMenu', $event)">
-                        <i class="fa-solid fa-bars"></i>
-                    </div>
+                    
                     <div id="f-d-nav-search-bar-input" ref="fdNavSearchBarInput"
                         class="search-bar-input bar-input active-color rounded-bottom-2 position-absolute container d-none">
                         <form class="d-flex p-3" role="search">
