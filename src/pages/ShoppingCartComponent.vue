@@ -298,6 +298,7 @@ export default {
                     .then(response => {
                         if (response.data.success) {
                             this.store.prevOrder = this.store.cart;
+                            this.store.prevname = localStorage.cartname
                             this.emptyCart();
                             this.$router.push({ path: '/thank-you' });
 

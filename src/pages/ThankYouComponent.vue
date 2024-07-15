@@ -4,7 +4,7 @@
         <i class="pt-4 fa-regular fa-circle-check"></i>
         <h5 class="text-center pt-4">Il pagamento è andato a buon fine
         <br>Grazie per averci scelto!</h5>
-        <h6 class="text-center">L'ordine è stato preso in carico da:<br>{{ restaurantName }}</h6>
+        <h6 class="text-center">L'ordine è stato preso in carico da:<br>{{ store.prevname }}</h6>
 
     <h6 id="order-summary" class="ps-4 my-3">Riepilogo dell'ordine:</h6>
     <div class="container">
@@ -64,8 +64,6 @@ export default {
     data() {
         return {
             store,
-            restaurantId: "",
-            restaurantName: "",
             countdown: 20
         }
     },
@@ -98,14 +96,6 @@ export default {
         totalPrice(item) {
             return (item.price * item.quantity).toFixed(2);
         },
-        getSingleRestaurant() {
-            axios.get(`${this.store.apiBaseUrl}/restaurants/${this.restaurantId}`).then(res => {
-                this.restaurantName = res.data.results.name;
-            });
-        },
-        getRestaurantId(){
-            this.restaurantId = this.store.prevOrder[0].restaurant_id;
-        }
     }
 }
 </script>
