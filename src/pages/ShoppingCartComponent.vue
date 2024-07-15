@@ -3,12 +3,12 @@
     <div class="cart text-center my-3">
         <!-- Loader -->
         <div v-if="isLoading" class="loader-overlay">
-            <div class="loader d-flex flex-column justify-content-center">
+            <div class="loader d-flex flex-column justify-content-center align-items-center">
                 <div class="my-2">
                     Caricamento...
                 </div> 
                 <div class="loader-image">
-                    <img src="../../public/images/delivery.webp" alt="">
+                    <img src="../../public/images/delivery.webp" alt="loading">
                 </div>
             </div>
         </div>
@@ -589,7 +589,32 @@ export default {
     background-image: url(../../public/images/sfondo-card.jpg);}
 
 .loader-image{
-    width: 50%;
+    width: 80%;
+    img{
+        width: 100%;
+    }
+}
+
+/* Media queries for responsiveness */
+
+/* For tablets and larger screens */
+@media (min-width: 768px) {
+    .loader {
+        width: 60%;
+        max-width: 400px;
+    }
+}
+
+/* For mobile phones */
+@media (max-width: 767px) {
+    .loader {
+        width: 90%;
+        max-width: 280px;
+    }
+
+    .loader-image {
+        width: 80%;
+    }
 }
 
 @media screen and (max-width: 576px) {
