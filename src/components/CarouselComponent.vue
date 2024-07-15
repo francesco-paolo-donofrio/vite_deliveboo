@@ -2,7 +2,7 @@
   <!-- Div invisibile per il posizionamento dell'ancora -->
   <div id="anchor-types-title" class="anchor-spacer"></div>
   <div id="types-title">
-    <h1 class="gradientColor text-center">Tipologie <p class="gradientColorMini"><em>scegli la tua tipologia preferita</em></p></h1>
+    <h1 class="gradientColor text-center">Tipologie <p class="gradientColorMini f-d-text-d-none"><em>scegli la tua tipologia preferita</em></p></h1>
   </div>
   <div id="types" class="d-flex justify-content-center align-items-center">
     <div class="typology-carousel">
@@ -237,6 +237,10 @@ export default {
     width: 100%;
     height: 200px;
   }
+
+  .f-d-text-d-none {
+    display: none;
+  }
 }
 
 @media screen and (max-width: 425px) {
@@ -251,6 +255,10 @@ export default {
         font-size: 25px;
     }
 }
+
+.f-d-text-d-none {
+    display: none;
+  }
 
   .nav-button {
     position: absolute;
@@ -288,6 +296,9 @@ export default {
         font-size: 25px;
     }
 }
+.f-d-text-d-none {
+    display: none;
+  }
 
   .nav-button {
     position: absolute;
@@ -324,6 +335,10 @@ export default {
     h1 {
       font-size: 25px;
     }
+  }
+
+  .f-d-text-d-none {
+    display: none;
   }
 
   .nav-button {

@@ -14,7 +14,7 @@
                                 class="fw-bold">Deliveboo</em><br>GUADAGNA ANCHE TU GRAZIE A  <em class="fw-bold">DELIVEBOO</em></p>
                     </div>
                     <div class="d-flex align-items-start justify-content-between gap-5">
-                        <div class="f-d-mini-container-ristoratore-great">
+                        <div class="f-d-mini-container-ristoratore-great f-d-text-d-none">
                             <CardDescriptionComponent />
                         </div>
                         <div class="f-d-mini-container-ristoratore-small ">
@@ -26,7 +26,7 @@
                                 <li class="text-start f-d-primary-color fw-bold">
                                     <em class="fw-bold">Crea</em> il tuo ristorante
                                 </li>
-                                <li class="text-start f-d-primary-color fw-bold">
+                                <li class="text-start f-d-primary-color fw-bold f-d-text-d-none">
                                     <em class="fw-bold">Aggiungi</em> i piatti al tuo ristorante
                                 </li>
                                 <li class="text-start f-d-primary-color fw-bold">
@@ -38,7 +38,7 @@
                                 <li class="text-start f-d-primary-color fw-bold">
                                     <em class="fw-bold">Analizza</em> i profitti tramite i grafici
                                 </li>
-                                <li class="text-start f-d-primary-color fw-bold">
+                                <li class="text-start f-d-primary-color fw-bold f-d-text-d-none">
                                     <em class="fw-bold">Gestisci</em> le Email e i relativi ordini
                                 </li>
 
@@ -231,9 +231,193 @@
 }
 }
 
+@media screen and (max-width: 1024px) {
+    .f-d-text-d-none {
+    display: none;
+    }
+
+
+.f-d-mini-container-ristoratore-small {
+    text-align: center;
+    margin: 0 auto;
+    width: 100%;
+    overflow: auto;
+    height: auto;
+    background-color: white;
+    border: 5px solid $background-primary-color;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+}
+
+.f-d-bounce {
+    animation: none;
+}
+
+}
+
+@media screen and (max-width: 768px) {
+    .f-d-text-d-none {
+    display: none;
+    }
+
+
+.f-d-mini-container-ristoratore-small {
+    text-align: center;
+    margin: 0 auto;
+    width: 100%;
+    overflow: auto;
+    height: auto;
+    background-color: white;
+    border: 5px solid $background-primary-color;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+}
+
+.f-d-bounce {
+    animation: none;
+}
+
+}
+
+@media screen and (max-width: 425px) {
+    .f-d-text-d-none {
+    display: none;
+    }
+
+
+.f-d-mini-container-ristoratore-small {
+    text-align: center;
+    margin: 0 auto;
+    width: 100%;
+    overflow: auto;
+    height: auto;
+    background-color: white;
+    border: 5px solid $background-primary-color;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+}
+
+.f-d-bounce {
+    animation: none;
+}
+
+    
+    .gradientColorTitle {
+    background: linear-gradient(to right, $background-fourth-color, $background-fourth-color, $background-primary-color, $background-fourth-color, $background-primary-color,  $background-fourth-color, $background-fourth-color); /* Gradient colors */
+    -webkit-background-clip: text; /* For Safari */
+    -webkit-text-fill-color: transparent; /* For Safari */
+    background-clip: text;
+    color: transparent;
+    font-size: 25px; /* Font size */
+    font-weight: bold; /* Font weight */
+    text-align: center; /* Center alignment */
+    padding: 10px 20px; /* Padding */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Box shadow */
+    text-transform: uppercase; /* Uppercase text */
+    letter-spacing: 2px; /* Spacing between letters */
+}
+
+}
+
+@media screen and (max-width: 375px) {
+    .f-d-text-d-none {
+    display: none;
+    }
+
+.f-d-mini-container-ristoratore-small {
+    text-align: center;
+    margin: 0 auto;
+    width: 100%;
+    overflow: auto;
+    height: auto;
+    background-color: white;
+    border: 5px solid $background-primary-color;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+}
+
+.f-d-bounce {
+    animation: none;
+}
+
+    
+    .gradientColorTitle {
+    background: linear-gradient(to right, $background-fourth-color, $background-fourth-color, $background-primary-color, $background-fourth-color, $background-primary-color,  $background-fourth-color, $background-fourth-color); /* Gradient colors */
+    -webkit-background-clip: text; /* For Safari */
+    -webkit-text-fill-color: transparent; /* For Safari */
+    background-clip: text;
+    color: transparent;
+    font-size: 25px; /* Font size */
+    font-weight: bold; /* Font weight */
+    text-align: center; /* Center alignment */
+    padding: 10px 20px; /* Padding */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Box shadow */
+    text-transform: uppercase; /* Uppercase text */
+    letter-spacing: 2px; /* Spacing between letters */
+}
+
+.f-d-text-d-none {
+    display: none;
+}
+
+}
+
 @media screen and (max-width: 320px) {
     .f-d-text-d-none {
     display: none;
     }
+
+    .gradientColorTitle {
+    background: linear-gradient(to right, $background-fourth-color, $background-fourth-color, $background-primary-color, $background-fourth-color, $background-primary-color,  $background-fourth-color, $background-fourth-color); /* Gradient colors */
+    -webkit-background-clip: text; /* For Safari */
+    -webkit-text-fill-color: transparent; /* For Safari */
+    background-clip: text;
+    color: transparent;
+    font-size: 25px; /* Font size */
+    font-weight: bold; /* Font weight */
+    text-align: center; /* Center alignment */
+    padding: 10px 20px; /* Padding */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Box shadow */
+    text-transform: uppercase; /* Uppercase text */
+    letter-spacing: 2px; /* Spacing between letters */
+}
+
+.f-d-text-d-none {
+    display: none;
+}
+
+.f-d-mini-container-ristoratore-small {
+    text-align: center;
+    margin: 0 auto;
+    width: 100%;
+    overflow: auto;
+    height: auto;
+    background-color: white;
+    border: 5px solid $background-primary-color;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+}
+
+.f-d-bounce {
+    animation: none;
+}
 }
 </style>

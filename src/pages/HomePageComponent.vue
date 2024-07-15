@@ -8,7 +8,7 @@
         <button type="button" class="btn btn-secondary mx-2 p-2" @click="resetTypes">Reset</button>
     </div> -->
     <div id="restaurants-title" class="d-flex justify-content-center align-items-center flex-column">
-        <h1 class="gradientColor text-center">Ristoranti, <p class="gradientColorMini"><em>ordina dal tuo ristorante preferito</em></p></h1>
+        <h1 class="gradientColor text-center">Ristoranti <p class="gradientColorMini f-d-text-d-none"><em>ordina dal tuo ristorante preferito</em></p></h1>
     </div>
     <div class="f-d-gradient-not-found-message">
         <div id="restaurants" class="container my-4 ">
@@ -310,39 +310,8 @@ export default {
         }
     }
 
-    .gradientColor {
-    background: linear-gradient(to right, $background-fourth-color, $background-fourth-color, $background-primary-color, $background-fourth-color, $background-fourth-color);
-    /* Gradient colors */
-    -webkit-background-clip: text;
-    /* For Safari */
-    -webkit-text-fill-color: transparent;
-    /* For Safari */
-    background-clip: text;
-    color: transparent;
-    font-size: 25px;
-    /* Font size */
-    font-weight: bold;
-    /* Font weight */
-    text-align: center;
-    /* Center alignment */
-    padding: 10px 20px;
-    /* Padding */
-    border-radius: 10px;
-    /* Rounded corners */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    /* Box shadow */
-    text-transform: uppercase;
-    /* Uppercase text */
-    letter-spacing: 2px;
-    /* Spacing between letters */
-}
-}
-
-@media screen and (max-width: 320px) {
-    #types-title {
-        h1 {
-            font-size: 25px;
-        }
+    .f-d-text-d-none {
+        display: none;
     }
 
     .gradientColor {
@@ -371,5 +340,117 @@ export default {
     letter-spacing: 2px;
     /* Spacing between letters */
 }
+}
+
+@media screen and (max-width: 425px) {
+    
+    .f-d-text-d-none {
+        display: none;
+    }
+
+    .gradientColor {
+    background: linear-gradient(to right, $background-fourth-color, $background-fourth-color, $background-primary-color, $background-fourth-color, $background-fourth-color);
+    /* Gradient colors */
+    -webkit-background-clip: text;
+    /* For Safari */
+    -webkit-text-fill-color: transparent;
+    /* For Safari */
+    background-clip: text;
+    color: transparent;
+    font-size: 25px;
+    /* Font size */
+    font-weight: bold;
+    /* Font weight */
+    text-align: center;
+    /* Center alignment */
+    padding: 10px 20px;
+    /* Padding */
+    border-radius: 10px;
+    /* Rounded corners */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* Box shadow */
+    text-transform: uppercase;
+    /* Uppercase text */
+    letter-spacing: 2px;
+    /* Spacing between letters */
+}
+
+
+}
+
+@media screen and (max-width: 375px) {
+    
+    .f-d-text-d-none {
+        display: none;
+    }
+
+    .gradientColor {
+    background: linear-gradient(to right, $background-fourth-color, $background-fourth-color, $background-primary-color, $background-fourth-color, $background-fourth-color);
+    /* Gradient colors */
+    -webkit-background-clip: text;
+    /* For Safari */
+    -webkit-text-fill-color: transparent;
+    /* For Safari */
+    background-clip: text;
+    color: transparent;
+    font-size: 25px;
+    /* Font size */
+    font-weight: bold;
+    /* Font weight */
+    text-align: center;
+    /* Center alignment */
+    padding: 10px 20px;
+    /* Padding */
+    border-radius: 10px;
+    /* Rounded corners */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* Box shadow */
+    text-transform: uppercase;
+    /* Uppercase text */
+    letter-spacing: 2px;
+    /* Spacing between letters */
+}
+
+
+}
+
+@media screen and (max-width: 320px) {
+    #types-title {
+        h1 {
+            font-size: 25px;
+        }
+    }
+    .f-d-text-d-none {
+        display: none;
+    }
+
+    .gradientColor {
+    background: linear-gradient(to right, $background-fourth-color, $background-fourth-color, $background-primary-color, $background-fourth-color, $background-fourth-color);
+    /* Gradient colors */
+    -webkit-background-clip: text;
+    /* For Safari */
+    -webkit-text-fill-color: transparent;
+    /* For Safari */
+    background-clip: text;
+    color: transparent;
+    font-size: 25px;
+    /* Font size */
+    font-weight: bold;
+    /* Font weight */
+    text-align: center;
+    /* Center alignment */
+    padding: 10px 20px;
+    /* Padding */
+    border-radius: 10px;
+    /* Rounded corners */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* Box shadow */
+    text-transform: uppercase;
+    /* Uppercase text */
+    letter-spacing: 2px;
+    /* Spacing between letters */
+}
+
+
 }
 </style>
