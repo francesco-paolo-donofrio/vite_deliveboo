@@ -50,7 +50,6 @@
 
 <script>
 import { store } from '../store';
-import axios from 'axios';
 import HeroComponent from '../components/HeroComponent.vue';
 import FooterComponent from '../components/FooterComponent.vue';
 
@@ -70,9 +69,6 @@ export default {
     mounted() {
         this.startCountdown();
         // console.log(this.store.prevOrder);
-        this.getRestaurantId();
-        // console.log(this.restaurantId);
-        this.getSingleRestaurant();
     },
     methods: {
         startCountdown() {
@@ -81,10 +77,10 @@ export default {
                     this.countdown--;
                 } else {
                     clearInterval(interval);
-                    // Redirigi alla pagina del carrello
+                    // Redirigi alla home
                     window.location.href = '/';
                 }
-            }, 2000);
+            }, 1000);
         },
         totalAmount() {
             let sum = 0;
